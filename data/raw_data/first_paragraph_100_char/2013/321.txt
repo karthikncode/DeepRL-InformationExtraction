@@ -1,0 +1,1 @@
+[lin_video src=http://eplayer.clipsyndicate.com/embed/player.js?aspect_ratio=3×2&auto_next=1&auto_start=0&div_id=videoplayer-1379953438&height=400&page_count=5&pf_id=9623&show_title=1&va_id=4369553&width=640&windows=2 service=syndicaster width=640 height=400 div_id=videoplayer-1379953438 type=script]

@@ -1,0 +1,10 @@
+# ignore some stuff
+# no compiled files
+*.pyc
+# editor swapfiles
+*.swp
+.idea/
+
+# distribution stuff
+YahooBoss_Python.egg-info/
+dist/

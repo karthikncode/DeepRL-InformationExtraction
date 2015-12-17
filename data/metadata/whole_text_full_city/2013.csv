@@ -1,0 +1,669 @@
+url,event_id,article_id,shooter_name,killed_num,wounded_num,city,title
+http://sanfrancisco.cbslocal.com/2013/01/12/3-young-men-teenage-boy-murdered-on-oakland-streets-in-6-hours-no-arrests/,0,0,Carlito Montoya,4,0,Oakland,Oakland Police Link 4 Recent Murders To Several Rival Groups « CBS San Francisco
+http://hinterlandgazette.com/2013/01/oakland-gun-violence-ken-harbin-larry-lovette-eddiebo-rodriguez-4-killed-6hour-span.html,0,1,Carlito Montoya,4,0,Oakland,"Oakland Gun Violence: Ken Harbin, Larry Lovette & Eddiebo Rodriguez Among 4 Killed in 6-Hour Span"
+http://losangeles.cbslocal.com/2013/01/01/man-killed-3-wounded-at-nye-party-in-hawthorne/,1,2,Unknown,1,3,Hawthorne,"Man Killed, 3 Wounded At NYE Party In Hawthorne « CBS Los Angeles"
+http://latimesblogs.latimes.com/lanow/2013/01/hawthorne-new-year-party-three-killed.html,1,3,Unknown,1,3,Hawthorne,"One killed, 3 injured in Hawthorne New Year's Eve party shooting"
+http://pittsburgh.cbslocal.com/2013/01/01/4-people-shot-in-mckeesport/,2,4,Julian Sims,0,4,McKeesport,4 Shot At McKeesport New Year’s Eve Party « CBS Pittsburgh
+http://www.wtae.com/news/local/allegheny/U-S-Marshals-task-force-arrests-New-Year-s-party-shooting-suspect/-/10927008/17977588/-/1ydqtj/-/index.html,2,5,Julian Sims,0,4,McKeesport,U.S. Marshals task force arrests New Year’s party shooting suspect
+http://www.wkyc.com/news/article/276177/3/Lorain-Arrest-made-in-gas-station-shooting,3,6,"Desmen Noble, Damian Bell",1,4,Lorain,Lorain: Arrest made in gas station shooting
+http://www.19actionnews.com/story/20494559/31-year-old-man-charged-with-new-years-day-murder-at-lorain-gas-station,3,7,"Desmen Noble, Damian Bell",1,4,Lorain,Desmen Deupree Noble charged with gas station murder - Cleveland 19 News
+http://chronicle.northcoastnow.com/2013/02/14/2-men-indicted-in-new-years-day-lorain-murder/,3,8,"Desmen Noble, Damian Bell",1,4,Lorain,2 men indicted in New Year's Day Lorain murder
+http://morningjournal.com/articles/2013/02/22/news/cops_and_courts/doc5126fa31928a4356439484.txt,3,9,"Desmen Noble, Damian Bell",1,4,Lorain,Lorain man pleads innocent to New Year's murder
+http://www.dailydemocrat.com/ci_22322664/aurora-shooter-was-frenetic-talented-neighbor-says,4,10,Sonny Archuleta,4,0,Aurora,"Aurora shootout killer was frenetic, talented, neighbor says"
+http://denver.cbslocal.com/2013/01/06/officer-told-neighbor-standoff-gunman-was-on-meth-binge/,4,11,Sonny Archuleta,4,0,Aurora,Officer Told Neighbor Standoff Gunman Was On Meth Binge « CBS Denver
+http://kwgn.com/2013/02/20/woman-shares-story-of-mental-illness-that-led-to-husbands-shooting-spree/,4,12,Sonny Archuleta,4,0,Aurora,Woman shares story of mental illness that led to husband’s shooting spree
+http://usnews.nbcnews.com/_news/2013/01/07/16397584-police-four-women-found-dead-in-tulsa-okla-apartment?lite,5,13,Cedric and James Poore,5,0,Tulsa,"Police: Four women found dead in Tulsa, Okla., apartment"
+http://www.newson6.com/story/20523249/police-4-women-found-dead-at-tulsa-apartment,5,14,Cedric and James Poore,5,0,Tulsa,"Our Apologies - NewsOn6.com - Tulsa, OK - News, Weather, Video and Sports - KOTV.com"
+http://www.tulsaworld.com/news/article.aspx?subjectid=298&articleid=20130221_297_0_hrimgs614899,5,15,Cedric and James Poore,5,0,Tulsa,"Tulsa news, sports, business, entertainment, weather"
+http://www.cbsnews.com/8301-504083_162-57577466-504083/tulsa-apartment-murders-update-hearing-scheduled-for-brothers-charged-in-quadruple-killing/,5,16,Cedric and James Poore,5,0,Tulsa,Tulsa Apartment Murders Update: Hearing scheduled for brothers charged in quadruple killing
+http://www.kjrh.com/dpp/news/local_news/tulsa-police-identify-mondays-5-homicide-victims,5,17,Cedric and James Poore,5,0,Tulsa,Tulsa police identify Monday's 5 homicide victims
+http://www.wric.com/story/20526108/police-man-killed-ex-girlfriend-and-her-mother-in-chesterfield,7,18,Herbert Bland Jr.,3,1,Dinwiddie,Police: Man Killed Ex-Girlfriend And Her Mother In Chesterfield
+http://www.nola.com/crime/index.ssf/2012/01/suspect_killed_two_wounded_in.html,8,19,Donald Johnson,3,2,New Orleans,New Orleans police sort out details of bloody chaos in eastern New Orleans
+http://www.nola.com/crime/index.ssf/2012/01/triple-homicide_suspect_once_c.html,8,20,Donald Johnson,3,2,New Orleans,Triple-homicide suspect once called crime scene home
+http://www.myfoxal.com/story/20585672/teen-arrested-after-deadly-shooting-rampage-in-tuscaloosa,9,21,Tresvon Spencer,1,4,Tuscaloosa,Teen arrested after deadly shooting rampage
+http://blog.al.com/tuscaloosa/2013/01/17-year-old_girl_killed_in_sho.html,9,22,Tresvon Spencer,1,4,Tuscaloosa,17-year-old girl killed in shooting at apartment near Stillman College; suspect in custody
+http://www.tuscaloosanews.com/article/20130114/NEWS/130119908,9,23,Tresvon Spencer,1,4,Tuscaloosa,Man arrested after Saturday shootings; 1 dead
+http://www.cbsnews.com/8301-504083_162-57565870-504083/nehemiah-gringo-case-memorial-service-planned-for-family-allegedly-slain-by-new-mexico-teen/,10,24,Nehemiah Griego,5,0,Albuquerque,Nehemiah Gringo Case: Memorial service planned for family allegedly slain by New Mexico teen
+http://www.theatlanticwire.com/national/2013/01/teenager-reportedly-used-ar-15-kill-five-new-mexico/61199/,10,25,Nehemiah Griego,5,0,Albuquerque,Teenager Reportedly Used AR-15 to Kill Five in New Mexico
+http://sanfrancisco.cbslocal.com/2013/01/22/4-teens-hurt-in-drive-by-shooting-in-brentwood/,11,26,Unknown,0,4,Brentwood,4 Teens Hurt In Drive-By Shooting In Brentwood « CBS San Francisco
+http://www.nola.com/crime/index.ssf/2013/01/nopd_4_people_shot_in_central.html,12,27,Unknown,0,5,New Orleans,NOPD: 5 people shot in Central City where Martin Luther King Day parade had passed earlier
+http://stlouis.cbslocal.com/2013/01/25/one-dead-four-wounded-in-drive-by-shooting/,13,28,Unknown,1,4,St. Louis,"One Dead, Four Wounded in Drive-By Shooting « CBS St. Louis"
+http://www.daytondailynews.com/news/news/1-dead-3-injured-in-tavern-shooting/nT77k/,14,29,Julian Johnson,1,3,Springfield,"1 dead, 3 injured in tavern shooting"
+http://washington.cbslocal.com/2013/01/27/5-injured-in-dc-nightclub-shooting/,15,30,Unknown,0,5,Washington DC,5 Injured in DC Nightclub Shooting « CBS DC
+http://www.wjla.com/articles/2013/01/dc-soundstage-shooting-five-shot-at-nightclub-84496.html,15,31,Unknown,0,5,Washington DC,DC Soundstage shooting: Five shot at nightclub
+http://www.nbcwashington.com/news/local/Five-Injured-in-DC-Nightclub-Shooting-188481201.html,15,32,Unknown,0,5,Washington DC,5 Injured in D.C. Nightclub Shooting
+http://www.foxnews.com/us/2013/01/26/trooper-officer-killed-2-sheriff-deputies-wounded-in-la-shooting-suspect-in/,16,33,Wilbert Thibodeaux,1,3,Charenton,"1 officer killed, 2 wounded near Louisiana casino"
+http://www.businessinsider.com/mark-hummels-dies-after-phoenix-shooting-2013-2,17,34,Douglas Harmon,3,1,Phoenix,Mark Hummels Dies After Phoenix Shooting
+http://www.mercurynews.com/ci_22506049/oakland-one-killed-three-wounded-shooting-at-oakland?source=email,18,35,Unknown,1,3,Oakland,"Oakland: One killed, three wounded in shooting after First Friday event"
+http://wreg.com/2013/02/04/two-killed-7-injured-during-violent-memphis-weekend/,19,36,Sundra Payne,0,5,Memphis,"Two Killed, 7 Injured During Violent Memphis Weekend"
+http://www.newsday.com/news/nation/christopher-dorner-how-life-on-the-run-ended-for-calif-police-killer-1.4662786,20,37,Christopher Dorner,5,4,Riverside,Christopher Dorner: How life on the run ended for Calif. police killer
+http://sacramento.cbslocal.com/2013/02/04/1-dead-3-hurt-in-olivehurst-shooting/,21,38,"Kong Meng Vue, Ryan Cha, Ken Cha",1,3,Olivehurst,"1 Dead, 3 Hurt In Olivehurst Shooting « CBS Sacramento"
+http://www.usatoday.com/story/news/nation/2013/02/06/2-children-denver-shooting/1895851/,23,39,Mayra Perez,3,1,Denver,"2 children, 1 woman killed in Denver home"
+"http://www.latimes.com/news/nation/nationnow/la-na-nn-denver-shooting-murder-suicide-20130207,0,1746242.story",23,40,Mayra Perez,3,1,Denver,"Denver police: Woman shot her three kids, then committed suicide"
+http://www.denverpost.com/breakingnews/ci_22616195/family-2-year-old-denver-girl-shot-by,23,41,Mayra Perez,3,1,Denver,Family: 2-year-old Denver girl shot by mom continues to improve
+http://chicago.cbslocal.com/2013/02/07/four-wounded-in-south-shore-shooting/,24,42,Unknown,0,4,Chicago,Four Wounded In South Shore Shooting « CBS Chicago
+http://www.cbsnews.com/8301-504083_162-57569930-504083/mardi-gras-shooting-third-man-arrested-in-new-orleans-bourbon-street-attack/,25,43,"Malcolm Hall, Brandon Brown, Deron Bridgewater",0,4,New Orleans,Mardi Gras Shooting: Third man arrested in New Orleans' Bourbon Street attack
+http://www.nola.com/crime/index.ssf/2013/04/suspect_sought_in_bourbon_stre.html,25,44,"Malcolm Hall, Brandon Brown, Deron Bridgewater",0,4,New Orleans,Suspect sought in Bourbon Street quadruple shooting during Mardi Gras celebrations
+http://www.wwltv.com/news/crime/NOPD-releases-video-of-suspect-in-February-quadruple-shooting-202041871.html,25,45,"Malcolm Hall, Brandon Brown, Deron Bridgewater",0,4,New Orleans,NOPD releases video of suspect in February quadruple shooting
+http://www.sfgate.com/crime/article/1-dead-4-hurt-in-Vallejo-shooting-4271870.php,26,46,Unknown,1,4,Vallejo,"1 dead, 4 hurt in Vallejo shooting"
+http://www.kaaltv.com/article/stories/S3021415.shtml?cat=10728,27,47,Nhan Lap Tran,1,4,Oakdale,The Page You are Looking for Doesn't Exist
+http://minnesota.cbslocal.com/2013/05/03/judge-man-incompetent-to-stand-trial-in-fatal-oakdale-shooting/,27,48,Nhan Lap Tran,1,4,Oakdale,Man Incompetent To Stand Trial In Fatal Oakdale Shooting « CBS Minnesota
+"http://www.latimes.com/news/nation/nationnow/la-na-nn-delaware-courthouse-shooting-matusiewicz-20130212,0,5059491.story",28,49,Thomas Matusiewicz,3,2,Wilmington,"In Delaware courthouse shooting, a complicated family history"
+http://www.kutv.com/news/top-stories/stories/vid_3882.shtml,29,50,"Two suspects, David Fresques in custody and Davis Fotu at large",3,1,Salt Lake,"Salt Lake City News, Weather, Sports, Breaking News"
+http://www.cbsnews.com/8301-504083_162-57568965-504083/utah-house-shooting-update-house-where-three-were-shot-dead-is-linked-to-narcotics-police-say/,29,51,"Two suspects, David Fresques in custody and Davis Fotu at large",3,1,Salt Lake,"Utah House Shooting Update: House where three were shot dead is linked to narcotics, police say"
+http://www.digtriad.com/news/article/269507/1/Police-Shooting-At-Nitty-Gritty-Soul-Cafe-In-Winston-Salem,31,52,Unknown,1,3,Winston-Salem,Police: Shooting At Nitty Gritty Soul Cafe In Winston-Salem
+http://www.nbclosangeles.com/news/local/Tustin-Orange-County-Freeway-Shootings-191813631.html,32,53,Ali Sayed,4,3,Tustin,"4 Dead After Orange County Shootings, Carjackings"
+https://www.nytimes.com/2013/02/20/us/shooting-spree-in-california.html?_r=1&amp,32,54,Ali Sayed,4,3,Tustin,At Least 4 Dead in California Shootings
+http://www.cbsnews.com/8301-504083_162-57570298-504083/los-angeles-freeway-shooting-update-new-details-emerge-about-rampage/,32,55,Ali Sayed,4,3,Tustin,Los Angeles Freeway Shooting Update: New details emerge about rampage
+http://rt.com/usa/three-dead-california-shooting-590/,32,56,Ali Sayed,4,3,Tustin,Four dead in California shooting spree — RT USA
+http://www.newson6.com/story/21303635/man-in-custody-after-fatal-shooting-at-tulsa-apartments-near-spartan-college,33,57,Mark Hopkins,1,3,Tulsa,"Man In Custody After Fatal Shooting At Tulsa Apartments - NewsOn6.com - Tulsa, OK - News, Weather, Video and Sports - KOTV.com"
+http://www.tulsaworld.com/news/article.aspx?subjectid=11&articleid=20130302_11_A16_CUTLIN976045,33,58,Mark Hopkins,1,3,Tulsa,"Tulsa news, sports, business, entertainment, weather"
+http://www.mlive.com/news/grand-rapids/index.ssf/2013/02/four_shot_outside_grandville_s.html,35,59,Unknown,0,4,Grand Rapids,Four shot outside Grandville SW bar in Grand Rapids
+http://latimesblogs.latimes.com/lanow/2013/02/suspects-sought-in-shooting-outside-lancaster-club.html,37,60,Unknown,0,4,Lancaster,"Four wounded, suspects sought in shooting outside Lancaster theater"
+http://www.theavtimes.com/2013/02/23/four-wounded-in-lancaster-nightclub-shooting/#,37,61,Unknown,0,4,Lancaster,Four wounded in Lancaster nightclub shooting
+http://www.41nbc.com/news/local-news/20390-one-critcally-injured-seven-others-wounded-in-macon-shooting,38,62,Unknown,0,8,Macon,404 Page or File Not Found
+http://www.wctv.tv/news/georgianews/headlines/Quadruple-Shooting-in-Moultrie-194924631.html,40,63,Unknown,1,3,Moultrie,"Two Men Arrested for Murder of Moultrie Man, Second Shooting Victim Dies"
+http://abclocal.go.com/ktrk/story?section=news/local&id=9013761&pt=print,41,64,Unknown,0,6,Houston,Multiple people shot at birthday party in northwest Harris County
+http://www.losbanosenterprise.com/2013/03/08/203519/gunfire-leaves-1-dead-3-hurt.html,43,65,Unknown,1,3,Los Banos,"Local News, Crime & Courts Coverage for Los Banos and West Merced County"
+http://www.losbanosenterprise.com/2013/03/23/204756/two-teens-arrested-in-los-banos.html,43,66,Unknown,1,3,Los Banos,"Local News, Crime & Courts Coverage for Los Banos and West Merced County"
+http://www.wral.com/four-shot-at-fuquay-varina-apartment-complex/12189440/,45,67,Unknown,0,4,Fuquay-Varina,Four shot at Fuquay-Varina apartment complex :: WRAL.com
+http://www.buffalonews.com/apps/pbcs.dll/article?AID=/20130309/CITYANDREGION/130309181/1002,47,68,Unknown,1,3,Buffalo,"Four shot, one fatally, in city’s Bailey-East Delavan area"
+http://www.washingtonpost.com/local/police-seek-two-men-in-connection-with-shooting-that-injured-13/2013/03/14/4fa6145a-8cda-11e2-9838-d62f083ba93f_story.html,48,69,Andrew Davon Allen and Craig Willson,0,13,Washington,D.C. police seek 2 men in connection with shooting that injured 13
+http://qctimes.com/news/state-and-regional/iowa/grad-student-killed-in-shooting-that-wounded-officers/article_5cc0b1b4-8a72-11e2-9061-001a4bcf887a.html?comment_form=true,49,70,Taleb Hussein Yousef Salameh,1,3,North Liberty,Grad student killed in shooting that wounded 3 officers
+http://www.usatoday.com/story/news/2013/03/14/upstate-new-york-herkimer-mohawk-suspect-surrounded/1986913/,51,71,Kurt Myers,5,2,Herkimer,Cops kill suspect in deadly N.Y. shooting rampage
+http://www.uticaod.com/news/x930817116/Police-release-autopsy-results-for-Herkimer-Co-killer,51,72,Kurt Myers,5,2,Herkimer,Police release autopsy results for Herkimer Co. killer
+http://www.huffingtonpost.com/2013/03/15/angelica-vazquez-murder-suicide-paulina-alejandro_n_2883425.html,52,73,Angelica Vazquez,4,0,Mesquite,"Angelica Vazquez Murders Husband And Two Children Before Suicide In Mesquite, Texas"
+http://sacramento.cbslocal.com/2013/03/14/modesto-police-4-injured-in-drive-by-shooting/,53,74,Unknown,0,4,Modesto,Modesto Police: 4 Injured In Drive-By Shooting « CBS Sacramento
+http://www.kcra.com/news/7-injured-in-Galt-drive-by-shooting/-/11797728/19349066/-/9pvp0e/-/index.html,54,75,Unknown,0,7,Galt,7 injured in Galt drive-by shooting
+http://www.mercurynews.com/breaking-news/ci_22816323/police-2-dead-stockton-fatal-shooting,55,76,Unknown,2,4,Stockton,Police: 2 dead in Stockton fatal shooting
+http://www.recordnet.com/apps/pbcs.dll/article?AID=/20130318/A_NEWS/130319881,55,77,Unknown,2,4,Stockton,"2 killed, 4 injured in Sunday night shootings in Stockton"
+http://blog.al.com/spotnews/2013/03/birmingham_boy_remains_critica.html,57,78,Brandon Menefee,3,1,Jefferson County,Jefferson County boy remains critical after being shot alongside mother and sister
+http://blog.al.com/spotnews/2013/03/mother_and_child_found_killed.html,57,79,Brandon Menefee,3,1,Jefferson County,Mother and child found killed in Rocky Ridge area of Jefferson County (updated; photos)
+http://www.reuters.com/article/2013/03/21/us-usa-chicago-shooting-idUSBRE92K0QY20130321,58,80,Unknown,0,7,Chicago,Seven wounded in possible gang shooting at Chicago nightclub: police
+http://www.suntimes.com/news/19001308-761/7-shot-during-rap-video-release-party-at-gresham-nightclub.html,58,81,Unknown,0,7,Chicago,Chicago : News : Politics : Things To Do : Sports
+http://abclocal.go.com/wls/story?section=news/local&id=9035531,58,82,Unknown,0,7,Chicago,"7 shot during rap CD release party at Auburn Gresham nightclub Mr. G&#39;s Supper Club and Entertainment Center at 87th and Ashland; performers included Nino, King Samson, Lil Mouse"
+http://www.kansascity.com/2013/03/22/4136463/four-shot-one-dead-near-plaza.html,59,83,Unknown,1,4,Kansas City,"Four shot, one dead, in home invasion near Plaza"
+http://www.tonyskansascity.com/2013/03/shock-kansas-city-triple-shooting.html,59,84,Unknown,1,4,Kansas City,SHOCK!!! KANSAS CITY BROOKSIDE MASS SHOOTING LEAVES ONE DEAD OVERNIGHT!!!
+http://www.kansascity.com/2013/03/22/4136965/lethal-invasion-happened-at-home.html,59,85,Unknown,1,4,Kansas City,"Lethal invasion happened at home of college students, KC police say"
+http://www.kmbz.com/4-shot-1-dead-in-Brookside-home-invasion/15863144,59,86,Unknown,1,4,Kansas City,"4 Shot, 1 Dead, In Brookside Home Invasion"
+http://www.nytimes.com/2013/03/23/nyregion/man-killed-in-coney-island-shooting-three-are-wounded.html?_r=0,60,87,Joseph Brown,1,3,Brooklyn,Man Killed in Coney Island Shooting; Three Are Wounded
+http://www.usatoday.com/story/news/nation/2013/03/22/coney-island-shooting/2011859/,60,88,Joseph Brown,1,3,Brooklyn,"Manhunt after 4 shot, 1 dead in Coney Island"
+http://newyork.cbslocal.com/2013/03/22/one-dead-two-injured-in-coney-island-shooting/,60,89,Joseph Brown,1,3,Brooklyn,"3 People Injured, At Least 1 Dead, In Coney Island Shooting « CBS New York"
+http://www.nbcnewyork.com/news/local/Joseph-Brown-Man-Arrested-Coney-Island-Shootings-Killed-1-Hurt-3-199680871.html,60,90,Joseph Brown,1,3,Brooklyn,"Man Arrested in Brooklyn Shooting That Killed 1, Hurt 3"
+http://gothamist.com/2013/03/24/brooklyn_man_arrested_for_shooting_2.php,60,91,Joseph Brown,1,3,Brooklyn,"Man Arrested For Shooting Four, Killing One, At Coney Island Day Care Center"
+http://www.myfoxtampabay.com/story/21803539/2013/03/27/multiple-people-injured-in-st-pete-shooting,61,92,Unknown,0,4,St. Petersberg,"Tampa Bay news, weather forecast, radar, and sports from WTVT-TV - FOX 13 News"
+http://www.tampabay.com/news/publicsafety/crime/six-sent-to-hospital-after-string-of-shootings-in-st-petersburg/2111457,61,93,Unknown,0,4,St. Petersberg,Night on the town ends with four shot in St. Petersburg
+http://www.abcactionnews.com/dpp/news/region_pinellas/4-people-shot-in-st-petersburg-police-have-possible-motive-for-the-shootout,61,94,Unknown,0,4,St. Petersberg,4 people shot in St. Petersburg; Police have possible motive for the shootout - Story
+http://q13fox.com/2013/03/31/three-people-fatally-shot-outside-auburn-tavern/,62,95,Unknown,3,1,Auburn,Three fatally shot outside Auburn tavern; family searches for answers
+http://www.king5.com/news/local/Three-people-killed-in-deadly-overnight-shooting-in-Auburn-200787941.html,62,96,Unknown,3,1,Auburn,"Three dead, one critical after shooting outside Auburn tavern"
+http://www.auburn-reporter.com/news/200794011.html,62,97,Unknown,3,1,Auburn,"Shooting at Auburn sports bar kills three, seriously wounds a fourth"
+http://abclocal.go.com/kfsn/story?section=news/local&id=9046338,63,98,Unknown,2,3,Merced County,"2 dead, 3 injured at party shooting in Merced County"
+http://abclocal.go.com/kfsn/story?section=news/local&id=9046328,63,99,Unknown,2,3,Merced County,5 shot in gang attack near Atwater; 3 killed
+http://www.modbee.com/2013/03/31/2647735/three-people-dead-in-atwater-gang.html,63,100,Unknown,2,3,Merced County,Three people dead in Atwater gang shooting
+http://www.laht.com/article.asp?ArticleId=734203&CategoryId=14092,64,101,Unknown,4,1,San Juan,Shootout in Puerto Rico Leaves 4 Dead
+http://www.globalpost.com/dispatch/news/agencia-efe/130403/shootout-puerto-rico-leaves-4-dead,64,102,Unknown,4,1,San Juan,Shootout in Puerto Rico leaves 4 dead
+http://www.nbcphiladelphia.com/news/local/High-Powered-Weapon-Philadelphia-Four-Shootings-Missing-M16-204898451.html,65,103,Unknown,0,4,Philadelphia,AK-47 Semi-Automatic Linked to 4 Philly Shootings
+http://abclocal.go.com/wpvi/story?section=news/local&id=9081242,65,104,Unknown,0,4,Philadelphia,Police: Suspect uses AK-47 in 2 separate shootings
+http://articles.philly.com/2013-04-28/news/38863908_1_gun-eighth-street-two-shootings,65,105,Unknown,0,4,Philadelphia,"Police offer $30,000 reward in AK47-style shootings"
+http://www.wyff4.com/news/local-news/abbeville-greenwood-news/Police-5-shot-at-birthday-party-15-year-old-dies/-/9654572/19651374/-/qa9mi0/-/index.html,66,106,Unknown,1,4,Greenwood,Police: Teen charged in fatal birthday party shooting
+http://www.foxcarolina.com/story/21900867/police-teen-dies-after-5-shot-in-greenwood,66,107,Unknown,1,4,Greenwood,Greenwood police make arrest in teen's death
+http://gwdtoday.com/main.asp?SectionID=2&SubSectionID=27&ArticleID=24847,66,108,Unknown,1,4,Greenwood,"One dead, four others wounded in shooting"
+http://cjonline.com/news/2013-04-07/one-dead-three-injured-manhattan-shooting,67,109,Matthew Wilson,1,3,Manhatten,"One dead, three injured in Manhattan shooting"
+http://www.wibw.com/home/localnews/headlines/One-Person-Dead-Three-Others-Wounded-In-Shooting-201829531.html,67,110,Matthew Wilson,1,3,Manhatten,Police Identify Man Killed In Manhattan Shooting
+http://www.ksallink.com/?cmd=displaystory&story_id=26644&format=html,67,111,Matthew Wilson,1,3,Manhatten,"Salina Local News, Weather and Sports"
+http://www.hdnews.net/apksstory/1-dead--3-hospitalized-after-Manhattan-shooting,67,112,Matthew Wilson,1,3,Manhatten,An online service of the Hays Daily News
+http://www.kstatecollegian.com/2013/04/07/one-killed-three-injured-in-university-garden-apartments-shooting/,67,113,Matthew Wilson,1,3,Manhatten,"One killed, three injured in University Garden Apartments shooting"
+http://themercury.com/articles/names-released-in-shooting-man-arrested,67,114,Matthew Wilson,1,3,Manhatten,"Names released in shooting, man arrested"
+http://www.dailybulletin.com/breakingnews/ci_22974008/1-dead-3-wounded-north-long-beach-shooting,68,115,Unknown,1,3,Long Beach,"Four shot in North Long Beach, one dead"
+"http://www.latimes.com/local/lanow/la-me-ln-long-beach-shooting-one-killed-20130407,0,3215815.story",68,116,Unknown,1,3,Long Beach,"One killed, three injured in Long Beach shooting"
+http://www.nydailynews.com/news/national/dead-north-long-beach-shooting-article-1.1309982,68,117,Unknown,1,3,Long Beach,One dead in North Long Beach shooting
+http://abclocal.go.com/kabc/story?section=news/local/los_angeles&id=9056029,68,118,Unknown,1,3,Long Beach,Long Beach shooting kills 1; suspect sought
+http://www.gazettes.com/news/crime/one-dead-two-critical-after-north-long-beach-shooting/article_29dc85e2-9ff9-11e2-b1d5-0019bb2963f4.html,68,119,Unknown,1,3,Long Beach,"One Dead, Two Critical After North Long Beach Shooting"
+http://www.lbpost.com/news/2000002078-four-shot-one-killed-outside-residence-near-del-amo-and-long-beach-blvd,68,120,Unknown,1,3,Long Beach,"Four Shot, One Killed Outside Residence Near Del Amo and Long Beach Blvd."
+http://losangeles.cbslocal.com/2013/04/07/man-killed-3-injured-after-gunfire-erupts-in-north-long-beach/,68,121,Unknown,1,3,Long Beach,"Man Killed, 3 Injured After Gunfire Erupts In North Long Beach « CBS Los Angeles"
+http://www.lbreport.com/news/apr13/245home.htm,68,122,Unknown,1,3,Long Beach,"23 Yr. Old Man Is Dead, Two Men Remain In Critical Condition, In Quadruple NLB Shooting, Midnight Hour, 300 block E. Home"
+http://www.nbcphiladelphia.com/news/local/Philadelphia-Shootings-202276451.html,69,123,Unknown,1,3,Philadelphia,"2 Dead, 6 Hurt as Violence Heats Up in Philly"
+http://www.philly.com/philly/news/2_dead_6_others_hurt_in_Philadelphia_shootings.html,69,124,Unknown,1,3,Philadelphia,"2 dead, 6 others hurt in Philadelphia shootings"
+http://www.philly.com/philly/blogs/dncrime/Four-shot-one-killed-in-North-Philly.html,69,125,Unknown,1,3,Philadelphia,Woman killed in quadruple shooting in Kensington
+http://abclocal.go.com/kgo/story?section=news/local/north_bay&id=9061192,70,126,Unknown,0,4,Vallejo,Four shot in rolling gun battle in Vallejo late Wednesday night
+http://sanfrancisco.cbslocal.com/2013/04/11/rolling-attack-shooting-in-vallejo-injures-4-suspects-sought/,70,127,Unknown,0,4,Vallejo,‘Rolling Attack’ Shooting in Vallejo Injures 4; Suspects Sought « CBS San Francisco
+http://www.sfgate.com/crime/article/4-shot-in-car-in-Vallejo-4427008.php,70,128,Unknown,0,4,Vallejo,4 shot in car in Vallejo
+http://hamptonroads.com/2013/04/norfolk-police-5-shot-attempted-robbery-2-arrested,71,129,"Trenton Ore, Joven Covington",0,5,Norfolk,Norfolk police: 5 shot in attempted robbery; 2 arrested
+http://wtkr.com/2013/04/14/five-people-shot-during-attempted-home-invasion-in-norfolk/,71,130,"Trenton Ore, Joven Covington",0,5,Norfolk,"UPDATE: Two people arrested in connection with Norfolk home invasion, shooting"
+http://www.kmph.com/story/21972353/gunshots-ring-out-in-merced-two-shot-two-more-hurt,72,131,Unknown,0,4,Merced,"Gunshots Ring Out In Merced; Two Shot, Two More Hurt"
+http://ktar.com/22/1626816/2-dead-4-hurt-in-Phoenix-driveby-shooting,73,132,Unknown,2,4,Phoenix,"2 dead, 4 wounded in drive-by shooting in north Phoenix"
+http://www.abc15.com/dpp/news/region_phoenix_metro/central_phoenix/four-hospitalized-after-gunfire-erupts-at-phoenix-party,73,133,Unknown,2,4,Phoenix,"Phoenix shooting: Drive-by shooting kills 2, injures 4"
+http://www.azcentral.com/community/phoenix/articles/20130414phoenix-party-four-shot-abrk.html,73,134,Unknown,2,4,Phoenix,"2 killed, 4 injured in Phoenix drive-by shooting"
+http://www.wkyt.com/news/headlines/One-dead-four-injured-in-shooting-at-Eastland-Bowling-Center-overnight-202983501.html,74,135,Unknown,1,4,Lexington,Man killed at Lexington bowling alley identified
+http://www.kentucky.com/2013/04/15/2601140/one-killed-four-hurt-in-shooting.html,74,136,Unknown,1,4,Lexington,"From April 15: Police release photo, want to talk to man about fatal shooting at Lexington bowling alley"
+http://www.huffingtonpost.com/2013/04/19/ohio-basement-murders-cop_n_3114243.html,77,137,Unknown,4,0,Akron,Ohio Basement Murders; Cops Find 4 Adults Shot In Heads
+http://www.newsnet5.com/dpp/news/local_news/oh_summit/akron-police-four-people-shot-in-the-head-killed-bodies-found-in-basement,77,138,Unknown,4,0,Akron,"Akron police: Four people shot in the head, killed; Bodies found in basement"
+http://www.dailymail.co.uk/news/article-2311437/Bodies-adults-basement-Ohio-townhouse-shot-execution-style-face.html,77,139,Unknown,4,0,Akron,Bodies of four adults found in basement of Ohio townhouse after shot execution style in the face
+http://news.yahoo.com/police-5-dead-shooting-south-seattle-081054003.html,80,140,Dennis Clark III,5,2,Federal Way,Police: 5 dead in shooting south of Seattle
+http://blogs.seattletimes.com/today/2013/04/5-dead-in-federal-way-shooting/,80,141,Dennis Clark III,5,2,Federal Way,5 dead in Federal Way shooting
+http://www.king5.com/news/local/Police-5-dead-in-shooting-in-Federal-Way-204044421.html,80,142,Dennis Clark III,5,2,Federal Way,Five killed in Federal Way apartment shootings
+http://www.komonews.com/news/local/Police-surround-apartment-building-after-shooting-204039221.html,80,143,Dennis Clark III,5,2,Federal Way,5 killed in gun battle at Federal Way apartments
+http://www.dnainfo.com/chicago/20130422/englewood/four-wounded-afternoon-shooting-englewood,81,144,Unknown,0,4,Englewood,"After Four Wounded in Englewood Shooting, 'I'm Hoping it Doesn't Get Worse'"
+http://chicago.cbslocal.com/2013/04/23/seven-wounded-in-shootings-on-south-west-sides/,81,145,Unknown,0,4,Englewood,"Seven Wounded In Shootings On South, West Sides « CBS Chicago"
+http://www.wdsu.com/news/local-news/new-orleans/Sheriff-Cold-blooded-killers-shot-at-children-women-in-Harvey-incident/-/9853400/19841056/-/241acbz/-/index.html,82,146,"Davante Robertson Charlie A. Gumms, Frankie Hookman, Jr and Lashawn Davis",0,5,Havey,"Sheriff: 'Cold-blooded killers' shot at children, women in Harvey incident"
+http://www.wwltv.com/news/Harvey-Shooting-Injures-Five-Including-3-Children-4-Arrested-204133681.html,82,147,"Davante Robertson Charlie A. Gumms, Frankie Hookman, Jr and Lashawn Davis",0,5,Havey,"'Cold blooded killers' shoot 5, including 3 young children"
+http://www.nola.com/crime/index.ssf/2013/04/3_arrested_in_quintuple_shooti.html,82,148,"Davante Robertson Charlie A. Gumms, Frankie Hookman, Jr and Lashawn Davis",0,5,Havey,4 arrested in quintuple shooting in Harvey
+http://theadvocate.com/news/5779363-123/four-arrested-in-shooting-of,82,149,"Davante Robertson Charlie A. Gumms, Frankie Hookman, Jr and Lashawn Davis",0,5,Havey,"The Advocate — Baton Rouge, Louisiana"
+http://www.usatoday.com/story/news/nation/2013/04/24/manchester-illinois-5-dead-shooting/2108991/,83,150,Rick Odell Smith,6,1,Manchester,"Illinois mayor's nephew kills 5, dies after firefight"
+http://www.foxnews.com/us/2013/04/24/5-reportedly-dead-1-in-custody-in-winchester-ill-shooting/,83,151,Rick Odell Smith,6,1,Manchester,5 dead in Illinois shooting; suspect dies after shootout with police
+http://altondailynews.com/news/details.cfm?clientid=17&id=74668,83,152,Rick Odell Smith,6,1,Manchester,"Six Dead, Including Suspect, in Small Town Shooting"
+http://www.newsnet5.com/dpp/news/local_news/oh_lorain/four-shot-at-an-apartment-in-oberlin-suspect-in-custody,84,153,Sean M. Woodings,0,4,Oberlin,"Four shot at an apartment in Oberlin, suspect in custody"
+http://chronicle.northcoastnow.com/2013/04/26/four-people-shot-in-oberlin/,84,154,Sean M. Woodings,0,4,Oberlin,24-year-old charged with shooting four people overnight in Oberlin
+http://www.cantonrep.com/newsnow/x63472513/4-shot-in-Oberlin-suspect-in-custody,84,155,Sean M. Woodings,0,4,Oberlin,4 shot in Oberlin; suspect in custody
+http://www.cleveland.com/metro/index.ssf/2013/04/four_people_injured_in_shootin.html,84,156,Sean M. Woodings,0,4,Oberlin,Four people injured in shooting in Oberlin; suspect in custody
+http://www.wkyc.com/news/article/296789/45/Oberlin-Four-shot-at-apartment-complex-overnight,84,157,Sean M. Woodings,0,4,Oberlin,Oberlin: Four shot at apartment complex
+http://morningjournal.com/articles/2013/04/27/news/doc517b47c33bb07471281729.txt,84,158,Sean M. Woodings,0,4,Oberlin,Man charged in Oberlin shooting injuries of 4 men on Thursday night
+http://medinagazette.northcoastnow.com/2013/04/27/panicked-scene-after-four-shot-in-oberlin/,84,159,Sean M. Woodings,0,4,Oberlin,Panicked scene after four shot in Oberlin — The Medina County Gazette
+http://www.gainesville.com/article/20130428/ARTICLES/130429609/1002/news?Title=1-dead-4-wounded-in-shooting-at-Williston-gathering,85,160,Unknown,1,4,Williston,"An unknown assailant opened fire during the Crab Festival, a gathering of about 10,000 on County Road 318, east of Williston"
+http://articles.sun-sentinel.com/2013-04-28/news/fl-four-shot-lauderdale-lakes-20130428_1_critical-condition-armed-services-committee-wednesday-david-rose,86,161,"Neville Lynch, Mark Rose",0,4,Lauderdale Lakes,Man still in critical condition after four shot Saturday
+http://www.nbcmiami.com/news/Man-in-Critical-Condition-Following-Shootout-at-Lauderdale-Lakes-Apartment-Complex-205204851.html,86,162,"Neville Lynch, Mark Rose",0,4,Lauderdale Lakes,Man in Critical Condition Following Shootout at Lauderdale Lakes Apartment Complex
+http://www.wcnc.com/news/crime/Five-shot-at-home-in-East-Charlotte-no-arrests-made-204988731.html,87,163,Unknown,0,5,Charlotte,Five shot at home in east Charlotte; no arrests made
+http://www.nbcphiladelphia.com/news/local/4-Men-Struck-in-Drive-By-Shooting-205031621.html,89,164,Unknown,1,3,Chester,"Teen Killed, 3 Hurt in Drive-By Shooting"
+http://delcotimes.com/articles/2013/04/28/news/doc517cee7e6e0c4962767105.txt,89,165,Unknown,1,3,Chester,"Teen fatally shot, 3 others injured in drive-by shooting in Chester"
+http://newarknj.patch.com/articles/five-shot-in-newark-thursday-night,91,166,Unknown,0,5,Newark,"Girl, 10, Among Those Hurt in Multiple Shooting"
+http://www.nytimes.com/2013/05/03/nyregion/five-are-shot-at-a-home-in-newark.html?_r=0,91,167,Unknown,0,5,Newark,Five Are Shot at a Home in Newark
+http://abclocal.go.com/wtvd/story?section=news/local&id=9090288,92,168,Krystal Olymica David,0,4,Smithfield,4 injured in Smithfield bar shooting
+http://www.foxnews.com/world/2013/05/04/4-killed-6-injured-in-drive-by-shooting-in-puerto-rico/,93,169,Unknown,4,6,Aguas Buenas,"4 killed, 6 injured in drive-by shooting in Puerto Rico"
+http://www.huffingtonpost.com/huff-wires/20130504/cb-puerto-rico-drive-by-shooting/?utm_hp_ref=homepage&ir=homepage,93,170,Unknown,4,6,Aguas Buenas,"4 killed, 6 injured in shooting in Puerto Rico"
+http://www.laht.com/article.asp?ArticleId=771412&CategoryId=14092,93,171,Unknown,4,6,Aguas Buenas,Quadruple-Murder Rekindles Problem of Crime in Puerto Rico
+http://www.inquisitr.com/647676/puerto-rico-shooting-aguas-buenas-2013/,93,172,Unknown,4,6,Aguas Buenas,"4 Killed, 6 Injured When Gunmen Open Fire At Crowded Restaurant"
+http://www.contracostatimes.com/breaking-news/ci_23180671/east-oakland-shootings-leave-17-year-old-boy,94,173,Unknown,1,3,Oakland,"East Oakland shootings leave 17-year-old boy dead, three others injured"
+http://www.sfgate.com/crime/article/Boy-17-slain-in-East-Oakland-4491593.php,94,174,Unknown,1,3,Oakland,"Boy, 17, slain in East Oakland"
+http://www.mercurynews.com/top-stories/ci_23180668/east-oakland-shootings-leave-17-year-old-boy,94,175,Unknown,1,3,Oakland,"East Oakland shootings leave 17-year-old boy dead, three others injured"
+http://www.sfgate.com/crime/article/Gunfire-near-E-Palo-Alto-restaurant-hurts-6-4490230.php,95,176,Unknown,0,6,E. Palo Alto,E. Palo Alto: Shots hurt 6 near McDonald's
+http://sanfrancisco.cbslocal.com/2013/05/05/6-people-shot-east-palo-alto/,95,177,Unknown,0,6,E. Palo Alto,6 People Wounded In Shooting Outside East Palo Alto McDonald’s « CBS San Francisco
+http://www.upi.com/Top_News/US/2013/05/05/6-wounded-in-gunfire-near-McDonalds-in-East-Palo-Alto-Calif/UPI-13401367799231/,95,178,Unknown,0,6,E. Palo Alto,"Gunfire near McDonald's in East Palo Alto, CA, leaves six wounded"
+http://tribune-democrat.com/local/x508495582/Police-question-4-men-wounded-in-shooting,96,179,Unknown,0,4,Johnstown,Police question 4 men wounded in shooting
+http://www.nj.com/monmouth/index.ssf/2013/05/monmouth_children_12_and_11_charged_with_robbery_assault_with_pellet_gun.html,97,180,"Two boys, 10, 11",0,4,Ocean Township,"Monmouth children, 12 and 11, charged with robbery, assault with pellet gun"
+http://ktla.com/2013/05/10/police-3-dead-in-shooting-in-harbor-gateway/,99,181,Unknown,3,1,Los Angeles,"3 Dead, 1 Wounded in Harbor Gateway Shooting"
+http://www.scpr.org/news/2013/05/10/37218/3-killed-1-wounded-in-la-harbor-gateway-shooting/,99,182,Unknown,3,1,Los Angeles,"3 killed, 1 wounded in LA Harbor Gateway shooting"
+"http://www.latimes.com/local/lanow/la-me-ln-harbor-gateway-shooting-20130510,0,4064502.story",99,183,Unknown,3,1,Los Angeles,"Three dead, one wounded in Harbor Gateway apartment shooting"
+http://www.philly.com/philly/blogs/dncrime/Four-shot-outside-corner-store-in-East-Germantown.html,101,184,Unknown,0,4,East Germantown,Four shot outside corner store in East Germantown
+http://www.philly.com/philly/news/pennsylvania/20130513_Four_injured_in_shooting_in_East_Germantown.html,101,185,Unknown,0,4,East Germantown,Four injured in shooting in East Germantown
+http://philadelphia.cbslocal.com/2013/05/11/4-shot-in-east-germantown/,101,186,Unknown,0,4,East Germantown,4 Shot Outside Germantown Market « CBS Philly
+http://www.ydr.com/state/ci_23227960/man-3-teens-shot-outside-philly-store,101,187,Unknown,0,4,East Germantown,"Man, 3 teens shot outside Philly store"
+http://ktar.com/22/1633793/Four-shot-at-party-in-Apache-Junction,102,188,Unknown,0,4,Apache Junction,Four shot overnight at party in Apache Junction
+http://www.dispatch.com/content/stories/national_world/2013/05/04/Shooting_of_girl_4_others_at_vigil_not_yet_solved.html,103,189,Unknown,0,5,Newark,"Shooting of girl, 4 others at vigil not yet solved"
+http://gothamist.com/2013/05/03/10-yr-old_girl_four_others_shot_at.php,103,190,Unknown,0,5,Newark,"10-Year-Old Girl, Four Others Shot At Vigil In Newark: Gothamist"
+http://www.reuters.com/article/2013/05/03/us-shooting-newark-idUSBRE9420UC20130503,103,191,Unknown,0,5,Newark,"Police seek gunman who shot five people at Newark, N.J., vigil"
+http://newyork.cbslocal.com/2013/05/11/4-shot-wounded-in-jersey-city-public-housing-development/,105,192,Unknown,0,4,Jersey City,"4 Shot, Wounded In Jersey City Public Housing Development « CBS New York"
+http://www.nj.com/hudson/index.ssf/2013/05/4_shot_outside_jersey_city_hou.html,105,193,Unknown,0,4,Jersey City,"4 shot outside Jersey City housing complex, police say"
+http://www.upi.com/Top_News/US/2013/05/12/About-19-wounded-in-New-Orleans-Mothers-Day-parade-shooting/UPI-65901368404258/,106,194,Unknown,0,19,New Orleans,Mother's Day parade shooting in New Orleans leaves about 19 hurt
+http://usnews.nbcnews.com/_news/2013/05/12/18213691-at-least-19-injured-in-new-orleans-mothers-day-shooting?lite,106,195,Unknown,0,19,New Orleans,At least 19 injured in New Orleans Mother's Day shooting
+http://www.local12.com/content/breaking_news/story/Five-People-Injured-In-Winton-Hills-Shooting/XXwNatFp80uyV0lLZmRf9w.cspx,107,196,Unknown,0,5,Winton Hills,"Cincinnati News, Weather, Sports, Breaking News"
+http://www.fox19.com/story/22236348/report-of-multiple-people-shot-in-winton-hills,107,197,Unknown,0,5,Winton Hills,Report of multiple people shot on Craft St in Winton Hills
+http://www.mynews4.com/news/local/story/Open-Murder-charges-to-be-filed-against-Jeremiah/vyd11s_PRku07VQCodeCiw.cspx,108,198,Jeremiah Bean,5,0,Fernley,Open Murder charges to be filed against Jeremiah Bean
+http://usnews.nbcnews.com/_news/2013/05/15/18281021-suspect-charged-with-open-murder-in-killing-of-five-in-nevada?lite,108,199,Jeremiah Bean,5,0,Fernley,Suspect charged with 'open murder' in killing of five in Nevada
+http://www.huffingtonpost.com/2013/09/23/jeremiah-diaz-bean_n_3976201.html,108,200,Jeremiah Bean,5,0,Fernley,"Jeremiah Diaz Bean, Suspect In 5 Nevada Killings, Competent For Court"
+http://www.wxyz.com/dpp/news/1-dead-4-injured-in-detroit-shooting,109,201,Undisclosed,1,4,Detroit,"1 dead, 4 injured in Detroit shooting"
+http://detroit.cbslocal.com/2013/05/16/4-shot-1-killed-during-argument-in-detroit/,109,202,Undisclosed,1,4,Detroit,"4 Shot, 1 Killed During Argument In Detroit « CBS Detroit"
+http://www.freep.com/article/20130521/NEWS01/305210124/quintuple-shooting-detroit-arrest,109,203,Undisclosed,1,4,Detroit,Detroit cops arrest suspect in deadly quintuple shooting
+http://www.nbcphiladelphia.com/news/local/4-People-Shot-in-Southwest-Philly-207645221.html,110,204,Unknown,0,4,Philadelphia,"27 Shots Fired, 4 People Struck"
+http://articles.philly.com/2013-05-16/news/39312815_1_graze-wound-stray-bullet-stable-condition,110,205,Unknown,0,4,Philadelphia,Woman hit by stray bullet a block from shooting scene
+http://www.timesdispatch.com/news/state-regional/article_5c4e2967-bd4d-5737-8b7d-6e6afa47ee24.html,113,206,Codarrell Lee Yates,0,4,Lunenburg,Suspect sought in Lunenburg quadruple shooting
+http://www.nbc12.com/story/22291717/man-wanted-in-lunenburg-quadruple-shooting,113,207,Codarrell Lee Yates,0,4,Lunenburg,Man wanted in Lunenburg quadruple shooting
+http://chicago.cbslocal.com/2013/05/21/four-teens-wounded-in-austin-shooting/,115,208,Unknown,0,4,Chicago,Four Teens Wounded In Austin Shooting « CBS Chicago
+"http://www.chicagotribune.com/news/local/breaking/chi-man-shot-in-the-head-on-the-south-side-20130520,0,6600336.story",115,209,Unknown,0,4,Chicago,"Man, 19, dies after South Side shooting"
+http://blog.al.com/breaking/2013/05/4_teens_injured_in_shooting_at.html,116,210,Unknown,0,4,Madison County,3 teens shot at Madison County graduation party (video)
+http://www.waaytv.com/news/local/four-teenagers-shot-overnight-at-buckhorn-graduation-party/article_cd2dddb4-c2ad-11e2-8ec9-0019bb30f31a.html,116,211,Unknown,0,4,Madison County,Three teenagers shot overnight at Buckhorn Graduation Party
+http://www.nbcwashington.com/news/local/Four-Found-Dead-in-Herndon-Home-171198321.html,117,212,Albert Peterson,4,0,Herndon,Four Found Dead in Herndon Home
+http://articles.washingtonpost.com/2012-09-26/local/35495284_1_county-police-herndon-candlelight-vigil,117,213,Albert Peterson,4,0,Herndon,"Herndon father shot wife, children before killing himself, police say"
+http://abcnews.go.com/US/police-father-killed-wife-children-virginia-murder-suicide/story?id=17331623,117,214,Albert Peterson,4,0,Herndon,"Police Say Father Killed Wife, Children in Virginia Murder-Suicide"
+http://www.mlive.com/news/saginaw/index.ssf/2013/05/update_1_dead_after_saginaw_hi.html,119,215,Evellis T. McGee and Karon D. Thomas,1,3,Saginaw,Update: 1 dead after Saginaw High pre-prom shooting; 3 others hospitalized
+http://www.freep.com/article/20130524/NEWS06/305240030/1-dead-3-hurt-in-Michigan-pre-prom-party-shooting,119,216,Evellis T. McGee and Karon D. Thomas,1,3,Saginaw,"1 Saginaw High student dead, 3 hurt in pre-prom party shooting"
+http://www.mlive.com/news/saginaw/index.ssf/2013/06/two_arraigned_two_at_large_in.html,119,217,Evellis T. McGee and Karon D. Thomas,1,3,Saginaw,"Two arraigned, two at large in Saginaw High pre-prom quadruple shooting, homicide"
+"http://www.dailypress.com/news/breaking/dp-nws-hampton-shooting-vigil-20130528,0,4761289.story",121,218,"Ryan Taybron, Eric Nixon",1,4,Hampton,Hampton community holds vigil for shooting victim
+http://articles.dailypress.com/2013-07-30/news/dp-nws-hampton-shooting-hearing-20130730_1_hampton-coliseum-spring-carnival-ralphael-davis-jr-one-teen,121,219,"Ryan Taybron, Eric Nixon",1,4,Hampton,Grand jury gets Hampton carnival murder case
+http://www.wnem.com/story/22423822/three-women-shot-in-flint,122,220,Antonio King Green,1,3,Flint,Person of interest named in Flint quadruple shooting
+http://www.mlive.com/news/flint/index.ssf/2013/05/four_people_injured_during_sho.html,122,221,Antonio King Green,1,3,Flint,"Four people injured during shooting in Flint; two in critical condition, two in serious condition"
+http://www.mlive.com/news/flint/index.ssf/2013/05/one_woman_dead_in_flint_after.html,122,222,Antonio King Green,1,3,Flint,Woman injured in Saturday's quadruple shooting in Flint dies; person of interest turns self in
+http://www.foxnews.com/us/2013/05/27/authorities-2-dead-5-injured-after-texas-gunman-seemed-to-randomly-shoot-at/,123,223,Esteban J. Smith,3,5,Eden,"Authorities: 2 dead, 5 injured after Texas gunman seemed to randomly shoot at vehicles"
+http://www.kcbd.com/story/22430976/several-injured-and-2-dead-in-concho-county-shooting,123,224,Esteban J. Smith,3,5,Eden,5 injured and 2 dead in Concho County shooting Sunday
+http://usnews.nbcnews.com/_news/2013/05/26/18517847-marine-killed-wife-went-on-shooting-spree-say-police?lite,123,225,Esteban J. Smith,3,5,Eden,"Marine killed wife, went on shooting spree, say police"
+http://www.fronterasdesk.org/news/2013/may/30/homicide-possible-five-bodies-arizona-desert/,124,226,Unknown,5,0,Sells,Homicide Possible For Five Bodies In Arizona Desert
+http://www.wmctv.com/story/22444072/gunfire-rocks-neighborhood-four-people-shot,125,227,Unknown,1,3,Memphis,Police: Deadly shooting stemmed from dice game
+http://wreg.com/2013/05/29/police-investigating-overnight-shootings/,125,228,Unknown,1,3,Memphis,"Teen Dead, Five Hurt In Overnight Shootings"
+"http://www.chicagotribune.com/news/local/breaking/chi-chicago-shootings-violence-2-shot-on-far-south-side-20130529,0,6107595.story",126,229,Unknown,0,4,Chicago,"Woman, 56, among 5 dead, 10 wounded in city shootings"
+http://homicides.suntimes.com/2013/05/29/3-dead-5-hurt-in-south-side-shootings/,126,230,Unknown,0,4,Chicago,Mark every death. Remember every victim. Follow every case.
+http://www.11alive.com/news/article/294952/1/4-people-shot-on-their-porch-during-neighborhood-dispute,127,231,Unknown,0,4,Atlanta,4 people shot on their porch during neighborhood dispute
+http://www.firstcoastnews.com/topstories/article/315810/483/4-people-shot-in-Atlanta-Ga-during-altercation,127,232,Unknown,0,4,Atlanta,4 people shot on their porch during altercation
+http://www.wsbtv.com/news/news/local/teen-60-year-old-among-victims-recovering-after-sh/nX8bR/,127,233,Unknown,0,4,Atlanta,60-year-old shooting victim speaks out after attack
+http://fox6now.com/2013/06/01/4-shot-outside-milwaukee-nightclub/,129,234,Unknown,0,4,Milwaukee,"Four people shot, wounded outside Milwaukee nightclub"
+http://articles.dailypress.com/2013-06-02/news/dp-nws-virginia-beach-shooting_1_virginia-beach-shooting-sentara-leigh,132,235,Unknown,0,4,Virginia Beach,Four wounded in Virginia Beach overnight shooting
+http://wtkr.com/2013/06/02/four-people-shot-at-virginia-beach-house-party/,132,236,Unknown,0,4,Virginia Beach,Four people injured in Virginia Beach shooting
+http://www.wvec.com/news/Four-Injured-in-Early-Morning-shooting-209839871.html,132,237,Unknown,0,4,Virginia Beach,Four hurt in Sunday shooting in Va. Beach
+http://articles.wdbj7.com/2013-06-02/roanoke-police-department_39696718,133,238,Unknown,0,5,Roanoke,Shot in parking lot of a Roanoke 7-Eleven
+"http://www.chicagotribune.com/news/local/suburbs/batavia_geneva_st_charles/ct-met-gun-club-accident-0606-20130606,0,731254.story",136,239,Undisclosed,0,10,Elburn,Ten injured by gun shooter didn't realize was loaded
+http://www.kcchronicle.com/2013/06/05/ten-hurt-in-accidental-shooting-at-sportsmens-club-near-elburn/atte45f/,136,240,Undisclosed,0,10,Elburn,Ten hurt in accidental shooting at sportsmen's club near Elburn
+http://fox43.com/2013/06/11/4-injured-in-late-night-york-city-shooting/,138,241,Unknown,0,4,York City,4 injured in late-night York City shooting
+http://www.yorkdispatch.com/ci_23429544/four-shot-york-city?source=most_viewed,138,242,Unknown,0,4,York City,Police: Four people shot in York City
+http://www.suntimes.com/news/20664257-418/four-shot-in-englewood.html,139,243,Unknown,1,5,Chicago,Chicago : News : Politics : Things To Do : Sports
+"http://www.chicagotribune.com/news/local/breaking/chi-paramedics-on-scene-of-multiple-shooting-on-south-side-20130610,0,4474847.story",139,244,Unknown,1,5,Chicago,"1 dead, 11 wounded during shootings citywide"
+http://abclocal.go.com/wls/story?section=news/local&id=9134275,139,245,Unknown,1,5,Chicago,"Englewood drive-by shooting kills teen girl, injures 4 near 57th and Sangamon"
+http://www.stltoday.com/news/local/crime-and-courts/nine-are-wounded-in-shootings-in-st-louis/article_785d41d9-c24f-52f2-b720-3e26244cf3ea.html,140,246,Davonta Coleman,0,6,St. Louis,"Outrage after bloody night in St. Louis leaves 18 shot, one stabbed"
+http://www.stltoday.com/news/local/crime-and-courts/st-louis-man-charged-in-shooting-of-people-during-violent/article_28af7ca6-dc4b-57af-b498-d3c5c0e16ff5.html,140,247,Davonta Coleman,0,6,St. Louis,St. Louis man charged in shooting of 6 people during violent night in city
+http://chicago.cbslocal.com/2013/06/11/four-people-found-shot-to-death-in-unincorporated-downers-grove/,141,248,David Andrus,4,0,Darien,Four Dead In Apparent Murder-Suicide Near Darien « CBS Chicago
+http://www.nbcchicago.com/news/local/four-dead-darien-illinois--211093221.html,141,249,David Andrus,4,0,Darien,"Identities Released In Darien Murders, Suicide"
+"http://www.chicagotribune.com/news/local/suburbs/downers_grove_darien_westmont_woodridge/chi-source-triple-murder-suicide-reported-near-darien-20130611,0,2900901.story",141,250,David Andrus,4,0,Darien,4 dead in suspected murder-suicide near Darien
+http://www.cnn.com/2013/06/13/us/missouri-shooting/,142,251,Ahmed Dirir,4,0,St. Louis,Police: Four fatally shot in St. Louis business
+http://usnews.nbcnews.com/_news/2013/06/13/18939654-four-dead-in-murder-suicide-at-st-louis-business-center-police-say?lite,142,252,Ahmed Dirir,4,0,St. Louis,"Four dead in murder-suicide at St. Louis health care company, police say"
+http://fox2now.com/2013/06/14/st-louis-reacts-to-cherokee-street-shootings/,142,253,Ahmed Dirir,4,0,St. Louis,Cherokee Street Shootings: Business License Was Expired
+http://nocera.blogs.nytimes.com/2013/06/17/weekend-gun-report-june-14-16-2013/,143,254,Unknown,0,4,High Point,"Weekend Gun Report: June 14-16, 2013"
+http://www.news-record.com/news/article_4122321e-d54c-11e2-8abc-0019bb30f31a.html,143,255,Unknown,0,4,High Point,Update: Four injured in High Point shooting
+http://www.huffingtonpost.com/2013/06/15/earnest-woodley-nashville-shooting_n_3446396.html,144,256,Earnest Woodley,0,4,Nashville,"Earnest Woodley Wanted For Allegedly Shooting Nicole Luke, 3 Teenage Daughters In Nashville"
+http://usnews.nbcnews.com/_news/2013/06/14/18961989-mom-three-teen-daughters-shot-in-nashville-gunman-still-at-large,144,257,Earnest Woodley,0,4,Nashville,"Mom, three teen daughters shot in Nashville; gunman still at large"
+http://www.chron.com/news/houston-texas/houston/article/1-dead-3-injured-in-SW-Houston-night-club-4602574.php,145,258,Unknown,1,3,Houston,"1 dead, 3 injured in SW Houston night club shooting"
+http://abclocal.go.com/ktrk/story?section=news/local&id=9140359,145,259,Unknown,1,3,Houston,Four people shot outside southwest Houston after-hours night club; 1 dead as shooter remains at large
+http://www.khou.com/news/local/Residents-on-edge-after-deadly-shooting-at-after-hours-club-in-southeast-Houston-211808441.html,145,260,Unknown,1,3,Houston,Residents fed up after deadly shooting at after-hours club in southeast Houston
+http://chicago.cbslocal.com/2013/06/16/police-1-dead-3-hurt-in-shooting-at-chatham-club/,146,261,Unknown,1,3,Chicago,"1 Dead, 3 Hurt In Shooting At Chatham Club « CBS Chicago"
+http://wgntv.com/2013/06/16/shooting-in-chatham-club-kills-one-injures-three/,146,262,Unknown,1,3,Chicago,"Shooting in Chatham club kills one, injures three"
+http://stlouis.cbslocal.com/2013/06/18/police-4-shot-in-berkeley-in-broad-daylight/,147,263,Unknown,1,3,Berkeley,1 Dead 3 Injured in Shooting at Berkeley Apartment Complex « CBS St. Louis
+http://fox2now.com/2013/06/18/police-investigating-multiple-shootings-in-berkeley/,147,264,Unknown,1,3,Berkeley,1 Dead & 3 Shot In Berkeley Violence
+http://www.stltoday.com/four-people-shot-in-berkeley/article_dbcdb912-fbbd-50a1-bba7-6527924e1c76.html,147,265,Unknown,1,3,Berkeley,"Three seriously injured, one killed in Berkeley shootout"
+http://www.wkyt.com/news/headlines/A-shooting-in-Louisville-leaves-three-dead-and-one-critically-injured--212223321.html,148,266,Gary W. Stewart Jr.,3,1,Louisville,"Three dead, one critically injured in Louisville shooting"
+http://www.wdrb.com/story/22636322/four-people-shot-on-gardiner-lane,148,267,Gary W. Stewart Jr.,3,1,Louisville,Four people shot on Gardiner Lane; 3 dead
+http://abclocal.go.com/wls/story?section=news/local&id=9149117,149,268,Unknown,1,3,Chicago,ABC7 WLS Chicago and Chicago News
+"http://www.chicagotribune.com/news/local/breaking/chi-1st-summer-weekend-leaves-4-dead-dozens-wounded-20130623,0,1958415.story",149,269,Unknown,1,3,Chicago,"1st summer weekend leaves 6 dead, dozens wounded in Chicago"
+http://articles.chicagotribune.com/2013-06-22/news/chi-5-ambulances-sent-to-northwest-side-for-multiple-shooting-victims-20130621_1_kelvyn-park-1-shot-30-year-old-man,149,270,Unknown,1,3,Chicago,"1 shot dead, 3 wounded in family 'nightmare'"
+http://www.nbcchicago.com/news/local/chicago-shooting-2900-north-kilpatrick-212570671.html,149,271,Unknown,1,3,Chicago,"1 Dead, 3 Wounded in NW Side Shooting"
+http://hamptonroads.com/2013/06/police-charge-two-norfolk-shooting-injured-six,150,272,Darren Lamont Roberts and Kyle Edward Thornton,0,6,Norfolk,Police charge two in Norfolk shooting that injured six
+http://wtkr.com/2013/06/21/dispatch-shooting-reported-on-tidewater-drive-in-norfolk/,150,273,Darren Lamont Roberts and Kyle Edward Thornton,0,6,Norfolk,Update: More suspects identified in Norfolk graduation party shooting
+http://www.turnto10.com/story/22663981/four-people-shot-overnight-in-providence,151,274,Unknown,0,4,Providence,Four people shot in drive-by in Providence
+http://www.abc6.com/story/22665832/providence-weekend-violence,151,275,Unknown,0,4,Providence,"Providence, RI and New Bedford, MA News, Weather"
+http://www.hendersondispatch.com/news/state/x1568238100/Five-including-gunman-shot-in-Greenville,152,276,Lakim Anthony Faust,0,5,Greenville,"Five, including gunman, shot in Greenville"
+http://www.cbsnews.com/8301-504083_162-57590696-504083/north-carolina-shooting-update-lakim-anthony-faust-23-to-be-charged-with-4-counts-of-attempted-murder-police-say/,152,277,Lakim Anthony Faust,0,5,Greenville,"North Carolina Shooting Update: Lakim Anthony Faust, 23, to be charged with 4 counts of attempted murder, police say"
+http://newyork.cbslocal.com/2013/06/22/report-one-killed-three-wounded-in-early-morning-paterson-shooting/,153,278,"Kamal ""Rico"" Edge",1,4,Paterson,NJ Police Investigate Fatal Paterson Shooting « CBS New York
+http://www.nj.com/passaic-county/index.ssf/2013/06/paterson_police_identify_man_who_shot_five_killed_one_over_one_night_last_week.html,153,279,"Kamal ""Rico"" Edge",1,4,Paterson,"Paterson cops identify man who they say shot 5, killed 1, in one night"
+http://articles.baltimoresun.com/2013-06-22/news/bs-md-ci-five-shot-20130622_1_west-baltimore-early-morning-shooting-homicide-unit,154,280,Unknown,1,4,Baltimore,"East Baltimore shooting wounds 4, kills 1"
+http://www.abc2news.com/dpp/news/crime_checker/baltimore_city_crime/four-shot-1-dead-in-east-baltimore-shooting,154,281,Unknown,1,4,Baltimore,"Four shot, 1 dead in East Baltimore shooting"
+http://www.wusa9.com/news/article/263535/189/Police-1-Dead-4-Injured-In-Md-Shooting,154,282,Unknown,1,4,Baltimore,"Donyae Jones dead after Md. shooting, 4 others injured, police said"
+http://www.wrcbtv.com/story/22664154/one-dead-in-chattanooga-shooting,155,283,Unknown,1,3,Chattanooga,UPDATE: Teenager dead in overnight Dodds Ave. shooting - WRCBtv.com
+http://www.kshb.com/dpp/news/crime/nine-people-shot-at-club-in-kansas-city-at-least-three-in-critical-condition,156,284,Unknown,1,8,Kansas City,"Shooting at Kansas City club kills one, injures eight"
+http://www.kmbc.com/news/kansas-city/police-9-injured-3-critically-in-kc-shooting/-/11664182/20680600/-/88wn7o/-/index.html,156,285,Unknown,1,8,Kansas City,"Police: 1 dead, 8 injured in KC shooting"
+http://www.wwltv.com/news/crime/Quadruple-shooting-rocks-Gentilly-street-during-soldiers-going-away-party-212688831.html,157,286,Unknown,0,4,Gentilly,Quadruple shooting erupts at soldier's going away party
+http://www.nola.com/crime/index.ssf/2013/06/four_shot_at_a_gentilly_house.html,157,287,Unknown,0,4,Gentilly,Four shot at Gentilly house party early Sunday morning
+http://wgno.com/2013/06/23/four-teens-shot-at-house-party/,157,288,Unknown,0,4,Gentilly,Four Shot at a House Party
+http://www.wvec.com/news/1-dead-4-injured-in-Town-Center-shooting-212669741.html,158,289,Unknown,1,4,Virginia Beach,Beach police identify man killed in Town Center shooting
+http://fox40.com/2013/06/23/19-year-old-dead-after-shots-ring-out-at-party/,159,290,Elijah Rodgers,1,3,Sacramento,19-year-old Dead After Shots Ring out at Party
+http://blogs.sacbee.com/crime/archives/2013/08/homicide-suspect-denies-involvement-in-valley-hi-shooting-of-four.html,159,291,Elijah Rodgers,1,3,Sacramento,Sacto 9-1-1: Homicide suspect denies involvement in Valley Hi shooting of four
+http://fox4kc.com/2013/06/24/1-dead-2-injured-in-kc-shooting/,160,292,Unknown,1,3,Kansas City,Five shot during violent night in Kansas City
+http://www.kansascity.com/2013/06/25/4311699/summer-starts-violently-in-kansas.html,160,293,Unknown,1,3,Kansas City,Summer starts violently in Kansas City with three slain and 11 hurt in gunfire
+"http://www.chicagotribune.com/news/local/breaking/chi-1-dead-4-wounded-in-south-side-shooting-20130625,0,2417544.story",161,294,Unknown,1,4,Chicago,"1 dead, 4 wounded in South Side shooting"
+http://www.dnainfo.com/chicago/20130625/chicago/teen-killed-five-people-injured-shootings,161,295,Unknown,1,4,Chicago,"Teen Killed, Five People Injured In Shootings"
+http://homicides.suntimes.com/2013/06/25/teen-killed-four-others-wounded-when-shots-fired-into-car/,161,296,Unknown,1,4,Chicago,"Teen killed, four others wounded, when shots fired into car"
+"http://www.baltimoresun.com/news/maryland/baltimore-city/bs-md-ci-shooting-arrest-20130704,0,710526.story",163,297,Tierra Fallin,1,3,Baltimore,"Baltimore police make arrest in shooting that left one dead, three hurt"
+http://www.afro.com/sections/news/Baltimore/story.htm?storyid=79020,163,298,Tierra Fallin,1,3,Baltimore,Family of Woman Slain in Triple Shooting Speaks Out
+http://www.wbal.com/article/101049/3/template-story/Woman-Charged-In-Murder-Following-Dispute,163,299,Tierra Fallin,1,3,Baltimore,Woman Charged In Murder Following Dispute
+http://www.huffingtonpost.com/2013/06/29/uptown-driveby-shooting-6_n_3521906.html?utm_hp_ref=chicago,164,300,Unknown,0,6,Chicago,Uptown Drive-By Shooting: 6 Injured In Shooting Outside North Side Strip Mall
+http://www.suntimes.com/21031715-761/five-men-shot-in-uptown.html,164,301,Unknown,0,6,Chicago,Chicago : News : Politics : Things To Do : Sports
+http://www.postandcourier.com/article/20130629/PC16/130629268/1009/north-charleston-police-report-3-killed-in-shooting-at-cycle-gear-shop&source=RSS,165,302,"Ronald Reid, Barry Stinson",3,1,North Charleston,North Charleston police report 3 killed in shooting at Cycle Gear shop
+http://www.wistv.com/story/22722475/police-responding-to-shooting-in-brentwood-plaza,165,303,"Ronald Reid, Barry Stinson",3,1,North Charleston,"Police say gang activity prompted melee, deadly triple-shooting"
+http://kdvr.com/2013/06/30/police-4-shot-at-aurora-house-party/,166,304,Unknown,0,4,Aurora,Police: 4 shot at Aurora house party
+http://www.9news.com/news/article/342929/339/4-juveniles-shot-at-Aurora-party-?odyssey=tab%7Ctopnews%7Cbc%7Clarge,166,305,Unknown,0,4,Aurora,4 juveniles shot at Aurora party
+http://www.denverpost.com/breakingnews/ci_23571359/four-shot-at-aurora-house-party,166,306,Unknown,0,4,Aurora,Four shot at Aurora house party
+http://www.nbcnewyork.com/news/local/Brooklyn-House-Party-Shooting-Police-Surveillance-Video-213814521.html,167,307,Unknown,0,9,Brooklyn,VIDEO: 2 Sought in Brooklyn House Party Shooting That Wounded 9
+http://newyork.cbslocal.com/2013/06/30/shooting-at-east-flatbush-house-party-leaves-8-people-hospitalized/,167,308,Unknown,0,9,Brooklyn,Shooting At East Flatbush House Party Leaves 8 People Hospitalized « CBS New York
+http://www.nbcdfw.com/news/local/Three-Shot-in-Fort-Worth-213915921.html,168,309,Amos Wells,4,0,Fort Worth,"4 Dead, Including Unborn Child, in Fort Worth Shooting"
+http://crimeblog.dallasnews.com/2013/07/reports-fort-worth-shooting-wounds-three-including-child.html/,168,310,Amos Wells,4,0,Fort Worth,"Updated: Two dead, including child, and one injured in Fort Worth shooting"
+http://blog.al.com/montgomery/2013/07/1_person_killed_others_injured.html,169,311,Unknown,1,3,Montgomery,"WSFA: 1 person killed, others injured in shootout at south Montgomery apartment complex"
+http://blog.al.com/montgomery/2013/07/1_person_killed_others_injured.html,169,312,Unknown,1,3,Montgomery,"WSFA: 1 person killed, others injured in shootout at south Montgomery apartment complex"
+http://www.wsfa.com/story/22736348/montgomery-police-1-dead-after-multi-person-shooting-at-apt-complex,169,313,Unknown,1,3,Montgomery,"Montgomery Police: ""Drug deal gone bad"" sparked shootout"
+http://www.wcsh6.com/news/article/248564/2/One-dead-and-three-injured-from-a-shooting-in-Calais,170,314,Unknown,1,3,Calais,One dead and three injured from a shooting in Calais
+http://bangordailynews.com/2013/07/03/news/down-east/shooting-reported-in-calais/?ref=polbeat,170,315,Unknown,1,3,Calais,"One person dead, three wounded in Calais shooting — Down East — Bangor Daily News — BDN Maine"
+http://www.wabi.tv/news/41432/update-1-dead-3-wounded-in-calais-shooting,170,316,Unknown,1,3,Calais,"UPDATE: 1 Dead, 3 Wounded in Calais Shooting"
+http://www.wxyz.com/dpp/news/1-dead-6-injured-in-pontiac-shooting,171,317,Robert Marion Naylor,1,6,Pontiac,"1 dead, 6 injured in Pontiac shooting"
+http://www.theoaklandpress.com/articles/2013/07/06/news/cops_and_courts/doc51d6d36e6c76a008268351.txt,171,318,Robert Marion Naylor,1,6,Pontiac,"Six injured, one dead in Independence Day shooting in front of Pontiac party store"
+http://chicago.cbslocal.com/2013/07/05/four-shot-including-14-year-old-boy-in-woodlawn/,172,319,Unknown,0,4,Woodlawn,"Four Shot, Including 14-Year-Old Boy, In Woodlawn « CBS Chicago"
+"http://www.chicagotribune.com/news/local/breaking/chi-man-wounded-in-south-side-shooting-20130704,0,3358230.story",172,320,Unknown,0,4,Woodlawn,"July Fourth holiday violence toll includes boys, 5 and 7"
+http://chicago.cbslocal.com/2013/07/05/5-dead-27-wounded-in-holiday-weekend-shootings/,172,321,Unknown,0,4,Woodlawn,"6 Dead, 28 Wounded In Holiday Weekend Shootings « CBS Chicago"
+http://www.13wmaz.com/news/article/237898/4/1-Dead-3-Injured-in-Shooting-Outside-Macon-Club,173,322,Unknown,1,3,Macon,Fatal Shooting Started With Fight Inside Club
+http://onlineathens.com/breaking-news/2013-07-05/teen-killed-3-others-wounded-outside-macon-nightclub,173,323,Unknown,1,3,Macon,"Teen killed, 3 others wounded outside Macon nightclub"
+http://www.41nbc.com/news/local-news/25214-17-year-old-dead-3-others-shot-at-macon-nightclub,173,324,Unknown,1,3,Macon,404 Page or File Not Found
+http://blog.al.com/breaking/2013/07/early_morning_shooting_leaves_1.html,174,325,Chauncy Laray Mitchell,0,4,Florence,Early morning shooting leaves 4 injured in Florence
+http://www.waff.com/story/22766314/4-taken-to-hospital-after-shooting-in-florence,174,326,Chauncy Laray Mitchell,0,4,Florence,"WAFF-TV: News, Weather and Sports for Huntsville, AL"
+http://cltv.com/2013/07/06/at-least-7-wounded-in-lawndale-neighborhood-shooting/,175,327,Unknown,1,7,Chicago,"1 dead, 10 wounded in West, South Side shootings"
+http://www.suntimes.com/news/crime/21196299-418/witness-ducked-for-cover-when-gunfire-erupted-on-west-side-killing-man-injuring-7.html,175,328,Unknown,1,7,Chicago,Chicago : News : Politics : Things To Do : Sports
+http://bed-stuy.patch.com/groups/editors-picks/p/four-people-shot-one-dead-at-marcy-houses,176,329,Brandon Reese,1,3,Brooklyn,"Four Shot, One Dead at Marcy Houses"
+http://www.nytimes.com/2013/07/09/nyregion/arrest-in-shooting-of-4-brooklyn-teenagers.html?_r=0,176,330,Brandon Reese,1,3,Brooklyn,Arrest in Shooting of 4 Brooklyn Teenagers
+http://www.dailynews.com/ci_23615062/1-shot-death-3-wounded-during-party-south?source=most_viewed,177,331,Unknown,1,3,Los Angeles,"1 shot to death, 3 wounded during party in South Los Angeles (updated)"
+http://losangeles.cbslocal.com/2013/07/08/1-fatally-shot-3-wounded-in-south-los-angeles/,177,332,Unknown,1,3,Los Angeles,"1 Fatally Shot, 3 Wounded In South Los Angeles « CBS Los Angeles"
+http://abclocal.go.com/kabc/story?section=news/local/los_angeles&id=9164667,177,333,Unknown,1,3,Los Angeles,"South Los Angeles party fight: 1 killed, 3 injured"
+http://www.nbcmiami.com/news/local/1-Dead-3-Injured-in-Pompano-Beach-Armed-Robbery-Attempt-Deputies-214527091.html,178,334,Unknown,1,3,Pompano Beach,"1 Dead, 3 Injured in Pompano Beach Armed Robbery Attempt: Deputies"
+http://miami.cbslocal.com/2013/07/07/pompano-beach-robbery-attempt-turns-deadly/,178,335,Unknown,1,3,Pompano Beach,Pompano Beach Robbery Attempt Turns Deadly « CBS Miami
+http://articles.sun-sentinel.com/2013-07-07/news/fl-pompano-shooting-20130707_1_bso-attempted-robbery-dominoes,178,336,Unknown,1,3,Pompano Beach,Pompano shooting: Police search for armed robbers involved in deadly shooting
+http://www.recordnet.com/apps/pbcs.dll/article?AID=/20130709/A_NEWS/307090313,180,337,Unknown,1,4,Stockton,Deadly gunfire followed reported argument at party
+http://www.recordnet.com/apps/pbcs.dll/article?AID=/20130708/A_NEWS/130709912/-1/NEWSMAP,180,338,Unknown,1,4,Stockton,Woman slain in hail of bullets identified
+http://www.suntimes.com/news/crime/21201725-418/four-shot-in-roseland-person-in-custody.html,181,339,Unknown,1,5,Chicago,Chicago : News : Politics : Things To Do : Sports
+"http://www.chicagotribune.com/news/local/breaking/chi-chicago-crime-shooting-gun-violence-sunday,0,4979831.story",181,340,Unknown,1,5,Chicago,"1 dead, 6 wounded in South Side shootings"
+http://articles.baltimoresun.com/2013-07-09/news/bs-md-ci-western-multiple-shooting-20130709_1_west-baltimore-broadway-east-east-baltimore,182,341,Lamont Jones,0,4,Baltimore,"Six people shot, one killed, in Baltimore on Tuesday"
+http://www.baltimorebrew.com/2013/07/09/mayor-to-go-on-safety-walk-as-city-shootings-escalate/,182,342,Lamont Jones,0,4,Baltimore,Mayor to go on safety walk as city shootings escalate
+http://www.abc2news.com/dpp/news/crime_checker/baltimore_city_crime/bpd-to-announce-arrest-in-quadruple-shooting,182,343,Lamont Jones,0,4,Baltimore,BPD to announce arrest in quadruple shooting
+http://www.afro.com/sections/news/Baltimore/story.htm?storyid=79180,182,344,Lamont Jones,0,4,Baltimore,Suspect Arrested in Baltimore’s Harlem Park Shooting Spree
+"http://www.orlandosentinel.com/news/local/breakingnews/os-konrad-schafer-murder--20130711,0,5562510.story",184,345,Konrad Schafer and David Damus,2,12,Kissimmee,"Konrad Schafer, 15, charged with Kissimmee murder of David Guerrero"
+http://www.heraldsun.com.au/news/law-order/teenager-konrad-schafer-killed-man-because-he-thought-it-would-be-fun-embarked-on-gang-spree/story-fni0ffnk-1226677633351,184,346,Konrad Schafer and David Damus,2,12,Kissimmee,Teenager Konrad Schafer allegedly killed man 'because he thought it would be fun'
+http://www.nydailynews.com/news/crime/fla-teen-thought-fun-kill-cops-article-1.1394614,184,347,Konrad Schafer and David Damus,2,12,Kissimmee,Fla. teen thought it would be 'fun' to kill: cops
+http://www.wbtv.com/story/22817634/police-one-dead-3,185,348,Unknown,1,3,Charlotte,"Police: Two dead, two injured in shooting NE Charlotte shooting"
+http://www.sfgate.com/crime/article/1-killed-3-wounded-in-Mission-shooting-4649420.php,186,349,Unknown,1,3,San Francicsco,"1 killed, 3 wounded in Mission shooting"
+http://sanfrancisco.cbslocal.com/2013/07/08/man-dies-from-injuries-suffered-in-sf-mission-district-shooting/,186,350,Unknown,1,3,San Francicsco,Man Dies From Injuries Suffered In SF Mission District Shooting « CBS San Francisco
+http://www.fugitive.com/2013/07/08/keith-smith-critically-injured-in-a-shooting-in-san-francisco-died/,186,351,Unknown,1,3,San Francicsco,Keith Smith critically injured in a shooting in San Francisco died
+http://www.washingtontimes.com/news/2013/jul/14/one-teen-dead-4-wounded-nj-birthday-party-shooting/,187,352,Unknown,1,4,Hamilton Township,"One teen dead, 4 wounded in N.J. birthday party shooting"
+http://abclocal.go.com/wpvi/story?section=news/local&id=9166536,187,353,Unknown,1,4,Hamilton Township,"Teen dead, 4 wounded in Hamilton Twp. house party shooting"
+http://philadelphia.cbslocal.com/2013/07/13/1-dead-4-injured-in-hamilton-twp-birthday-party-shooting/,187,354,Unknown,1,4,Hamilton Township,"1 Dead, 4 Injured In Hamilton Twp. Birthday Party Shooting « CBS Philly"
+http://www.nbcphiladelphia.com/news/local/1-Dead-4-Hurt-in-Shooting-at-Teen-Girls-Birthday-Party-215364471.html,187,355,Unknown,1,4,Hamilton Township,"1 Dead, 4 Hurt in Shooting at Teen Girl's Birthday Party"
+http://kfor.com/2013/07/14/one-dead-three-injured-in-northeast-okc-shooting/,189,356,Unknown,1,3,Oklahoma City,"One dead, three injured in northeast OKC shooting"
+http://www.news9.com/story/22842674/okc-police-identify-victims-of-fatal-quadruple-shooting,189,357,Unknown,1,3,Oklahoma City,"OKC Police Identify Victims Of Quadruple Shooting - News9.com - Oklahoma City, OK - News, Weather, Video and Sports"
+http://newsok.com/one-dead-three-wounded-in-northeast-oklahoma-city-shooting/article/3862318,189,358,Unknown,1,3,Oklahoma City,"One dead, three wounded in northeast Oklahoma City shooting"
+http://www.nbcwashington.com/news/local/Four-Shot-Police-Searching-for-Gunman-215434211.html,190,359,Unknown,0,4,Washington,Four Shot; Police Searching for Gunman
+http://www.nbcwashington.com/news/local/PD-Men-Enter-and-Exit-Metrobus-Shoot-at-Pedestrians-215573571.html,190,360,Unknown,0,4,Washington,Police Seek Suspects in Shooting That Injured Four
+http://www.wibw.com/home/headlines/One-Dead-Four-Injured-In-Shooting-Near-Downtown-Wichita-215439921.html,191,361,Unknown,1,4,Wichita,"One Dead, Four Injured In Shooting Near Downtown Wichita"
+http://www.ksn.com/2013/07/14/one-dead-several-injured-in-central-wichita-shooting/,191,362,Unknown,1,4,Wichita,"One dead, four injured after shooting near downtown Wichita"
+http://www.kansas.com/2013/07/14/2887178/one-dead-four-injured-in-overnight.html,191,363,Unknown,1,4,Wichita,"One dead, four injured in overnight shooting in Wichita"
+http://www.mlive.com/news/grand-rapids/index.ssf/2013/07/5_people_shot_late_sunday_at_p.html,192,364,Billie McKinney,0,5,Kentwood,"5 people shot late Sunday at party, police searching for suspects"
+http://www.wzzm13.com/news/article/261687/280/BREAKING-5-hurt-in-Kentwood-pool-party-shooting,192,365,Billie McKinney,0,5,Kentwood,Object reference not set to an instance of an object.
+http://www.mlive.com/news/grand-rapids/index.ssf/2013/07/kentwood_police_release_ages_i.html,192,366,Billie McKinney,0,5,Kentwood,"Kentwood police release ages, injuries of five people shot at graduation party"
+http://www.wzzm13.com/news/article/270391/2/Witnesses-describe-shooting-at-graduation-party,192,367,Billie McKinney,0,5,Kentwood,Object reference not set to an instance of an object.
+http://www.nbcbayarea.com/news/local/Quadruple-Shooting-Girl-8-Dead-Children-Grandma-Injured-215984691.html,194,368,Joe Carroll,3,1,Oakland,"Quadruple Shooting: Girl, 8, Dead, Children, Grandma Injured"
+http://www.insidebayarea.com/breaking-news/ci_23684178/oakland-girl-8-killed-when-gunman-opens-fire,194,369,Joe Carroll,3,1,Oakland,"Oakland: Eight-year-old girl killed, three wounded when apartment sprayed with gunfire in Dimond District"
+http://www.mercurynews.com/breaking-news/ci_23684177/oakland-girl-8-killed-when-gunman-opens-fire,194,370,Joe Carroll,3,1,Oakland,"Oakland: Eight-year-old girl killed, three wounded when apartment sprayed with gunfire in Dimond District"
+http://www.contracostatimes.com/news/ci_24214195/oakland-two-arrested-july-slaying-8-year-old,194,371,Joe Carroll,3,1,Oakland,Police: Retaliation was motive behind shooting that killed Oakland girl at sleepover
+http://abclocal.go.com/kfsn/story?section=news/local&id=9176737,195,372,Unknown,0,4,Madera,4 people injured in a North Valley shooting
+http://articles.courant.com/2013-07-19/community/hc-hartford-shooting-vibes-club-0720-20130719_1_graze-wound-18-year-old-man-10-gunshots,196,373,Unknown,0,4,Hartford,Four Wounded In Shooting Outside Hartford Club
+http://www.nbcconnecticut.com/news/local/Several-Injured-in-Hartford-Shooting-216138411.html,196,374,Unknown,0,4,Hartford,4 Teens Shot After Family Party in Hartford
+http://www.vindy.com/news/2013/jul/21/-injured-in-shootings-in-campbell/,197,375,Devin Spann,0,5,Campbell,"Youngstown News, Four suffer serious injuries in Campbell shooting"
+http://www.vindy.com/news/2013/jul/22/campbell/?nw,197,376,Devin Spann,0,5,Campbell,"Youngstown News, Campbell police release names of shooting suspect, victims"
+http://www.vindy.com/news/2013/jul/20/5-people-shot-in-campbell/?nw,197,377,Devin Spann,0,5,Campbell,"Youngstown News, 5 people shot in Campbell"
+http://wgntv.com/2013/07/21/1-dead-3-injured-in-far-south-side-shooting/,198,378,Terrence Lynom and Angelo Clark,1,3,Chicago,"1 dead, 3 injured in Far South Side shooting"
+http://abclocal.go.com/wls/story?section=news/local&id=9179997,198,379,Terrence Lynom and Angelo Clark,1,3,Chicago,"Far South Side shooting kills 1, injures 3 on East 131 Street"
+http://homicides.suntimes.com/2013/07/22/altgeld-gardens-father-of-three-killed-when-fight-escalates/,198,380,Terrence Lynom and Angelo Clark,1,3,Chicago,Altgeld Gardens father of three killed when fight escalates
+"http://www.chicagotribune.com/news/local/breaking/chi-chicago-crime-shooting-gun-violence-south-side-20130422,0,1015711.story",198,381,Terrence Lynom and Angelo Clark,1,3,Chicago,"3 teens charged with shooting girl, 6"
+http://newyork.cbslocal.com/2013/07/21/cops-seek-suspects-in-east-new-york-shooting-that-left-one-dead-and-one-wounded/,199,382,Unknown,0,4,Brooklyn,Cops Seek Suspects In Seperate Crown Heights And East New York Shootings « CBS New York
+http://www.nypost.com/p/news/local/brooklyn/spray_of_bullets_hits_Utf74cwI8L0Lr8TSaw0D5H,200,383,Unknown,0,5,Brooklyn,5 people shot in revenge violence at Brooklyn park
+http://www.inquisitr.com/862001/five-family-members-shot-in-brooklyn-after-calling-police-about-abuse-in-mcdonalds/,200,384,Unknown,0,5,Brooklyn,Five Family Members Shot In Brooklyn After Calling Police About Abuse In McDonald’s
+http://www.nypost.com/p/news/local/brooklyn/four_people_shot_as_gunman_opens_oVwU7ClQgdINy8w20NDCEM,200,385,Unknown,0,5,Brooklyn,"Shot for going to the cops: Gunmen open fire on family, wound 5, because dad went to police to protect his daughter"
+http://www.wibw.com/home/headlines/Drive-by-Reported-On-SE-Topeka-Street-For-2nd-Time-In-One-Week-216878511.html,202,386,Unknown,0,4,Topeka,2 Teens Among 4 Shot In Topeka Drive-by
+http://www.kake.com/home/headlines/4-Injured-In-Drive-By-Shooting-In-Topeka-216914861.html,202,387,Unknown,0,4,Topeka,4 Injured In Drive-By Shooting In Topeka
+http://www.wxyz.com/dpp/news/4-people-shot-in-inkster-on-thursday-evening,203,388,Unknown,0,4,Inkster,4 people shot in Inkster on Thursday evening
+http://detroit.cbslocal.com/2013/07/26/4-injured-in-apparent-drive-by-shooting-in-inkster/,203,389,Unknown,0,4,Inkster,"4 Injured, Including Child, In Apparent Drive-By Shooting « CBS Detroit"
+http://www.wvgazette.com/News/201307260012,204,390,Sidney A. Muller,4,0,Clarksburg,4 shot dead in Clarksburg; suspect in custody
+http://www.wboy.com/story/22937993/3-dead-and-one-transported-to-the-hosptal,204,391,Sidney A. Muller,4,0,Clarksburg,"WBOY.com: Clarksburg, Morgantown: News, Sports, Weather"
+http://www.newsandsentinel.com/page/content.detail/id/576437/Four-killed-in-Clarksburg-shooting.html?nav=5061,204,392,Sidney A. Muller,4,0,Clarksburg,"News, Sports, Jobs, Community Information - Parkersburg News and Sentinel"
+http://www.upi.com/Top_News/US/2013/07/27/Four-shot-dead-after-drug-deal-gone-bad/UPI-91451374961163/,204,393,Sidney A. Muller,4,0,Clarksburg,"Four shot dead in Charleston, W. Va., after drug deal gone bad"
+http://www.exponent-telegram.com/news/court_and_police/probable-cause-hearing-set-for-quadruple-homicide-suspect/article_16874a28-4cd7-11e3-ab28-001a4bcf887a.html,204,394,Sidney A. Muller,4,0,Clarksburg,Probable cause hearing set for quadruple homicide suspect
+http://www.examiner.com/article/seven-people-shot-and-killed-florida-including-gunman,205,395,Pedro Alberto Vargas,7,0,Hialea,"Seven people shot and killed in Florida, including gunman"
+http://www.miamiherald.com/2013/08/03/3539629/hialeah-killer-showed-signs-of.html,205,396,Pedro Alberto Vargas,7,0,Hialea,Hialeah killer showed signs of trouble before mass shooting
+http://www.krqe.com/dpp/news/crime/1-dead-3-hurt-in-farmington-shooting,206,397,Unknown,1,3,Farmington,"Crime News for Albuquerque, NM and New Mexico"
+http://www.daily-times.com/four_corners-news/ci_23746219/names-released-victims-suspects-saturdays-fatal-shooting-farmington,206,398,Unknown,1,3,Farmington,Farmington police still investigating fatal shooting on East Hopi Street
+http://www.daily-times.com/four_corners-news/ci_23744925/shooting-reported-near-orchard-avenue-and-apache-street,206,399,Unknown,1,3,Farmington,"One dead, three injured after shooting near North Orchard Avenue and Hopi Street in Farmington"
+http://newjersey.news12.com/news/1-dead-3-injured-after-irvington-shootings-1.5786807,207,400,Unknown,1,3,Irvington,"1 dead, 3 injured after Irvington shootings"
+http://www.nj.com/essex/index.ssf/2013/07/slain_victim_in_irvington_shooting_identified_as_linden_man.html,207,401,Unknown,1,3,Irvington,Slain victim in Irvington shooting identified as Linden man
+http://njtoday.net/2013/07/29/linden-man-killed-in-irvington-sunday/,207,402,Unknown,1,3,Irvington,Linden Man Killed In Irvington Sunday
+http://crimeblog.dallasnews.com/2013/07/police-five-shot-wounded-at-fast-food-drive-through-in-north-dallas.html/,208,403,Unknown,0,5,Dallas,"Police: Five shot, wounded at fast food drive-through in North Dallas"
+http://www.nbcdfw.com/news/local/Four-Wounded-In-McDonalds-Parking-Lot-Gunfire-217316361.html,208,404,Unknown,0,5,Dallas,Four Wounded in McDonald's Parking Lot Gunfire
+http://seattletimes.com/html/localnews/2021495487_apwagrangershooting.html,209,405,Unknown,0,4,Granger,4 teens wounded in Granger shooting
+http://www.tri-cityherald.com/2013/07/29/2493551/four-mattawa-teens-shot-while.html,209,406,Unknown,0,4,Granger,Four Mattawa teens shot while leaving party
+http://www.kimatv.com/news/local/Four-Mattawa-teens-shot-after-Granger-house-party-217374841.html,209,407,Unknown,0,4,Granger,"Yakima News, Weather, Sports, Breaking News"
+http://www.krqe.com/dpp/news/crime/4-injured-in-shooting-near-hobbs,210,408,Parrish Chee,0,4,Lea County,"Crime News for Albuquerque, NM and New Mexico"
+http://www.newswest9.com/story/22981254/four-people-hurt-after-shooting-in-lea-county-officials-searching-for-suspect,210,409,Parrish Chee,0,4,Lea County,"Hobbs Man Arrested in Connection With Shooting That Left Four Pe - KWES NewsWest 9 / Midland, Odessa, Big Spring, TX: newswest9.com"
+http://fox59.com/2013/08/02/four-people-shot-in-broadripple/,211,410,Tristan Crayton,0,4,Broad Ripple,Man claims self-defense after four shot in Broad Ripple
+http://www.nj.com/news/index.ssf/2013/08/at_least_one_dead_four_shot_in_newarks_central_ward.html,212,411,Unknown,2,3,Newark,"Two dead, five others injured in two separate Newark shootings"
+http://abclocal.go.com/wabc/story?section=news/local/new_jersey&id=9194102,212,412,Unknown,2,3,Newark,Police investigating double murder in Newark
+http://www.kentucky.com/2013/08/02/2746208/triple-murder-suicide-occurs-in.html,213,413,Unknown,4,0,Whitesburg,"Coroner: Jenkins man killed girlfriend, two others, then committed suicide"
+http://www.clickondetroit.com/news/5-shot-including-child-outside-detroit-home/-/1719418/21320248/-/p60k3gz/-/index.html,214,414,Unknown,0,5,Detriot,"5 shot, including 2 children outside Detroit home"
+http://www.ksbw.com/news/central-california/salinas/double-homicide-in-salinas/-/5738906/21334240/-/lx0hwnz/-/index.html,215,415,Giovanni Pacheco,3,4,Salinas,Third victim dies in Salinas taco restaurant shooting
+"http://www.latimes.com/local/lanow/la-me-ln-2-killed-5-wounded-in-taco-stand-shooting-man-arrested-20130805,0,4509638.story",215,416,Giovanni Pacheco,3,4,Salinas,"2 killed, 5 wounded in Salinas taco shop shooting; man arrested"
+http://fox4kc.com/2013/08/04/quadruple-shooting-leaves-one-dead-while-neighborhood-church-seeks-change/,216,417,Unknown,1,3,Kansas City,Quadruple shooting leaves one dead while neighborhood church seeks change
+http://www.kshb.com/dpp/news/crime/three-injured-one-dead-in-fatal-shooting-at-24th-and-park,216,418,Unknown,1,3,Kansas City,"Three injured, one dead in fatal shooting at 24th and Park"
+http://www.kctv5.com/story/23040380/teen-killed-in-quadruple-shooting-in-east-kc,216,419,Unknown,1,3,Kansas City,Police ID teen killed in east KC quadruple shooting
+http://articles.mcall.com/2013-08-06/news/mc-monroe-ross-township-municipal-building-shootin-20130805_1_township-official-state-police-hamilton-township,217,420,Rockne Newell,3,4,Ross Township,"Shooting reported at Ross Township, Monroe County, municipal building"
+http://www.poconorecord.com/apps/pbcs.dll/article?AID=/20130806/NEWS/308060316,217,421,Rockne Newell,3,4,Ross Township,Gunman kills three at Ross Township meeting
+http://www.nypost.com/p/news/local/gun_nut_murders_three_in_pennsylvania_qevA03ScXQpE5wPdGjQ2CN,217,422,Rockne Newell,3,4,Ross Township,Gunman murders three at Poconos town council meeting – ‘hoarder’ tackled by local official during shooting spree
+http://articles.mcall.com/2013-12-16/news/mc-ross-township-shooting-rockne-newell-arraignmen-20131216_1_david-fleetwood-bernie-kozen-gerard-kozic,217,423,Rockne Newell,3,4,Ross Township,"Rockne Newell pleads not guilty in shootings at Ross Township, Pa."
+http://pix11.com/2013/08/06/4-people-shot-in-montclair-new-jersey/,218,424,Known but unidentified.,0,4,Montclair,"4 people shot in Montclair, New Jersey; masked suspect on the loose"
+http://www.nj.com/essex/index.ssf/2013/08/neighbors_say_montclair_neighborhood_where_4_were_shot_is_becoming_more_violent.html,218,425,Known but unidentified.,0,4,Montclair,"Montclair neighborhood where 4 were shot is becoming more violent, residents say"
+http://abclocal.go.com/wabc/story?section=news/local/new_jersey&id=9196641,218,426,Known but unidentified.,0,4,Montclair,"Gunman on the loose after 4 shot in Montclair, New Jersey"
+"http://www.dailypress.com/news/crime/dp-portsmouth-homicide-shooting-0812,0,793658.story",220,427,Unknown,1,4,Portsmouth,Portsmouth defense contractor welcomes Rep. Scott
+http://www.inquisitr.com/937335/nebraska-convict-nikko-jenkins-adds-four-homicides-after-prison-release/,221,428,Nikko Jenkins,4,0,Omaha,Nebraska Convict Nikko Jenkins Adds Four Homicides After Prison Release
+http://www.businessinsider.com/nikko-jenkins-alleged-murders-in-omaha-2013-9,221,429,Nikko Jenkins,4,0,Omaha,Nikko Jenkins' Alleged Murders In Omaha
+http://www.amny.com/urbanite-1.812039/four-shot-in-flatbush-1.5873385,222,430,Unknown,1,3,Flatbush,"New York City News: Latest Headlines, Videos & Pictures"
+http://abclocal.go.com/wabc/story?section=news/local/new_york&id=9202495,222,431,Unknown,1,3,Flatbush,"4 shot and wounded at party in East Flatbush, Brooklyn"
+http://newyork.cbslocal.com/2013/08/11/police-searching-for-suspect-who-opened-fire-at-e-flatbush-house-party/,222,432,Unknown,1,3,Flatbush,Police Searching For Suspect Who Opened Fire At East Flatbush House Party « CBS New York
+http://abclocal.go.com/wpvi/story?section=news/local&id=9202915,224,433,Unknown,0,4,Wilmington,"4 shot, including 2 teen girls, in Wilmington"
+http://www.local12.com/news/features/top-stories/stories/4-people-shot-overtherhine-monday-night-936.shtml,225,434,Unknown,0,4,Cincinnati,"Cincinnati News, Weather, Sports, Breaking News"
+http://www.news9.com/story/23149917/neighbors-shocked-over-qualduple-murder-in,226,435,Daniel Green,4,0,Oklahoma,"Neighbors Shocked Over Family Murdered In SE OKC - News9.com - Oklahoma City, OK - News, Weather, Video and Sports"
+http://www.news9.com/story/23177122/man-accused-in-okc-quadruple-murder-arraigned-on-Monday,226,436,Daniel Green,4,0,Oklahoma,"Man Accused In OKC Quadruple Murder Arraigned On Monday - News9.com - Oklahoma City, OK - News, Weather, Video and Sports"
+http://newsok.com/oklahoma-city-man-charged-with-killing-four-family-members/article/3874045,226,437,Daniel Green,4,0,Oklahoma,Oklahoma City man charged with killing four family members
+http://www.philly.com/philly/news/breaking/20130814_Four_injured__1_critically__in_Kingsessing_shooting.html,227,438,Unknown,0,4,Kingsessing,"Philadelphia local news, sports, jobs, cars, homes"
+http://philadelphia.cbslocal.com/2013/08/13/breaking-police-investigate-shooting-in-kingsessing/,227,439,Unknown,0,4,Kingsessing,4 Hospitalized In Kingsessing Shooting « CBS Philly
+http://www.contracostatimes.com/news/ci_23885411/oakland-four-shot-telegraph-avenue,228,440,Demetrius Ward,0,4,Oakland,Oakland: Four shot on Telegraph Avenue
+http://abclocal.go.com/kgo/story?section=news/local/east_bay&id=9210450,228,441,Demetrius Ward,0,4,Oakland,Oakland police investigate shooting on Telegraph Avenue near 17th Street that left four injured
+http://www.contracostatimes.com/news/ci_23893647/oakland-police-arrest-suspect-uptown-salon-shooting,228,442,Demetrius Ward,0,4,Oakland,Oakland: Police arrest suspect in Uptown salon shooting
+http://www.toledoblade.com/Police-Fire/2013/08/19/Six-injured-in-violent-weekend-in-Toledo.html,230,443,Unknown,0,4,Toledo,Six injured in violent weekend in Toledo
+http://www.whec.com/news/stories/S3133832.shtml?cat=565,231,444,Unknown,1,3,Rochester,Sorry - The Page You are Looking for Doesn't Exist
+http://fox2now.com/2013/08/18/suspect-arrested-four-shot-midtown-gas-station/,232,445,Darryl Sain,0,4,St. Louis,Suspect arrested after four shot at Midtown gas station
+http://stlouis.cbslocal.com/2013/08/19/charged-multiple-shooting-st-louis-gas-station/,232,446,Darryl Sain,0,4,St. Louis,Man Charged With Multiple Shooting Outside St. Louis Gas Station « CBS St. Louis
+http://www.ksdk.com/news/article/393394/3/Four-people-recovering-after-overnight-shooting,232,447,Darryl Sain,0,4,St. Louis,Four people recovering after overnight shooting
+http://chicago.cbslocal.com/2013/08/18/1-killed-3-wounded-in-west-side-shooting/,233,448,Unknown,1,3,Chicago,"1 Killed, 3 Wounded In West Side Shooting « CBS Chicago"
+http://chicago.cbslocal.com/2013/08/19/6-dead-27-wounded-in-weekend-shootings/,233,449,Unknown,1,3,Chicago,"6 Dead, 28 Wounded In Weekend Shootings « CBS Chicago"
+http://myfox8.com/2013/08/18/5-shot-1-killed-in-sc-shooting-suspects-sought-in-nc/,234,450,Dontrel Shyhee Blakeney,1,4,Chesterfield County,"5 shot, 1 killed in SC shooting, suspects sought in NC"
+http://www.wsoctv.com/news/news/local/chesterfield-co-investigators-search-2-shooting-su/nZR5g/,234,451,Dontrel Shyhee Blakeney,1,4,Chesterfield County,"5 shot at Chesterfield Co. nightclub, police say"
+http://articles.chicagotribune.com/2013-08-20/news/chi-cops-5-shot-in-uptown-20130819_1_bang-five-men-shooting,235,452,Kelsky Patterson,1,4,Chicago,"5 shot in Uptown: 'A constant bang, bang, bang'"
+http://www.suntimes.com/news/metro/22036784-418/five-injured-in-uptown-shooting.html,235,453,Kelsky Patterson,1,4,Chicago,Chicago : News : Politics : Things To Do : Sports
+http://chicago.cbslocal.com/2013/08/19/breaking-5-shot-one-fatally-in-uptown/,235,454,Kelsky Patterson,1,4,Chicago,5 Wounded In Uptown Shooting « CBS Chicago
+http://www.huffingtonpost.com/2013/11/13/kelsky-patterson-charged_n_4268634.html?utm_hp_ref=chicago,235,455,Kelsky Patterson,1,4,Chicago,"Kelsky Patterson, Already Charged With Summer Uptown Shooting, Faces New Murder Charges"
+http://www.witn.com/home/headlines/Multiple-People-Shot-Outside-Vanceboro-220411001.html,237,456,Unknown,0,4,Vanceboro,Officer Used Proper Force In Shooting Vanceboro Suspect
+http://baltimore.cbslocal.com/2013/08/25/juvenile-dead-6-shot-after-dice-game-goes-bad/,239,457,Unknown,1,6,Baltimore,"15-Year-Old Dead, 6 Shot After Dice Game Goes Bad « CBS Baltimore"
+http://articles.baltimoresun.com/2013-08-25/news/bs-md-ci-shootings-20130824_1_west-baltimore-15-year-old-boy-shooting-incidents,239,458,Unknown,1,6,Baltimore,"Seven shot in West Baltimore, teenager killed"
+http://www.abc2news.com/dpp/news/crime_checker/baltimore_city_crime/seven-shot-1-dead-at-illegal-dice-game,239,459,Unknown,1,6,Baltimore,"Seven shot, 1 dead at illegal dice game"
+http://www.abcactionnews.com/dpp/news/state/officials-gunman-kills-wounds-multiple-people-in-north-florida-shooting-spree,241,460,Hubert Allen Jr.,3,2,Lake Butler,"Officials: Gunman kills, wounds multiple people in north Florida shooting spree - Story"
+http://www.cbsnews.com/8301-201_162-57600001/motive-a-mystery-in-lake-butler-fla-shooting-spree/,241,461,Hubert Allen Jr.,3,2,Lake Butler,"Motive a mystery in Lake Butler, Fla., shooting spree"
+http://jacksonville.com/news/2013-08-25/story/lake-butler-gunman-ex-boss-he-killed-were-once-close,241,462,Hubert Allen Jr.,3,2,Lake Butler,"Lake Butler gunman, ex-boss he killed were once close"
+http://www.usatoday.com/story/news/nation/2013/08/28/workplace-shooting-florida/2712227/,241,463,Hubert Allen Jr.,3,2,Lake Butler,Third victim dies after Florida mass shooting
+http://www.contracostatimes.com/news/ci_23939970/four-people-including-two-girls-wounded-oakland-shooting,243,464,Unknown,0,4,Oakland,"Four people, including three children, wounded in Oakland shooting"
+http://sanfrancisco.cbslocal.com/2013/08/25/4-injured-oakland-shooting/,243,465,Unknown,0,4,Oakland,"4 Injured, Including 2 Children, In Oakland Shooting « CBS San Francisco"
+http://www.nbcbayarea.com/news/local/Two-Children-Two-Adults-Injured-in-Oakland-Shooting-221111801.html,243,466,Unknown,0,4,Oakland,"Two Children, Two Adults Injured in Oakland Shooting"
+http://www.carolinalive.com/news/story.aspx?id=938146,244,467,Unknown,1,4,Dillon County,"Four shot, one killed at Dillon County club"
+http://www.wbtw.com/story/23245535/one-killed-four-injured-in-dillon-county-shooting,244,468,Unknown,1,4,Dillon County,"One killed, four injured in Dillon County shooting"
+http://www.whiotv.com/news/news/crime-law/highway-patrol-on-lookout-for-armed-carjackers/nY5nF/,245,469,Devonere Simmonds,3,2,Columbus,Teen linked to Columbus crimes has Dayton criminal past
+http://www.chron.com/news/media/2-dead-4-injured-in-Gary-Indiana-shooting-87075.php?cmpid=videohcat,248,470,Unknown,2,4,Gary,"2 dead, 4 injured in Gary, Indiana shooting"
+http://abclocal.go.com/wls/story?section=news/local/indiana&id=9239958,248,471,Unknown,2,4,Gary,6 shot outside Gary home; 2 killed
+"http://www.courant.com/news/connecticut/hc-bridgeport-shooting-0911-20130910,0,6220161.story",249,472,Roderick Rodgers and David Anderson,1,4,Bridgeport,"One Man Killed, Three Others Wounded In"
+"http://www.courant.com/community/bridgeport/hc-bridgeport-shooting-0912-20130912,0,3111130.story",249,473,Roderick Rodgers and David Anderson,1,4,Bridgeport,"One Dead, Six Wounded In Three Separate Bridgeport Shootings"
+http://connecticut.cbslocal.com/2013/09/16/five-shot-in-bridgeport-arrest-made/,249,474,Roderick Rodgers and David Anderson,1,4,Bridgeport,"Five Shot In Bridgeport, Arrest Made « CBS Connecticut"
+http://www.wfsb.com/story/23539618/second-arrest-made-in-deadly-shooting-in-bridgeport,249,475,Roderick Rodgers and David Anderson,1,4,Bridgeport,Second arrest made in deadly shooting in Bridgeport
+http://www.wusa9.com/news/article/274561/158/1-dead-3-injured-after-quadruple-shooting-in-NW-DC,250,476,Unknown,1,3,Washington,Delonta Hendrix killed in quadruple shooting at Pierce and 1st St NW in DC
+http://www.nbcwashington.com/news/local/1-Dead-3-Injured-in-NW-DC-Shooting-223435251.html,250,477,Unknown,1,3,Washington,"Within Hours, 1 Dead, 4 Injured in D.C. Shootings"
+http://washington.cbslocal.com/2013/09/12/one-dead-three-injured-in-overnight-d-c-shooting/,250,478,Unknown,1,3,Washington,Man Identified in Fatal Overnight D.C. Shooting « CBS DC
+http://www.nydailynews.com/new-york/4-people-shot-club-sob-varick-st-article-1.1453270,251,479,Unknown,0,4,New York,4 people shot at club SOB's on Varick St.
+http://nypost.com/2013/09/12/four-shot-inside-soho-music-club/,251,480,Unknown,0,4,New York,Four shot inside Soho music club
+http://www.foxnews.com/us/2013/09/12/investigators-bodies-4-people-shot-to-death-found-in-car-on-renegade-mountain/,252,481,Jacob Bennett and Brittany Moser,4,0,Renegade Mountain,Investigators: Bodies of 4 people shot to death found in car on Renegade Mountain in Tennessee
+http://www.reuters.com/article/2013/09/12/us-usa-crime-tennessee-idUSBRE98B15X20130912,252,482,Jacob Bennett and Brittany Moser,4,0,Renegade Mountain,Four people shot to death found on Tennessee mountain road
+http://www.wsmv.com/story/23415177/4-people-found-dead-inside-car-in-cumberland-county,252,483,Jacob Bennett and Brittany Moser,4,0,Renegade Mountain,Authorities arrest second suspect in connection with murders
+http://fox2now.com/2013/09/13/four-shot-in-centreville-housing-complex/,253,484,Unknown,0,4,Centreville,Four shot in Centreville housing complex
+http://www.stltoday.com/news/local/crime-and-courts/dispute-at-centreville-apartment-complex-ends-with-three-men-shot/article_24d68032-35c0-59f8-8517-27e858c69458.html,253,485,Unknown,0,4,Centreville,Dispute at Centreville apartment complex ends with three men shot
+http://www.mcdowellnews.com/news/article_1476be3e-1d6c-11e3-8698-001a4bcf6878.html,254,486,Earl Spencer Boyce,0,4,Marion,Four injured by gunfire outside Marion nightclub
+http://www.kktv.com/home/headlines/Shooting--223813311.html,256,487,Unknown,0,5,Colorado Springs,Shooting Leaves At Least Five Injured
+http://www.krdo.com/news/five-injured-in-colorado-springs-shooting/-/417220/21946284/-/2wkkdz/-/index.html,256,488,Unknown,0,5,Colorado Springs,Five injured in Colorado Springs shooting
+http://abclocal.go.com/wpvi/story?section=news/local&id=9249747,257,489,Unknown,0,4,Wilmington,"4 recovering from shootings in Wilmington, Delaware"
+http://www.wdel.com/story.php?id=53630,257,490,Unknown,0,4,Wilmington,"Four people, three of them teens, shot in Wilmington Sunday"
+http://www.kimatv.com/news/local/Shooting-leaves-six-people-shot-one-in-critical-condition--223823421.html,259,491,Unknown,0,6,Yakima,"Police: Shooting leaves 6 people hurt, 1 in critical condition"
+http://www.11alive.com/news/article/306499/40/4-Shot-3-dead-in-Gwinnett-Co-shooting,260,492,Robert E. Bell,3,1,Snellville,Gwinnett triple murder suspect may be on run
+http://onlineathens.com/local-news/2013-09-16/3-people-shot-death-home-atlanta-suburbs,260,493,Robert E. Bell,3,1,Snellville,3 people shot to death at home in Atlanta suburbs
+http://www.examiner.com/article/cops-guest-shoots-kills-woman-her-12-year-old-son-and-teenage-godson,260,494,Robert E. Bell,3,1,Snellville,"Cops: Guest shoots, kills woman, her 12-year-old son and teenage godson"
+http://www.upi.com/Top_News/US/2013/09/25/Police-say-four-people-shot-at-their-Georgia-home-were-ambushed/UPI-65751380125926/?spt=hs&or=tn,260,495,Robert E. Bell,3,1,Snellville,Ga. police say suspect at-large in quadruple shooting outside home
+http://www.washingtonpost.com/local/police-search-for-active-shooter-on-grounds-of-washington-navy-yard-in-southeast-dc/2013/09/16/b1d72b9a-1ecb-11e3-b7d1-7153ad47b549_story.html,261,496,Aaron Alexis,13,8,Washington,At least 13 dead in Navy Yard shooting; possible suspect at large
+http://www.nbcwashington.com/news/local/Confirmed-Shooter-at-Navy-Yard-One-Person-Shot-223897891.html,261,497,Aaron Alexis,13,8,Washington,"12 Victims Killed, 8 Wounded in Shooting at D.C. Navy Yard, Suspected Gunman Killed"
+http://abclocal.go.com/kfsn/story?section=news/state&id=9252662,262,498,Unknown,1,4,Stockton,5 people gunned down at Stockton grocery store
+http://www.recordnet.com/apps/pbcs.dll/article?AID=/20130917/A_NEWS/130919885/-1/A_NEWS02,262,499,Unknown,1,4,Stockton,"(UPDATED: 11:51 p.m.) One killed, several shot"
+http://www.mlive.com/lansing-news/index.ssf/2013/09/sexton_shooting_rocks_quiet_ne.html,263,500,Unknown,0,4,Lansing,"Sexton High School student shootings shake quiet Lansing neighborhood, anger mayor and police chief"
+https://www.reviewjournal.com/news/crime-courts/las-vegas-police-seek-information-drive-shooting,264,501,Unknown,0,4,Las Vegas,Las Vegas police seek information in drive-by shooting
+http://www.lasvegassun.com/news/2013/sep/19/us-florida-chase-deaths/,265,502,Unknown,4,0,West Broward,Page not found Las Vegas Sun News
+http://miami.cbslocal.com/2013/09/18/wild-police-chase-on-u-s-27-ends-in-shoot-out/,265,503,Unknown,4,0,West Broward,"4 Dead After Shooting, Wild Police Chase, Crash On U.S 27 « CBS Miami"
+http://www.wflx.com/story/23474164/four-dead-in-fatal-shooting-high-speed,265,504,Unknown,4,0,West Broward,"Fox29 WFLX TV, West Palm Beach, FL-news & weather"
+http://wreg.com/2013/09/18/one-dead-three-injured-in-whitehaven-shooting/,266,505,Unknown,1,4,Whitehaven,"Five Shot, One Dead In Whitehaven"
+http://www.wmctv.com/story/23470990/police-at-least-three-people-shot-in,266,506,Unknown,1,4,Whitehaven,"22-year-old killed, four others injured in apartment complex sho"
+http://www.bakersfieldnow.com/news/local/4-shot-behind-convenience-store-224423401.html,268,507,Unknown,1,4,Bakersfield,5 shot behind Bakersfield convenience store
+http://fox40.com/2013/09/19/stockton-shooting-aftermath-posted-on-facebook/,268,508,Unknown,1,4,Bakersfield,Man Records Victims Moments after Deadly Shooting
+"http://www.chicagotribune.com/news/local/breaking/chi-multiple-people-including-3yearold-shot-in-south-side-attack-20130919,0,352520.story",269,509,Bryon Champ,0,13,Chicago,"13 people, including 3-year-old, shot at South Side park"
+http://www.cbsnews.com/8301-201_162-57603810/chicago-park-shooting-leaves-13-wounded-including-3-year-old-boy/,269,510,Bryon Champ,0,13,Chicago,"Chicago park shooting leaves 13 wounded, including 3-year-old boy"
+http://abclocal.go.com/wls/story?section=news/local/chicago_news&id=9255232,269,511,Bryon Champ,0,13,Chicago,Mother pleads for park gunman to turn himself in
+http://www.cnn.com/2013/09/22/justice/texas-bodies-found/,270,512,Guadalupe Ronquillo-Ovalle,5,0,Rice,Family of 5 found dead inside Texas home
+http://www.nbcdfw.com/news/local/Five-Family-Members-Found-Dead-In-Navarro-County-224807262.html,270,513,Guadalupe Ronquillo-Ovalle,5,0,Rice,"2 Adults, 3 Children Dead Investigated as Murder-Suicide: Sheriff"
+http://www.dallasnews.com/news/crime/headlines/20130924-sheriff-navarro-county-mother-killed-husband-children-before-shooting-herself.ece,270,514,Guadalupe Ronquillo-Ovalle,5,0,Rice,"Sheriff: Navarro County mother killed husband, children before shooting herself"
+http://www.ksn.com/2013/09/22/police-investigating-shooting-in-old-town/,273,515,Unknown,1,6,Witchita,"One dead, six hurt in Wichita’s Old Town shooting"
+http://www.kansas.com/2013/09/22/3015131/six-injured-after-shooting-in.html,273,516,Unknown,1,6,Witchita,"One killed, six injured in Old Town shooting"
+http://www.kansascity.com/2013/09/22/4500139/six-injured-after-shooting-in.html,273,517,Unknown,1,6,Witchita,"One killed, six injured after shooting in Wichita's Old Town"
+http://blogs.riverfronttimes.com/dailyrft/2013/09/randy_lee_jones_21_killed_three_injured_north_st_louis.php,274,518,Unknown,1,3,St. Louis,"Randy Lee Jones, 21, Killed; Three Injured in North St. Louis Shooting (Homicide No. 75)"
+http://www.stltoday.com/news/local/crime-and-courts/shot-one-fatally-on-st-louis-street/article_e2cdfd83-17c9-550a-91e1-7afb3a809b9c.html,274,519,Unknown,1,3,St. Louis,"4 shot, one fatally, on St. Louis street"
+http://fox2now.com/2013/09/22/north-st-louis-shooting-kills-one-wounds-three/,274,520,Unknown,1,3,St. Louis,"North St. Louis shooting kills one, wounds three"
+http://www.usatoday.com/story/news/nation/2013/09/22/shootout-social-club/2850083/,275,521,Antonio Keshawn Raglin,3,1,Muskegon,Shootout at Muskegon social club leaves 3 dead
+http://www.wsaz.com/news/huntingtonnews/headlines/Multiple-People-Shot-in-Huntington-At-Least-Four-Victims-225120602.html,276,522,Antonio Michael Smith,0,6,Huntington,Huntington Shooting Suspect Arraigned on Federal Charges
+http://wvmetronews.com/2013/09/25/six-shot-in-huntington-shooting/,276,523,Antonio Michael Smith,0,6,Huntington,WV MetroNews – Page not found
+http://www.wsaz.com/news/headlines/Multiple-People-Shot-in-Huntington-At-Least-Four-Victims-225120602.html,276,524,Antonio Michael Smith,0,6,Huntington,Huntington Shooting Suspect Arraigned on Federal Charges
+http://www.thetimesnews.com/news/top-news/four-shot-at-haw-river-sports-bar-1.208316,277,525,Unknown,0,4,Haw River,Four shot at Haw River sports bar
+http://jacksonville.com/news/crime/2013-09-27/story/shooting-plush-puts-4-people-hospital-1-life-threatening-condition,278,526,Unknown,0,4,Jacksonville,"Shooting at Plush puts 4 people in hospital, 1 in life-threatening condition"
+http://www.post-gazette.com/stories/local/region/state-police-identify-4-shooting-victims-in-cambria-county-incident-705426/,279,527,Unknown,4,0,Ashville,State police identify 4 shooting victims in Cambria County incident
+http://www.parentdish.co.uk/2013/09/30/woman-shot-her-mother-and-was-then-killed-by-father/,279,528,Unknown,4,0,Ashville,Four Dead In Family Feud Horror: Woman Shot Her Mother
+http://www.10tv.com/content/stories/2013/09/30/zanesville-hoppys-bar-shooting-4-injured.html,280,529,Unknown,0,4,Zanesville,4 People Injured In Zanesville Bar Shooting
+http://chicago.cbslocal.com/2013/09/28/four-hurt-in-washington-park-shooting/,281,530,Unknown,1,4,Chicago,Four Hurt In Washington Park Shooting « CBS Chicago
+http://www.suntimes.com/22867010-418/1-dead-14-wounded-in-shootings-across-chicago-since-friday.html,281,531,Unknown,1,4,Chicago,Chicago : News : Politics : Things To Do : Sports
+http://blog.al.com/spotnews/2013/10/4_found_shot_to_death_in_car_s.html,282,532,Andy Keith Hunt,4,0,Double Springs,4 found shot to death in car south of Double Springs (updated)
+http://www.abc3340.com/story/23595954/winston-co-sheriff-4-found-shot-to-death-inside-vehicle-in-black-pond-community,282,533,Andy Keith Hunt,4,0,Double Springs,UPDATE: 4 found shot to death inside vehicle in remote area of Winston Co.
+http://nation.time.com/2013/10/03/four-found-brutally-beaten-and-shot-in-alabama/,282,534,Andy Keith Hunt,4,0,Double Springs,Four Found Brutally Beaten and Shot in Alabama
+http://www.myfoxal.com/story/23628816/sheriff-confirms-murder-suicide-in-winston-county-identifies-4th-body,282,535,Andy Keith Hunt,4,0,Double Springs,"Sheriff confirms murder-suicide in Winston County, identifies 4t"
+http://www.wowt.com/news/headlines/Seven-Injured-In-Overnight-Shootings-226275981.html,283,536,Unknown,0,4,Omaha,Neighbors Rattled in Wake of Shootings
+http://www.abc15.com/dpp/news/region_west_valley/avondale/avondale-pd-4-people-shot-during-party-at-versante-luxury-apartments,285,537,Unknown,0,4,Avondale,Avondale PD: 4 people shot during party at Versante Luxury Apartments
+http://www.azcentral.com/community/swvalley/articles/20131006avondale-shooting-four-people-injured-abrk.html,285,538,Unknown,0,4,Avondale,"4 injured, 2 critical in Avondale shooting"
+http://www.buffalonews.com/city-region/police-blotter/four-shot-outside-zelmer-street-party-20131006,287,539,Unknown,0,4,Buffalo,Four shot outside Zelmer Street party
+http://dfw.cbslocal.com/2013/10/10/4-people-found-shot-dead-in-paris-texas/,288,540,Unknown,4,0,Paris,"4 People Found Shot Dead In Paris, Texas « CBS Dallas"
+http://www.foxnews.com/us/2013/10/10/police-say-4-men-found-fatally-shot-at-ne-texas-house-no-details-on-suspects/,288,541,Unknown,4,0,Paris,"Police say 4 men found fatally shot at NE Texas house; no details on suspects, circumstances"
+http://www.theblaze.com/stories/2013/10/13/gunfire-erupts-at-asian-cultural-celebration-5-injured-2-arrested/,290,542,Meng Lee,0,5,Tulsa,"Gunfire Erupts at Asian Cultural Celebration; 5 Injured, 2 Arrested"
+http://www.yourhoustonnews.com/courier/news/two-in-custody-for-shooting-of-at-tulsa-event/article_b02e84a3-94a9-5153-83e0-979849c8d2c8.html,290,543,Meng Lee,0,5,Tulsa,Two in custody for shooting of 5 at Tulsa event
+http://cumberlink.com/news/local/communities/harrisburg/police-multiple-people-shot-sunday-outside-harrisburg-community-center/article_23653c26-34bf-11e3-af30-001a4bcf887a.html,291,544,Unknown,0,8,Harrisburg,Multiple people shot Sunday outside Harrisburg community center
+http://www.pennlive.com/midstate/index.ssf/2013/10/allison_hill_community_center.html,291,545,Unknown,0,8,Harrisburg,Allison Hill Community Center activities marred by street violence
+http://www.pennlive.com/midstate/index.ssf/2013/10/police_confirm_eight_people_sh.html,291,546,Unknown,0,8,Harrisburg,Police confirm eight people shot outside Harrisburg's Central Allison Hill Community Center
+http://articles.sun-sentinel.com/2013-10-22/news/fl-margate-shooting-folo-20131022_1_lori-eller-shooting-victims-margate-coconut-creek-fire-rescue,292,547,Unknown,0,4,Margate,Police receive tips in Margate quadruple shooting
+http://miami.cbslocal.com/2013/10/19/four-people-found-shot-in-margate/,292,548,Unknown,0,4,Margate,Four People Found Shot In Margate « CBS Miami
+http://www.philly.com/philly/news/breaking/20131020_ap_ce7c85b6f7cd419d97b4c28ecd7d1f2c.html,294,549,Unknown,2,4,Pittsburgh,"Philadelphia local news, sports, jobs, cars, homes"
+http://pittsburgh.cbslocal.com/2013/10/20/homewood-shooting-leaves-2-dead/,294,550,Unknown,2,4,Pittsburgh,"Homewood Shooting Leaves 2 Dead, At Least 4 Injured « CBS Pittsburgh"
+http://www.usatoday.com/story/news/nation/2013/10/21/las-vegas-casino-shooting/3142815/,295,551,Benjamin Frazier,1,4,Las Vegas,"One dead, 2 wounded in Vegas casino shooting"
+http://www.8newsnow.com/story/23743794/breaking-news-police-activity-near-ballys-hotel-and-casino,295,552,Benjamin Frazier,1,4,Las Vegas,Suspect arrested after overnight police chase - Story
+http://www.lasvegassun.com/news/2013/oct/21/us-nightclub-shooting-vegas/,295,553,Benjamin Frazier,1,4,Las Vegas,Police: Guest killed after tackling gunman at nightclub; 2 security officers wounded
+http://www.examiner.com/article/bally-s-hotel-shooting-leaves-1-dead-4-hurt-gunfire-at-vegas-nightclub,295,554,Benjamin Frazier,1,4,Las Vegas,"Bally's hotel shooting leaves 1 dead, 4 hurt in gunfire at Vegas nightclub"
+http://www.christianpost.com/news/ballys-hotel-shooting-las-vegas-shooting-sees-patron-shot-dead-4-others-injured-in-drais-nightclub-107140/,295,555,Benjamin Frazier,1,4,Las Vegas,"Las Vegas Shooting Sees Patron Shot Dead, 4 Others Injured in Drai's Nightclub"
+http://www.fox5vegas.com/story/23743924/police-1-dead-3-hurt-in-ballys-casino-shooting,295,556,Benjamin Frazier,1,4,Las Vegas,Uncle: Bally's shooting suspect 'piecing his life together'
+http://miami.cbslocal.com/2013/10/27/four-injured-in-miami-gardens-shooting/,297,557,Unknown,0,4,Miami Gardens,Four Injured In Miami Gardens Shooting « CBS Miami
+http://www.nbcconnecticut.com/news/local/1-Killed-5-Injured-in-New-Haven-Club-Shooting-229371141.html,298,558,Unknown,1,5,New Haven,"1 Killed, 5 Injured in New Haven Club Shooting"
+http://www.upi.com/Top_News/US/2013/10/27/One-dead-five-injured-in-shooting-at-New-Haven-Conn-nightclub/UPI-73691382907716/,298,559,Unknown,1,5,New Haven,"Shooting at Key Club Cabaret leaves 1 dead, 1 critical, four wounded"
+http://www.nhregister.com/general-news/20131026/governor-new-haven-mayor-denounce-violence-that-left-1-dead-in-city-nightclub-Saturday,298,560,Unknown,1,5,New Haven,"Governor, New Haven mayor denounce violence that left 1 dead in city nightclub Saturday"
+"http://www.latimes.com/local/lanow/la-me-ln-victims-ridgecrest-shootings-20131025,0,7877039.story#axzz2j22H29vy",299,561,Unknown,1,3,Ridgecrest,Three victims in Ridgecrest shootings 'likely to survive'
+http://www.lasvegassun.com/news/2013/oct/28/us-ridgecrest-shooting-spree/,299,562,Unknown,1,3,Ridgecrest,Page not found Las Vegas Sun News
+http://usnews.nbcnews.com/_news/2013/10/26/21172930-gunman-slain-hostages-freed-after-30-mile-mojave-desert-police-chase?lite,299,563,Unknown,1,3,Ridgecrest,"Gunman slain, hostages freed after 30-mile Mojave Desert police chase"
+"http://www.chicagotribune.com/sns-rt-usa-phoenixshooting-20131026,0,899134.story",300,564,Michael Guzzo,5,0,Phonix,Barking dogs may have set off gunman who killed 4 and self in Phoenix
+http://cnews.canoe.ca/CNEWS/World/2013/10/26/21225046.html,300,565,Michael Guzzo,5,0,Phonix,"Phoenix gunman kills four, commits suicide"
+http://www.news.com.au/world/michael-dante-guzzo-kills-neighbours-barking-dogs-may-have-sparked-dispute/story-fndir2ev-1226748605120,300,566,Michael Guzzo,5,0,Phonix,"Michael Dante Guzzo kills neighbours, barking dogs may have sparked dispute"
+http://blogs.phoenixnewtimes.com/valleyfever/2013/10/names_released_in_phoenix_quad.php,300,567,Michael Guzzo,5,0,Phonix,Victims of Phoenix Quadruple Homicide Identified Along with Suspected Shooter
+http://nation.time.com/2013/10/28/family-of-four-may-have-been-slain-over-noisy-dog/,300,568,Michael Guzzo,5,0,Phonix,Phoenix Shooter Michael Guzzo May Have Slain Moore Family Over Dogs
+http://sacramento.cbslocal.com/2013/10/27/7-people-shot-1-killed-during-drive-by-shooting-at-sacramento-club/,301,569,Unknown,1,6,Sacramento,"7 People Shot, 1 Killed During Drive-By Shooting At Sacramento Club « CBS Sacramento"
+http://fox40.com/2013/10/27/shooting-after-halloween-party-leaves-1-dead-6-hurt/,301,570,Unknown,1,6,Sacramento,"Shooting after Halloween Party Leaves 1 Dead, 6 Hurt"
+http://fox40.com/2013/10/27/police-8-people-shot-in-vallejo-after-getting-flat-tire/,302,571,Unknown,1,7,Vallejo,Police: 8 People Shot in Vallejo after Getting Flat Tire
+http://abclocal.go.com/kgo/story?section=news/local/east_bay&id=9302826,302,572,Unknown,1,7,Vallejo,"One dead, several injured in drive-by shooting in Vallejo"
+http://www.nbcbayarea.com/news/local/One-Dead-Seven-Injured-in-Drive-By-Shooting-in-Vallejo-229459261.html,302,573,Unknown,1,7,Vallejo,"One Dead, Seven Injured in Drive-By Shooting in Vallejo"
+http://www.dailyrepublic.com/news/crimecourts/police-1-dead-after-8-shot-while-changing-flat-tire/,302,574,Unknown,1,7,Vallejo,1 dead after 8 shot while changing flat tire
+http://www.wafb.com/story/23800728/4-wounded-in-beaumont-gunfire-suspect-sought,303,575,Unknown,0,4,Beaumont,"WAFB 9 News Baton Rouge, Louisiana News, Weather, Sports"
+http://usnews.nbcnews.com/_news/2013/10/26/21182048-albuquerque-shootout-and-chase-cops-sheriffs-deputy-wounded,304,576,Unknown,0,4,Albuquerque,"Albuquerque shootout and chase: Cops, sheriff's deputy wounded"
+http://www.wral.com/five-shot-at-southern-pines-billiards-bar/13043219/,306,577,Unknown,1,4,Southern Pines,Five shot at Southern Pines billiards bar
+http://abclocal.go.com/wtvd/story?section=news/local&id=9302794,306,578,Unknown,1,4,Southern Pines,5 shot at Southern Pines bar
+http://abclocal.go.com/wtvd/story?section=news/local&id=9308137,306,579,Unknown,1,4,Southern Pines,One of 5 shot in Southern Pines billiards bar dies of injuries
+http://inforney.com/crime/item/1378-terrell-pd-five-confirmed-dead-after-shooting-spree-suspect-in-custody,307,580,Charles Everett Brownlow Jr.,5,0,Terrell,"Terrell PD: Five confirmed dead after shooting spree, suspect in custody"
+http://www.wfaa.com/news/local/Terrell-police-investigate-two-deaths-229633611.html,307,581,Charles Everett Brownlow Jr.,5,0,Terrell,Terrell rampage suspect charged with capital murder in clerk's slaying
+http://www.wyff4.com/news/local-news/abbeville-greenwood-news/sheriff-multiple-dead-in-upstate-home/-/9654572/22702972/-/cnrsfg/-/index.html,308,582,Bryan Sweatt,6,0,Callison,"Sheriff: 4 adults, 2 children dead in 'horrific' scene"
+http://www.huffingtonpost.com/2013/10/30/south-carolina-shooting_n_4176154.html,308,583,Bryan Sweatt,6,0,Callison,Police Discover 6 Bodies Inside Greenwood County Home
+http://www.cbsnews.com/8301-504083_162-57610066-504083/s.c-murder-suicide-update-gunman-idd-as-bryan-sweatt-victims-include-former-girlfriend-her-parents-and-two-children/,308,584,Bryan Sweatt,6,0,Callison,"S.C. Murder-Suicide Update: Gunman ID'd as Bryan Sweatt, victims include former girlfriend, her parents and two children"
+http://www.wave3.com/story/23858405/early-morning-shooting-leaves-one-dead-3-injured,310,585,Unknown,1,3,Radcliff,Victim of early morning shooting identified
+http://www.nbclosangeles.com/news/local/SoCal-Teacher-Survives-LAX-Shooting-Rampage-230385911.html,311,586,Unknown,1,4,Los Angeles,SoCal Teacher Survives LAX Shooting Rampage
+http://blog.pe.com/crime/2013/11/04/perris-five-people-shot-in-early-morning-drive-by/,312,587,Jose Luis Avalos,0,5,Perris,PERRIS: Man arrested in connection with drive-by shooting (UPDATE)
+http://lakeelsinore-wildomar.patch.com/groups/police-and-fire/p/5-people-wounded-in-driveby-shooting-at-local-restaurant,312,588,Jose Luis Avalos,0,5,Perris,5 People Wounded In Drive-By Shooting At Local Restaurant
+http://www.menifee247.com/2013/11/suspect-vehicle-in-driveby-shooting-located-in-menifee.html,312,589,Jose Luis Avalos,0,5,Perris,Suspect Vehicle in Drive-By Shooting Located in Menifee
+http://abclocal.go.com/kfsn/story?section=news/local&id=9313803,313,590,Jerry Vue,1,3,Fresno,Shootout involving a suspected felon leaves 3 Valley officers wounded
+http://www.wtop.com/109/3499118/At-least-three-men-shot-in-Northeast-DC,314,591,Victor Leon Coley,0,4,Washington,Four people injured in NE D.C. shooting
+http://www.huffingtonpost.com/2013/11/06/dc-shooting-northeast_n_4227290.html,314,592,Victor Leon Coley,0,4,Washington,DC Shooting Leaves Multiple People Wounded
+http://www.nbcwashington.com/news/local/Four-Reportedly-Shot-in-Northeast-DC-230848981.html,314,593,Victor Leon Coley,0,4,Washington,Arrest Made in Northeast D.C. Quadruple Shooting
+http://bigstory.ap.org/article/detroit-police-3-dead-4-hurt-store-shooting,315,594,Unknown,3,7,Detroit,"2 killed, 7 hurt in Detroit barbershop shooting"
+http://www.buzzfeed.com/mbvd/multiple-people-shot-on-detroits-east-side,315,595,Unknown,3,7,Detroit,"10 People Shot, 3 Killed At Detroit Barber Shop"
+http://www.usatoday.com/story/news/nation/2013/11/06/9-people-shot-at-detroit-barber-shop-at-least-3-dead-/3459413/,315,596,Unknown,3,7,Detroit,10 people shot near Detroit barbershop; at least 2 dead
+http://jacksonville.com/breaking-news/2013-11-08/story/police-investigating-quadruple-shooting-jacksonvilles-westside,316,597,Unknown,4,0,Jacksonville,Surveillance footage may have hints about vehicle involved in Jacksonville quadruple homicide
+http://www.firstcoastnews.com/topstories/article/335396/483/Still-no-answers-in-Murray-Hill-quadruple-murder,316,598,Unknown,4,0,Jacksonville,Still no answers in quadruple murder in Jacksonville's Murray Hill area
+http://www.chron.com/news/houston-texas/houston/article/Two-dead-more-than-a-dozen-injured-in-shooting-4971781.php,317,599,Randy Stewart,2,16,Cyprus,Authorities ID teen killed at Cypress house party
+http://abclocal.go.com/ktrk/story?section=news/local&id=9320227,317,600,Randy Stewart,2,16,Cyprus,"Cypress party shooting: Two teens dead, 19 injured in shooting at house party in northwest Harris County; Suspects remain at large"
+http://www.presstv.ir/detail/2013/11/10/334064/texas-party-shooting-kills-2-injures-22/,317,601,Randy Stewart,2,16,Cyprus,"PressTV-Texas party shooting kills 2, injures 22"
+http://www.abc15.com/dpp/news/region_phoenix_metro/south_phoenix/pd-2-shot-at-large-house-party-in-phoenix,318,602,Unknown,1,3,Phoenix,"PD: Nora Osman, 19, shot and killed at S. Phoenix party"
+http://www.kpho.com/story/23928754/pd-1-dead-3-wounded-in-phoenix-party-shooting,318,603,Unknown,1,3,Phoenix,Community demands justice for teen shot dead at party
+http://www.newsnet5.com/dpp/news/local_news/oh_stark/man-arrested-for-shooting-four-in-canton-bar-parking-lot,319,604,Dwight Ellis,1,3,Canton,"Dwight Ellis arrested, charged with aggravated murder after shooting at Canton bar parking lot"
+http://fox8.com/2013/11/10/1-killed-3-injured-in-canton-bar-shooting/,319,605,Dwight Ellis,1,3,Canton,"1 Killed, 3 Injured in Canton Bar Shooting"
+http://www.cantonrep.com/article/20131110/NEWS/131119993,319,606,Dwight Ellis,1,3,Canton,"Man killed, 3 wounded in shooting outside Canton bar"
+http://www.nbcnewyork.com/news/local/East-Williamsburg-Shooting-Monday-231395251.html,320,607,Ali Akbar Mohammadi Rafie,4,1,Brooklyn,"Gunman Fatally Shoots 3 Musicians, Self in Brooklyn: Police"
+http://nypost.com/2013/11/11/gunman-three-others-dead-in-brooklyn-bloodshed/,320,608,Ali Akbar Mohammadi Rafie,4,1,Brooklyn,"Gunman ‘kills 3 bandmates, self after being kicked out of rock group’"
+http://www.nydailynews.com/new-york/brooklyn/manhunt-gunman-east-williamsburg-article-1.1512828,320,609,Ali Akbar Mohammadi Rafie,4,1,Brooklyn,East Williamsburg gunman ID'd in murders-suicide
+http://www.nytimes.com/2013/11/12/nyregion/4-dead-in-brooklyn-murder-suicide-police-say.html?_r=0,320,610,Ali Akbar Mohammadi Rafie,4,1,Brooklyn,Bloody End for Iranian Rockers Seeking Musical Freedom in U.S.
+http://www.azcentral.com/community/nephoenix/articles/20131113phoenix-police-release-ids-triple-homicide-abrk.html,321,611,Michael Sanders,4,0,Phoenix,Phoenix man who killed family had terrorized them
+http://abclocal.go.com/ktrk/story?section=news/local&id=9319503,322,612,Unknown,1,3,Houston,"1 dead, 3 injured in house party shooting in far southwest Houston"
+http://www.nydailynews.com/news/national/3-dead-2-injured-houston-shooting-article-1.1524017,323,613,Johnathan Sanchez,3,2,Houston,"5 shot, 3 dead in suburban Houston shooting"
+http://www.chron.com/neighborhood/cyfair/crime-courts/article/3-killed-2-wounded-in-shooting-at-apartment-4996946.php?cmpid=hpbn,323,614,Johnathan Sanchez,3,2,Houston,"3 killed, 2 wounded in shooting at apartment"
+http://abclocal.go.com/ktrk/story?section=news/local&id=9334256,323,615,Johnathan Sanchez,3,2,Houston,"Police ID suspect accused of killing 3, injuring 2 others in northwest Harris County"
+http://abclocal.go.com/ktrk/story?section=news/local&id=9337822,323,616,Johnathan Sanchez,3,2,Houston,"Suspect arrested in shooting that killed 3, wounded 2 in northwest Harris County"
+http://www.miamiherald.com/2013/11/20/3767531/one-dead-one-critical-in-shooting.html,324,617,Roberto Garcia Sousa,3,1,Miami-Dade,Victims identified in North Miami-Dade shooting
+http://philadelphia.cbslocal.com/2013/11/21/polcie-investigate-quadruple-shooting-in-west-philadelphia/,325,618,Unknown,0,4,Philadelphia,Police Investigate Quadruple Shooting In West Philadelphia « CBS Philly
+http://www.kansas.com/2013/12/02/3154290/suspect-to-appear-in-court-in.html,327,619,David Cornell Bennett Jr.,4,0,Parsons,"More time to file charges in deaths of mom, 3 kids in Parsons"
+http://www.reuters.com/article/2013/11/25/us-usa-shooting-tulsa-idUSBRE9AO02F20131125,328,620,Unknown,4,1,Tulsa,"Four killed, one wounded in shooting at Tulsa, Oklahoma, drug house"
+http://www.newson6.com/story/24067125/new-details-uncovered-in-quadruple,328,621,Unknown,4,1,Tulsa,"Tulsa Police Still Searching For Shooter Who Killed 4 People - NewsOn6.com - Tulsa, OK - News, Weather, Video and Sports - KOTV.com"
+http://www.nbcbayarea.com/news/local/7-Injured-in-East-Oakland-Shooting-233404941.html,329,622,Unknown,0,7,Oakland,"7 Injured in East Oakland Shooting, Police Chief Decries Violence"
+http://www.twincities.com/localnews/ci_24595473/minneapolis-shooting-leaves-one-dead-three-injured,330,623,Unknown,1,3,Minneapolis,"Minneapolis: Shots fired into Lake Street restaurant, killing 1, wounding 3"
+http://www.whec.com/news/stories/S3230445.shtml,331,624,Unknown,0,4,Rochester,Sorry - The Page You are Looking for Doesn't Exist
+http://abclocal.go.com/kfsn/story?section=news/local&id=9344154,332,625,Unknown,0,4,Fresno,Four injured in Southwest Fresno shooting
+http://www.wtxl.com/news/four-people-shot-valdosta-police-search-for-suspects/article_33eb666a-5a1c-11e3-8eba-0019bb30f31a.html,335,626,Unknown,0,4,Valdosta,"Four people shot, Valdosta Police search for suspects - Tallahassee News"
+http://www.kake.com/home/headlines/Three-dead-one-injured-in-Topeka-shooting-234030831.html?ref=831,336,627,Unknown,4,0,Topeka,4th victim in Topeka shooting dies
+http://cjonline.com/news/2013-12-03/police-say-fourth-victim-central-topeka-homicide-has-died,336,628,Unknown,4,0,Topeka,Central Topeka shooting becomes quadruple homicide
+http://wgntv.com/2013/12/03/violent-confusing-day-in-gary-leaves-3-dead-several-injured/,338,629,Unknown,1,3,Gary,"Violent, confusing day in Gary leaves 3 dead, several injured"
+http://articles.chicagotribune.com/2013-12-02/news/chi-reports-several-shot-in-gary-overnight-20131202_1_coroner-wounded-man-gabrielle-king,338,630,Unknown,1,3,Gary,"1 dead, 3 wounded as three masked gunmen break into home"
+http://www.arktimes.com/ArkansasBlog/archives/2013/12/03/police-triple-murder-suicide-near-alma,339,631,Tim Adams,4,0,Alma,"Arkansas news, politics, opinion, restaurants, music, movies and art"
+http://www.local8now.com/home/headlines/Police-release-names-of-4-family-members-killed-in-Erwin-189834641.html,341,632,Herbert Clyde Hughes Jr.,4,0,Erwin,Names of Erwin family members killed in murder-suicide released
+http://hiphopwired.com/2013/12/08/meek-mill-delaware-concert-4-people-shot/,342,633,Unknown,0,4,Wilmington,"Meek Mill's Delaware Concert Ends In Gunfire, 4 People Shot"
+http://www.rapbasement.com/meek-mill/120813-meek-mill-show-cut-short-due-to-shooting-four-people-shot.html,342,634,Unknown,0,4,Wilmington,Meek Mill Show Cut Short Due To Shooting; Four People Shot
+http://www.philly.com/philly/news/Police_Four_shot_outside_Meek_Mill_concert.html,342,635,Unknown,0,4,Wilmington,Four shot outside Meek Mill concert
+http://articles.courant.com/2013-12-08/community/hc-manchester-shooting-1208-20131207_1_three-women-gunshot-child,343,636,Unknown,4,0,Manchester,Four Dead After Apparent Triple Murder-Suicide In Manchester
+http://www.nj.com/union/index.ssf/2013/12/union_woman_among_3_dead_in_connecticut_double_murder-suicide.html,343,637,Unknown,4,0,Manchester,Union woman among 4 dead in Connecticut triple murder-suicide
+http://www.miamiherald.com/2013/12/10/3809575/3-officers-shot-in-northwest-miami.html,344,638,Unknown,2,3,Miami-Dade,3 officers shot in Northwest Miami-Dade; 2 people killed in shootout
+http://www.nydailynews.com/news/national/wild-shootout-miami-leaves-officers-wounded-suspects-dead-article-1.1543065,344,639,Unknown,2,3,Miami-Dade,Wild shootout in Miami leaves four officers wounded and two suspects dead
+http://www.wsaz.com/news/headlines/Multiple-Shooting-in-Huntington-235696321.html,345,640,Antonio Devon Brown,1,3,Huntington,"One Dead, Three Wounded in Huntington Bar Shooting"
+http://www.wowktv.com/story/24211066/gunman-dead-three-hurt-in-huntington-wv-shooting,345,641,Antonio Devon Brown,1,3,Huntington,"WOWK 13 Charleston, Huntington WV News, Weather, Sports"
+http://www.wvva.com/story/24212155/2013/12/13/at-least-one-person-is-dead-after-a-shooting-near-marshall-university,345,642,Antonio Devon Brown,1,3,Huntington,At least one dead after shooting near Marshall University
+http://www.herald-dispatch.com/x955017292/HPD-investigating-downtown-shooting,345,643,Antonio Devon Brown,1,3,Huntington,Man identified in Huntington bar shooting
+http://www.statesville.com/news/article_85907f20-65ff-11e3-aa76-001a4bcf6878.html,346,644,Unknown,0,4,Statesville,Four teenagers shot at birthday party
+http://www.wcnc.com/news/crime/4-teens-shot-during-Statesville-birthday-party-236044071.html,346,645,Unknown,0,4,Statesville,4 teens shot during Statesville birthday party
+http://www.nbcmiami.com/news/4-Injured-in-Florida-City-Shooting-Police-235869831.html,347,646,Unknown,1,3,Florida City,"1 Dead, 3 Others Injured in Florida City Shooting: Police"
+http://miami.cbslocal.com/2013/12/14/florida-city-shooting-leaves-four-in-the-hospital/,347,647,Unknown,1,3,Florida City,"1 Dead, 3 Injured In Florida City Shooting « CBS Miami"
+http://www.nbcdfw.com/news/local/Five-Teens-Shot-in-Harris-County-235999031.html,348,648,Unknown,0,5,Channelview,Five Teens Shot in Harris County
+http://www.wfaa.com/news/crime/Five--people-wounded-in-shooting-in-Harris-County-235947061.html,348,649,Unknown,0,5,Channelview,Five teens wounded in Harris County gunfire
+http://www.nj.com/mercer/index.ssf/2013/12/drive-by_shooting_in_trenton_leaves_1_dead_4_wounded_authorities_say.html,350,650,Unknown,1,4,Trenton,"Drive-by shooting in Trenton leaves 1 dead, 4 wounded, authorities say"
+http://newjersey.news12.com/news/brandon-varlow-killed-4-others-hurt-in-trenton-drive-by-shooting-1.6660970,350,651,Unknown,1,4,Trenton,"Brandon Varlow killed, 4 others hurt in Trenton drive-by shooting"
+http://www.shelbystar.com/news/local/police-four-injured-in-overnight-shooting-updated-10-15-a-m-1.253381,351,652,Unknown,0,4,Shelby,Police: 4 hit in shooting; suspects sought
+http://newyork.cbslocal.com/2013/12/25/one-dead-3-injured-in-early-morning-medford-li-shooting/,353,653,Unknown,1,3,Medford,"One Dead, 3 Injured In Early Morning Medford, LI Shooting « CBS New York"
+http://nypost.com/2013/12/25/1-dead-3-injured-in-christmas-morning-shooting/,353,654,Unknown,1,3,Medford,"1 dead, 3 injured in Christmas morning shooting"
+http://patchogue.patch.com/groups/police-and-fire/p/four-shot-one-fatally-at-medford-engine-shop,353,655,Unknown,1,3,Medford,"Updated: Four Shot, One Fatally at Medford Business"
+http://www.wafb.com/story/24305963/shooting-outside-bar-leaves-several-people-injured,355,656,Unknown,1,7,Slidell,"Shooting outside Slidell bar leaves 2 dead, 6 others injured"
+http://www.wwltv.com/news/local/237290471.html,355,657,Unknown,1,7,Slidell,Shooting of eight people in Slidell shocks community
+http://www.nola.com/crime/index.ssf/2013/12/one_dead_seven_injured_in_olde.html,355,658,Unknown,1,7,Slidell,"One dead, seven injured in Olde Towne Slidell shooting"
+http://www.nola.com/crime/index.ssf/2013/12/lafourche_parish_shooter_attac.html#incart_river_default,356,659,Ben Edward Freeman,4,3,Raceland,"Lafourche Parish shooter attacked wife, former in-laws, former boss in rampage that left 4 dead, 3 wounded"
+http://www.nydailynews.com/news/national/louisiana-man-kills-wounds-shooting-spree-article-1.1559338#ixzz2oh2cbodF,356,660,Ben Edward Freeman,4,3,Raceland,"La. gunman kills wife, ex-mother-in-law, self in spree: cops"
+http://www.cbsatlanta.com/story/24318554/mpd-investigating-citys-47th-and-48th-homicide,358,661,Jason McWilliams,2,6,Montgomery,"Mayor closes Montgomery club after shootings leave 2 dead, 6 inj"
+http://www.usatoday.com/story/news/nation/2013/12/30/alabama-nightclub-shooting/4248753/,358,662,Jason McWilliams,2,6,Montgomery,Suspect accused of killing 2 at Ala. nightclub arrested
+http://www.cbsnews.com/news/cops-ny-pharmacist-killed-wife-then-sons-then-himself/,359,663,Abbas Lodhi,4,0,Pleasant Valley,"Cops: NY pharmacist Abbas Lodhi killed wife, then sons, then himself in Dutchess County"
+http://www.syracuse.com/news/index.ssf/2013/11/ny_pharmacist_abbas_lodhi_shot_to_death_his_wife_then_killed_2_sons_and_himself.html,359,664,Abbas Lodhi,4,0,Pleasant Valley,"NY pharmacist Abbas Lodhi shot to death his wife, then killed 2 sons and himself, police say"
+http://www.nbcnewyork.com/news/politics/Shooting-Party-Brooklyn--238202211.html,360,665,Unknown,0,5,Brooklyn,"Five Partygoers Shot, One Pistol-Whipped in Brooklyn: Police"
+"http://www.latimes.com/local/lanow/la-me-ln-shooting-deaths-fontana-family-20131231,0,2131640.story#axzz2p5fGw0xj",361,666,Undisclosed,4,0,Fontana,"Shooting deaths of Fontana family may be murder-suicide, police say"
+http://www.nydailynews.com/news/national/people-including-children-found-killed-california-home-article-1.1562139,361,667,Undisclosed,4,0,Fontana,"4 people, including 2 kids, found dead in home"

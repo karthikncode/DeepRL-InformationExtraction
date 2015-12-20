@@ -169,7 +169,10 @@ def get_related_articles_from_query(query_text,original_text,search_engine_name)
 	article_dates = []
 	downloaded_urls = []
 	selected_urls = []
+	i = 1
 	for url in article_urls:
+		print "Checking URL ", i
+		i+=1
 		try:
 			if "newslocker" not in url and "newsjs" not in url:
 				downloaded_article = download_article(url, False, False)
@@ -191,13 +194,15 @@ def get_related_articles_from_query(query_text,original_text,search_engine_name)
 	tfidf_vectorizer = TfidfVectorizer()
 	tfidf_matrix = tfidf_vectorizer.fit_transform(article_texts)
 	similarities = similarities_without_duplicates(tfidf_matrix,len(article_texts))#cosine_similarity(tfidf_matrix[0:1], tfidf_matrix).flatten()
-	print similarities
+	print "Similarities", similarities
 	similarities_indexed = [(i,x) for i,x in enumerate(similarities) if i > 0 and x > 0.42]	
 	similarities_indexed.sort(key=lambda x:x[1], reverse=True)
 	#doc_indices = similarities_indexed[:4] #NOTE: max 8, choose best 4
 	doc_indices = similarities_indexed
 	selected_texts = []
 	selected_dates = []
+
+	#find the true date of the original article
 	true_date = None
 	for i,x in doc_indices:
 		if x > 0.9 and article_dates[i-1] != None:
@@ -235,6 +240,7 @@ def similarities_without_duplicates(tfidf_matrix,length):
 
 
 def get_related_urls_from_bing(query_text):
+	# BING_API_KEY = 'WvT9Yo4AQHnS7tdCTePQRgRjhHvGOwMJZVjBbMMPSAI' #karthik
 	BING_API_KEY = 'q52coTH39rJGmzKKzAeWbrQzDvNIj5OI437Hmwyb5U0' 
 	credentialBing = 'Basic ' + (':%s' % BING_API_KEY).encode('base64').rstrip()
 	searchString = '%27'+urllib.urlencode({"q": query_text})+'%27'

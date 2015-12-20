@@ -26,12 +26,12 @@ def main(training_file,trained_model,previous_n,next_n, c, prune):
     ## train LR
     print("training")
     tic = time.clock()
-    clf = LogisticRegression(C=c)
+    clf = LogisticRegression(C=c, multi_class='multinomial', solver='lbfgs')
     clf.fit(trainX,trainY)
     print time.clock()-tic
 
     feature_list = (word_vocab.keys() + helper.other_features) * (previous_n+next_n+1)  + word_vocab.keys() + ['previous_one'] * len(tags) + ['previous_two'] * len(tags)+ ['previous_three'] * len(tags)
-    #getTopFeatures(clf,tags,feature_list)
+    getTopFeatures(clf,tags,feature_list)
     if trained_model != "":
         pickle.dump([clf, previous_n,next_n, word_vocab,helper.other_features], open( trained_model, "wb" ) )
     return [clf, previous_n,next_n, word_vocab,helper.other_features]

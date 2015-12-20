@@ -9,7 +9,7 @@ import inflect
 from train import load_data
 import helper
 from collections import defaultdict
-import re
+import re, pdb  
 
 p = inflect.engine()
 tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
@@ -84,6 +84,7 @@ def predict_mode(sentence, tags, cities):
         if tag == "city":
             output_pred_line += ","
             possible_city_combos = []
+            # pdb.set_trace()
             for permutation in itertools.permutations(output_entities[tag],2):
                 if permutation[0] in cities:
                     if "" in cities[permutation[0]]:
@@ -193,10 +194,11 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
             if j < i:
                 dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1
         dataY[i] = clf.predict(dataX[i,:].reshape(1, -1))
+    # pdb.set_trace()
     return dataY
 
 if __name__ == "__main__":
-    trained_model = "trained_model.p" #sys.argv[1]
+    trained_model = "trained_model.p2" #sys.argv[1]
     testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" #sys.argv[2]
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

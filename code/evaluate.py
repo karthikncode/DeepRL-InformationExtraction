@@ -8,48 +8,49 @@ import warnings
 
 inflect_engine = inflect.engine()
 
-def entity_level_eval(output_file, correct_file):
-	'''
-	output_file := output file from training
-	'''
+#not used
+# def entity_level_eval(output_file, correct_file):
+# 	'''
+# 	output_file := output file from training
+# 	'''
 	
-	TP, FP, FN = np.zeros(5), np.zeros(5), np.zeros(5)
+# 	TP, FP, FN = np.zeros(5), np.zeros(5), np.zeros(5)
 
-	tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
+# 	tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
 
-	line_num = 1
-	with open(correct_file) as cfile:
-		with open(output_file) as ofile:
-			for line1, line2 in zip(cfile, ofile):
-				if line_num % 2 == 0:
-					lines_correct = line1.split()
-					lines_output = line2.split()
-					for pair1, pair2 in zip(lines_correct, lines_output):
-						word1 = pair1.split('_')[0]
-						tag_correct = pair1.split('_')[1]
-						word2 = pair2.split('_')[0]
-						tag_output = pair2.split('_')[1]
-						if word1 == word2: # this must be true each time
-							if tag_correct == tag_output: # T.P. counted only if the tag is same, not just positive.
-								TP[tags2int[tag_correct]] += 1
-							else:
-								FP[tags2int[tag_output]] += 1
-								FN[tags2int[tag_correct]] += 1
-						else:
-							raise Exception("Erorr: file mismatch")
-				line_num += 1
+# 	line_num = 1
+# 	with open(correct_file) as cfile:
+# 		with open(output_file) as ofile:
+# 			for line1, line2 in zip(cfile, ofile):
+# 				if line_num % 2 == 0:
+# 					lines_correct = line1.split()
+# 					lines_output = line2.split()
+# 					for pair1, pair2 in zip(lines_correct, lines_output):
+# 						word1 = pair1.split('_')[0]
+# 						tag_correct = pair1.split('_')[1]
+# 						word2 = pair2.split('_')[0]
+# 						tag_output = pair2.split('_')[1]
+# 						if word1 == word2: # this must be true each time
+# 							if tag_correct == tag_output: # T.P. counted only if the tag is same, not just positive.
+# 								TP[tags2int[tag_correct]] += 1
+# 							else:
+# 								FP[tags2int[tag_output]] += 1
+# 								FN[tags2int[tag_correct]] += 1
+# 						else:
+# 							raise Exception("Erorr: file mismatch")
+# 				line_num += 1
 
-	TP = TP[1:]
-	FP = FP[1:]
-	FN = FN[1:]
-	pre = TP/(TP+FP)
-	re = TP/(TP+FN)
-	F1 = 2*(pre*re/(pre+re))
+# 	TP = TP[1:]
+# 	FP = FP[1:]
+# 	FN = FN[1:]
+# 	pre = TP/(TP+FP)
+# 	re = TP/(TP+FN)
+# 	F1 = 2*(pre*re/(pre+re))
 
-	print "Precision: ", pre
-	print "Recall: ", re
-	print "F1: ", F1
-	return [pre, re, F1]
+# 	print "Precision: ", pre
+# 	print "Recall: ", re
+# 	print "F1: ", F1
+# 	return [pre, re, F1]
 
 
 def article_level_eval(output_file, test_tags):
@@ -64,7 +65,7 @@ def article_level_eval(output_file, test_tags):
 	other_tags_samples = defaultdict(int)
 	shooterName_app = 0
 
-	texts, identifiers = load_data(test_tags)
+	# texts, identifiers = load_data(test_tags)
 
 	line_num = 1
 	with open(output_file,'r') as ofile:
@@ -73,33 +74,6 @@ def article_level_eval(output_file, test_tags):
 		for line in ofile:
 			if line_num % 2 == 1:
 				curr_correct_entities = make_result_dict(line)
-				# Now the following code is taken care of in scrape :)
-				# original_text = texts[int((line_num-1)/2)][0]
-				# original_text = map(str.lower,original_text)
-				# original_text = map(convert_num_to_word,original_text)
-				# for tag in curr_correct_entities.keys():
-				# 	if tag in other_tags:
-				# 		if tag == "city":
-				# 			for entity in curr_correct_entities[tag].split(" "):
-				# 				if entity != "" and entity not in original_text:
-				# 					print "city", entity, line
-				# 					curr_correct_entities[tag] = ""
-				# 					other_tags_removed[tag] += 1
-
-				# 		else:
-				# 			entity = curr_correct_entities[tag]
-				# 			if entity != "zero" and entity != "" and entity not in original_text:
-				# 				print "number", entity, line
-				# 				curr_correct_entities[tag] = ""
-				# 				other_tags_removed[tag] += 1
-				# 	else:
-				# 		for entity in list(curr_correct_entities[tag]):
-				# 			if entity not in original_text:
-				# 				print "shooterName", entity, line
-				# 				curr_correct_entities[tag].remove(entity)
-				# 		if curr_correct_entities[tag] == []:
-				# 			print tag
-				# 			del curr_correct_entities[tag]
 			else:
 				predicted_entities = make_result_dict(line)
 				for tag in other_tags:

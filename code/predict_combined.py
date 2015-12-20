@@ -3,6 +3,7 @@ from predict import get_mode
 from train import load_data
 from collections import defaultdict
 import helper
+import pdb
 
 tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
 int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
@@ -24,22 +25,26 @@ def combine_predictions_batch(output_tags, output_predictions, output_combined_p
         print "Query text", query_text
         #print text
         pred_list = get_predictions_from_query(query_text, " ".join(text[0]), "bing")
+        print("Got predictions for the article")
         pred_list.append(prediction)
         #pred_list.append(prediction)
         f.write(identifier)
         f.write("\n")
         f.write(combine_predictions(pred_list))
         print pred_list
-        print combine_predictions(pred_list)
+        print "FINAL PREDICTION: ", combine_predictions(pred_list)
         f.write("\n")
     return
 
 # Combines a list of prediction strings by taking the mode
 def combine_predictions(pred_list):
+
+    # pdb.set_trace()
+
     combined = defaultdict(list)
     for pred in pred_list:
         preds = pred.split(",")
-        #print preds
+        #print pred_list
         for i in range(1,len(int2tags)):
             tag = int2tags[i]
             if tag == "shooterName":

@@ -26,7 +26,7 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
     if not isinstance(trained_model, list):
         clf, previous_n, next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
     else:
-        [clf, previous_n, next_n, word_vocab,other_features] = trained_model
+        clf, previous_n, next_n, word_vocab,other_features = trained_model
 
     #print("predicting")
     tic = time.clock()
@@ -35,7 +35,7 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
     #print len(identifier)
     for i in range(len(test_data)+len(identifier)):
         if i%2 == 1:
-            y = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
+            y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
             f.write(" ".join([test_data[i/2][0][j]+"_"+int2tags[int(y[j])] for j in range(len(test_data[i/2][0]))]))
             f.write("\n")
         else:
@@ -52,15 +52,36 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
 # cities - set of cities to match for backup if no city was predicted
 # Returns comma separated preditions of shooterNames, killedNum, woundedNum and city with shooter names separated by '|'
 def predict(trained_model, sentence, viterbi, cities):
-    clf, previous_n,next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
+    if type(trained_model) == str:
+        clf, previous_n,next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
+    else:
+        #trained_model is an already initialized list of params
+        clf, previous_n,next_n, word_vocab,other_features = trained_model
     sentence = sentence.replace("_"," ")
     words = re.findall(r"[\w']+|[.,!?;]", sentence)
-    y = predict_tags_n(viterbi, previous_n,next_n, clf, words, word_vocab,other_features)
+    y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, words, word_vocab,other_features)
     tags = []
     for i in range(len(y)):
         tags.append(int(y[i]))
     pred = predict_mode(words, tags, cities)
     return pred
+
+#TODO
+def predictWithConfidences(trained_model, sentence, viterbi, cities):
+    if type(trained_model) == str:
+        clf, previous_n,next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
+    else:
+        #trained_model is an already initialized list of params
+        clf, previous_n,next_n, word_vocab,other_features = trained_model
+    sentence = sentence.replace("_"," ")
+    words = re.findall(r"[\w']+|[.,!?;]", sentence)
+    y, confidences = predict_tags_n(viterbi, previous_n,next_n, clf, words, word_vocab,other_features)
+    tags = []
+    for i in range(len(y)):
+        tags.append(int(y[i]))
+    pred = predict_mode(words, tags, cities)
+    return pred
+
 
 # Make predictions using majority voting of the tag
 # sentence - list of words
@@ -163,6 +184,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     total_features = (previous_n + next_n + 1)*num_features + len(word_vocab) + previous_n * len(tags) + first_n
     dataX = np.zeros((len(sentence),total_features))
     dataY = np.zeros(len(sentence))
+    dataYconfidences = [None for i in range(len(sentence))]
     other_words_lower = set([s.lower() for s in sentence[0]])
     for i in range(len(sentence)):
         word = sentence[i]
@@ -192,13 +214,15 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     for i in range(len(sentence)):
         for j in range(previous_n):
             if j < i:
-                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1
-        dataY[i] = clf.predict(dataX[i,:].reshape(1, -1))
+                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1                
+        dataYconfidences[i] = clf.predict_proba(dataX[i,:].reshape(1, -1))
+        dataY[i] = numpy.argmax(dataYconfidences[i])
+
     # pdb.set_trace()
-    return dataY
+    return dataY, dataYconfidences
 
 if __name__ == "__main__":
-    trained_model = "trained_model.p2" #sys.argv[1]
+    trained_model = "trained_model.p" #sys.argv[1]
     testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" #sys.argv[2]
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

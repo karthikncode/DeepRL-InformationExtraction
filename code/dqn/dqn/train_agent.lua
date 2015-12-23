@@ -43,6 +43,7 @@ cmd:option('-threads', 1, 'number of BLAS threads')
 cmd:option('-gpu', -1, 'gpu flag')
 
 cmd:option('-zmq_port', 5050, 'ZMQ port')
+cmd:option('-exp_folder', 'logs/', 'folder for logs')
 
 cmd:text()
 
@@ -107,9 +108,13 @@ while step < opt.steps do
 
     if step%1000 == 0 then collectgarbage() end
 
+    -- evaluation
     if step % opt.eval_freq == 0 and step > learn_start then
 
         state, reward, terminal = game_env:newGame()
+
+        test_avg_Q = test_avg_Q or optim.Logger(paths.concat(opt.exp_folder , 'test_avgQ.log'))
+        test_avg_R = test_avg_R or optim.Logger(paths.concat(opt.exp_folder , 'test_avgR.log'))        
 
         total_reward = 0
         nrewards = 0
@@ -158,6 +163,13 @@ while step < opt.steps do
             qmax_history[ind] = agent.q_max
         end
         print("V", v_history[ind], "TD error", td_history[ind], "Qmax", qmax_history[ind])
+
+        -- plotting graphs
+        test_avg_R:add{['Average Reward'] = total_reward}
+        test_avg_Q:add{['Average Q'] = agent.v_avg}
+     
+        test_avg_R:style{['Average Reward'] = '-'}; test_avg_R:plot()        
+        test_avg_Q:style{['Average Q'] = '-'}; test_avg_Q:plot()
 
         reward_history[ind] = total_reward
         reward_counts[ind] = nrewards

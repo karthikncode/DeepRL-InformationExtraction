@@ -1,5 +1,4 @@
 *.pyc
-*.p
 *.pred
 .DS_Store
 */output.tag

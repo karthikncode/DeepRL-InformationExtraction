@@ -74,7 +74,7 @@ def test_queries(event_dict):
 		query_types_with_title.insert(0, title)
 		results = {}
 		results_ratios = {}
-		for i,query_format in enumerate(query_types_with_title):
+		for i,query_format in enumerate(query_types_with_title):			
 			#query = replace_with_metadata(query_format, meta, metadata)
 			query = query_format
  			#article_urls_google = set(get_related_urls_from_google(query))

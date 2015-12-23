@@ -216,7 +216,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
             if j < i:
                 dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1                
         dataYconfidences[i] = clf.predict_proba(dataX[i,:].reshape(1, -1))
-        dataY[i] = numpy.argmax(dataYconfidences[i])
+        dataY[i] = np.argmax(dataYconfidences[i])
 
     # pdb.set_trace()
     return dataY, dataYconfidences

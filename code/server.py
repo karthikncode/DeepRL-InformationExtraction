@@ -6,9 +6,13 @@ import helper
 import predict2 as predict
 from train import load_data
 from itertools import izip
+import inflect
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
 
+
+#Global variables
 NUM_ENTITIES = 4
-
 port = "5050"
 
 context = zmq.Context()
@@ -17,6 +21,9 @@ socket.bind("tcp://*:%s" % port)
 print "Started server on port", port
 
 trained_model = pickle.load( open( "trained_model.p", "rb" ) )
+tfidf_vectorizer = TfidfVectorizer()
+inflect_engine = inflect.engine()
+
 
 #Environment for each episode
 class Environment:
@@ -25,7 +32,7 @@ class Environment:
         self.originalArticle = originalArticle
         self.newArticles = newArticles #extra articles to process
         self.goldEntities = goldEntities 
-        self.stepNum = 0
+       
         #TODO: add slots for matches in values between DB and the new article
         self.state = [0 for i in range(2 * NUM_ENTITIES + 1)]
         self.terminal = False
@@ -37,8 +44,18 @@ class Environment:
         # to keep track of extracted values from previousArticle
         self.prevEntities, self.prevConfidences = self.extractEntitiesWithConfidences(self.originalArticle)
 
+        #calculate tf-idf similarities
+        self.allArticles = [originalArticle] + self.newArticles
+        self.allArticles = [' '.join(q) for q in self.allArticles]
+        self.tfidf_matrix = tfidf_vectorizer.fit_transform(self.allArticles)
+
         #update the initial state
-        self.updateState(1, self.newArticles[0])
+        self.stepNum = 0
+        self.updateState(1)
+
+        print "goldEntities", self.goldEntities
+        print "extracted", self.bestEntities
+        # pdb.set_trace()
 
         return
     
@@ -53,21 +70,32 @@ class Environment:
 
         return pred.split(','), conf_scores
 
-    #TODO: find the article similarity of a1 and a2
-    def articleSim(self, a1, a2):
-        return 0.5
+    #find the article similarity between original and newArticle[i] (=allArticles[i+1])
+    def articleSim(self, i):
+
+        return cosine_similarity(self.tfidf_matrix[0:1], self.tfidf_matrix[i+1:i+2])[0][0]
 
     # update the state based on the decision from DQN
-    def updateState(self, action, nextArticle):
+    def updateState(self, action):
+
+        #get next article
+        if self.stepNum < len(self.newArticles):
+            nextArticle = self.newArticles[self.stepNum]
+        else:
+            nextArticle = None
 
         if action == 1:
             # integrate the values into the current DB state
             entities, confidences = self.prevEntities, self.prevConfidences
+            print "best confidences", self.bestConfidences
+            print "new confidences", confidences
             for i in range(NUM_ENTITIES):
                 self.entities[i].append(entities[i])
                 if not self.bestEntities[i] or confidences[i] > self.bestConfidences[i]:
                     self.bestEntities[i] = entities[i]
                     self.bestConfidences[i] = confidences[i]
+                    print "Changing best Entities"
+                    print "New entities", self.bestEntities
 
         if nextArticle:    
             entities, confidences = self.extractEntitiesWithConfidences(nextArticle)
@@ -81,14 +109,21 @@ class Environment:
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
             self.state[NUM_ENTITIES+i] = confidences[i]  #next article state
-            self.state[-1] = self.articleSim(self.originalArticle, nextArticle)
+            if nextArticle:
+                self.state[-1] = self.articleSim(self.stepNum)
+            else:
+                self.state[-1] = 0
+
+        #update state variables
+        self.prevEntities = entities
+        self.prevConfidences = confidences
 
         return
 
     # check if two entities are equal. Need to handle shooterName and city
-    #TODO
-    def checkEquality(self, e1, e2):
-        return False
+    #TODO: handle the case when goldEntities does not have annotation
+    def checkEquality(self, e1, e2): 
+        return e1.lower() == e2.lower()
 
     def calculateReward(self, oldEntities, newEntities):
         reward = sum(map(self.checkEquality, newEntities, self.goldEntities)) \
@@ -100,18 +135,15 @@ class Environment:
 
     #take a single step in the episode
     def step(self, action):
-        oldEntities = copy.copy(self.bestEntities)
+        oldEntities = copy.copy(self.bestEntities.values())
 
-        #get next article
+        #update pointer to next article
         self.stepNum += 1
-        if self.stepNum < len(self.newArticles):
-            nextArticle = self.newArticles[self.stepNum] #starts with 1
-        else:
-            nextArticle = None
+    
 
-        self.updateState(action, nextArticle)
+        self.updateState(action)
 
-        newEntities = self.bestEntities
+        newEntities = self.bestEntities.values()
         reward = self.calculateReward(oldEntities, newEntities)
 
         return self.state, reward, self.terminal
@@ -125,8 +157,19 @@ if __name__ == '__main__':
     else:
         trainFile = '../data/tagged_data/whole_text_full_city/train.tag'
 
+    #load data and process identifiers
     articles, identifiers = load_data(trainFile)
-    identifiers = [e.split(',')[:4] for e in identifiers]
+    identifiers_tmp = []  
+    for e in identifiers:
+        e = e.split(',')[:NUM_ENTITIES]
+        for i in range(NUM_ENTITIES):
+            try:
+                e[i] = int(e[i])
+                e[i] = inflect_engine.number_to_words(e[i])
+            except:
+                pass
+        identifiers_tmp.append(e)
+    identifiers = identifiers_tmp
 
     # server loop
     while True:
@@ -140,6 +183,7 @@ if __name__ == '__main__':
         newArticles = [e[0] for e in articles[1:5]]
         goldEntities = identifiers[0]
 
+
         # UNCOMMENT THIS
         if message == "newGame":
             env = Environment(originalArticle, newArticles, goldEntities)
@@ -148,6 +192,7 @@ if __name__ == '__main__':
             action = int(message)
             newstate, reward, terminal = env.step(action)        
             terminal = 'true' if terminal else 'false'
+
 
         #send message
         outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal

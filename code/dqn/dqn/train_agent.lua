@@ -209,7 +209,7 @@ while step < opt.steps do
             filename = filename .. "_" .. math.floor(step / opt.save_versions)
         end
         filename = filename
-        torch.save(filename .. ".t7", {agent = agent,
+        torch.save(opt.exp_folder .. filename .. ".t7", {agent = agent,
                                 model = agent.network,
                                 best_model = agent.best_network,
                                 reward_history = reward_history,
@@ -222,13 +222,13 @@ while step < opt.steps do
                                 arguments=opt})
         if opt.saveNetworkParams then
             local nets = {network=w:clone():float()}
-            torch.save(filename..'.params.t7', nets, 'ascii')
+            torch.save(opt.exp_folder .. filename..'.params.t7', nets, 'ascii')
         end
         agent.valid_s, agent.valid_a, agent.valid_r, agent.valid_s2,
             agent.valid_term = s, a, r, s2, term
         agent.w, agent.dw, agent.g, agent.g2, agent.delta, agent.delta2,
             agent.deltas, agent.tmp = w, dw, g, g2, delta, delta2, deltas, tmp
-        print('Saved:', filename .. '.t7')
+        print('Saved:', opt.exp_folder .. filename .. '.t7')
         io.flush()
         collectgarbage()
     end

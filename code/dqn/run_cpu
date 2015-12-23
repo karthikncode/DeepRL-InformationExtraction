@@ -13,7 +13,7 @@ n_replay=1
 netfile="\"network_mass\""
 update_freq=1
 actrep=1 #TODO: check this
-discount=0.5
+discount=0.8
 seed=1
 learn_start=5000
 pool_frms_type="\"max\""
@@ -43,4 +43,5 @@ args="-exp_folder $exp_folder -zmq_port $1 -framework $FRAMEWORK -game_path $gam
 echo $args
 
 cd dqn
+mkdir -p exp_folder;
 th train_agent.lua $args

@@ -123,6 +123,8 @@ while step < opt.steps do
 
         local eval_time = sys.clock()
         print("Testing...")
+        game_env:evalStart()
+
         for estep=1,opt.eval_steps do
             xlua.progress(estep, opt.eval_steps)
 
@@ -146,6 +148,8 @@ while step < opt.steps do
                 state, reward, terminal = game_env:newGame()
             end
         end
+
+        game_env:evalEnd()
 
         eval_time = sys.clock() - eval_time
         start_time = start_time + eval_time

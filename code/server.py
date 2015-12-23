@@ -12,9 +12,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 #Global variables
-NUM_ENTITIES = 4
-port = "5050"
+int2tags = ['shooterName','numKilled', 'numWounded', 'city']
+NUM_ENTITIES = len(int2tags)
+WORD_LIMIT = 1000
 
+port = "5050"
 context = zmq.Context()
 socket = context.socket(zmq.REP)
 socket.bind("tcp://*:%s" % port)
@@ -27,6 +29,12 @@ inflect_engine = inflect.engine()
 TFIDF_MATRICES = {}
 ENTITIES = collections.defaultdict(lambda:{})
 CONFIDENCES = collections.defaultdict(lambda:{})
+
+CORRECT = collections.defaultdict(lambda:0.)
+GOLD = collections.defaultdict(lambda:0.)
+PRED = collections.defaultdict(lambda:0.)
+evalMode = False
+
 
 #Environment for each episode
 class Environment:
@@ -66,10 +74,8 @@ class Environment:
         self.stepNum = 0
         self.updateState(1)
 
-        # print "goldEntities", self.goldEntities
-        # print "extracted", self.bestEntities
-        # pdb.set_trace()
-
+        #variables for evaluation
+        
         return
     
     def extractEntitiesWithConfidences(self, article):
@@ -153,6 +159,29 @@ class Environment:
 
         return reward
 
+    #evaluate the bestEntities retrieved so far for a single article
+    #IMP: make sure the evaluate variables are properly re-initialized
+    def evaluateArticle(self, predEntities, goldEntities):
+        # print "Evaluating article", predEntities, goldEntities
+
+        #shooterName first: only add this if gold contains a valid shooter
+        if goldEntities[0]!='':
+            gold = set(goldEntities[0].lower().split('|'))
+            pred = set(predEntities[0].lower().split('|'))
+            correct = len(gold.intersection(pred))
+
+            CORRECT[int2tags[0]] += correct
+            GOLD[int2tags[0]] += len(gold)
+            PRED[int2tags[0]] += len(pred)
+
+        #all other tags
+        for i in range(1, NUM_ENTITIES):
+            GOLD[int2tags[i]] += 1
+            PRED[int2tags[i]] += 1
+            if predEntities[i].lower() == goldEntities[i].lower():
+                CORRECT[int2tags[i]] += 1
+
+
     #take a single step in the episode
     def step(self, action):
         oldEntities = copy.copy(self.bestEntities.values())
@@ -194,11 +223,9 @@ if __name__ == '__main__':
     identifiers_tmp = []  
     for e in identifiers:        
         for i in range(NUM_ENTITIES):
-            try:
+            if type(e[i]) == int or e[i].isdigit():            
                 e[i] = int(e[i])
-                e[i] = inflect_engine.number_to_words(e[i])
-            except:
-                pass
+                e[i] = inflect_engine.number_to_words(e[i])            
         identifiers_tmp.append(e)
     identifiers = identifiers_tmp
         
@@ -215,17 +242,35 @@ if __name__ == '__main__':
         # UNCOMMENT THIS
         if message == "newGame":
             indx = articleNum % len(articles)
-            print "INDX:", indx
+            # print "INDX:", indx
             articleNum += 1
             originalArticle = articles[indx][0]
-            newArticles = [q.split(' ')[:1000] for q in downloaded_articles[indx]]
+            newArticles = [q.split(' ')[:WORD_LIMIT] for q in downloaded_articles[indx]]
             goldEntities = identifiers[indx]   
             env = Environment(originalArticle, newArticles, goldEntities, indx)
             newstate, reward, terminal = env.state, 0, 'false'
+        elif message == "evalStart":
+            CORRECT = collections.defaultdict(lambda:0.)
+            GOLD = collections.defaultdict(lambda:0.)
+            PRED = collections.defaultdict(lambda:0.)
+            evalMode = True
+        elif message == "evalEnd":
+            
+            print "------------\nEvaluation Stats: (Precision, Recall, F1):"
+            for tag in int2tags:
+                prec = CORRECT[tag]/PRED[tag]
+                rec = CORRECT[tag]/GOLD[tag]
+                f1 = 2*prec*rec/(prec+rec)
+                print tag, prec, rec, f1
+            evalMode = False
         else:
             action = int(message)
             newstate, reward, terminal = env.step(action)        
             terminal = 'true' if terminal else 'false'
+        
+        #do article eval if terminal
+        if evalMode and terminal == 'true':
+            env.evaluateArticle(env.bestEntities.values(), env.goldEntities)
 
 
         #send message

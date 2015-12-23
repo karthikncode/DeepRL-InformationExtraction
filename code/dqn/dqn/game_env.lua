@@ -19,9 +19,9 @@ function env:process_msg(msg)
     -- screen, reward, terminal
     -- print("MESSAGE:", msg)
     loadstring(msg)()
-    if reward > 0 then
-        print('non-zero reward', reward)
-    end
+    -- if reward > 0 then
+    --     print('non-zero reward', reward)
+    -- end
     return torch.Tensor(state), reward, terminal
 end
 
@@ -44,6 +44,13 @@ function env:step(action)
     return self:process_msg(msg)
 end
 
+function env:evalStart()
+    self.skt:send("evalStart")
+end
+
+function env:evalEnd()
+    self.skt:send("evalEnd")
+end
 
 
 function env:getActions()   

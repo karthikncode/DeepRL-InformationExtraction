@@ -37,7 +37,7 @@ class Environment:
         self.goldEntities = goldEntities 
        
         #TODO: add slots for matches in values between DB and the new article
-        self.state = [0 for i in range(2 * NUM_ENTITIES + 1)]
+        self.state = [0 for i in range(3 * NUM_ENTITIES + 1)]
         self.terminal = False
         
         self.entities = collections.defaultdict(lambda:[]) #current Entities extracted
@@ -122,9 +122,12 @@ class Environment:
             self.terminal = True
 
         #modify self.state appropriately        
+        # print(self.bestEntities, entities)
+        matches = map(self.checkEquality, self.bestEntities.values(), entities)
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
             self.state[NUM_ENTITIES+i] = confidences[i]  #next article state
+            self.state[2*NUM_ENTITIES+i] = int(matches[i])
             if nextArticle:
                 self.state[-1] = self.articleSim(self.stepNum)
             else:

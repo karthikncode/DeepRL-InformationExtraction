@@ -128,7 +128,7 @@ while step < opt.steps do
         for estep=1,opt.eval_steps do
             xlua.progress(estep, opt.eval_steps)
 
-            local action_index = agent:perceive(reward, state, terminal, true, 0.05)
+            local action_index = agent:perceive(reward, state, terminal, true, 0.0)
 
             -- Play game in test mode (episodes don't end when losing a life)
             state, reward, terminal = game_env:step(game_actions[action_index])

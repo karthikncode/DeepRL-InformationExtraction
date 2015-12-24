@@ -252,14 +252,21 @@ function nql:qLearnMinibatch()
     self.lr = math.max(self.lr, self.lr_end)
 
     -- use gradients
-    self.g:mul(0.95):add(0.05, self.dw)
+    -- self.g:mul(0.95):add(0.05, self.dw)
+    -- self.tmp:cmul(self.dw, self.dw)
+    -- self.g2:mul(0.95):add(0.05, self.tmp)
+    -- self.tmp:cmul(self.g, self.g)
+    -- self.tmp:mul(-1)
+    -- self.tmp:add(self.g2)
+    -- self.tmp:add(0.01)
+    -- self.tmp:sqrt()
+
+    --rmsprop
+    local smoothing_value = 1e-8
     self.tmp:cmul(self.dw, self.dw)
-    self.g2:mul(0.95):add(0.05, self.tmp)
-    self.tmp:cmul(self.g, self.g)
-    self.tmp:mul(-1)
-    self.tmp:add(self.g2)
-    self.tmp:add(0.01)
-    self.tmp:sqrt()
+    self.g:mul(0.9):add(0.1, self.tmp)
+    self.tmp = torch.sqrt(self.g)
+    self.tmp:add(smoothing_value) 
 
     -- accumulate update
     self.deltas:mul(0):addcdiv(self.lr, self.dw, self.tmp)

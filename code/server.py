@@ -235,19 +235,8 @@ class Environment:
 
         return self.state, reward, self.terminal
 
-if __name__ == '__main__':
-    env = None
-    newstate, reward, terminal = None, None, None
 
-    if len(sys.argv) > 1:
-        trainFile = sys.argv[1]
-    else:
-        trainFile = 'train.extra'
-
-    
-
-    print "Running with file", trainFile    
-
+def loadFile(filename):
     articles, titles, identifiers, downloaded_articles = [], [] ,[] ,[]
 
     #load data and process identifiers
@@ -258,7 +247,7 @@ if __name__ == '__main__':
                 articles.append(a)
                 titles.append(b)
                 identifiers.append(c)
-                downloaded_articles.append(d)                
+                downloaded_articles.append(d)             
             except:
                 break
 
@@ -270,6 +259,24 @@ if __name__ == '__main__':
                 e[i] = inflect_engine.number_to_words(e[i])            
         identifiers_tmp.append(e)
     identifiers = identifiers_tmp
+
+    return articles, titles, identifiers, downloaded_articles
+
+if __name__ == '__main__':
+    env = None
+    newstate, reward, terminal = None, None, None
+
+    if len(sys.argv) > 1:
+        trainFile = sys.argv[1]
+    else:
+        trainFile = 'train.extra'
+
+    testFile = 'dev.extra'
+
+    print "Running with file", trainFile    
+
+    articles, titles, identifiers, downloaded_articles = loadFile(trainFile)
+    test_articles, test_titles, test_identifiers, test_downloaded_articles = loadFile(testFile)
         
     # pdb.set_trace()
 
@@ -283,7 +290,7 @@ if __name__ == '__main__':
         # print "Received request: ", message
 
         if message == "newGame":
-            # indx = articleNum % 10
+            # indx = articleNum % 10 #for test
             indx = articleNum % len(articles)
             # print "INDX:", indx
             articleNum += 1
@@ -319,8 +326,10 @@ if __name__ == '__main__':
             terminal = 'true' if terminal else 'false'
         
         #do article eval if terminal
-        if evalMode and terminal == 'true':
+        if evalMode and articleNum < len(articles) and terminal == 'true':
             env.evaluateArticle(env.bestEntities.values(), env.goldEntities)
+
+
 
 
         #send message

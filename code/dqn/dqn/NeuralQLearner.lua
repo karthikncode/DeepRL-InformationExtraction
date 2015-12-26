@@ -356,7 +356,7 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
     if not terminal then
         return actionIndex
     else
-        return 0
+        return 1
     end
 end
 
@@ -368,7 +368,7 @@ function nql:eGreedy(state, testing_ep)
     -- Epsilon greedy
     if torch.uniform() < self.ep then
         return torch.random(1, self.n_actions)
-    else
+    else        
         return self:greedy(state)
     end
 end

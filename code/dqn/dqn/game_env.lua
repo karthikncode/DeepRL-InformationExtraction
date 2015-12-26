@@ -36,6 +36,7 @@ end
 
 
 function env:step(action)
+    assert(action==1 or action==0, "Action " .. tostring(action))
     self.skt:send(tostring(action))
     msg = self.skt:recv()
     while msg == nil do

@@ -4,13 +4,14 @@ if [ -z "$1" ]
   then echo "Please provide the port for the game, e.g.  ./run_cpu 5050 "; exit 0
 fi
 FRAMEWORK="alewrap"
-exp_folder="logs/dev_test/"
+exp_folder="logs/tmp/"
 game_path=$PWD"/roms/"
 env_params="useRGB=true"
 agent="NeuralQLearner"
 n_replay=1
 # netfile="\"convnet_atari3\""
 netfile="\"network_mass\""
+# netfile="\"logs/dev3_shooter_match_state/agent_5050.t7\""
 update_freq=1
 actrep=1 #TODO: check this
 discount=0.5

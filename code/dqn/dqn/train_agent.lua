@@ -110,7 +110,8 @@ while step < opt.steps do
 
     -- evaluation
     if step % opt.eval_freq == 0 and step > learn_start then
-
+        
+        game_env:evalStart()
         state, reward, terminal = game_env:newGame()
 
         test_avg_Q = test_avg_Q or optim.Logger(paths.concat(opt.exp_folder , 'test_avgQ.log'))
@@ -123,7 +124,6 @@ while step < opt.steps do
 
         local eval_time = sys.clock()
         print("Testing...")
-        game_env:evalStart()
 
         for estep=1,opt.eval_steps do
             xlua.progress(estep, opt.eval_steps)

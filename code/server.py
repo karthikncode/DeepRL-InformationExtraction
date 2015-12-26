@@ -9,33 +9,35 @@ from itertools import izip
 import inflect
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+import argparse
 
+
+DEBUG = False
 
 #Global variables
 int2tags = ['shooterName','numKilled', 'numWounded', 'city']
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
 
-port = "5050"
-context = zmq.Context()
-socket = context.socket(zmq.REP)
-socket.bind("tcp://*:%s" % port)
-print "Started server on port", port
+
 
 trained_model = pickle.load( open( "trained_model.p", "rb" ) )
 tfidf_vectorizer = TfidfVectorizer()
 inflect_engine = inflect.engine()
 
-TFIDF_MATRICES = {}
-ENTITIES = collections.defaultdict(lambda:{})
-CONFIDENCES = collections.defaultdict(lambda:{})
+#global caching to speed up
+TRAIN_TFIDF_MATRICES = {}
+TRAIN_ENTITIES = collections.defaultdict(lambda:{})
+TRAIN_CONFIDENCES = collections.defaultdict(lambda:{})
+
+TEST_TFIDF_MATRICES = {}
+TEST_ENTITIES = collections.defaultdict(lambda:{})
+TEST_CONFIDENCES = collections.defaultdict(lambda:{})
 
 CORRECT = collections.defaultdict(lambda:0.)
 GOLD = collections.defaultdict(lambda:0.)
 PRED = collections.defaultdict(lambda:0.)
 evalMode = False
-
-outFile = file(sys.argv[2], 'w')
 
 #Environment for each episode
 class Environment:
@@ -113,9 +115,9 @@ class Environment:
                     #handle shooterName -  add to list
                     if not self.bestEntities[i]:
                         self.bestEntities[i] = entities[i]
+                        self.bestConfidences[i] = confidences[i]                        
                     elif confidences[i] > self.bestConfidences[i]:
-                        self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i]
-                        # self.bestEntities[i] = entities[i] #use this for original replacement
+                        self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i]                        
                         self.bestConfidences[i] = confidences[i]                        
                 else:
                     if not self.bestEntities[i] or confidences[i] > self.bestConfidences[i]:
@@ -153,6 +155,7 @@ class Environment:
         self.prevEntities = entities
         self.prevConfidences = confidences
 
+
         return
 
     # check if two entities are equal. Need to handle shooterName and city
@@ -188,18 +191,28 @@ class Environment:
         # if shooter_reward != 0:
         #     print "Shooter reward", shooter_reward
 
+        if DEBUG:
+            #print
+            print "bestEntities:", newEntities
+            print "goldEntities:", self.goldEntities
+            print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
+
         #TODO: if terminal, give some reward based on how many entities are correct?
 
         return reward + shooter_reward
 
     #evaluate the bestEntities retrieved so far for a single article
     #IMP: make sure the evaluate variables are properly re-initialized
-    def evaluateArticle(self, predEntities, goldEntities):
+    def evaluateArticle(self, predEntities, goldEntities, shooterLenientEval, shooterLastName):
         # print "Evaluating article", predEntities, goldEntities
 
         #shooterName first: only add this if gold contains a valid shooter
         if goldEntities[0]!='':
-            gold = set(goldEntities[0].lower().split('|'))
+            if shooterLastName:
+                gold = set(goldEntities[0].lower().split('|')[-1:])
+            else:
+                gold = set(goldEntities[0].lower().split('|'))
+
             pred = set(predEntities[0].lower().split('|'))
             correct = len(gold.intersection(pred))
 
@@ -208,12 +221,17 @@ class Environment:
             # print gold, pred, correct
             # pdb.set_trace()
 
-            CORRECT[int2tags[0]] += correct
-            GOLD[int2tags[0]] += len(gold)
-            PRED[int2tags[0]] += len(pred)
+            if shooterLenientEval:
+                CORRECT[int2tags[0]] += (1 if correct> 0 else 0)
+                GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+                PRED[int2tags[0]] += (1 if len(pred) > 0 else 0)            
+            else:
+                CORRECT[int2tags[0]] += correct
+                GOLD[int2tags[0]] += len(gold)
+                PRED[int2tags[0]] += len(pred)
 
         #all other tags
-        for i in range(1, NUM_ENTITIES):
+        for i in range(1, NUM_ENTITIES):            
             GOLD[int2tags[i]] += 1
             PRED[int2tags[i]] += 1
             if predEntities[i].lower() == goldEntities[i].lower():
@@ -240,7 +258,7 @@ def loadFile(filename):
     articles, titles, identifiers, downloaded_articles = [], [] ,[] ,[]
 
     #load data and process identifiers
-    with open(trainFile, "rb") as inFile:
+    with open(filename, "rb") as inFile:
         while True:
             try:
                 a, b, c, d = pickle.load(inFile)
@@ -262,26 +280,43 @@ def loadFile(filename):
 
     return articles, titles, identifiers, downloaded_articles
 
-if __name__ == '__main__':
-    env = None
-    newstate, reward, terminal = None, None, None
+def main(args):
+    global ENTITIES, CONFIDENCES, TFIDF_MATRICES
+    global evalMode
+    global CORRECT, GOLD, PRED
+    
+    print args
 
-    if len(sys.argv) > 1:
-        trainFile = sys.argv[1]
+    train_articles, train_titles, train_identifiers, train_downloaded_articles = loadFile(args.trainFile)
+    if args.testFile:
+        test_articles, test_titles, test_identifiers, test_downloaded_articles = loadFile(args.testFile)
     else:
-        trainFile = 'train.extra'
+        print "Using trainFile for eval"        
+        TEST_ENTITIES = TRAIN_ENTITIES
+        TEST_CONFIDENCES = TRAIN_CONFIDENCES
+        TEST_TFIDF_MATRICES = TRAIN_TFIDF_MATRICES
+        test_articles, test_titles, test_identifiers, test_downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
 
-    testFile = 'dev.extra'
 
-    print "Running with file", trainFile    
-
-    articles, titles, identifiers, downloaded_articles = loadFile(trainFile)
-    test_articles, test_titles, test_identifiers, test_downloaded_articles = loadFile(testFile)
-        
-    # pdb.set_trace()
+    #starting assignments
+    ENTITIES = TRAIN_ENTITIES
+    CONFIDENCES = TRAIN_CONFIDENCES
+    TFIDF_MATRICES = TRAIN_TFIDF_MATRICES
+    articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
 
     articleNum = 0
     savedArticleNum = 0
+
+    outFile = open(args.outFile, 'w')
+
+    # pdb.set_trace()
+
+    #server setup
+    port = args.port
+    context = zmq.Context()
+    socket = context.socket(zmq.REP)
+    socket.bind("tcp://*:%s" % port)
+    print "Started server on port", port
 
     # server loop
     while True:
@@ -292,13 +327,14 @@ if __name__ == '__main__':
         if message == "newGame":
             # indx = articleNum % 10 #for test
             indx = articleNum % len(articles)
-            # print "INDX:", indx
+            if DEBUG: print "INDX:", indx
             articleNum += 1
             originalArticle = articles[indx][0]
             newArticles = [q.split(' ')[:WORD_LIMIT] for q in downloaded_articles[indx]]
             goldEntities = identifiers[indx]   
             env = Environment(originalArticle, newArticles, goldEntities, indx)
             newstate, reward, terminal = env.state, 0, 'false'
+
         elif message == "evalStart":
             CORRECT = collections.defaultdict(lambda:0.)
             GOLD = collections.defaultdict(lambda:0.)
@@ -306,9 +342,14 @@ if __name__ == '__main__':
             evalMode = True
             savedArticleNum = articleNum
             articleNum = 0
+
+            ENTITIES = TEST_ENTITIES
+            CONFIDENCES = TEST_CONFIDENCES
+            TFIDF_MATRICES = TEST_TFIDF_MATRICES
+            articles, titles, identifiers, downloaded_articles = test_articles, test_titles, test_identifiers, test_downloaded_articles
             # print "##### Evaluation Started ######"
-        elif message == "evalEnd":
-            
+
+        elif message == "evalEnd":            
             print "------------\nEvaluation Stats: (Precision, Recall, F1):"
             outFile.write("------------\nEvaluation Stats: (Precision, Recall, F1):\n")
             for tag in int2tags:
@@ -319,21 +360,74 @@ if __name__ == '__main__':
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
             evalMode = False
             articleNum = savedArticleNum
+
+            ENTITIES = TRAIN_ENTITIES
+            CONFIDENCES = TRAIN_CONFIDENCES
+            TFIDF_MATRICES = TRAIN_TFIDF_MATRICES
+            articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
             # print "##### Evaluation Ended ######"
+
         else:
             action = int(message)
+
+            if DEBUG:
+                print "State:", newstate[:4], newstate[4:]
+                print "Entities:", env.prevEntities
+                print "Action:", action            
             newstate, reward, terminal = env.step(action)        
             terminal = 'true' if terminal else 'false'
+            
+            if DEBUG:
+                print "Reward:", reward            
+                pdb.set_trace()
         
         #do article eval if terminal
         if evalMode and articleNum < len(articles) and terminal == 'true':
-            env.evaluateArticle(env.bestEntities.values(), env.goldEntities)
-
-
+            env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
 
 
         #send message
         outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal
         socket.send(outMsg.replace('[', '{').replace(']', '}'))
+
+
+if __name__ == '__main__':
+    env = None
+    newstate, reward, terminal = None, None, None
+
+    argparser = argparse.ArgumentParser(sys.argv[0])
+    argparser.add_argument("--port",
+        type = int,
+        default = 5050,
+        help = "port for server")
+    argparser.add_argument("--trainFile",
+        type = str,
+        default = "",
+        help = "training File")
+    argparser.add_argument("--testFile",
+        type = str,
+        default = "",
+        help = "Testing File")
+    argparser.add_argument("--outFile",
+        type = str,
+        default = "",
+        help = "Output File")
+
+    argparser.add_argument("--shooterLenientEval",
+        type = bool,
+        default = False,
+        help = "Evaluate shooter leniently by counting any match as right")
+
+    argparser.add_argument("--shooterLastName",
+        type = bool,
+        default = False,
+        help = "Evaluate shooter using only last name")
+
+
+    args = argparser.parse_args()
+
+    main(args)
+
+    
 
         

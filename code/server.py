@@ -231,11 +231,59 @@ class Environment:
                 PRED[int2tags[0]] += len(pred)
 
         #all other tags
-        for i in range(1, NUM_ENTITIES):            
-            GOLD[int2tags[i]] += 1
-            PRED[int2tags[i]] += 1
-            if predEntities[i].lower() == goldEntities[i].lower():
-                CORRECT[int2tags[i]] += 1
+        for i in range(1, NUM_ENTITIES):   
+            gold = set(goldEntities[i].lower().split())
+            pred = set(predEntities[i].lower().split())
+            correct = len(gold.intersection(pred))      
+            GOLD[int2tags[i]] += len(gold)
+            PRED[int2tags[i]] += len(pred)
+            # if predEntities[i].lower() == goldEntities[i].lower():
+            CORRECT[int2tags[i]] += correct
+
+
+    def oracleEvaluate(self, goldEntities, entityDic):
+        # the best possible numbers assuming that just the right information is extracted 
+        # from the set of related articles
+        bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
+
+        for stepNum, predEntities in entityDic.items():   
+
+            #shooterName first: only add this if gold contains a valid shooter
+            if goldEntities[0]!='':
+                gold = set(goldEntities[0].lower().split('|'))
+
+                pred = set(predEntities[0].lower().split('|'))
+                correct = len(gold.intersection(pred))
+
+                if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
+                    # print "Correct: ", correct
+                    # print "Gold:", gold
+                    # print "pred:", pred
+                    bestCorrect[int2tags[0]] = correct
+                    bestPred[int2tags[0]] = len(pred)
+
+                if stepNum == 0:
+                    GOLD[int2tags[0]] += len(gold)
+
+
+
+            #all other tags
+            for i in range(1, NUM_ENTITIES):   
+                gold = set(goldEntities[i].lower().split())
+                pred = set(predEntities[i].lower().split())
+                correct = len(gold.intersection(pred))      
+                if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                    bestCorrect[int2tags[i]] = correct
+                    bestPred[int2tags[i]] = len(pred)
+                    # print "Correct: ", correct
+                    # print "Gold:", gold
+                    # print "pred:", pred
+                if stepNum == 0:
+                    GOLD[int2tags[i]] += len(gold)
+
+        for i in range(NUM_ENTITIES):    
+            PRED[int2tags[i]] += bestPred[int2tags[i]]
+            CORRECT[int2tags[i]] += bestCorrect[int2tags[i]]        
 
 
     #take a single step in the episode
@@ -357,6 +405,7 @@ def main(args):
                 rec = CORRECT[tag]/GOLD[tag]
                 f1 = (2*prec*rec)/(prec+rec)
                 print tag, prec, rec, f1
+                # print CORRECT[tag], PRED[tag], GOLD[tag]
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
             evalMode = False
             articleNum = savedArticleNum
@@ -376,14 +425,19 @@ def main(args):
                 print "Action:", action            
             newstate, reward, terminal = env.step(action)        
             terminal = 'true' if terminal else 'false'
-            
+
             if DEBUG:
                 print "Reward:", reward            
                 pdb.set_trace()
         
         #do article eval if terminal
         if evalMode and articleNum < len(articles) and terminal == 'true':
-            env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
+            if args.oracle:
+                env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx])
+            else:
+                env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
+
+                
 
 
         #send message
@@ -422,6 +476,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Evaluate shooter using only last name")
+
+    argparser.add_argument("--oracle",
+        type = bool,
+        default = False,
+        help = "Evaluate using oracle")
 
 
     args = argparser.parse_args()

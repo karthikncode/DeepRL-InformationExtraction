@@ -4,7 +4,7 @@ if [ -z "$1" ]
   then echo "Please provide the port for the game, e.g.  ./run_cpu 5050 "; exit 0
 fi
 FRAMEWORK="alewrap"
-exp_folder="logs/tmp/"
+exp_folder="logs/oracle/"
 game_path=$PWD"/roms/"
 env_params="useRGB=true"
 agent="NeuralQLearner"

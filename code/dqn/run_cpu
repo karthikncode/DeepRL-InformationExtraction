@@ -45,5 +45,5 @@ args="-exp_folder $exp_folder -zmq_port $1 -framework $FRAMEWORK -game_path $gam
 echo $args
 
 cd dqn
-mkdir -p exp_folder;
+mkdir -p $exp_folder;
 th train_agent.lua $args

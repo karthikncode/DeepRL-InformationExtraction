@@ -533,7 +533,6 @@ if __name__ == '__main__':
         help = "port for server")
     argparser.add_argument("--trainFile",
         type = str,
-        default = "",
         help = "training File")
     argparser.add_argument("--testFile",
         type = str,
@@ -541,12 +540,10 @@ if __name__ == '__main__':
         help = "Testing File")
     argparser.add_argument("--outFile",
         type = str,
-        default = "",
         help = "Output File")
 
     argparser.add_argument("--modelFile",
         type = str,
-        default = "",
         help = "Model File")
 
     argparser.add_argument("--shooterLenientEval",

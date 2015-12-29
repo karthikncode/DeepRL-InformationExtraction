@@ -10,6 +10,7 @@ import inflect
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 import argparse
+from random import shuffle
 
 
 DEBUG = False
@@ -20,8 +21,7 @@ NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
 
 
-
-trained_model = pickle.load( open( "trained_model.p", "rb" ) )
+trained_model = None
 tfidf_vectorizer = TfidfVectorizer()
 inflect_engine = inflect.engine()
 
@@ -42,13 +42,17 @@ evalMode = False
 #Environment for each episode
 class Environment:
 
-    def __init__(self, originalArticle, newArticles, goldEntities, indx):
+    def __init__(self, originalArticle, newArticles, goldEntities, indx, ignoreDuplicates, shuffleArticles):
         self.indx = indx
         self.originalArticle = originalArticle
         self.newArticles = newArticles #extra articles to process
         self.goldEntities = goldEntities 
+        self.ignoreDuplicates = ignoreDuplicates
+
+        self.shuffledIndxs = range(len(self.newArticles))
+        if shuffleArticles:
+            shuffle(self.shuffledIndxs) #IMP: remove this to eliminate shuffling
        
-        #TODO: add slots for matches in values between DB and the new article
         self.state = [0 for i in range(3 * NUM_ENTITIES + 1)]
         self.terminal = False
         
@@ -75,9 +79,9 @@ class Environment:
 
         #update the initial state
         self.stepNum = 0
-        self.updateState(1)
+        self.updateState(1, self.ignoreDuplicates)
 
-        #variables for evaluation
+        
         
         return
     
@@ -97,13 +101,23 @@ class Environment:
         return cosine_similarity(self.tfidf_matrix[0:1], self.tfidf_matrix[i+1:i+2])[0][0]
 
     # update the state based on the decision from DQN
-    def updateState(self, action):
-
-        #get next article
-        if self.stepNum < len(self.newArticles):
-            nextArticle = self.newArticles[self.stepNum]
-        else:
+    def updateState(self, action, ignoreDuplicates=False):
+        articleIndx = None
+        if ignoreDuplicates:
             nextArticle = None
+            while not nextArticle and self.stepNum < len(self.newArticles):
+                articleIndx = self.shuffledIndxs[self.stepNum]
+                if self.articleSim(articleIndx) < 0.95:
+                    nextArticle =self.newArticles[articleIndx]
+                else:
+                    self.stepNum += 1                
+        else:
+            #get next article
+            if self.stepNum < len(self.newArticles):
+                articleIndx = self.shuffledIndxs[self.stepNum]
+                nextArticle = self.newArticles[articleIndx]
+            else:
+                nextArticle = None
 
         if action == 1:
             # integrate the values into the current DB state
@@ -126,12 +140,13 @@ class Environment:
                         # print "Changing best Entities"
                         # print "New entities", self.bestEntities
 
-        if nextArticle:    
-            if (self.stepNum+1) in ENTITIES[self.indx]:
-                entities, confidences = ENTITIES[self.indx][self.stepNum+1], CONFIDENCES[self.indx][self.stepNum+1]
+        if nextArticle:               
+            assert(articleIndx != None)
+            if (articleIndx+1) in ENTITIES[self.indx]:
+                entities, confidences = ENTITIES[self.indx][articleIndx+1], CONFIDENCES[self.indx][articleIndx+1]
             else:
                 entities, confidences = self.extractEntitiesWithConfidences(nextArticle)
-                ENTITIES[self.indx][self.stepNum+1], CONFIDENCES[self.indx][self.stepNum+1] = entities, confidences
+                ENTITIES[self.indx][articleIndx+1], CONFIDENCES[self.indx][articleIndx+1] = entities, confidences
             assert(len(entities) == len(confidences))          
         else:
             # print "No next article"
@@ -140,14 +155,17 @@ class Environment:
 
         #modify self.state appropriately        
         # print(self.bestEntities, entities)
-        matches = map(self.checkEquality, self.bestEntities.values()[1:], entities[1:])
+        matches = map(self.checkEquality, self.bestEntities.values()[1:-1], entities[1:-1])
         matches.insert(0, self.checkEqualityShooter(self.bestEntities.values()[0], entities[0]))
+        matches.append(self.checkEqualityCity(self.bestEntities.values()[-1], entities[-1]))
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
-            self.state[NUM_ENTITIES+i] = confidences[i]  #next article state
-            self.state[2*NUM_ENTITIES+i] = int(matches[i])
+            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state
+            # self.state[i] -= confidences[i] 
+            # self.state[NUM_ENTITIES+i] = 0
+            self.state[2*NUM_ENTITIES+i] = float(matches[i])
             if nextArticle:
-                self.state[-1] = self.articleSim(self.stepNum)
+                self.state[-1] = self.articleSim(articleIndx)
             else:
                 self.state[-1] = 0
 
@@ -155,11 +173,9 @@ class Environment:
         self.prevEntities = entities
         self.prevConfidences = confidences
 
-
         return
 
-    # check if two entities are equal. Need to handle shooterName and city
-    #TODO: handle the case when goldEntities does not have annotation
+    # check if two entities are equal. Need to handle city
     def checkEquality(self, e1, e2):         
         # if gold is unknown, then dont count that
         return e2!=''  and e1.lower() == e2.lower()
@@ -178,15 +194,33 @@ class Environment:
             return f1
 
         return 0
+
+    def checkEqualityCity(self, e1, e2):
+        if e2!='' and e1!='':
+            gold = set(e2.lower().split())
+            pred = set(e1.lower().split())
+            correct = len(gold.intersection(pred))
+            prec = float(correct)/len(pred)
+            rec = float(correct)/len(gold)
+            if prec+rec > 0:
+                f1 = (2*prec*rec)/(prec+rec)
+            else:
+                f1 = 0.
+            return f1
+
+        return 0
         
 
     def calculateReward(self, oldEntities, newEntities):
-        reward = sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:])) \
-                - sum(map(self.checkEquality, oldEntities[1:], self.goldEntities[1:]))
+        reward = sum(map(self.checkEquality, newEntities[1:-1], self.goldEntities[1:-1])) \
+                - sum(map(self.checkEquality, oldEntities[1:-1], self.goldEntities[1:-1]))
 
         #add in shooter reward
         shooter_reward = self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
                 - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0])
+
+        city_reward = self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
+                - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1])
 
         # if shooter_reward != 0:
         #     print "Shooter reward", shooter_reward
@@ -199,7 +233,7 @@ class Environment:
 
         #TODO: if terminal, give some reward based on how many entities are correct?
 
-        return reward + shooter_reward
+        return reward + shooter_reward + city_reward
 
     #evaluate the bestEntities retrieved so far for a single article
     #IMP: make sure the evaluate variables are properly re-initialized
@@ -229,6 +263,17 @@ class Environment:
                 CORRECT[int2tags[0]] += correct
                 GOLD[int2tags[0]] += len(gold)
                 PRED[int2tags[0]] += len(pred)
+
+            # FOR DEBUGGING
+            # if correct != len(gold):
+            #     print "Gold:", gold
+            #     print "Pred:", pred
+            #     #print all articles
+            #     for i in range(len(self.allArticles)):
+            #         print self.allArticles[i]
+            #         print "----------------------------"
+            #     pdb.set_trace()
+
 
         #all other tags
         for i in range(1, NUM_ENTITIES):   
@@ -294,7 +339,7 @@ class Environment:
         self.stepNum += 1
     
 
-        self.updateState(action)
+        self.updateState(action, self.ignoreDuplicates)
 
         newEntities = self.bestEntities.values()
         reward = self.calculateReward(oldEntities, newEntities)
@@ -328,12 +373,37 @@ def loadFile(filename):
 
     return articles, titles, identifiers, downloaded_articles
 
+def baselineEval(articles, identifiers, args):
+    global CORRECT, GOLD, PRED
+    CORRECT = collections.defaultdict(lambda:0.)
+    GOLD = collections.defaultdict(lambda:0.)
+    PRED = collections.defaultdict(lambda:0.)
+    for indx in range(len(articles)):
+        print "INDX:", indx        
+        originalArticle = articles[indx][0]
+        newArticles = []
+        goldEntities = identifiers[indx]   
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args.ignoreDuplicates, False)
+        env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
+
+    print "------------\nEvaluation Stats: (Precision, Recall, F1):"
+    for tag in int2tags:
+        prec = CORRECT[tag]/PRED[tag]
+        rec = CORRECT[tag]/GOLD[tag]
+        f1 = (2*prec*rec)/(prec+rec)
+        print tag, prec, rec, f1
+
 def main(args):
     global ENTITIES, CONFIDENCES, TFIDF_MATRICES
+    global TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_TFIDF_MATRICES
+    global TEST_ENTITIES, TEST_CONFIDENCES, TEST_TFIDF_MATRICES
     global evalMode
     global CORRECT, GOLD, PRED
+    global trained_model
     
     print args
+
+    trained_model = pickle.load( open(args.modelFile, "rb" ) )
 
     train_articles, train_titles, train_identifiers, train_downloaded_articles = loadFile(args.trainFile)
     if args.testFile:
@@ -344,13 +414,16 @@ def main(args):
         TEST_CONFIDENCES = TRAIN_CONFIDENCES
         TEST_TFIDF_MATRICES = TRAIN_TFIDF_MATRICES
         test_articles, test_titles, test_identifiers, test_downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
-
-
+ 
     #starting assignments
     ENTITIES = TRAIN_ENTITIES
     CONFIDENCES = TRAIN_CONFIDENCES
     TFIDF_MATRICES = TRAIN_TFIDF_MATRICES
     articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
+
+    if args.baselineEval:
+        baselineEval(articles, identifiers, args)
+        return
 
     articleNum = 0
     savedArticleNum = 0
@@ -380,7 +453,7 @@ def main(args):
             originalArticle = articles[indx][0]
             newArticles = [q.split(' ')[:WORD_LIMIT] for q in downloaded_articles[indx]]
             goldEntities = identifiers[indx]   
-            env = Environment(originalArticle, newArticles, goldEntities, indx)
+            env = Environment(originalArticle, newArticles, goldEntities, indx, args.ignoreDuplicates, not evalMode and args.shuffleArticles)
             newstate, reward, terminal = env.state, 0, 'false'
 
         elif message == "evalStart":
@@ -417,32 +490,36 @@ def main(args):
             # print "##### Evaluation Ended ######"
 
         else:
+            # message is "step"
             action = int(message)
 
-            if DEBUG:
-                print "State:", newstate[:4], newstate[4:]
+            if evalMode and DEBUG:
+                print "State:"
+                print newstate[:4]
+                print newstate[4:8]
+                print newstate[8:]
                 print "Entities:", env.prevEntities
                 print "Action:", action            
             newstate, reward, terminal = env.step(action)        
             terminal = 'true' if terminal else 'false'
 
-            if DEBUG:
+            if evalMode and DEBUG and reward != 0:
                 print "Reward:", reward            
                 pdb.set_trace()
         
-        #do article eval if terminal
-        if evalMode and articleNum < len(articles) and terminal == 'true':
-            if args.oracle:
-                env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx])
-            else:
-                env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
+        if message != "evalStart" and message != "evalEnd":
+            #do article eval if terminal
+            if evalMode and articleNum < len(articles) and terminal == 'true':
+                if args.oracle:
+                    env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx])
+                else:
+                    env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
 
-                
-
-
-        #send message
-        outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal
-        socket.send(outMsg.replace('[', '{').replace(']', '}'))
+            #send message (IMP: only for newGame or step messages)
+            outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal
+            socket.send(outMsg.replace('[', '{').replace(']', '}'))
+        else:
+            socket.send("done")
 
 
 if __name__ == '__main__':
@@ -467,6 +544,11 @@ if __name__ == '__main__':
         default = "",
         help = "Output File")
 
+    argparser.add_argument("--modelFile",
+        type = str,
+        default = "",
+        help = "Model File")
+
     argparser.add_argument("--shooterLenientEval",
         type = bool,
         default = False,
@@ -482,6 +564,20 @@ if __name__ == '__main__':
         default = False,
         help = "Evaluate using oracle")
 
+    argparser.add_argument("--ignoreDuplicates",
+        type = bool,
+        default = False,
+        help = "Ignore duplicate articles in downloaded ones.")
+
+    argparser.add_argument("--baselineEval",
+        type = bool,
+        default = False,
+        help = "Evaluate baseline performance")
+
+    argparser.add_argument("--shuffleArticles",
+        type = bool,
+        default = False,
+        help = "Shuffle the order of new articles presented to agent")
 
     args = argparser.parse_args()
 

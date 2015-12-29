@@ -47,10 +47,14 @@ end
 
 function env:evalStart()
     self.skt:send("evalStart")
+    msg = self.skt:recv()
+    assert(msg == 'done', msg)
 end
 
 function env:evalEnd()
     self.skt:send("evalEnd")
+    msg = self.skt:recv()
+    assert(msg == 'done', msg)
 end
 
 

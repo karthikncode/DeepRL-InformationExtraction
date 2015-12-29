@@ -110,7 +110,7 @@ while step < opt.steps do
 
     -- evaluation
     if step % opt.eval_freq == 0 and step > learn_start then
-        
+
         game_env:evalStart()
         state, reward, terminal = game_env:newGame()
 
@@ -130,7 +130,7 @@ while step < opt.steps do
 
             local action_index = agent:perceive(reward, state, terminal, true, 0.0)
 
-            -- Play game in test mode (episodes don't end when losing a life)
+            -- Play game in test mode 
             state, reward, terminal = game_env:step(game_actions[action_index])
 
             if estep%1000 == 0 then collectgarbage() end

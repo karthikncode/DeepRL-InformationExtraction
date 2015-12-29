@@ -31,7 +31,7 @@ def main(training_file,trained_model,previous_n,next_n, c, prune):
     print time.clock()-tic
 
     feature_list = (word_vocab.keys() + helper.other_features) * (previous_n+next_n+1)  + word_vocab.keys() + ['previous_one'] * len(tags) + ['previous_two'] * len(tags)+ ['previous_three'] * len(tags)
-    getTopFeatures(clf,tags,feature_list)
+    # getTopFeatures(clf,tags,feature_list)
     if trained_model != "":
         pickle.dump([clf, previous_n,next_n, word_vocab,helper.other_features], open( trained_model, "wb" ) )
     return [clf, previous_n,next_n, word_vocab,helper.other_features]
@@ -149,9 +149,9 @@ def save_list_first_names(infile_path,outfile_path):
 
 if __name__ == "__main__":
     training_file = "../data/tagged_data/whole_text_full_city/train.tag" #sys.argv[1]
-    trained_model = "trained_model.p" #sys.argv[2]
-    previous_n = 0 #sys.argv[3]
-    next_n = 4
+    trained_model = "trained_model_3_3.p" #sys.argv[2]
+    previous_n = 3 #sys.argv[3]
+    next_n = 3
     c = 10
-    prune = 3
+    prune = 5
     main(training_file,trained_model,previous_n,next_n,c,prune)

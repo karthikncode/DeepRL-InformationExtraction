@@ -52,7 +52,7 @@ function trans:__init(args)
         end
     end
 
-    self.s = torch.ByteTensor(self.maxSize, self.stateDim):fill(0)
+    self.s = torch.FloatTensor(self.maxSize, self.stateDim):fill(0)
     self.a = torch.LongTensor(self.maxSize):fill(0)
     self.r = torch.zeros(self.maxSize)
     self.t = torch.ByteTensor(self.maxSize):fill(0)
@@ -68,8 +68,8 @@ function trans:__init(args)
     self.buf_a      = torch.LongTensor(self.bufferSize):fill(0)
     self.buf_r      = torch.zeros(self.bufferSize)
     self.buf_term   = torch.ByteTensor(self.bufferSize):fill(0)
-    self.buf_s      = torch.ByteTensor(self.bufferSize, s_size):fill(0)
-    self.buf_s2     = torch.ByteTensor(self.bufferSize, s_size):fill(0)
+    self.buf_s      = torch.FloatTensor(self.bufferSize, s_size):fill(0)
+    self.buf_s2     = torch.FloatTensor(self.bufferSize, s_size):fill(0)
 
     if self.gpu and self.gpu >= 0 then
         self.gpu_s  = self.buf_s:float():cuda()
@@ -107,8 +107,8 @@ function trans:fill_buffer()
         self.buf_s2[buf_ind]:copy(s2)
         self.buf_term[buf_ind] = term
     end
-    self.buf_s  = self.buf_s:float():div(255)
-    self.buf_s2 = self.buf_s2:float():div(255)
+    self.buf_s  = self.buf_s:float()
+    self.buf_s2 = self.buf_s2:float()
     if self.gpu and self.gpu >= 0 then
         self.gpu_s:copy(self.buf_s)
         self.gpu_s2:copy(self.buf_s2)
@@ -257,7 +257,7 @@ end
 
 function trans:get_recent()
     -- Assumes that the most recent state has been added, but the action has not
-    return self:concatFrames(1, true):float():div(255)
+    return self:concatFrames(1, true):float()
 end
 
 
@@ -288,7 +288,7 @@ function trans:add(s, a, r, term)
     end
 
     -- Overwrite (s,a,r,t) at insertIndex
-    self.s[self.insertIndex] = s:clone():float():mul(255)
+    self.s[self.insertIndex] = s:clone():float()
     self.a[self.insertIndex] = a
     self.r[self.insertIndex] = r
     if term then
@@ -300,7 +300,7 @@ end
 
 
 function trans:add_recent_state(s, term)
-    local s = s:clone():float():mul(255):byte()
+    local s = s:clone():float()
     if #self.recent_s == 0 then
         for i=1,self.recentMemSize do
             table.insert(self.recent_s, s:clone():zero())
@@ -377,7 +377,7 @@ function trans:read(file)
     self.numEntries = 0
     self.insertIndex = 0
 
-    self.s = torch.ByteTensor(self.maxSize, self.stateDim):fill(0)
+    self.s = torch.FloatTensor(self.maxSize, self.stateDim):fill(0)
     self.a = torch.LongTensor(self.maxSize):fill(0)
     self.r = torch.zeros(self.maxSize)
     self.t = torch.ByteTensor(self.maxSize):fill(0)
@@ -392,8 +392,8 @@ function trans:read(file)
     self.buf_a      = torch.LongTensor(self.bufferSize):fill(0)
     self.buf_r      = torch.zeros(self.bufferSize)
     self.buf_term   = torch.ByteTensor(self.bufferSize):fill(0)
-    self.buf_s      = torch.ByteTensor(self.bufferSize, self.stateDim * self.histLen):fill(0)
-    self.buf_s2     = torch.ByteTensor(self.bufferSize, self.stateDim * self.histLen):fill(0)
+    self.buf_s      = torch.FloatTensor(self.bufferSize, self.stateDim * self.histLen):fill(0)
+    self.buf_s2     = torch.FloatTensor(self.bufferSize, self.stateDim * self.histLen):fill(0)
 
     if self.gpu and self.gpu >= 0 then
         self.gpu_s  = self.buf_s:float():cuda()

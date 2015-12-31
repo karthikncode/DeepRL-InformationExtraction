@@ -4,7 +4,7 @@ if [ -z "$1" ]
   then echo "Please provide the port for the game, e.g.  ./run_cpu 5050 "; exit 0
 fi
 FRAMEWORK="alewrap"
-exp_folder="logs/tmp3_2/"
+exp_folder="logs/pos_reward/"
 game_path=$PWD"/roms/"
 env_params="useRGB=true"
 agent="NeuralQLearner"
@@ -23,7 +23,7 @@ pool_frms_size=2
 initial_priority="false"
 replay_memory=100000
 eps_end=0.1
-eps_endt=replay_memory
+eps_endt=$replay_memory
 lr=0.0005
 agent_type="DQN3_0_1"
 agent_name="agent_"$1

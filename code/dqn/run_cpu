@@ -48,4 +48,4 @@ echo $args
 
 cd dqn
 mkdir -p $exp_folder;
-th train_agent.lua $args
+OMP_NUM_THREADS=1 th train_agent.lua $args

@@ -566,7 +566,7 @@ def main(args):
     articleNum = 0
     savedArticleNum = 0
 
-    outFile = open(args.outFile, 'w')
+    outFile = open(args.outFile, 'w', 0) #unbuffered
     outFile.write(str(args)+"\n")
 
     evalOutFile = None

@@ -1,7 +1,7 @@
 # script to run experiments
 
 i=0
-MAX_PARALLEL=10
+MAX_PARALLEL=20
 for trainFile in "train" "dev"; do
   for testFile in "dev" "test"; do   
     if [ $trainFile != $testFile ]; then      
@@ -9,8 +9,8 @@ for trainFile in "train" "dev"; do
         for delayedReward in "False" "True"; do                     
           for entity in 0 1 2 3 4; do
             # echo $i && sleep $i &
-            port=$(( $i+5050 ))
-            name=$port.$trainFile.$testFile.$entity
+            port=$(( $i+5050 ));
+            name=$port.$trainFile.$testFile.$entity.$aggregate.$delayedReward;
             python server.py --port $port --trainFile downloaded_articles/$trainFile.extra \
                              --testFile downloaded_articles/$testFile.extra \
                              --trainEntities cached_entities/$trainFile.entities \
@@ -20,7 +20,7 @@ for trainFile in "train" "dev"; do
                              --entity $entity --aggregate $aggregate \
                              --delayedReward $delayedReward &
             cd dqn
-            ./run_cpu $port logs/$name &
+            ./run_cpu $port logs/$name/ &
             cd ..
 
             ((i++));

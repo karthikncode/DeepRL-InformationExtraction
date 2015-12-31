@@ -4,9 +4,12 @@ local env = torch.class('GameEnv')
 
 local json = require ("dkjson")
 local zmq = require "lzmq"
-require "signal"
 
-signal.signal("SIGPIPE", function() print("raised") end)
+if pcall(require, 'signal') then
+    signal.signal("SIGPIPE", function() print("raised") end)
+else
+    print("No signal module found. Assuming SIGPIPE is okay.")
+end
 
 function env:__init(args)
 

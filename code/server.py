@@ -433,7 +433,7 @@ class Environment:
 
         newEntities = self.bestEntities.values()
     
-        if self.delayedReward:
+        if self.delayedReward == 'True':
             reward = self.calculateReward(self.originalEntities, newEntities)
         else:
             reward = self.calculateReward(oldEntities, newEntities)
@@ -656,7 +656,7 @@ def main(args):
             terminal = 'true' if terminal else 'false'
 
             #remove reward unless terminal
-            if args.delayedReward and terminal == 'false':
+            if args.delayedReward == 'True' and terminal == 'false':
                 reward = 0
 
             if evalMode and DEBUG and reward != 0:
@@ -754,8 +754,8 @@ if __name__ == '__main__':
         help = "Options: always, conf, majority")
 
     argparser.add_argument("--delayedReward",
-        type = bool,
-        default = False,
+        type = str,
+        default = 'False',
         help = "delay reward to end")
 
     argparser.add_argument("--trainEntities",

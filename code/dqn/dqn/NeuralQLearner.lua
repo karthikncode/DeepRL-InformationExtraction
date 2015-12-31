@@ -369,12 +369,12 @@ function nql:eGreedy(state, testing_ep)
     if torch.uniform() < self.ep then
         return torch.random(1, self.n_actions)
     else        
-        return self:greedy(state)
+        return self:greedy(state, testing_ep)
     end
 end
 
 
-function nql:greedy(state)
+function nql:greedy(state, testing_ep)
     -- Turn single state into minibatch.  Needed for convolutional nets.
     -- if state:dim() == 2 then
     --     print(state)
@@ -389,6 +389,13 @@ function nql:greedy(state)
     local q = self.network:forward(state):float():squeeze()
     local maxq = q[1]
     local besta = {1}
+
+    -- for debugging
+    -- if testing_ep then
+    --     print ("State:", state)
+    --     print("Q-values: ", q)
+
+    -- end
 
     -- Evaluate all other actions (with random tie-breaking)
     for a = 2, self.n_actions do

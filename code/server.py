@@ -19,7 +19,7 @@ DEBUG = False
 int2tags = ['shooterName','numKilled', 'numWounded', 'city']
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
-
+STATE_SIZE = 4*NUM_ENTITIES+1
 
 trained_model = None
 tfidf_vectorizer = TfidfVectorizer()
@@ -42,18 +42,19 @@ evalMode = False
 #Environment for each episode
 class Environment:
 
-    def __init__(self, originalArticle, newArticles, goldEntities, indx, ignoreDuplicates, shuffleArticles):
+    def __init__(self, originalArticle, newArticles, goldEntities, indx, ignoreDuplicates, shuffleArticles, majorityVote):
         self.indx = indx
         self.originalArticle = originalArticle
         self.newArticles = newArticles #extra articles to process
         self.goldEntities = goldEntities 
         self.ignoreDuplicates = ignoreDuplicates
+        self.majorityVote = majorityVote
 
         self.shuffledIndxs = range(len(self.newArticles))
         if shuffleArticles:
             shuffle(self.shuffledIndxs) #IMP: remove this to eliminate shuffling
        
-        self.state = [0 for i in range(3 * NUM_ENTITIES + 1)]
+        self.state = [0 for i in range(STATE_SIZE)]
         self.terminal = False
         
         self.bestEntities = collections.defaultdict(lambda:'') #current best entities
@@ -158,16 +159,27 @@ class Environment:
         matches = map(self.checkEquality, self.bestEntities.values()[1:-1], entities[1:-1])
         matches.insert(0, self.checkEqualityShooter(self.bestEntities.values()[0], entities[0]))
         matches.append(self.checkEqualityCity(self.bestEntities.values()[-1], entities[-1]))
+
+        self.state = [0 for i in range(STATE_SIZE)]
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
-            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state
-            # self.state[i] -= confidences[i] 
-            # self.state[NUM_ENTITIES+i] = 0
-            self.state[2*NUM_ENTITIES+i] = float(matches[i])
+            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state            
+            matchScore = float(matches[i])
+            if matchScore > 0:
+                self.state[2*NUM_ENTITIES+i] = 1
+            else:
+                self.state[3*NUM_ENTITIES+i] = 1
+
+            # self.state[2*NUM_ENTITIES+i] = float(matches[i])*confidences[i] if float(matches[i])>0 else -1*confidences[i]
             if nextArticle:
                 self.state[-1] = self.articleSim(articleIndx)
             else:
                 self.state[-1] = 0
+
+            #simplest state
+            # for j in range(2*NUM_ENTITIES):
+            #     self.state[j] = 0
+
 
         #update state variables
         self.prevEntities = entities
@@ -233,11 +245,12 @@ class Environment:
 
         #TODO: if terminal, give some reward based on how many entities are correct?
 
-        return reward + shooter_reward + city_reward
+        return city_reward
+        # return reward + shooter_reward + city_reward
 
     #evaluate the bestEntities retrieved so far for a single article
     #IMP: make sure the evaluate variables are properly re-initialized
-    def evaluateArticle(self, predEntities, goldEntities, shooterLenientEval, shooterLastName):
+    def evaluateArticle(self, predEntities, goldEntities, shooterLenientEval, shooterLastName, evalOutFile):
         # print "Evaluating article", predEntities, goldEntities
 
         #shooterName first: only add this if gold contains a valid shooter
@@ -284,6 +297,13 @@ class Environment:
             PRED[int2tags[i]] += len(pred)
             # if predEntities[i].lower() == goldEntities[i].lower():
             CORRECT[int2tags[i]] += correct
+
+        if evalOutFile:
+            evalOutFile.write("--------------------\n")
+            evalOutFile.write("Gold: "+str(gold)+"\n")
+            evalOutFile.write("Pred: "+str(pred)+"\n")
+            evalOutFile.write("Correct: "+str(correct)+"\n")
+
 
 
     def oracleEvaluate(self, goldEntities, entityDic):
@@ -429,6 +449,9 @@ def main(args):
     savedArticleNum = 0
 
     outFile = open(args.outFile, 'w')
+    evalOutFile = None
+    if args.evalOutFile != '':
+        evalOutFile = open(args.evalOutFile, 'w')
 
     # pdb.set_trace()
 
@@ -453,7 +476,7 @@ def main(args):
             originalArticle = articles[indx][0]
             newArticles = [q.split(' ')[:WORD_LIMIT] for q in downloaded_articles[indx]]
             goldEntities = identifiers[indx]   
-            env = Environment(originalArticle, newArticles, goldEntities, indx, args.ignoreDuplicates, not evalMode and args.shuffleArticles)
+            env = Environment(originalArticle, newArticles, goldEntities, indx, args.ignoreDuplicates, not evalMode and args.shuffleArticles, args.majorityVote)
             newstate, reward, terminal = env.state, 0, 'false'
 
         elif message == "evalStart":
@@ -513,7 +536,7 @@ def main(args):
                 if args.oracle:
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx])
                 else:
-                    env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
+                    env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
             #send message (IMP: only for newGame or step messages)
             outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal
@@ -539,6 +562,11 @@ if __name__ == '__main__':
         default = "",
         help = "Testing File")
     argparser.add_argument("--outFile",
+        type = str,
+        help = "Output File")
+
+    argparser.add_argument("--evalOutFile",
+        default = "",
         type = str,
         help = "Output File")
 
@@ -575,6 +603,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Shuffle the order of new articles presented to agent")
+
+    argparser.add_argument("--majorityVote",
+        type = bool,
+        default = False,
+        help = "Use majority voting to aggregate values in each episode")
 
     args = argparser.parse_args()
 

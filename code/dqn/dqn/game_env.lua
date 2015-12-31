@@ -24,7 +24,7 @@ function env:process_msg(msg)
     loadstring(msg)()
     -- if reward > 0 then
     --     print('non-zero reward', reward)
-    -- end
+    -- end    
     return torch.Tensor(state), reward, terminal
 end
 

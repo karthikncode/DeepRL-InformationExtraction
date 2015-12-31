@@ -241,7 +241,7 @@ def similarities_without_duplicates(tfidf_matrix,length):
 
 
 def get_related_urls_from_bing(query_text):
-    # BING_API_KEY = 'WvT9Yo4AQHnS7tdCTePQRgRjhHvGOwMJZVjBbMMPSAI' #karthik
+    # BING_API_KEY = 'WvT9Yo4AQHnS7tdCTePQRgRjhHvGOwMJZVjBbMMPSAI' #new key
     BING_API_KEY = 'q52coTH39rJGmzKKzAeWbrQzDvNIj5OI437Hmwyb5U0' 
     credentialBing = 'Basic ' + (':%s' % BING_API_KEY).encode('base64').rstrip()
     searchString = '%27'+urllib.urlencode({"q": query_text})+'%27'

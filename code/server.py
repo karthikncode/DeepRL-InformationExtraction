@@ -456,7 +456,7 @@ class Environment:
             if ticker == 0: dic[entity] += 0.1 #extra for original article
             ticker += 1
 
-        bestEntity, bestConf = sorted(dic.items(), key=itemgetter(1), reverse=True)[0]
+        bestEntity, bestVote = sorted(dic.items(), key=itemgetter(1), reverse=True)[0]
         return bestEntity, confDic[bestEntity]/cnt[bestEntity]
 
 

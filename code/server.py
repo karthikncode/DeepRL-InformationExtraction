@@ -66,7 +66,10 @@ class Environment:
         self.terminal = False
         
         self.bestEntities = collections.defaultdict(lambda:'') #current best entities
-        self.bestConfidences = collections.defaultdict(lambda:0)
+        self.bestConfidences = collections.defaultdict(lambda:0.)
+        self.bestEntitySet = None
+        if self.aggregate == 'majority':
+            self.bestEntitySet = collections.defaultdict(lambda:[])
 
         # to keep track of extracted values from previousArticle
         if 0 in ENTITIES[self.indx]:
@@ -135,21 +138,27 @@ class Environment:
 
             # all other tags
             for i in range(NUM_ENTITIES):
-                if i==0:
-                    #handle shooterName -  add to list
-                    if not self.bestEntities[i]:
-                        self.bestEntities[i] = entities[i]
-                        self.bestConfidences[i] = confidences[i]                        
-                    elif self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
-                        self.bestEntities[i] = entities[i]
-                        # self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i]
-                        self.bestConfidences[i] = confidences[i]                        
+                if self.aggregate == 'majority':
+                    self.bestEntitySet[i].append((entities[i], confidences[i]))
+                    self.bestEntities[i], self.bestConfidences[i] = self.majorityVote(self.bestEntitySet[i])
                 else:
-                    if not self.bestEntities[i] or self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
-                        self.bestEntities[i] = entities[i]
-                        self.bestConfidences[i] = confidences[i]
-                        # print "Changing best Entities"
-                        # print "New entities", self.bestEntities
+                    if i==0:
+                        #handle shooterName -  add to list
+                        if not self.bestEntities[i]:
+                            self.bestEntities[i] = entities[i]
+                            self.bestConfidences[i] = confidences[i]                        
+                        elif self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
+                            self.bestEntities[i] = entities[i]
+                            # self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i]
+                            self.bestConfidences[i] = confidences[i]                        
+                    else:
+                        if not self.bestEntities[i] or self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
+                            self.bestEntities[i] = entities[i]
+                            self.bestConfidences[i] = confidences[i]
+                            # print "Changing best Entities"
+                            # print "New entities", self.bestEntities
+            if DEBUG:
+                print "entitySet:", self.bestEntitySet
 
         if nextArticle:               
             assert(articleIndx != None)
@@ -169,7 +178,7 @@ class Environment:
         matches = map(self.checkEquality, self.bestEntities.values()[1:-1], entities[1:-1])
         matches.insert(0, self.checkEqualityShooter(self.bestEntities.values()[0], entities[0]))
         matches.append(self.checkEqualityCity(self.bestEntities.values()[-1], entities[-1]))
-
+        # pdb.set_trace()
         self.state = [0 for i in range(STATE_SIZE)]
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
@@ -206,19 +215,18 @@ class Environment:
         return e2!=''  and e1.lower() == e2.lower()
 
     def checkEqualityShooter(self, e1, e2):
-        if e2!='':
-            gold = set(e2.lower().split('|'))
-            pred = set(e1.lower().split('|'))
-            correct = len(gold.intersection(pred))
-            prec = float(correct)/len(pred)
-            rec = float(correct)/len(gold)
-            if prec+rec > 0:
-                f1 = (2*prec*rec)/(prec+rec)
-            else:
-                f1 = 0.
-            return f1
+        if e2 == '': return 0.
 
-        return 0
+        gold = set(e2.lower().split('|'))
+        pred = set(e1.lower().split('|'))
+        correct = len(gold.intersection(pred))
+        prec = float(correct)/len(pred)
+        rec = float(correct)/len(gold)
+        if prec+rec > 0:
+            f1 = (2*prec*rec)/(prec+rec)
+        else:
+            f1 = 0.
+        return f1
 
     def checkEqualityCity(self, e1, e2):
         if e2!='' and e1!='':
@@ -242,8 +250,11 @@ class Environment:
 
 
         #add in shooter reward
-        rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
-                - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+        if self.goldEntities[0]:
+            rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
+                    - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+        else:
+            rewards.insert(0, 0.)
 
         rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
                 - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
@@ -253,11 +264,15 @@ class Environment:
 
         if DEBUG:
             #print
-            print "bestEntities:", newEntities
+            print "oldEntities", oldEntities
+            print "newEntities:", newEntities
             print "goldEntities:", self.goldEntities
             print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
+            print rewards            
 
         #TODO: if terminal, give some reward based on how many entities are correct?
+
+        # pdb.set_trace()
 
         if self.entity == 4:
             return sum(rewards)
@@ -356,7 +371,8 @@ class Environment:
 
 
             #all other tags
-            for i in range(1, NUM_ENTITIES):   
+            for i in range(1, NUM_ENTITIES): 
+                if goldEntities[i].lower() == 'zero': continue  
                 gold = set(goldEntities[i].lower().split())
                 pred = set(predEntities[i].lower().split())
                 correct = len(gold.intersection(pred))      
@@ -382,6 +398,7 @@ class Environment:
         # the best possible numbers assuming that just the right information is extracted 
         # from the set of related articles
         global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
+        global ENTITIES, CONFIDENCES
         bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
         bestConf = collections.defaultdict(lambda:0.)
         bestSim = 0.
@@ -404,9 +421,13 @@ class Environment:
             #     bestConf = confidences
             #     print bestSim
             if sim > thres:
-                entities, confidences = self.extractEntitiesWithConfidences(self.newArticles[i])
+                if (i+1) in ENTITIES[self.indx]:
+                    entities, confidences = ENTITIES[self.indx][i+1], CONFIDENCES[self.indx][i+1]
+                else:
+                    entities, confidences = self.extractEntitiesWithConfidences(self.newArticles[i])
                 for j in range(NUM_ENTITIES):
-                    aggEntites[j][entities[j]] += 1
+                    if entities[j]:
+                        aggEntites[j][entities[j]] += 1
 
 
         #choose the best entities now
@@ -415,11 +436,28 @@ class Environment:
             bestEntities[i] = tmp[0][0]
 
             print i, tmp
-            pdb.set_trace()
+            # pdb.set_trace()
 
 
         self.evaluateArticle(bestEntities, goldEntities, False, False, False)
 
+    #TODO: use conf or 1 for mode calculation
+    def majorityVote(self, entityList):
+        if not entityList: return '',0.
+
+        dic = collections.defaultdict(lambda:0.)
+        confDic = collections.defaultdict(lambda:0.)
+        cnt = collections.defaultdict(lambda:0.)
+        ticker = 0
+        for entity, conf in entityList:
+            dic[entity] += 1
+            cnt[entity] += 1
+            confDic[entity] += conf
+            if ticker == 0: dic[entity] += 0.1 #extra for original article
+            ticker += 1
+
+        bestEntity, bestConf = sorted(dic.items(), key=itemgetter(1), reverse=True)[0]
+        return bestEntity, confDic[bestEntity]/cnt[bestEntity]
 
 
     #take a single step in the episode
@@ -476,20 +514,21 @@ def baselineEval(articles, identifiers, args):
         print "INDX:", indx        
         originalArticle = articles[indx][0]
         newArticles = []
-        goldEntities = identifiers[indx]   
-        env = Environment(originalArticle, newArticles, goldEntities, indx, args.ignoreDuplicates, False)
-        env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName)
+        goldEntities = identifiers[indx]        
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
+        env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"
     for tag in int2tags:
         prec = CORRECT[tag]/PRED[tag]
         rec = CORRECT[tag]/GOLD[tag]
         f1 = (2*prec*rec)/(prec+rec)
-        print tag, prec, rec, f1
+        print tag, prec, rec, f1, "########", CORRECT[tag], PRED[tag], GOLD[tag]
+
 
 def thresholdEval(articles, downloaded_articles, identifiers, args):
     global CORRECT, GOLD, PRED
-    THRES = 0.4
+    THRES = 0.6
     CORRECT = collections.defaultdict(lambda:0.)
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
@@ -498,7 +537,7 @@ def thresholdEval(articles, downloaded_articles, identifiers, args):
         originalArticle = articles[indx][0]
         newArticles = [q.split(' ')[:WORD_LIMIT] for q in downloaded_articles[indx]]
         goldEntities = identifiers[indx]   
-        env = Environment(originalArticle, newArticles, goldEntities, indx, args.ignoreDuplicates, False, False, 4)
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
         env.thresholdEvaluate(env.goldEntities, THRES)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"
@@ -701,7 +740,7 @@ if __name__ == '__main__':
     argparser.add_argument("--evalOutFile",
         default = "",
         type = str,
-        help = "Output File")
+        help = "Output File for predictions")
 
     argparser.add_argument("--modelFile",
         type = str,

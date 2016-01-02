@@ -148,10 +148,10 @@ def save_list_first_names(infile_path,outfile_path):
 
 
 if __name__ == "__main__":
-    training_file = "../data/tagged_data/whole_text_full_city/train.tag" #sys.argv[1]
-    trained_model = "trained_model_3_3.p" #sys.argv[2]
-    previous_n = 3 #sys.argv[3]
-    next_n = 3
+    training_file = "../data/tagged_data/whole_text_full_city2/train.tag" #sys.argv[1]
+    trained_model = "trained_model2.p" #sys.argv[2]
+    previous_n = 0 #sys.argv[3]
+    next_n = 4
     c = 10
     prune = 5
     main(training_file,trained_model,previous_n,next_n,c,prune)

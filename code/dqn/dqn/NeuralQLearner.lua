@@ -262,9 +262,10 @@ function nql:qLearnMinibatch()
     -- self.tmp:sqrt()
 
     --rmsprop
+    local rho = 0.9
     local smoothing_value = 1e-8
     self.tmp:cmul(self.dw, self.dw)
-    self.g:mul(0.9):add(0.1, self.tmp)
+    self.g:mul(rho):add((1-rho), self.tmp)
     self.tmp = torch.sqrt(self.g)
     self.tmp:add(smoothing_value) 
 

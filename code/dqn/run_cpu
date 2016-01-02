@@ -26,15 +26,16 @@ initial_priority="false"
 replay_memory=100000
 eps_end=0.1
 eps_endt=$replay_memory
-lr=0.0005
-lr_end=0.00005
+lr=0.0001
+lr_end=0.0001
 lr_endt=$replay_memory
+wc=0.0
 agent_type="DQN3_0_1"
 agent_name="agent_"$1
 state_dim=17 #IMP: change this when changing the state
 ncols=1
 target_q=5000
-agent_params="lr="$lr",lr_end="$lr_end",lr_endt="$lr_endt",ep=1,ep_end="$eps_end",ep_endt="$eps_endt",discount="$discount",hist_len=1,learn_start="$learn_start",replay_memory="$replay_memory",update_freq="$update_freq",n_replay="$n_replay",network="$netfile",state_dim="$state_dim",minibatch_size="$minibatch_size",rescale_r=1,ncols="$ncols",bufferSize=512,valid_size=500,target_q="$target_q",clip_delta=1,min_reward=-10,max_reward=10"
+agent_params="wc="$wc",lr="$lr",lr_end="$lr_end",lr_endt="$lr_endt",ep=1,ep_end="$eps_end",ep_endt="$eps_endt",discount="$discount",hist_len=1,learn_start="$learn_start",replay_memory="$replay_memory",update_freq="$update_freq",n_replay="$n_replay",network="$netfile",state_dim="$state_dim",minibatch_size="$minibatch_size",rescale_r=1,ncols="$ncols",bufferSize=512,valid_size=500,target_q="$target_q",clip_delta=10,min_reward=-10,max_reward=10"
 steps=1000000
 eval_freq=5000
 eval_steps=5000

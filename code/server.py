@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 
 
 DEBUG = False
+COUNT_ZERO = False
 
 #Global variables
 int2tags = ['shooterName','numKilled', 'numWounded', 'city']
@@ -138,6 +139,11 @@ class Environment:
 
             # all other tags
             for i in range(NUM_ENTITIES):
+
+                #ignore state updates to other states
+                # if self.bestEntities[i]  and self.entity != 4 and i != self.entity:                    
+                #     continue
+
                 if self.aggregate == 'majority':
                     self.bestEntitySet[i].append((entities[i], confidences[i]))
                     self.bestEntities[i], self.bestConfidences[i] = self.majorityVote(self.bestEntitySet[i])
@@ -212,7 +218,7 @@ class Environment:
     # check if two entities are equal. Need to handle city
     def checkEquality(self, e1, e2):         
         # if gold is unknown, then dont count that
-        return e2!=''  and e1.lower() == e2.lower()
+        return e2!='' and (COUNT_ZERO or e2 != 'zero')  and e1.lower() == e2.lower()
 
     def checkEqualityShooter(self, e1, e2):
         if e2 == '': return 0.
@@ -323,13 +329,14 @@ class Environment:
 
         #all other tags
         for i in range(1, NUM_ENTITIES):   
-            gold = set(goldEntities[i].lower().split())
-            pred = set(predEntities[i].lower().split())
-            correct = len(gold.intersection(pred))      
-            GOLD[int2tags[i]] += len(gold)
-            PRED[int2tags[i]] += len(pred)
-            # if predEntities[i].lower() == goldEntities[i].lower():
-            CORRECT[int2tags[i]] += correct
+            if COUNT_ZERO or goldEntities[i] != 'zero':
+                gold = set(goldEntities[i].lower().split())
+                pred = set(predEntities[i].lower().split())
+                correct = len(gold.intersection(pred))      
+                GOLD[int2tags[i]] += len(gold)
+                PRED[int2tags[i]] += len(pred)
+                # if predEntities[i].lower() == goldEntities[i].lower():
+                CORRECT[int2tags[i]] += correct
 
         if evalOutFile:
             evalOutFile.write("--------------------\n")
@@ -372,7 +379,7 @@ class Environment:
 
             #all other tags
             for i in range(1, NUM_ENTITIES): 
-                if goldEntities[i].lower() == 'zero': continue  
+                if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
                 gold = set(goldEntities[i].lower().split())
                 pred = set(predEntities[i].lower().split())
                 correct = len(gold.intersection(pred))      

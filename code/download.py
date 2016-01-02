@@ -8,6 +8,8 @@ from train import load_data
 
 NUM_ENTITIES = 4
 
+EXTRA_QUERY='( suspect | shooter | identified | arrested | charged )'
+
 if __name__ == '__main__':
 
 
@@ -35,7 +37,7 @@ if __name__ == '__main__':
 
     with open(saveFile, "wb" ) as f:
         for i in range(len(titles)):        
-            tmp = query.download_articles_from_query(titles[i],' '.join(articles[i][0]),'bing')
+            tmp = query.download_articles_from_query(titles[i]+' '+EXTRA_QUERY,' '.join(articles[i][0]),'bing')
             downloaded_articles.append(tmp)            
             pickle.dump([articles[i], titles[i], identifiers[i], downloaded_articles[i]], f)        
             print '\r',i,'/',len(titles)

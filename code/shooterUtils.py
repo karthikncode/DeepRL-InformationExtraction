@@ -1,4 +1,4 @@
-''' script to retag the data files, especially for killed and wounded tags'''
+''' script to find all shooter names'''
 
 import sys, pdb
 

@@ -11,14 +11,23 @@ def load_constants():
         female_first_names = set(json.load(outfile))
     with open('../data/constants/last_names.json','rb') as outfile:
         last_names = set(json.load(outfile))
+    with open('../data/constants/train_names.json','rb') as outfile:
+        train_names = set(json.load(outfile))
     with open('../data/constants/number_as_words.json','rb') as outfile:
         number_as_words = set(json.load(outfile))
     with open('../data/constants/word_ordinals.json','rb') as outfile:
         word_ordinals = set(json.load(outfile))
 
+    #IMP: adding train names to last names here. Comment below if you don't want this
+    # last_names.update(train_names)
+
     other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,
     is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num]
     #other_features = []
+
+ 
+
+
 
 # other features, return true or false
 def is_capital(word):

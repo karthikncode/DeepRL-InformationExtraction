@@ -100,13 +100,19 @@ def predict_mode(sentence, tags, confidences,  cities):
 
     
     output_pred_line = ""
-    for shooterName, conf in output_entities["shooterName"]:
-        output_pred_line += shooterName.lower()
-        output_pred_line += "|"
-        entity_confidences[tags2int['shooterName']-1] += conf
-        entity_cnts[tags2int['shooterName']-1] += 1
 
-    output_pred_line = output_pred_line[:-1]
+    #for shooter (OLD)
+    # for shooterName, conf in output_entities["shooterName"]:
+    #     output_pred_line += shooterName.lower()
+    #     output_pred_line += "|"
+    #     entity_confidences[tags2int['shooterName']-1] += conf
+    #     entity_cnts[tags2int['shooterName']-1] += 1
+    # output_pred_line = output_pred_line[:-1]
+
+    mode, conf = get_mode(output_entities["shooterName"])
+    output_pred_line += mode
+
+    
 
     for tag in int2tags:
         if tag == "city":

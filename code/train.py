@@ -149,7 +149,7 @@ def save_list_first_names(infile_path,outfile_path):
 
 if __name__ == "__main__":
     training_file = "../data/tagged_data/whole_text_full_city2/train.tag" #sys.argv[1]
-    trained_model = "trained_model2.p" #sys.argv[2]
+    trained_model = "trained_model3.p" #sys.argv[2]
     previous_n = 0 #sys.argv[3]
     next_n = 4
     c = 10

@@ -321,9 +321,9 @@ class Environment:
             #     print "Gold:", gold
             #     print "Pred:", pred
             #     #print all articles
-            #     for i in range(len(self.allArticles)):
-            #         print self.allArticles[i]
-            #         print "----------------------------"
+            #     # for i in range(len(self.allArticles)):
+            #     #     print self.allArticles[i]
+            #     #     print "----------------------------"
             #     pdb.set_trace()
 
 
@@ -522,7 +522,7 @@ def baselineEval(articles, identifiers, args):
         originalArticle = articles[indx][0]
         newArticles = []
         goldEntities = identifiers[indx]        
-        env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args, True)
         env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"

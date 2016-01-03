@@ -9,11 +9,12 @@ function create_network(args)
     net:add(args.nl())
     net:add(nn.Linear(args.n_hid, args.n_hid))
     net:add(args.nl())
-    -- net:add(nn.Linear(args.n_hid, args.n_hid))
-    -- net:add(args.nl())
-    -- net:add(nn.Linear(args.n_hid, args.n_hid))
-    -- net:add(args.nl())
-    net:add(nn.Linear(args.n_hid, args.n_actions))
+
+    parallel_net = nn.ConcatTable()    
+    parallel_net:add(nn.Linear(args.n_hid, args.n_actions))
+    parallel_net:add(nn.Linear(args.n_hid, args.n_objects))
+
+    net:add(parallel_net)
 
     if args.gpu >=0 then
         net:cuda()

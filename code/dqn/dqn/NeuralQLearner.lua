@@ -14,7 +14,8 @@ local nql = torch.class('dqn.NeuralQLearner')
 function nql:__init(args)
     self.state_dim  = args.state_dim -- State dimensionality.
     self.actions    = args.actions
-    self.n_actions  = #self.actions
+    self.n_actions  = #self.actions 
+    self.n_objects  = args.n_queries
     self.verbose    = args.verbose
     self.best       = args.best
 
@@ -111,6 +112,7 @@ function nql:__init(args)
     ---- converting accordingly
     local transition_args = {
         stateDim = self.state_dim, numActions = self.n_actions,
+        numObjects = self.n_objects,
         histLen = self.hist_len, gpu = self.gpu,
         maxSize = self.replay_memory, histType = self.histType,
         histSpacing = self.histSpacing, nonTermProb = self.nonTermProb,
@@ -156,22 +158,13 @@ function nql:reset(state)
 end
 
 
-function nql:preprocess(rawstate)
-    if self.preproc then
-        return self.preproc:forward(rawstate:float())
-                    :clone():reshape(self.state_dim)
-    end
-
-    return rawstate
-end
-
-
 function nql:getQUpdate(args)
-    local s, a, r, s2, term, delta
+    local s, a, o, r, s2, term, delta
     local q, q2, q2_max
 
     s = args.s
     a = args.a
+    o = args.o
     r = args.r
     s2 = args.s2
     term = args.term
@@ -190,37 +183,60 @@ function nql:getQUpdate(args)
     end
 
     -- Compute max_a Q(s_2, a).
-    q2_max = target_q_net:forward(s2):float():max(2)
+    q2_max = target_q_net:forward(s2)
+
+    q2_max[1] = q2_max[1]:float():max(2) --actions
+    q2_max[2] = q2_max[2]:float():max(2) -- objects
 
     -- Compute q2 = (1-terminal) * gamma * max_a Q(s2, a)
-    q2 = q2_max:clone():mul(self.discount):cmul(term)
+    q2 = {}
+    q2[1] = q2_max[1]:clone():mul(self.discount):cmul(term)
+    q2[2] = q2_max[2]:clone():mul(self.discount):cmul(term)
 
-    delta = r:clone():float()
 
-    if self.rescale_r then
-        delta:div(self.r_max)
-    end
-    delta:add(q2)
+    delta = {r:clone():float(), r:clone():float()}
 
+    delta[1]:add(q2[1])
+    delta[2]:add(q2[2])
+
+ 
     -- q = Q(s,a)
-    local q_all = self.network:forward(s):float()
-    q = torch.FloatTensor(q_all:size(1))
-    for i=1,q_all:size(1) do
-        q[i] = q_all[i][a[i]]
+    local q_all = self.network:forward(s)
+
+    q_all[1] = q_all[1]:float()
+    q_all[2] = q_all[2]:float()
+
+    q = {torch.FloatTensor(q_all[1]:size(1)), torch.FloatTensor(q_all[2]:size(1))}
+    for i=1,q_all[1]:size(1) do
+        q[1][i] = q_all[1][i][a[i]]
     end
-    delta:add(-1, q)
+    for i=1,q_all[2]:size(1) do
+        q[2][i] = q_all[2][i][o[i]]
+    end
+
+    delta[1]:add(-1, q[1])
+    delta[2]:add(-1, q[2])
 
     if self.clip_delta then
-        delta[delta:ge(self.clip_delta)] = self.clip_delta
-        delta[delta:le(-self.clip_delta)] = -self.clip_delta
+        delta[1][delta[1]:ge(self.clip_delta)] = self.clip_delta
+        delta[1][delta[1]:le(-self.clip_delta)] = -self.clip_delta
+        delta[2][delta[2]:ge(self.clip_delta)] = self.clip_delta
+        delta[2][delta[2]:le(-self.clip_delta)] = -self.clip_delta
     end
 
-    local targets = torch.zeros(self.minibatch_size, self.n_actions):float()
+    local targets = {torch.zeros(self.minibatch_size, self.n_actions):float(),
+                    torch.zeros(self.minibatch_size, self.n_objects):float()}
     for i=1,math.min(self.minibatch_size,a:size(1)) do
-        targets[i][a[i]] = delta[i]
+        targets[1][i][a[i]] = delta[1][i]
+    end
+    for i=1,math.min(self.minibatch_size,o:size(1)) do
+        targets[2][i][o[i]] = delta[2][i]
     end
 
-    if self.gpu >= 0 then targets = targets:cuda() end
+
+    if self.gpu >= 0 then targets = {targets[1]:cuda(), targets[2]:cuda()} end
+
+    q2_max = (q2_max[1] + q2_max[2])/2 --take mean
 
     return targets, delta, q2_max
 end
@@ -231,10 +247,9 @@ function nql:qLearnMinibatch()
     -- w += alpha * (r + gamma max Q(s2,a2) - Q(s,a)) * dQ(s,a)/dw
     assert(self.transitions:size() > self.minibatch_size)
 
-    local s, a, r, s2, term = self.transitions:sample(self.minibatch_size)
+    local s, a, o, r, s2, term = self.transitions:sample(self.minibatch_size)
 
-    local targets, delta, q2_max = self:getQUpdate{s=s, a=a, r=r, s2=s2,
-        term=term, update_qmax=true}
+    local targets, delta, q2_max = self:getQUpdate{s=s, a=a, o=o, r=r, s2=s2, term=term, update_qmax=true}
 
     -- zero gradients of parameters
     self.dw:zero()
@@ -276,9 +291,10 @@ end
 
 
 function nql:sample_validation_data()
-    local s, a, r, s2, term = self.transitions:sample(self.valid_size)
+    local s, a, o, r, s2, term = self.transitions:sample(self.valid_size)
     self.valid_s    = s:clone()
     self.valid_a    = a:clone()
+    self.valid_o    = o:clone()
     self.valid_r    = r:clone()
     self.valid_s2   = s2:clone()
     self.valid_term = term:clone()
@@ -287,16 +303,19 @@ end
 
 function nql:compute_validation_statistics()
     local targets, delta, q2_max = self:getQUpdate{s=self.valid_s,
-        a=self.valid_a, r=self.valid_r, s2=self.valid_s2, term=self.valid_term}
+        a=self.valid_a, o = self.valid_o, r=self.valid_r, s2=self.valid_s2, term=self.valid_term}
 
     self.v_avg = self.q_max * q2_max:mean()
-    self.tderr_avg = delta:clone():abs():mean()
+
+    delta_mean = (delta[1] + delta[2])/2
+
+    self.tderr_avg = delta_mean:clone():abs():mean()
 end
 
 
 function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
     -- Preprocess state (will be set to nil if terminal)
-    local state = self:preprocess(rawstate):float()
+    local state = rawstate:float()
     local curState
 
     if self.max_reward then
@@ -315,7 +334,7 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
 
     --Store transition s, a, r, s'
     if self.lastState and not testing then
-        self.transitions:add(self.lastState, self.lastAction, reward,
+        self.transitions:add(self.lastState, self.lastAction, self.lastObject, reward,
                              self.lastTerminal, priority)
     end
 
@@ -328,8 +347,9 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
 
     -- Select action
     local actionIndex = 1
+    local objectIndex = 1
     if not terminal then
-        actionIndex = self:eGreedy(curState, testing_ep)
+        actionIndex, objectIndex = self:eGreedy(curState, testing_ep)
     end
 
     self.transitions:add_recent_action(actionIndex)
@@ -348,6 +368,7 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
 
     self.lastState = state:clone()
     self.lastAction = actionIndex
+    self.lastObject = objectIndex
     self.lastTerminal = terminal
 
     if self.target_q and self.numSteps % self.target_q == 1 then
@@ -355,9 +376,9 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
     end
 
     if not terminal then
-        return actionIndex
+        return actionIndex, objectIndex
     else
-        return 1
+        return 1, 1
     end
 end
 
@@ -368,10 +389,30 @@ function nql:eGreedy(state, testing_ep)
                 math.max(0, self.numSteps - self.learn_start))/self.ep_endt))
     -- Epsilon greedy
     if torch.uniform() < self.ep then
-        return torch.random(1, self.n_actions)
+        return torch.random(1, self.n_actions), torch.random(1, self.n_objects)
     else        
         return self:greedy(state, testing_ep)
     end
+end
+
+
+function nql:getBestRandom(q, N)
+    local maxq = q[1]
+    local besta = {1}
+
+    -- Evaluate all other actions (with random tie-breaking)
+    for a = 2, N do
+        if q[a] > maxq then
+            besta = { a }
+            maxq = q[a]
+        elseif q[a] == maxq then
+            besta[#besta+1] = a
+        end
+    end
+    self.bestq = maxq
+
+    local r = torch.random(1, #besta)
+    return besta[r]
 end
 
 
@@ -387,33 +428,25 @@ function nql:greedy(state, testing_ep)
         state = state:cuda()
     end
 
-    local q = self.network:forward(state):float():squeeze()
-    local maxq = q[1]
-    local besta = {1}
+    local q = self.network:forward(state)
 
-    -- for debugging
-    -- if testing_ep then
-    --     print ("State:", state)
-    --     print("Q-values: ", q)
 
-    -- end
+    q[1] = q[1]:float():squeeze()
+    q[2] = q[2]:float():squeeze()
 
-    -- Evaluate all other actions (with random tie-breaking)
-    for a = 2, self.n_actions do
-        if q[a] > maxq then
-            besta = { a }
-            maxq = q[a]
-        elseif q[a] == maxq then
-            besta[#besta+1] = a
-        end
+    local best = {}
+    local maxq = {}
+    best[1], maxq[1] = self:getBestRandom(q[1], self.n_actions)
+    if self.n_objects>1 then
+        best[2], maxq[2] = self:getBestRandom(q[2], self.n_objects)
+    else
+        best[2] = 1
     end
-    self.bestq = maxq
 
-    local r = torch.random(1, #besta)
+    self.lastAction = best[1]
+    self.lastObject = best[2]
 
-    self.lastAction = besta[r]
-
-    return besta[r]
+    return best[1], best[2]
 end
 
 
@@ -429,7 +462,6 @@ function nql:createNetwork()
 
     return mlp
 end
-
 
 function nql:_loadNet()
     local net = self.network

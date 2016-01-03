@@ -89,11 +89,11 @@ while step < opt.steps do
     xlua.progress(step, opt.steps)
 
     step = step + 1
-    local action_index = agent:perceive(reward, state, terminal)
+    local action_index, query_index = agent:perceive(reward, state, terminal)
 
     -- game over? get next game!
     if not terminal then
-        state, reward, terminal = game_env:step(game_actions[action_index])
+        state, reward, terminal = game_env:step(game_actions[action_index], query_index)
     else    
         state, reward, terminal = game_env:newGame()        
     end
@@ -128,10 +128,10 @@ while step < opt.steps do
         for estep=1,opt.eval_steps do
             xlua.progress(estep, opt.eval_steps)
 
-            local action_index = agent:perceive(reward, state, terminal, true, 0.0)
+            local action_index, query_index = agent:perceive(reward, state, terminal, true, 0.0)
 
             -- Play game in test mode 
-            state, reward, terminal = game_env:step(game_actions[action_index])
+            state, reward, terminal = game_env:step(game_actions[action_index], query_index)
 
             if estep%1000 == 0 then collectgarbage() end
 
@@ -150,6 +150,7 @@ while step < opt.steps do
         end
 
         game_env:evalEnd()
+        state, reward, terminal = game_env:newGame() --start new game
 
         eval_time = sys.clock() - eval_time
         start_time = start_time + eval_time
@@ -195,8 +196,8 @@ while step < opt.steps do
     end
 
     if step % opt.save_freq == 0 or step == opt.steps then
-        local s, a, r, s2, term = agent.valid_s, agent.valid_a, agent.valid_r,
-            agent.valid_s2, agent.valid_term
+        local s, a, o, r, s2, term = agent.valid_s, agent.valid_a, agent.valid_o,
+        agent.valid_r, agent.valid_s2, agent.valid_term
         agent.valid_s, agent.valid_a, agent.valid_r, agent.valid_s2,
             agent.valid_term = nil, nil, nil, nil, nil, nil, nil
         local w, dw, g, g2, delta, delta2, deltas, tmp = agent.w, agent.dw,
@@ -224,8 +225,8 @@ while step < opt.steps do
             local nets = {network=w:clone():float()}
             torch.save(opt.exp_folder .. filename..'.params.t7', nets, 'ascii')
         end
-        agent.valid_s, agent.valid_a, agent.valid_r, agent.valid_s2,
-            agent.valid_term = s, a, r, s2, term
+        agent.valid_s, agent.valid_a, agent.valid_o, agent.valid_r, agent.valid_s2,
+            agent.valid_term = s, a, o, r, s2, term
         agent.w, agent.dw, agent.g, agent.g2, agent.delta, agent.delta2,
             agent.deltas, agent.tmp = w, dw, g, g2, delta, delta2, deltas, tmp
         print('Saved:', opt.exp_folder .. filename .. '.t7')

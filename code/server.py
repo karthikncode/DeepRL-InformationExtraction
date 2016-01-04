@@ -683,7 +683,6 @@ def main(args):
             COSINE_SIM = TEST_COSINE_SIM
             articles, titles, identifiers, downloaded_articles = test_articles, test_titles, test_identifiers, test_downloaded_articles
             
-            print(ENTITIES[0][0])
             # print "##### Evaluation Started ######"
 
         elif message == "evalEnd":            
@@ -704,7 +703,6 @@ def main(args):
             articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
             # print "##### Evaluation Ended ######"
 
-            print(ENTITIES[0][0])
 
             if args.oracle:
                 plot_hist(EVALCONF, "conf1")
@@ -720,13 +718,14 @@ def main(args):
             # message is "step"            
             action, query = [int(q) for q in message.split()]
 
+
             if evalMode and DEBUG:
                 print "State:"
                 print newstate[:4]
                 print newstate[4:8]
                 print newstate[8:]
                 print "Entities:", env.prevEntities
-                print "Action:", action            
+                print "Action:", action, query            
             newstate, reward, terminal = env.step(action, query)        
             terminal = 'true' if terminal else 'false'
 

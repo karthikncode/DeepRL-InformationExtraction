@@ -28,6 +28,8 @@ ENTITIES = collections.defaultdict(ddd)
 CONFIDENCES = collections.defaultdict(ddd)
 
 ARTICLES, TITLES, IDENTIFIERS, DOWNLOADED_ARTICLES = [],[],[],[]
+ARTICLES2, TITLES2, IDENTIFIERS2, DOWNLOADED_ARTICLES2 = [],[],[],[]
+
 
 fileName = sys.argv[1]
 #IMP: lists must be of the form train.extra.0
@@ -48,43 +50,56 @@ def extractEntitiesWithConfidences(article):
 
     return pred.split(','), conf_scores
 
+if ',' in fileName:
+    fileNames = fileName.split(',')
+else:
+    fileNames = [fileName]
 
+globalIndx = 0
 
+for fileName in fileNames:
+    for listNum in range(numLists):
+        print "LIST", listNum
 
-for listNum in range(numLists):
-    print "LIST", listNum
+        #read the file
+        articles, titles, identifiers, downloaded_articles = loadFile(fileName+'.'+str(listNum))
 
-    #read the file
-    articles, titles, identifiers, downloaded_articles = loadFile(fileName+'.'+str(listNum))
+        #need this information only once
+        if listNum==0:
+            ARTICLES = articles
+            TITLES = titles
+            IDENTIFIERS = identifiers
+            DOWNLOADED_ARTICLES = [[] for q in range(len(ARTICLES))]
 
-    #need this information only once
-    if listNum==0:
-        ARTICLES = articles
-        TITLES = titles
-        IDENTIFIERS = identifiers
-        DOWNLOADED_ARTICLES = [[] for q in range(len(ARTICLES))]
+        for indx in range(len(articles)):
+            DOWNLOADED_ARTICLES[indx].append(downloaded_articles[indx])
 
-    for indx in range(len(articles)):
-        DOWNLOADED_ARTICLES[indx].append(downloaded_articles[indx])
+        assert(len(articles)>0 and len(ARTICLES) == len(articles))
 
-    assert(len(articles)>0 and len(ARTICLES) == len(articles))
+        print "Calculating ENTITIES and CONFIDENCES...\n"
+        #extract entities and save them
+        for indx, article in enumerate(articles):
+            print indx,'/',len(articles)            
+            #IMP: adding original article to all ENTITIES and CONFIDENCES LISTS at 0th position
+            originalArticle = article[0]
+            entities, confidences = extractEntitiesWithConfidences(originalArticle)
+            ENTITIES[indx+globalIndx][listNum][0], CONFIDENCES[indx+globalIndx][listNum][0] = entities, confidences
 
-    print "Calculating ENTITIES and CONFIDENCES...\n"
-    #extract entities and save them
-    for indx, article in enumerate(articles):
-        print indx,'/',len(articles)
-        #IMP: adding original article to all ENTITIES and CONFIDENCES LISTS at 0th position
-        originalArticle = article[0]
-        entities, confidences = extractEntitiesWithConfidences(originalArticle)
-        ENTITIES[indx][listNum][0], CONFIDENCES[indx][listNum][0] = entities, confidences
+            #now for the downloaded extra articles
+            for j, newArticle in enumerate(downloaded_articles[indx]):
+                newArticle = newArticle.split(' ')[:WORD_LIMIT] 
+                entities, confidences = extractEntitiesWithConfidences(newArticle)
+                ENTITIES[indx+globalIndx][listNum][j+1], CONFIDENCES[indx+globalIndx][listNum][j+1] = entities, confidences
+            # pdb.set_trace()
+        print    
 
-        #now for the downloaded extra articles
-        for j, newArticle in enumerate(downloaded_articles[indx]):
-            newArticle = newArticle.split(' ')[:WORD_LIMIT] 
-            entities, confidences = extractEntitiesWithConfidences(newArticle)
-            ENTITIES[indx][listNum][j+1], CONFIDENCES[indx][listNum][j+1] = entities, confidences
-        # pdb.set_trace()
-    print    
+    globalIndx += len(articles)
+    ARTICLES2 += ARTICLES
+    TITLES2 += TITLES
+    IDENTIFIERS2 += IDENTIFIERS
+    DOWNLOADED_ARTICLES2 += DOWNLOADED_ARTICLES
+
+ARTICLES, TITLES, IDENTIFIERS, DOWNLOADED_ARTICLES = ARTICLES2, TITLES2, IDENTIFIERS2, DOWNLOADED_ARTICLES2
 
 # now to calculate cosine_sim using tf-idf calculated using all the downloaded articles
 for indx, article in enumerate(ARTICLES):

@@ -259,6 +259,9 @@ class Environment:
         return f1
 
     def checkEqualityCity(self, e1, e2):
+
+        return e2!='' and e1.lower() == e2.lower()
+
         if e2!='' and e1!='':
             gold = set(e2.lower().split())
             pred = set(e1.lower().split())
@@ -354,13 +357,15 @@ class Environment:
         #all other tags
         for i in range(1, NUM_ENTITIES):   
             if COUNT_ZERO or goldEntities[i] != 'zero':
-                gold = set(goldEntities[i].lower().split())
-                pred = set(predEntities[i].lower().split())
-                correct = len(gold.intersection(pred))      
-                GOLD[int2tags[i]] += len(gold)
-                PRED[int2tags[i]] += len(pred)
-                # if predEntities[i].lower() == goldEntities[i].lower():
-                CORRECT[int2tags[i]] += correct
+                # gold = set(goldEntities[i].lower().split())
+                # pred = set(predEntities[i].lower().split())
+                # correct = len(gold.intersection(pred))      
+                # GOLD[int2tags[i]] += len(gold)
+                # PRED[int2tags[i]] += len(pred)
+                GOLD[int2tags[i]] += 1
+                PRED[int2tags[i]] += 1
+                if predEntities[i].lower() == goldEntities[i].lower():
+                    CORRECT[int2tags[i]] += 1
 
         if evalOutFile:
             evalOutFile.write("--------------------\n")
@@ -545,7 +550,7 @@ def baselineEval(articles, identifiers, args):
     for indx in range(len(articles)):
         print "INDX:", indx        
         originalArticle = articles[indx][0] #since article has words and tags
-        newArticles = []
+        newArticles = [[] for i in range(5)]
         goldEntities = identifiers[indx]        
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, True)
         env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
@@ -608,6 +613,8 @@ def main(args):
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
 
 
+    print len(train_articles)
+    print len(test_articles)
 
     # train_articles, train_titles, train_identifiers, train_downloaded_articles = loadFile(args.trainFile)
     # if args.testFile:
@@ -739,7 +746,7 @@ def main(args):
         
         if message != "evalStart" and message != "evalEnd":
             #do article eval if terminal
-            if evalMode and articleNum < len(articles) and terminal == 'true':
+            if evalMode and articleNum <= len(articles) and terminal == 'true':
                 if args.oracle:
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])                    
                 else:

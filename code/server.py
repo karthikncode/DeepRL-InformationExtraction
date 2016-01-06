@@ -58,6 +58,7 @@ EVALCONF = collections.defaultdict(lambda:[])
 EVALCONF2 = collections.defaultdict(lambda:[])
 QUERY = collections.defaultdict(lambda:0.)
 ACTION = collections.defaultdict(lambda:0.)
+CHANGES = 0
 evalMode = False
 
 #Environment for each episode
@@ -541,6 +542,7 @@ class Environment:
 
     #take a single step in the episode
     def step(self, action, query):
+        global CHANGES
         oldEntities = copy.copy(self.bestEntities.values())
 
         #update pointer to next article
@@ -549,6 +551,7 @@ class Environment:
         self.updateState(action, query, self.ignoreDuplicates)
 
         newEntities = self.bestEntities.values()
+
     
         if self.delayedReward == 'True':
             reward = self.calculateReward(self.originalEntities, newEntities)
@@ -666,7 +669,7 @@ def main(args):
     global TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM
     global evalMode
     global CORRECT, GOLD, PRED, EVALCONF, EVALCONF2
-    global QUERY, ACTION
+    global QUERY, ACTION, CHANGES
     global trained_model
     
     print args
@@ -758,6 +761,7 @@ def main(args):
             PRED = collections.defaultdict(lambda:0.)
             QUERY = collections.defaultdict(lambda:0.)
             ACTION = collections.defaultdict(lambda:0.)
+            CHANGES = 0
             evalMode = True
             savedArticleNum = articleNum
             articleNum = 0
@@ -786,6 +790,7 @@ def main(args):
                 outFile2.write("Query " + str(k) + ' ' + str(val/qsum)+'\n')
             for k, val in ACTION.items():    
                 outFile2.write("Action " + str(k) + ' ' + str(val/asum)+'\n')
+            outFile2.write("CHANGES: "+str(CHANGES)+ ' ' + str(float(CHANGES)/len(articles))+"\n")
 
             evalMode = False
             articleNum = savedArticleNum
@@ -840,6 +845,9 @@ def main(args):
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])                    
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
+
+                if evalMode and env.bestEntities.values() != env.originalEntities:
+                    CHANGES += 1
 
             #send message (IMP: only for newGame or step messages)
             outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal

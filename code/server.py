@@ -446,8 +446,8 @@ class Environment:
             aggEntites[i][self.bestEntities[i]] += 1.1
 
 
-        for i in range(len(self.newArticles)):
-            for listNum in range(len(self.newArticles[i])):
+        for listNum in range(len(self.newArticles)):
+            for i in range(len(self.newArticles[listNum])):
                 sim = self.articleSim(self.indx, listNum, i)
                 # print sim
 
@@ -474,6 +474,46 @@ class Environment:
 
             print i, tmp
             # pdb.set_trace()
+
+
+        self.evaluateArticle(bestEntities, goldEntities, False, False, False)
+
+
+    def confEvaluate(self, goldEntities, thres=0.0):
+        # the best possible numbers assuming that just the right information is extracted 
+        # from the set of related articles
+        global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
+        global ENTITIES, CONFIDENCES
+        bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
+        bestConf = collections.defaultdict(lambda:0.)
+        bestSim = 0.
+        bestEntities = ['','','','']
+        bestConfidences = [0.,0.,0.,0.]
+        aggEntites = collections.defaultdict(lambda:collections.defaultdict(lambda:0.))       
+
+        #add in the original entities
+        for i in range(NUM_ENTITIES):
+            if self.bestConfidences[i] > bestConfidences[i]:
+                bestConfidences[i] = self.bestConfidences[i]
+                bestEntities[i] = self.bestEntities[i]
+
+
+        for listNum in range(len(self.newArticles)):
+            for i in range(len(self.newArticles[listNum])):  
+                sim = self.articleSim(self.indx, listNum, i)
+                if sim <= thres: continue  
+                if (i+1) in ENTITIES[self.indx][listNum]:
+                    entities, confidences = ENTITIES[self.indx][listNum][i+1], CONFIDENCES[self.indx][listNum][i+1]
+                else:
+                    entities, confidences = self.extractEntitiesWithConfidences(self.newArticles[listNum][i])
+                for j in range(NUM_ENTITIES):
+                    if entities[j] != '':
+                        # if j==0 and confidences[j] > 0:
+                        #     pdb.set_trace()
+                        if confidences[j] > bestConfidences[j]:
+                            bestConfidences[j] = confidences[j]
+                            bestEntities[j] = entities[j]
+
 
 
         self.evaluateArticle(bestEntities, goldEntities, False, False, False)
@@ -565,14 +605,14 @@ def baselineEval(articles, identifiers, args):
 
 def thresholdEval(articles, downloaded_articles, identifiers, args):
     global CORRECT, GOLD, PRED
-    THRES = 0.6
+    THRES = 0.8
     CORRECT = collections.defaultdict(lambda:0.)
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
     for indx in range(len(articles)):
         print "INDX:", indx        
         originalArticle = articles[indx][0]
-        newArticles = [q.split(' ')[:WORD_LIMIT] for q in downloaded_articles[indx]]
+        newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
         goldEntities = identifiers[indx]   
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
         env.thresholdEvaluate(env.goldEntities, THRES)
@@ -582,6 +622,30 @@ def thresholdEval(articles, downloaded_articles, identifiers, args):
         prec = CORRECT[tag]/PRED[tag]
         rec = CORRECT[tag]/GOLD[tag]
         f1 = (2*prec*rec)/(prec+rec)
+        print tag, prec, rec, f1
+
+def confEval(articles, downloaded_articles, identifiers, args):
+    global CORRECT, GOLD, PRED
+    CORRECT = collections.defaultdict(lambda:0.)
+    GOLD = collections.defaultdict(lambda:0.)
+    PRED = collections.defaultdict(lambda:0.)
+    THRES = 0.0
+    for indx in range(len(articles)):
+        print "INDX:", indx        
+        originalArticle = articles[indx][0]
+        newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
+        goldEntities = identifiers[indx]   
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
+        env.confEvaluate(env.goldEntities, THRES)
+
+    print "------------\nEvaluation Stats: (Precision, Recall, F1):"
+    for tag in int2tags:
+        prec = CORRECT[tag]/PRED[tag]
+        rec = CORRECT[tag]/GOLD[tag]
+        if prec+rec > 0:
+            f1 = (2*prec*rec)/(prec+rec)
+        else:
+            f1 = 0
         print tag, prec, rec, f1
 
 def plot_hist(evalconf, name):
@@ -637,6 +701,9 @@ def main(args):
         return
     elif args.thresholdEval:
         thresholdEval(articles, downloaded_articles, identifiers, args)
+        return
+    elif args.confEval:
+        confEval(articles, downloaded_articles, identifiers, args)
         return
     
 
@@ -817,6 +884,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Evaluate baseline performance")
+
+    argparser.add_argument("--confEval",
+        type = bool,
+        default = False,
+        help = "Evaluate with best conf ")
 
     argparser.add_argument("--shuffleArticles",
         type = bool,

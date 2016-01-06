@@ -682,6 +682,34 @@ def main(args):
     
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
 
+    # cnting downloaded articles
+    # cnt = 0
+    # for a in train_downloaded_articles:
+    #     for b in a:
+    #         cnt += len(b)
+    # print cnt
+    # cnt = 0
+    # for a in test_downloaded_articles:
+    #     for b in a:
+    #         cnt += len(b)
+    # print cnt
+
+    # gold annotations calc
+    # cnt = collections.defaultdict(lambda:0)
+    # for l in train_identifiers:
+    #     for i, a in enumerate(l):
+    #         if a != '' and a!= 'zero':
+    #             cnt[i] += 1
+    # print cnt
+
+    # cnt = collections.defaultdict(lambda:0)
+    # for l in test_identifiers:
+    #     for i, a in enumerate(l):
+    #         if a != '' and a!= 'zero':
+    #             cnt[i] += 1
+    # print cnt
+
+    # pdb.set_trace()
 
     print len(train_articles)
     print len(test_articles)
@@ -846,7 +874,7 @@ def main(args):
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
-                if evalMode and env.bestEntities.values() != env.originalEntities:
+                if evalMode and env.bestEntities.values()[args.entity] != env.originalEntities[args.entity]:
                     CHANGES += 1
 
             #send message (IMP: only for newGame or step messages)

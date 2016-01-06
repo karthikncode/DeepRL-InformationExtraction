@@ -56,6 +56,8 @@ GOLD = collections.defaultdict(lambda:0.)
 PRED = collections.defaultdict(lambda:0.)
 EVALCONF = collections.defaultdict(lambda:[])
 EVALCONF2 = collections.defaultdict(lambda:[])
+QUERY = collections.defaultdict(lambda:0.)
+ACTION = collections.defaultdict(lambda:0.)
 evalMode = False
 
 #Environment for each episode
@@ -664,6 +666,7 @@ def main(args):
     global TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM
     global evalMode
     global CORRECT, GOLD, PRED, EVALCONF, EVALCONF2
+    global QUERY, ACTION
     global trained_model
     
     print args
@@ -713,6 +716,11 @@ def main(args):
     outFile = open(args.outFile, 'w', 0) #unbuffered
     outFile.write(str(args)+"\n")
 
+    outFile2 = open(args.outFile+'.2', 'w', 0) #for analysis
+    outFile2.write(str(args)+"\n")
+
+
+
     evalOutFile = None
     if args.evalOutFile != '':
         evalOutFile = open(args.evalOutFile, 'w')
@@ -748,6 +756,8 @@ def main(args):
             CORRECT = collections.defaultdict(lambda:0.)
             GOLD = collections.defaultdict(lambda:0.)
             PRED = collections.defaultdict(lambda:0.)
+            QUERY = collections.defaultdict(lambda:0.)
+            ACTION = collections.defaultdict(lambda:0.)
             evalMode = True
             savedArticleNum = articleNum
             articleNum = 0
@@ -768,6 +778,15 @@ def main(args):
                 f1 = (2*prec*rec)/(prec+rec)
                 print tag, prec, rec, f1, "########", CORRECT[tag], PRED[tag], GOLD[tag]
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
+
+            qsum = sum(QUERY.values())
+            asum = sum(ACTION.values())
+            outFile2.write("Qsum: " + str(qsum) +  " Asum: " +  str(asum)+'\n')
+            for k, val in QUERY.items():
+                outFile2.write("Query " + str(k) + ' ' + str(val/qsum)+'\n')
+            for k, val in ACTION.items():    
+                outFile2.write("Action " + str(k) + ' ' + str(val/asum)+'\n')
+
             evalMode = False
             articleNum = savedArticleNum
 
@@ -792,6 +811,9 @@ def main(args):
             # message is "step"            
             action, query = [int(q) for q in message.split()]
 
+            if evalMode:
+                ACTION[action] += 1
+                QUERY[query] += 1
 
             if evalMode and DEBUG:
                 print "State:"

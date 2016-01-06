@@ -6,6 +6,8 @@ import math
 import numpy as np
 
 # plt.gcf().subplots_adjust(bottom=0.15)
+# plt.gcf().subplots_adjust(right=1.05)
+# plt.gcf().subplots_adjust(left=-0.05)
 
 
 #rewards first
@@ -29,19 +31,24 @@ labels = ['LSTM-DQN', 'BI-DQN', 'BOW-DQN']
 
 fig, ax1 = plt.subplots()
 ax1.plot(np.arange(N), f1[:N], 'b-')
-ax1.set_xlabel('Epoch')
+ax1.set_xlabel('Epoch', fontsize=20)
 # Make the y-axis label and tick labels match the line color.
-ax1.set_ylabel('Reward', color='b')
+ax1.set_ylabel('Reward', color='black', fontsize=20)
 for tl in ax1.get_yticklabels():
-    tl.set_color('b')
+    tl.set_color('black')
+    tl.set_fontsize(17)
+
+for tl in ax1.get_xticklabels():    
+    tl.set_fontsize(17)
 
 ax2 = ax1.twinx()
 ax2.plot(np.arange(N), f2[:N], 'r--')
-ax2.set_ylabel('Accuracy', color='r')
+ax2.set_ylabel('Accuracy', color='black', fontsize=20)
 for tl in ax2.get_yticklabels():
-    tl.set_color('r')
+    tl.set_color('black')
+    tl.set_fontsize(17)
 # plt.show()
-plt.savefig('plots/plot.pdf')
+plt.savefig('plots/plot.pdf', bbox_inches='tight')
 
 
 

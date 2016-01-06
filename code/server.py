@@ -781,7 +781,7 @@ def main(args):
 
             qsum = sum(QUERY.values())
             asum = sum(ACTION.values())
-            outFile2.write("Qsum: " + str(qsum) +  " Asum: " +  str(asum)+'\n')
+            outFile2.write("------------\nQsum: " + str(qsum) +  " Asum: " +  str(asum)+'\n')
             for k, val in QUERY.items():
                 outFile2.write("Query " + str(k) + ' ' + str(val/qsum)+'\n')
             for k, val in ACTION.items():    

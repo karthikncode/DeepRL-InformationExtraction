@@ -72,7 +72,7 @@ class Environment:
         self.entity = args.entity
         self.aggregate = args.aggregate
         self.delayedReward = args.delayedReward
-        self.listNum = 0 #start off with first list
+        self.listNum = 0 #start off with first list        
 
         self.shuffledIndxs = [range(len(q)) for q in self.newArticles]
         if not evalMode and args.shuffleArticles:
@@ -87,6 +87,9 @@ class Environment:
         self.bestEntitySet = None
         if self.aggregate == 'majority':
             self.bestEntitySet = collections.defaultdict(lambda:[])
+        self.bestIndex = (0,0)
+        self.prevListNum = 0
+        self.prevArticleIndx = 0
 
         # to keep track of extracted values from previousArticle
         # start off with list 0 always
@@ -96,6 +99,10 @@ class Environment:
             self.prevEntities, self.prevConfidences = self.extractEntitiesWithConfidences(self.originalArticle)
             ENTITIES[self.indx][0][0] = self.prevEntities
             CONFIDENCES[self.indx][0][0] = self.prevConfidences
+
+        #store the original entities before updateing state
+        self.originalEntities = self.prevEntities
+
 
         #calculate tf-idf similarities using all the articles related to the original
         self.allArticles = [originalArticle] + [item for sublist in self.newArticles for item in sublist]
@@ -112,10 +119,11 @@ class Environment:
 
         #update the initial state
         self.stepNum = 0
+        
+
         self.updateState(1, 1, self.ignoreDuplicates)
 
-        #store the original entities
-        self.originalEntities = self.prevEntities
+        
         
         return
     
@@ -168,7 +176,7 @@ class Environment:
                 #ignore state updates to other states
                 # if self.bestEntities[i]  and self.entity != 4 and i != self.entity:                    
                 #     continue
-
+                self.bestIndex = (self.prevListNum, self.prevArticleIndx)
                 if self.aggregate == 'majority':
                     self.bestEntitySet[i].append((entities[i], confidences[i]))
                     self.bestEntities[i], self.bestConfidences[i] = self.majorityVote(self.bestEntitySet[i])
@@ -239,6 +247,8 @@ class Environment:
         #update state variables
         self.prevEntities = entities
         self.prevConfidences = confidences
+        self.prevListNum = listNum
+        self.prevArticleIndx = articleIndx
 
         return
 
@@ -533,7 +543,7 @@ class Environment:
             dic[entity] += 1
             cnt[entity] += 1
             confDic[entity] += conf
-            if ticker == 0: dic[entity] += 0.1 #extra for original article
+            if ticker == 0: dic[entity] += 0.1 #extra for original article to break ties
             ticker += 1
 
         bestEntity, bestVote = sorted(dic.items(), key=itemgetter(1), reverse=True)[0]
@@ -820,6 +830,9 @@ def main(args):
                 outFile2.write("Action " + str(k) + ' ' + str(val/asum)+'\n')
             outFile2.write("CHANGES: "+str(CHANGES)+ ' ' + str(float(CHANGES)/len(articles))+"\n")
 
+            #for analysis
+            # pdb.set_trace()
+
             evalMode = False
             articleNum = savedArticleNum
 
@@ -874,8 +887,17 @@ def main(args):
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
-                if evalMode and env.bestEntities.values()[args.entity] != env.originalEntities[args.entity]:
+                #for analysis
+                if evalMode and env.bestEntities.values()[args.entity].lower() != env.originalEntities[args.entity].lower() and reward > 0:
                     CHANGES += 1
+                    try:
+                        print "Entities:", 'best', env.bestEntities.values()[args.entity], 'orig', env.originalEntities[args.entity], 'gold', env.goldEntities[args.entity]
+                        print ' '.join(originalArticle)
+                        print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+                        print ' '.join(newArticles[env.bestIndex[0]][env.bestIndex[1]])
+                        print "----------------------------"
+                    except:
+                        pass
 
             #send message (IMP: only for newGame or step messages)
             outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal

@@ -12,6 +12,7 @@ local trans = torch.class('dqn.TransitionTable')
 function trans:__init(args)
     self.stateDim = args.stateDim
     self.numActions = args.numActions
+    self.numObjects = args.numObjects
     self.histLen = args.histLen
     self.maxSize = args.maxSize or 1024^2
     self.bufferSize = args.bufferSize or 1024
@@ -54,18 +55,23 @@ function trans:__init(args)
 
     self.s = torch.FloatTensor(self.maxSize, self.stateDim):fill(0)
     self.a = torch.LongTensor(self.maxSize):fill(0)
+    self.o = torch.LongTensor(self.maxSize):fill(0) --objects/queries
     self.r = torch.zeros(self.maxSize)
     self.t = torch.ByteTensor(self.maxSize):fill(0)
     self.action_encodings = torch.eye(self.numActions)
+    self.object_encodings = torch.eye(self.numObjects)
+
 
     -- Tables for storing the last histLen states.  They are used for
     -- constructing the most recent agent state more easily.
     self.recent_s = {}
     self.recent_a = {}
+    self.recent_o = {}
     self.recent_t = {}
 
     local s_size = self.stateDim*histLen
     self.buf_a      = torch.LongTensor(self.bufferSize):fill(0)
+    self.buf_o      = torch.LongTensor(self.bufferSize):fill(0)
     self.buf_r      = torch.zeros(self.bufferSize)
     self.buf_term   = torch.ByteTensor(self.bufferSize):fill(0)
     self.buf_s      = torch.FloatTensor(self.bufferSize, s_size):fill(0)
@@ -100,9 +106,10 @@ function trans:fill_buffer()
     self.buf_ind = 1
     local ind
     for buf_ind=1,self.bufferSize do
-        local s, a, r, s2, term = self:sample_one(1)
+        local s, a, o, r, s2, term = self:sample_one(1)
         self.buf_s[buf_ind]:copy(s)
         self.buf_a[buf_ind] = a
+        self.buf_o[buf_ind] = o
         self.buf_r[buf_ind] = r
         self.buf_s2[buf_ind]:copy(s2)
         self.buf_term[buf_ind] = term
@@ -158,14 +165,14 @@ function trans:sample(batch_size)
     self.buf_ind = self.buf_ind+batch_size
     local range = {{index, index+batch_size-1}}
 
-    local buf_s, buf_s2, buf_a, buf_r, buf_term = self.buf_s, self.buf_s2,
-        self.buf_a, self.buf_r, self.buf_term
+    local buf_s, buf_s2, buf_a, buf_o, buf_r, buf_term = self.buf_s, self.buf_s2,
+        self.buf_a, self.buf_o, self.buf_r, self.buf_term
     if self.gpu and self.gpu >=0  then
         buf_s = self.gpu_s
         buf_s2 = self.gpu_s2
     end
 
-    return buf_s[range], buf_a[range], buf_r[range], buf_s2[range], buf_term[range]
+    return buf_s[range], buf_a[range], buf_o[range], buf_r[range], buf_s2[range], buf_term[range]
 end
 
 
@@ -215,10 +222,11 @@ end
 
 function trans:concatActions(index, use_recent)
     local act_hist = torch.FloatTensor(self.histLen, self.numActions)
+    local obj_hist = torch.FloatTensor(self.histLen, self.numObjects)
     if use_recent then
-        a, t = self.recent_a, self.recent_t
+        a, o, t = self.recent_a, self.recent_o, self.recent_t
     else
-        a, t = self.a, self.t
+        a, o, t = self.a, self.o, self.t
     end
 
     -- Zero out frames from all but the most recent episode.
@@ -237,6 +245,7 @@ function trans:concatActions(index, use_recent)
 
         if zero_out then
             act_hist[i]:zero()
+            obj_hist[i]:zero()
         else
             episode_start = i
         end
@@ -249,6 +258,7 @@ function trans:concatActions(index, use_recent)
     -- Copy frames from the current episode.
     for i=episode_start,self.histLen do
         act_hist[i]:copy(self.action_encodings[a[index+self.histIndices[i]-1]])
+        obj_hist[i]:copy(self.object_encodings[o[index+self.histIndices[i]-1]])
     end
 
     return act_hist
@@ -266,13 +276,14 @@ function trans:get(index)
     local s2 = self:concatFrames(index+1)
     local ar_index = index+self.recentMemSize-1
 
-    return s, self.a[ar_index], self.r[ar_index], s2, self.t[ar_index+1]
+    return s, self.a[ar_index], self.o[ar_index], self.r[ar_index], s2, self.t[ar_index+1]
 end
 
 
-function trans:add(s, a, r, term)
+function trans:add(s, a, o, r, term)
     assert(s, 'State cannot be nil')
     assert(a, 'Action cannot be nil')
+    assert(o, 'Object cannot be nil')
     assert(r, 'Reward cannot be nil')
 
     -- Incremenet until at full capacity
@@ -290,6 +301,7 @@ function trans:add(s, a, r, term)
     -- Overwrite (s,a,r,t) at insertIndex
     self.s[self.insertIndex] = s:clone():float()
     self.a[self.insertIndex] = a
+    self.o[self.insertIndex] = o
     self.r[self.insertIndex] = r
     if term then
         self.t[self.insertIndex] = 1
@@ -323,18 +335,21 @@ function trans:add_recent_state(s, term)
 end
 
 
-function trans:add_recent_action(a)
+function trans:add_recent_action(a, o)
     if #self.recent_a == 0 then
         for i=1,self.recentMemSize do
             table.insert(self.recent_a, 1)
+            table.insert(self.recent_o, 1)
         end
     end
 
     table.insert(self.recent_a, a)
+    table.insert(self.recent_o, o)
 
     -- Keep recentMemSize steps.
     if #self.recent_a > self.recentMemSize then
         table.remove(self.recent_a, 1)
+        table.remove(self.recent_o, 1)
     end
 end
 
@@ -349,6 +364,7 @@ to create an empty transition table.
 function trans:write(file)
     file:writeObject({self.stateDim,
                       self.numActions,
+                      self.numObjects,                      
                       self.histLen,
                       self.maxSize,
                       self.bufferSize,
@@ -369,6 +385,7 @@ function trans:read(file)
     local stateDim, numActions, histLen, maxSize, bufferSize, numEntries, insertIndex, recentMemSize, histIndices = unpack(file:readObject())
     self.stateDim = stateDim
     self.numActions = numActions
+    self.numObjects = numObjects
     self.histLen = histLen
     self.maxSize = maxSize
     self.bufferSize = bufferSize
@@ -379,6 +396,7 @@ function trans:read(file)
 
     self.s = torch.FloatTensor(self.maxSize, self.stateDim):fill(0)
     self.a = torch.LongTensor(self.maxSize):fill(0)
+    self.o = torch.LongTensor(self.maxSize):fill(0)
     self.r = torch.zeros(self.maxSize)
     self.t = torch.ByteTensor(self.maxSize):fill(0)
     self.action_encodings = torch.eye(self.numActions)
@@ -387,9 +405,11 @@ function trans:read(file)
     -- constructing the most recent agent state more easily.
     self.recent_s = {}
     self.recent_a = {}
+    self.recent_o = {}
     self.recent_t = {}
 
     self.buf_a      = torch.LongTensor(self.bufferSize):fill(0)
+    self.buf_o      = torch.LongTensor(self.bufferSize):fill(0)
     self.buf_r      = torch.zeros(self.bufferSize)
     self.buf_term   = torch.ByteTensor(self.bufferSize):fill(0)
     self.buf_s      = torch.FloatTensor(self.bufferSize, self.stateDim * self.histLen):fill(0)

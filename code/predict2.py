@@ -111,8 +111,8 @@ def predict_mode(sentence, tags, confidences,  cities):
 
     mode, conf = get_mode(output_entities["shooterName"])
     output_pred_line += mode
-
-    
+    entity_confidences[tags2int['shooterName']-1] += conf
+    entity_cnts[tags2int['shooterName']-1] += 1
 
     for tag in int2tags:
         if tag == "city":

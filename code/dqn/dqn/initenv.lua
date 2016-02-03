@@ -119,7 +119,7 @@ function setup(_opt)
     
 
     local gameEnv = GameEnv(_opt)
-    local gameActions = gameEnv:getActions()    
+    local gameActions = gameEnv:getActions()     
 
     -- agent options
     _opt.agent_params.actions   = gameActions

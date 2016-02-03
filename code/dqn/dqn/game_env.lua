@@ -41,9 +41,9 @@ function env:newGame()
 end
 
 
-function env:step(action)
+function env:step(action, query)
     assert(action==1 or action==0, "Action " .. tostring(action))
-    self.skt:send(tostring(action))
+    self.skt:send(tostring(action) .. ' ' .. tostring(query))
     msg = self.skt:recv()
     while msg == nil do
         msg = self.skt:recv()

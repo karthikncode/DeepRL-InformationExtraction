@@ -9,6 +9,7 @@ from itertools import izip
 import inflect
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression as MaxEnt
 import argparse
 from random import shuffle
 from operator import itemgetter
@@ -221,7 +222,7 @@ class Environment:
         self.state = [0 for i in range(STATE_SIZE)]
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
-            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state            
+            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state
             matchScore = float(matches[i])
             if matchScore > 0:
                 self.state[2*NUM_ENTITIES+i] = 1
@@ -674,23 +675,59 @@ def plot_hist(evalconf, name):
         plt.clf()
 
 
-def runBaseline(train_identifiers):
 
-    ANNOTATED_TRAIN_ENTITIES = copy.deepcopy(TRAIN_ENTITIES)
-    ##Annotate
+def runBaseline(train_identifiers, num_entities):
+    classifier = [] ##List of classifiers
 
-    for article_index in range(len(TRAIN_ENTITIES)):
-        article = TRAIN_ENTITIES[article_index]
-        for query_index in range(len(article)):
-            query = article[query_index]
-            for supporting_article_index in range(len(query)):
-                supporting_article = query[supporting_article_index]
-                for entity_index in range(len(supporting_article)):
+    for entity_index in range(num_entities):
+        ## Train classifiers
+        classifier.append(MaxEnt(multi_class='multinomial', solver='lbfgs'))
+        X = []
+        Y = []
+        for article_index in range(len(TRAIN_ENTITIES)):
+            article = TRAIN_ENTITIES[article_index]
+            for query_index in range(len(article)):
+                query = article[query_index]
+                for supporting_article_index in range(len(query)):
+                    supporting_article = query[supporting_article_index]
+
+                    #Construct feature vector for this sampled entity
+                    original_confidence = TRAIN_CONFIDENCES[article_index][query_index]\
+                            [0][entity_index]
+                    confidence = TRAIN_CONFIDENCES[article_index][query_index]\
+                            [supporting_article_index][entity_index]
+                    original_entity = query[0][entity_index].strip().lower()
                     entity = supporting_article[entity_index].strip().lower()
-                    gold_entity = train_identifiers[article_index][entity_index].strip().lower()
-                    ANNOTATED_TRAIN_ENTITIES[article_index][query_index]\
-                        [supporting_article_index][entity_index] = int(gold_entity == entity)
-                return
+                    if entity == '':
+                        continue
+                    entity_match = [1, 0] if original_entity == entity else [0, 1]
+
+                    # Cosine sim array is shifted by one.
+                    # Index 0 should be 1 as orig is same as itself.
+                    tfidf = 1 if supporting_article_index == 0 else \
+                            TRAIN_COSINE_SIM[article_index]\
+                            [query_index][supporting_article_index - 1]
+
+                    features = [original_confidence, confidence] + entity_match + [tfidf]
+
+
+                    #Extract out label for this article (ie. is label correct)
+                    gold_entity = train_identifiers[article_index]\
+                                  [entity_index].strip().lower()
+                    if gold_entity == '':
+                        continue
+                    label = int(gold_entity == entity)
+
+                    ## Only if gold entity and the entity aren't empty,
+                    ## we add this as a training example
+                    X.append(features)
+                    Y.append(label)
+        assert( len(X) == len(Y))
+        classifier[entity_index].fit(X,Y)
+
+        ## Evaluate classifiers
+
+
 
 def main(args):
     global ENTITIES, CONFIDENCES, COSINE_SIM
@@ -711,7 +748,7 @@ def main(args):
     
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
 
-    runBaseline(train_identifiers)
+    runBaseline(train_identifiers, args.entity)
     return
     # cnting downloaded articles
     # cnt = 0

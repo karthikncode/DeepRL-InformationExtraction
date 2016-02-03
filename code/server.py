@@ -673,6 +673,25 @@ def plot_hist(evalconf, name):
         plt.savefig(name+"_"+str(i)+".png")
         plt.clf()
 
+
+def runBaseline(train_identifiers):
+
+    ANNOTATED_TRAIN_ENTITIES = copy.deepcopy(TRAIN_ENTITIES)
+    ##Annotate
+
+    for article_index in range(len(TRAIN_ENTITIES)):
+        article = TRAIN_ENTITIES[article_index]
+        for query_index in range(len(article)):
+            query = article[query_index]
+            for supporting_article_index in range(len(query)):
+                supporting_article = query[supporting_article_index]
+                for entity_index in range(len(supporting_article)):
+                    entity = supporting_article[entity_index].strip().lower()
+                    gold_entity = train_identifiers[article_index][entity_index].strip().lower()
+                    ANNOTATED_TRAIN_ENTITIES[article_index][query_index]\
+                        [supporting_article_index][entity_index] = int(gold_entity == entity)
+                return
+
 def main(args):
     global ENTITIES, CONFIDENCES, COSINE_SIM
     global TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM
@@ -692,6 +711,8 @@ def main(args):
     
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
 
+    runBaseline(train_identifiers)
+    return
     # cnting downloaded articles
     # cnt = 0
     # for a in train_downloaded_articles:
@@ -730,7 +751,7 @@ def main(args):
     # else:
     #     print "Using trainFile for eval"        
     #     TEST_ENTITIES = TRAIN_ENTITIES
-    #     TEST_CONFIDENCES = TRAIN_CONFIDENCES
+    #     TEST_CONFIDENCES = TRAIN_CONFIDEN CES
     #     TEST_COSINE_SIM = TRAIN_COSINE_SIM
     #     test_articles, test_titles, test_identifiers, test_downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
  
@@ -744,7 +765,7 @@ def main(args):
         baselineEval(articles, identifiers, args)
         return
     elif args.thresholdEval:
-        thresholdEval(articles, downloaded_articles, identifiers, args)
+
         return
     elif args.confEval:
         confEval(articles, downloaded_articles, identifiers, args)

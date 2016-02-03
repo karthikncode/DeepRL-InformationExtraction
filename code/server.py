@@ -742,8 +742,6 @@ def predictEntities(classifiers, num_entities):
                             [supporting_article_index][entity_index]
                     original_entity = query[0][entity_index].strip().lower()
                     entity = supporting_article[entity_index].strip().lower()
-                    if entity == '':
-                        continue
                     entity_match = [1, 0] if original_entity == entity else [0, 1]
 
                     # Cosine sim array is shifted by one.
@@ -754,12 +752,67 @@ def predictEntities(classifiers, num_entities):
 
                     features = [original_confidence, confidence] + entity_match + [tfidf]
 
-                    prediction = classifiers[entity_index].predict(features)[0]
-                    DECISIONS[article_index][query_index]\
-                        [supporting_article_index][entity_index] = prediction
+
+                    if entity == '':
+                        DECISIONS[article_index][query_index]\
+                            [supporting_article_index][entity_index] = 0
+                    else:
+                        prediction = classifiers[entity_index].predict(features)[0]
+                        DECISIONS[article_index][query_index]\
+                            [supporting_article_index][entity_index] = prediction
     return DECISIONS
 
-def aggregateResults(DECISIONS, num_entities)
+#Run both Max Confidence and Majority Aggregation Schemes given the decisions
+#Return the decided tag for each query
+def aggregateResults(DECISIONS, num_entities):
+    majority = []
+    max_conf = []
+    for article_index in range(len(TEST_ENTITIES)):
+        max_conf.append([])
+        majority.append([])
+        article = TEST_ENTITIES[article_index]
+        for query_index in range(len(article)):
+            max_conf[article_index].append([])
+            majority[article_index].append([])
+            query = article[query_index]
+            for entity_index in range(num_entities):
+                max_confidence = -1
+                max_confidence_tag = ''
+                tag_occurances = {}
+                for supporting_article_index in range(len(query)):
+                    supporting_article = query[supporting_article_index]
+                    if DECISIONS[article_index][query_index][supporting_article_index]\
+                       [entity_index] == 0:
+                        continue
+
+
+                    confidence = TEST_CONFIDENCES[article_index][query_index]\
+                            [supporting_article_index][entity_index]
+                    entity = supporting_article[entity_index].strip().lower()
+                    assert(not entity == '')
+
+                    ##Update counts of majority
+                    if entity not in tag_occurances:
+                        tag_occurances[entity] = 1
+                    else:
+                        tag_occurances[entity] += 1
+
+                    ##Update max_confidence
+                    if confidence > max_confidence:
+                        max_confidence = confidence
+                        max_confidence_tag = entity
+                max_majority_count = -1
+                majority_tag = ''
+                for ent in tag_occurances:
+                    if tag_occurances[ent] > max_majority_count:
+                        max_majority_count = tag_occurances[ent]
+                        majority_tag = ent
+                max_conf[article_index][query_index].append(max_confidence_tag)
+                majority[article_index][query_index].append(majority_tag)
+
+    return majority, max_conf
+
+
 
 
 def runBaseline(train_identifiers, num_entities):

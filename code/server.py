@@ -679,7 +679,7 @@ def trainClassifiers(train_identifiers, num_entities):
     classifiers = [] ##List of classifiers
 
     for entity_index in range(num_entities):
-        classifiers.append(MaxEnt(multi_class='multinomial', solver='lbfgs'))
+        classifiers.append(MaxEnt(multi_class='ovr', solver='lbfgs'))
         X = []
         Y = []
         for article_index in range(len(TRAIN_ENTITIES)):
@@ -814,13 +814,46 @@ def aggregateResults(DECISIONS, num_entities):
 
 
 
+def evaluateBaseline(predicted_identifiers, test_identifiers, num_entities):
+    for entity_index in range(num_entities):
+        predicted_correct = 0
+        total_predicted   = 0
+        total_gold        = 0
+        for article_index in range(len(predicted_identifiers)):
+            ## TODO: Add classifier for selecting query index?
+            for query_index in range(len(predicted_identifiers[article_index])):
+                predicted = predicted_identifiers[article_index][query_index][entity_index].strip().lower()
+                gold = test_identifiers[article_index][entity_index].strip().lower()
+                if gold == '':
+                    continue
+                if not predicted == '':
+                    total_predicted += 1
+                if predicted == gold:
+                    predicted_correct += 1
+                total_gold += 1
+        if total_predicted == 0 :
+            continue
 
-def runBaseline(train_identifiers, num_entities):
+        if predicted_correct == 0 :
+            continue
+
+        precision = predicted_correct * 1. / total_predicted
+        recall = predicted_correct * 1. / total_gold
+        f1 = (2*precision*recall)/(precision+recall)
+        print "PRECISION", precision, "RECALL", recall, "F1", f1
+
+
+def runBaseline(train_identifiers, test_identifiers, num_entities):
     classifiers = trainClassifiers(train_identifiers, num_entities)
     DECISIONS  = predictEntities(classifiers, num_entities)
     majority, max_conf = aggregateResults(DECISIONS, num_entities)
-    ## Evaluate classifiers
-    
+
+    print "Evaluation for Classifier baseline with MAJORITY aggregation"
+    evaluateBaseline(majority, test_identifiers, num_entities)
+
+
+    print "Evaluation for Classifier baseline with MAX CONFIDENCE aggregation"
+    evaluateBaseline(max_conf, test_identifiers, num_entities)
 
 
 def main(args):
@@ -842,7 +875,7 @@ def main(args):
     
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
 
-    runBaseline(train_identifiers, args.entity)
+    runBaseline(train_identifiers, test_identifiers, args.entity)
     return
     # cnting downloaded articles
     # cnt = 0

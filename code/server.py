@@ -675,13 +675,11 @@ def plot_hist(evalconf, name):
         plt.clf()
 
 
-
-def runBaseline(train_identifiers, num_entities):
-    classifier = [] ##List of classifiers
+def trainClassifiers(train_identifiers, num_entities):
+    classifiers = [] ##List of classifiers
 
     for entity_index in range(num_entities):
-        ## Train classifiers
-        classifier.append(MaxEnt(multi_class='multinomial', solver='lbfgs'))
+        classifiers.append(MaxEnt(multi_class='multinomial', solver='lbfgs'))
         X = []
         Y = []
         for article_index in range(len(TRAIN_ENTITIES)):
@@ -723,10 +721,53 @@ def runBaseline(train_identifiers, num_entities):
                     X.append(features)
                     Y.append(label)
         assert( len(X) == len(Y))
-        classifier[entity_index].fit(X,Y)
+        classifiers[entity_index].fit(X,Y)
+    return classifiers
 
-        ## Evaluate classifiers
+def predictEntities(classifiers, num_entities):
+    assert(len(classifiers) == num_entities)
+    DECISIONS = copy.deepcopy(TEST_ENTITIES)
+    for entity_index in range(num_entities):
+        for article_index in range(len(TEST_ENTITIES)):
+            article = TEST_ENTITIES[article_index]
+            for query_index in range(len(article)):
+                query = article[query_index]
+                for supporting_article_index in range(len(query)):
+                    supporting_article = query[supporting_article_index]
 
+                    #Construct feature vector for this sampled entity
+                    original_confidence = TEST_CONFIDENCES[article_index][query_index]\
+                            [0][entity_index]
+                    confidence = TEST_CONFIDENCES[article_index][query_index]\
+                            [supporting_article_index][entity_index]
+                    original_entity = query[0][entity_index].strip().lower()
+                    entity = supporting_article[entity_index].strip().lower()
+                    if entity == '':
+                        continue
+                    entity_match = [1, 0] if original_entity == entity else [0, 1]
+
+                    # Cosine sim array is shifted by one.
+                    # Index 0 should be 1 as orig is same as itself.
+                    tfidf = 1 if supporting_article_index == 0 else \
+                            TEST_COSINE_SIM[article_index]\
+                            [query_index][supporting_article_index - 1]
+
+                    features = [original_confidence, confidence] + entity_match + [tfidf]
+
+                    prediction = classifiers[entity_index].predict(features)[0]
+                    DECISIONS[article_index][query_index]\
+                        [supporting_article_index][entity_index] = prediction
+    return DECISIONS
+
+def aggregateResults(DECISIONS, num_entities)
+
+
+def runBaseline(train_identifiers, num_entities):
+    classifiers = trainClassifiers(train_identifiers, num_entities)
+    DECISIONS  = predictEntities(classifiers, num_entities)
+    majority, max_conf = aggregateResults(DECISIONS, num_entities)
+    ## Evaluate classifiers
+    
 
 
 def main(args):

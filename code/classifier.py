@@ -165,9 +165,11 @@ class Classifier(object):
 
     def evaluateBaseline(self, predicted_identifiers, test_identifiers, num_entities, COUNT_ZERO):
         for entity_index in range(num_entities):
-            predicted_correct = 0.
-            total_predicted   = 0.
-            total_gold        = 0.
+            num_queries = 5
+            predicted_correct = [0.] * num_queries
+            total_predicted   = [0.] * num_queries
+            total_gold        = [0.] * num_queries
+
             for article_index in range(len(predicted_identifiers)):
                 ## TODO: Add classifier for selecting query index?
                 for query_index in range(len(predicted_identifiers[article_index])):        
@@ -182,27 +184,40 @@ class Classifier(object):
                         predicted = set(predicted.split('|'))
                         gold = set(gold.split('|'))
                         correct = gold.intersection(predicted)
-                        predicted_correct += (1 if len(correct)>0 else 0)
-                        total_predicted += 1
-                        total_gold += 1 
+                        predicted_correct[query_index] += (1 if len(correct)>0 else 0)
+                        total_predicted[query_index] += 1
+                        total_gold[query_index] += 1 
                     else:
-                        total_predicted += 1
+                        total_predicted[query_index] += 1
                         if predicted == gold:
-                            predicted_correct += 1
-                        total_gold += 1
+                            predicted_correct[query_index] += 1
+                        total_gold[query_index] += 1
 
             print "Entity", entity_index, ":",
-            if total_predicted == 0 :
+            if sum(total_predicted) == 0 :
                 continue
 
-            if predicted_correct == 0 :
+            if sum(predicted_correct) == 0 :
                 continue
 
-            precision = predicted_correct / total_predicted
-            recall = predicted_correct / total_gold
-            f1 = (2*precision*recall)/(precision+recall)
-            print "PRECISION", precision, "RECALL", recall, "F1", f1
-            print "Total predicted", total_predicted
+            print "BEGINNING WITH PER QUERY SCORES"
+            for query_index in range(num_queries):
+                print "*********************************************"
+                print
+                print "QUERY INDEX:", query_index
+                self.displayScore(predicted_correct[query_index], total_predicted[query_index],\
+                                  total_gold[query_index])
+                print
+                print "*********************************************"
+            print "NOW SHOWING SCORES AGGREGATED OVER ALL QUERRIES"
+            self.displayScore(sum(predicted_correct), sum(total_predicted),sum(total_gold))
+        
+    def displayScore(self, predicted_correct, total_predicted, total_gold):
+        precision = predicted_correct / total_predicted
+        recall = predicted_correct / total_gold
+        f1 = (2*precision*recall)/(precision+recall)
+        print "PRECISION", precision, "RECALL", recall, "F1", f1
+        print "Total predicted", total_predicted
 
 
     def trainAndEval(self, train_identifiers, test_identifiers, num_entities, COUNT_ZERO):
@@ -210,9 +225,21 @@ class Classifier(object):
         DECISIONS  = self.predictEntities(classifiers, num_entities)
         majority, max_conf = self.aggregateResults(DECISIONS, num_entities)
 
+        print "#############################################################"
+        print "#############################################################"
         print "Evaluation for Classifier baseline with MAJORITY aggregation"
+        print
         self.evaluateBaseline(majority, test_identifiers, num_entities, COUNT_ZERO)
 
+        print
+        print "#############################################################"
+        print "#############################################################"
 
+        print "#############################################################"
+        print "#############################################################"
         print "Evaluation for Classifier baseline with MAX CONFIDENCE aggregation"
+        print
         self.evaluateBaseline(max_conf, test_identifiers, num_entities, COUNT_ZERO)
+        print
+        print "#############################################################"
+        print "#############################################################"

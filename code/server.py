@@ -714,7 +714,17 @@ def trainClassifiers(train_identifiers, num_entities):
                                   [entity_index].strip().lower()
                     if gold_entity == '':
                         continue
-                    label = int(gold_entity == entity)
+
+                    #special handling for shooterName (entity_index = 0)
+                    if entity_index == 0:
+                        entity = set(entity.split('|'))
+                        gold_entity = set(gold_entity.split('|'))
+                        if len(entity.intersection(gold_entity)) > 0:
+                            label = 1
+                        else:
+                            label = 0                        
+                    else:
+                        label = int(gold_entity == entity)
 
                     ## Only if gold entity and the entity aren't empty,
                     ## we add this as a training example
@@ -816,31 +826,44 @@ def aggregateResults(DECISIONS, num_entities):
 
 def evaluateBaseline(predicted_identifiers, test_identifiers, num_entities):
     for entity_index in range(num_entities):
-        predicted_correct = 0
-        total_predicted   = 0
-        total_gold        = 0
+        predicted_correct = 0.
+        total_predicted   = 0.
+        total_gold        = 0.
         for article_index in range(len(predicted_identifiers)):
             ## TODO: Add classifier for selecting query index?
-            for query_index in range(len(predicted_identifiers[article_index])):
+            for query_index in range(len(predicted_identifiers[article_index])):        
                 predicted = predicted_identifiers[article_index][query_index][entity_index].strip().lower()
                 gold = test_identifiers[article_index][entity_index].strip().lower()
-                if gold == '':
+                if gold == '' or (not COUNT_ZERO and gold == 'zero'):
                     continue
-                if not predicted == '':
+
+
+                #special handling for shooterName (lenient eval)
+                if entity_index == 0:
+                    predicted = set(predicted.split('|'))
+                    gold = set(gold.split('|'))
+                    correct = gold.intersection(predicted)
+                    predicted_correct += (1 if len(correct)>0 else 0)
                     total_predicted += 1
-                if predicted == gold:
-                    predicted_correct += 1
-                total_gold += 1
+                    total_gold += 1 
+                else:
+                    total_predicted += 1
+                    if predicted == gold:
+                        predicted_correct += 1
+                    total_gold += 1
+
+        print "Entity", entity_index, ":",
         if total_predicted == 0 :
             continue
 
         if predicted_correct == 0 :
             continue
 
-        precision = predicted_correct * 1. / total_predicted
-        recall = predicted_correct * 1. / total_gold
+        precision = predicted_correct / total_predicted
+        recall = predicted_correct / total_gold
         f1 = (2*precision*recall)/(precision+recall)
         print "PRECISION", precision, "RECALL", recall, "F1", f1
+        print "Total predicted", total_predicted
 
 
 def runBaseline(train_identifiers, test_identifiers, num_entities):
@@ -875,8 +898,7 @@ def main(args):
     
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
 
-    runBaseline(train_identifiers, test_identifiers, args.entity)
-    return
+    
     # cnting downloaded articles
     # cnt = 0
     # for a in train_downloaded_articles:
@@ -933,6 +955,9 @@ def main(args):
         return
     elif args.confEval:
         confEval(articles, downloaded_articles, identifiers, args)
+        return
+    elif args.classifierEval:
+        runBaseline(train_identifiers, test_identifiers, args.entity)
         return
     
 
@@ -1144,6 +1169,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Evaluate baseline performance")
+
+    argparser.add_argument("--classifierEval",
+        type = bool,
+        default = False,
+        help = "Evaluate performance using a simple maxent classifier")
 
     argparser.add_argument("--thresholdEval",
         type = bool,

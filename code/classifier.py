@@ -1,5 +1,6 @@
 from sklearn.linear_model import LogisticRegression as MaxEnt
 import copy
+import random
 
 class Classifier(object):
 
@@ -219,12 +220,54 @@ class Classifier(object):
         print "PRECISION", precision, "RECALL", recall, "F1", f1
         print "Total predicted", total_predicted
 
+    def runExploratoryTests(self, DECISIONS, train_identifiers, test_identifiers):
+        print "Exploring how many times gold entity is not in orignal document"
+        count = 0.
+        total_count = 0.
+        for article_index in range(len(self.TRAIN_ENTITIES)):
+            article = self.TRAIN_ENTITIES[article_index]
+            for entity_index in range(4):
+                for query_index in range(len(article)):
+                    query = article[query_index]
+                    orig_entity = query[0][entity_index].strip().lower()
+                    gold = train_identifiers[article_index][entity_index].strip().lower()
+                    for supp_index in range(len(query)):
+                        entity = query[supp_index][entity_index].strip().lower()
+                        if entity == gold and not entity == orig_entity:
+                            count += 1
+                        total_count +=1
+
+        print "COUNT ", count
+        print "TOTAL ", total_count
+        print "Ratio" , count/total_count
+
+        print "Exploring if classifier ever chooses not first entity"
+        print "Program will halt with assert if classifier chooses entity not in org document"
+        for article_index in range(len(self.TEST_ENTITIES)):
+            article = self.TEST_ENTITIES[article_index]
+            for entity_index in range(4):
+                for query_index in range(len(article)):
+                    query = article[query_index]
+                    orig_entity = query[0][entity_index].strip().lower()
+                    gold = test_identifiers[article_index][entity_index].strip().lower()
+                    for supp_index in range(len(query)):
+                        decision = DECISIONS[article_index][query_index][supp_index][entity_index]
+                        if decision == 1:
+                            entity = query[supp_index][entity_index].strip().lower()
+                            assert(entity == orig_entity)
+        print "It does not"
+
 
     def trainAndEval(self, train_identifiers, test_identifiers, num_entities, COUNT_ZERO):
         classifiers = self.trainClassifiers(train_identifiers, num_entities)
         DECISIONS  = self.predictEntities(classifiers, num_entities)
-        majority, max_conf = self.aggregateResults(DECISIONS, num_entities)
 
+        debug = False
+        if debug:
+            self.runExploratoryTests(DECISIONS, train_identifiers, test_identifiers)
+            return
+        
+        majority, max_conf = self.aggregateResults(DECISIONS, num_entities)
         print "#############################################################"
         print "#############################################################"
         print "Evaluation for Classifier baseline with MAJORITY aggregation"

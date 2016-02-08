@@ -4,6 +4,8 @@ import random
 import collections
 from itertools import izip
 
+
+
 class Classifier(object):
 
     def __init__(self, TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM,\
@@ -15,6 +17,9 @@ class Classifier(object):
         self.TEST_ENTITIES = TEST_ENTITIES
         self.TEST_CONFIDENCES = TEST_CONFIDENCES
         self.TEST_COSINE_SIM = TEST_COSINE_SIM
+
+        self.match_orig_feature = True
+        self.print_query_scores = False
 
 
     def trainClassifiers(self, train_identifiers, num_entities):
@@ -48,8 +53,10 @@ class Classifier(object):
                                 self.TRAIN_COSINE_SIM[article_index]\
                                 [query_index][supporting_article_index - 1]
 
-                        features = [original_confidence, confidence] + entity_match + [tfidf]
-
+                        if self.match_orig_feature:
+                            features = [original_confidence, confidence] + entity_match + [tfidf]
+                        else:
+                            features = [original_confidence, confidence] + [tfidf]
 
                         #Extract out label for this article (ie. is label correct)
                         gold_entity = train_identifiers[article_index]\
@@ -64,7 +71,7 @@ class Classifier(object):
                             if len(entity.intersection(gold_entity)) > 0:
                                 label = 1
                             else:
-                                label = 0                        
+                                label = 0
                         else:
                             label = int(gold_entity == entity)
 
@@ -73,7 +80,11 @@ class Classifier(object):
                         X.append(features)
                         Y.append(label)
             assert( len(X) == len(Y))
+
             classifiers[entity_index].fit(X,Y)
+            print "CLASSIFIER INDEX", entity_index
+            print "Ratio of Labels being ones is ", sum(Y)*1./len(Y)
+            
         return classifiers
 
     def predictEntities(self, classifiers, num_entities):
@@ -102,8 +113,10 @@ class Classifier(object):
                                 self.TEST_COSINE_SIM[article_index]\
                                 [query_index][supporting_article_index - 1]
 
-                        features = [original_confidence, confidence] + entity_match + [tfidf]
-
+                        if self.match_orig_feature:
+                            features = [original_confidence, confidence] + entity_match + [tfidf]
+                        else:
+                            features = [original_confidence, confidence] +  [tfidf]
 
                         if entity == '':
                             DECISIONS[article_index][query_index]\
@@ -196,6 +209,7 @@ class Classifier(object):
                             predicted_correct[query_index] += 1
                         total_gold[query_index] += 1
 
+
             print "Entity", entity_index, ":",
             if sum(total_predicted) == 0 :
                 continue
@@ -203,18 +217,20 @@ class Classifier(object):
             if sum(predicted_correct) == 0 :
                 continue
 
-            print "BEGINNING WITH PER QUERY SCORES"
-            for query_index in range(num_queries):
-                print "*********************************************"
-                print
-                print "QUERY INDEX:", query_index
-                self.displayScore(predicted_correct[query_index], total_predicted[query_index],\
-                                  total_gold[query_index])
-                print
-                print "*********************************************"
-            print "NOW SHOWING SCORES AGGREGATED OVER ALL QUERRIES"
+            if  self.print_query_scores:
+                print "BEGINNING WITH PER QUERY SCORES"
+
+                for query_index in range(num_queries):
+                    print "*********************************************"
+                    print
+                    print "QUERY INDEX:", query_index
+                    self.displayScore(predicted_correct[query_index], total_predicted[query_index],\
+                                      total_gold[query_index])
+                    print
+                    print "*********************************************"
+                print "NOW SHOWING SCORES AGGREGATED OVER ALL QUERRIES"
             self.displayScore(sum(predicted_correct), sum(total_predicted),sum(total_gold))
-        
+
     def displayScore(self, predicted_correct, total_predicted, total_gold):
         precision = predicted_correct / total_predicted
         recall = predicted_correct / total_gold
@@ -236,9 +252,9 @@ class Classifier(object):
                         gold = train_identifiers[article_index][entity_index].strip().lower()
                         for supp_index in range(len(query)):
                             entity = query[supp_index][entity_index].strip().lower()
-                            if entity == gold and not entity == orig_entity:
+                            if entity == gold:
                                 count[entity_index] += 1
-                        total_count[entity_index] +=1
+                            total_count[entity_index] +=1
                     else:
                         orig_entity = set(query[0][entity_index].strip().lower().split('|'))
                         gold = set(train_identifiers[article_index][entity_index].strip().lower().split('|'))
@@ -246,7 +262,7 @@ class Classifier(object):
                             entity = set(query[supp_index][entity_index].strip().lower().split('|'))
                             if len(entity.intersection(gold)) > len(orig_entity.intersection(gold)):
                                 count[entity_index] += 1
-                        total_count[entity_index] +=1
+                            total_count[entity_index] +=1
 
         print "COUNT ", count
         print "TOTAL ", total_count
@@ -254,18 +270,27 @@ class Classifier(object):
 
         print "Exploring if classifier ever chooses not first entity"
         print "Program will halt with assert if classifier chooses entity not in org document"
-        for article_index in range(len(self.TEST_ENTITIES)):
-            article = self.TEST_ENTITIES[article_index]
-            for entity_index in range(4):
+        ones = [0] * 4
+        ones_not_orig = [0] * 4
+        counts = [0] * 4
+        for entity_index in range(4):
+            for article_index in range(len(self.TEST_ENTITIES)):
+                article = self.TEST_ENTITIES[article_index]
                 for query_index in range(len(article)):
                     query = article[query_index]
                     orig_entity = query[0][entity_index].strip().lower()
                     gold = test_identifiers[article_index][entity_index].strip().lower()
                     for supp_index in range(len(query)):
                         decision = DECISIONS[article_index][query_index][supp_index][entity_index]
+                        ones[entity_index] += decision
+                        counts[entity_index] += 1
                         if decision == 1:
                             entity = query[supp_index][entity_index].strip().lower()
-                            assert(entity == orig_entity)
+                            if entity != orig_entity:
+                                ones_not_orig[entity_index] += 1
+
+        print "Ratio ones in prediction", [ ones[x]*1. / counts[x] for x in range(4)]
+        print "Ratio one not matching original entity in prediction", [ ones_not_orig[x]*1. / counts[x] for x in range(4)]
         print "It does not"
 
 
@@ -273,11 +298,11 @@ class Classifier(object):
         classifiers = self.trainClassifiers(train_identifiers, num_entities)
         DECISIONS  = self.predictEntities(classifiers, num_entities)
 
-        debug = True
+        debug = False
         if debug:
             self.runExploratoryTests(DECISIONS, train_identifiers, test_identifiers)
             return
-        
+
         majority, max_conf = self.aggregateResults(DECISIONS, num_entities)
         print "#############################################################"
         print "#############################################################"

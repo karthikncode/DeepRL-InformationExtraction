@@ -1,6 +1,8 @@
 from sklearn.linear_model import LogisticRegression as MaxEnt
 import copy
 import random
+import collections
+from itertools import izip
 
 class Classifier(object):
 
@@ -221,25 +223,34 @@ class Classifier(object):
         print "Total predicted", total_predicted
 
     def runExploratoryTests(self, DECISIONS, train_identifiers, test_identifiers):
-        print "Exploring how many times gold entity is not in orignal document"
-        count = 0.
-        total_count = 0.
+        print "Exploring how many times gold entity is not in original document"
+        count = collections.defaultdict(lambda:0.)
+        total_count = collections.defaultdict(lambda:0.)
         for article_index in range(len(self.TRAIN_ENTITIES)):
             article = self.TRAIN_ENTITIES[article_index]
             for entity_index in range(4):
                 for query_index in range(len(article)):
                     query = article[query_index]
-                    orig_entity = query[0][entity_index].strip().lower()
-                    gold = train_identifiers[article_index][entity_index].strip().lower()
-                    for supp_index in range(len(query)):
-                        entity = query[supp_index][entity_index].strip().lower()
-                        if entity == gold and not entity == orig_entity:
-                            count += 1
-                        total_count +=1
+                    if query_index > 0: #not shooter
+                        orig_entity = query[0][entity_index].strip().lower()
+                        gold = train_identifiers[article_index][entity_index].strip().lower()
+                        for supp_index in range(len(query)):
+                            entity = query[supp_index][entity_index].strip().lower()
+                            if entity == gold and not entity == orig_entity:
+                                count[entity_index] += 1
+                        total_count[entity_index] +=1
+                    else:
+                        orig_entity = set(query[0][entity_index].strip().lower().split('|'))
+                        gold = set(train_identifiers[article_index][entity_index].strip().lower().split('|'))
+                        for supp_index in range(len(query)):
+                            entity = set(query[supp_index][entity_index].strip().lower().split('|'))
+                            if len(entity.intersection(gold)) > len(orig_entity.intersection(gold)):
+                                count[entity_index] += 1
+                        total_count[entity_index] +=1
 
         print "COUNT ", count
         print "TOTAL ", total_count
-        print "Ratio" , count/total_count
+        print "Ratio" , [a/b for a,b in izip(count.values(),total_count.values())]
 
         print "Exploring if classifier ever chooses not first entity"
         print "Program will halt with assert if classifier chooses entity not in org document"
@@ -262,7 +273,7 @@ class Classifier(object):
         classifiers = self.trainClassifiers(train_identifiers, num_entities)
         DECISIONS  = self.predictEntities(classifiers, num_entities)
 
-        debug = False
+        debug = True
         if debug:
             self.runExploratoryTests(DECISIONS, train_identifiers, test_identifiers)
             return

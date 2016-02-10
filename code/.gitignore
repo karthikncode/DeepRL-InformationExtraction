@@ -1,0 +1,5 @@
+*.png
+dloads
+dqn/dqn/logs
+consolidated
+consolidated_old

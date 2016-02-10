@@ -13,16 +13,20 @@ import argparse
 from random import shuffle
 from operator import itemgetter
 import matplotlib.pyplot as plt
+from nltk.tokenize import word_tokenize
 
 
 DEBUG = False
+ANALYSIS = False
 COUNT_ZERO = False
 
 #Global variables
 int2tags = ['shooterName','numKilled', 'numWounded', 'city']
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
-STATE_SIZE = 4*NUM_ENTITIES+1
+CONTEXT_LENGTH = 3
+STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH
+
 
 trained_model = None
 tfidf_vectorizer = TfidfVectorizer()
@@ -46,10 +50,13 @@ def ddd():
 TRAIN_COSINE_SIM = collections.defaultdict(dd)
 TRAIN_ENTITIES = collections.defaultdict(ddd)
 TRAIN_CONFIDENCES = collections.defaultdict(ddd)
+TRAIN_CONTEXT = collections.defaultdict(ddd) #final value will be a vector
+
 
 TEST_COSINE_SIM =  collections.defaultdict(dd)
 TEST_ENTITIES = collections.defaultdict(ddd)
 TEST_CONFIDENCES = collections.defaultdict(ddd)
+TEST_CONTEXT = collections.defaultdict(ddd) #final value will be a vector
 
 CORRECT = collections.defaultdict(lambda:0.)
 GOLD = collections.defaultdict(lambda:0.)
@@ -60,6 +67,8 @@ QUERY = collections.defaultdict(lambda:0.)
 ACTION = collections.defaultdict(lambda:0.)
 CHANGES = 0
 evalMode = False
+
+CONTEXT = None
 
 #Environment for each episode
 class Environment:
@@ -145,6 +154,7 @@ class Environment:
 
     # update the state based on the decision from DQN
     def updateState(self, action, query, ignoreDuplicates=False):
+        global CONTEXT
         #action is [action, query]
 
         #use query to get next article
@@ -241,7 +251,13 @@ class Environment:
             for j in range(NUM_ENTITIES):
                 if j != self.entity:
                     self.state[j] = 0
-                    self.state[NUM_ENTITIES+j] = 0            
+                    self.state[NUM_ENTITIES+j] = 0  
+                    #TODO          
+
+        #add in context information
+        if nextArticle:
+            assert(self.entity!=4) #TODO: handle this assumption better
+            self.state[-6:] = CONTEXT[self.indx][listNum][articleIndx+1][self.entity]
 
 
         #update state variables
@@ -673,10 +689,90 @@ def plot_hist(evalconf, name):
         plt.savefig(name+"_"+str(i)+".png")
         plt.clf()
 
+def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer, context=3):
+    # calculate the context variables for all articles
+    print "Computing context..."
+
+    vocab = vectorizer.vocabulary_
+
+    for indx, lists in ENTITIES.items():
+        print '\r', indx, '/', len(ENTITIES),
+        for listNum, articles in lists.items():
+            for articleNum, entities in articles.items():    
+                CONTEXT[indx][listNum][articleNum] = []
+                if articleNum == 0: 
+                    #original article
+                    article = [w.lower() for w in ARTICLES[indx][0]] #need only the tokens, not tags
+                else:
+                    article = word_tokenize(DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower())
+                for entityNum, entity in enumerate(entities):
+                    vec = []
+                    phrase = []
+                    
+                    if entityNum == 0: #shooter case
+                        entity = set(entity.split('|')) 
+                        for i, word in enumerate(article):
+                            if word in entity:
+                                for j in range(1,context+1):
+                                    if i-j>=0:
+                                        phrase.append(article[i-j])
+                                    else:
+                                        phrase.append('XYZUNK') #random unseen phrase
+                                for j in range(1,context+1):
+                                    if i+j < len(article):
+                                        phrase.append(article[i+j])
+                                    else:
+                                        phrase.append('XYZUNK') #random unseen phrase
+                                break
+                        mat = vectorizer.transform([' '.join(phrase)]).toarray()
+
+                        for w in phrase:
+                            feat_indx = vocab.get(w)
+                            if feat_indx:
+                                vec.append(float(mat[0,feat_indx]))
+                            else:
+                                vec.append(0.)
+                    else:                        
+                        for i, word in enumerate(article):
+                            if type(word) == int or word.isdigit() and word < 100:            
+                                word = int(word)
+                                word = inflect_engine.number_to_words(word)   
+                            if word in entity:
+                                for j in range(1,context+1):
+                                    if i-j>=0:
+                                        phrase.append(article[i-j])
+                                    else:
+                                        phrase.append('XYZUNK') #random unseen phrase
+                                for j in range(1,context+1):
+                                    if i+j < len(article):
+                                        phrase.append(article[i+j])
+                                    else:
+                                        phrase.append('XYZUNK') #random unseen phrase
+                                break
+                        
+                        mat = vectorizer.transform([' '.join(phrase)]).toarray()
+                        for w in phrase:
+                            feat_indx = vocab.get(w)
+                            if feat_indx:
+                                vec.append(float(mat[0,feat_indx]))
+                            else:
+                                vec.append(0.)
+
+                    # take care of all corner cases
+                    if len(vec) == 0:
+                        vec = [0. for q in range(2*context)]
+
+                    #now store the vector
+                    CONTEXT[indx][listNum][articleNum].append(vec)
+                    assert(len(CONTEXT[indx][listNum][articleNum]) <= 4)
+
+    print "done."
+    return CONTEXT
+
 def main(args):
-    global ENTITIES, CONFIDENCES, COSINE_SIM
-    global TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM
-    global TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM
+    global ENTITIES, CONFIDENCES, COSINE_SIM, CONTEXT
+    global TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM, TRAIN_CONTEXT
+    global TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM, TEST_CONTEXT
     global evalMode
     global CORRECT, GOLD, PRED, EVALCONF, EVALCONF2
     global QUERY, ACTION, CHANGES
@@ -687,57 +783,30 @@ def main(args):
     trained_model = pickle.load( open(args.modelFile, "rb" ) )
 
     #load cached entities (speed up)
-    train_articles, train_titles, train_identifiers, train_downloaded_articles, TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM = pickle.load(open(args.trainEntities, "rb"))
+    train_articles, train_titles, train_identifiers, train_downloaded_articles, TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM, CONTEXT1, CONTEXT2 = pickle.load(open(args.trainEntities, "rb"))
+
+    if args.contextType == 1:
+        TRAIN_CONTEXT = CONTEXT1
+    else:
+        TRAIN_CONTEXT = CONTEXT2   
 
     
-    test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM = pickle.load(open(args.testEntities, "rb"))
+    test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM, CONTEXT1, CONTEXT2 = pickle.load(open(args.testEntities, "rb"))
 
-    # cnting downloaded articles
-    # cnt = 0
-    # for a in train_downloaded_articles:
-    #     for b in a:
-    #         cnt += len(b)
-    # print cnt
-    # cnt = 0
-    # for a in test_downloaded_articles:
-    #     for b in a:
-    #         cnt += len(b)
-    # print cnt
-
-    # gold annotations calc
-    # cnt = collections.defaultdict(lambda:0)
-    # for l in train_identifiers:
-    #     for i, a in enumerate(l):
-    #         if a != '' and a!= 'zero':
-    #             cnt[i] += 1
-    # print cnt
-
-    # cnt = collections.defaultdict(lambda:0)
-    # for l in test_identifiers:
-    #     for i, a in enumerate(l):
-    #         if a != '' and a!= 'zero':
-    #             cnt[i] += 1
-    # print cnt
-
-    # pdb.set_trace()
+    if args.contextType == 1:
+        TEST_CONTEXT = CONTEXT1
+    else:
+        TEST_CONTEXT = CONTEXT2 
 
     print len(train_articles)
     print len(test_articles)
 
-    # train_articles, train_titles, train_identifiers, train_downloaded_articles = loadFile(args.trainFile)
-    # if args.testFile:
-    #     test_articles, test_titles, test_identifiers, test_downloaded_articles = loadFile(args.testFile)
-    # else:
-    #     print "Using trainFile for eval"        
-    #     TEST_ENTITIES = TRAIN_ENTITIES
-    #     TEST_CONFIDENCES = TRAIN_CONFIDENCES
-    #     TEST_COSINE_SIM = TRAIN_COSINE_SIM
-    #     test_articles, test_titles, test_identifiers, test_downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
- 
+
     #starting assignments
     ENTITIES = TRAIN_ENTITIES
     CONFIDENCES = TRAIN_CONFIDENCES
     COSINE_SIM = TRAIN_COSINE_SIM
+    CONTEXT = TRAIN_CONTEXT
     articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
 
     if args.baselineEval:
@@ -807,6 +876,7 @@ def main(args):
             ENTITIES = TEST_ENTITIES
             CONFIDENCES = TEST_CONFIDENCES
             COSINE_SIM = TEST_COSINE_SIM
+            CONTEXT = TEST_CONTEXT
             articles, titles, identifiers, downloaded_articles = test_articles, test_titles, test_identifiers, test_downloaded_articles
             
             # print "##### Evaluation Started ######"
@@ -839,6 +909,7 @@ def main(args):
             ENTITIES = TRAIN_ENTITIES
             CONFIDENCES = TRAIN_CONFIDENCES
             COSINE_SIM = TRAIN_COSINE_SIM
+            CONTEXT = TRAIN_CONTEXT
             articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
             # print "##### Evaluation Ended ######"
 
@@ -888,7 +959,7 @@ def main(args):
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
                 #for analysis
-                if evalMode and env.bestEntities.values()[args.entity].lower() != env.originalEntities[args.entity].lower() and reward > 0:
+                if ANALYSIS and evalMode and env.bestEntities.values()[args.entity].lower() != env.originalEntities[args.entity].lower() and reward > 0:
                     CHANGES += 1
                     try:
                         print "Entities:", 'best', env.bestEntities.values()[args.entity], 'orig', env.originalEntities[args.entity], 'gold', env.goldEntities[args.entity]
@@ -1005,6 +1076,11 @@ if __name__ == '__main__':
         type = int,
         default = 1,
         help = "number of different query lists to consider")
+
+    argparser.add_argument("--contextType",
+        type = int,
+        default = 1,
+        help = "Type of context to consider (1 = counts, 2 = tfidf)")    
 
 
     argparser.add_argument("--saveEntities",

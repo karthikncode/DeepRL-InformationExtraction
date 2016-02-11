@@ -242,9 +242,9 @@ class Environment:
         if nextArticle:
             # print self.indx, listNum, articleIndx
             # print COSINE_SIM[self.indx][listNum]
-            self.state[-1] = self.articleSim(self.indx, listNum, articleIndx)
+            self.state[4*NUM_ENTITIES] = self.articleSim(self.indx, listNum, articleIndx)
         else:
-            self.state[-1] = 0
+            self.state[4*NUM_ENTITIES] = 0
 
         #selectively mask states
         if self.entity != 4:

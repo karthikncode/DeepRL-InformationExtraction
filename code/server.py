@@ -209,7 +209,7 @@ class Environment:
             if DEBUG:
                 print "entitySet:", self.bestEntitySet
 
-        if nextArticle:               
+        if nextArticle and action != 2:   # action=2 -> STOP
             assert(articleIndx != None)
             if (articleIndx+1) in ENTITIES[self.indx][listNum]:
                 entities, confidences = ENTITIES[self.indx][listNum][articleIndx+1], CONFIDENCES[self.indx][listNum][articleIndx+1]

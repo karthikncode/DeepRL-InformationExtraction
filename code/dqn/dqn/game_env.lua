@@ -42,7 +42,7 @@ end
 
 
 function env:step(action, query)
-    assert(action==1 or action==0, "Action " .. tostring(action))
+    -- assert(action==1 or action==0, "Action " .. tostring(action))
     self.skt:send(tostring(action) .. ' ' .. tostring(query))
     msg = self.skt:recv()
     while msg == nil do
@@ -65,5 +65,5 @@ end
 
 
 function env:getActions()   
-    return {0,1} --two actions - no/yes
+    return {0,1,2} --three actions - no/yes/stop
 end

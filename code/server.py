@@ -25,7 +25,9 @@ int2tags = ['shooterName','numKilled', 'numWounded', 'city']
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
-STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH
+STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
+STOP_ACTION = 4
+ACCEPT_ALL = STOP_ACTION+1
 
 
 trained_model = None
@@ -130,7 +132,7 @@ class Environment:
         self.stepNum = 0
         
 
-        self.updateState(1, 1, self.ignoreDuplicates)
+        self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates) 
 
         
         
@@ -155,7 +157,6 @@ class Environment:
     # update the state based on the decision from DQN
     def updateState(self, action, query, ignoreDuplicates=False):
         global CONTEXT
-        #action is [action, query]
 
         #use query to get next article
         articleIndx = None
@@ -176,29 +177,27 @@ class Environment:
             else:
                 nextArticle = None
 
-        if action == 1:
+        if action != STOP_ACTION:
             # integrate the values into the current DB state
             entities, confidences = self.prevEntities, self.prevConfidences           
 
             # all other tags
             for i in range(NUM_ENTITIES):
-
-                #ignore state updates to other states
-                # if self.bestEntities[i]  and self.entity != 4 and i != self.entity:                    
-                #     continue
-                self.bestIndex = (self.prevListNum, self.prevArticleIndx)
+                if action != ACCEPT_ALL and i != action: continue #only perform update for the entity chosen by agent
+               
+                self.bestIndex = (self.prevListNum, self.prevArticleIndx) #analysis
                 if self.aggregate == 'majority':
                     self.bestEntitySet[i].append((entities[i], confidences[i]))
                     self.bestEntities[i], self.bestConfidences[i] = self.majorityVote(self.bestEntitySet[i])
                 else:
                     if i==0:
-                        #handle shooterName -  add to list
+                        #handle shooterName -  add to list or directly replace
                         if not self.bestEntities[i]:
                             self.bestEntities[i] = entities[i]
                             self.bestConfidences[i] = confidences[i]                        
                         elif self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
-                            self.bestEntities[i] = entities[i]
-                            # self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i]
+                            self.bestEntities[i] = entities[i] #directly replace
+                            # self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i] #add to list
                             self.bestConfidences[i] = confidences[i]                        
                     else:
                         if not self.bestEntities[i] or self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
@@ -209,7 +208,7 @@ class Environment:
             if DEBUG:
                 print "entitySet:", self.bestEntitySet
 
-        if nextArticle and action != 2:   # action=2 -> STOP
+        if nextArticle and action != STOP_ACTION:   
             assert(articleIndx != None)
             if (articleIndx+1) in ENTITIES[self.indx][listNum]:
                 entities, confidences = ENTITIES[self.indx][listNum][articleIndx+1], CONFIDENCES[self.indx][listNum][articleIndx+1]
@@ -252,12 +251,16 @@ class Environment:
                 if j != self.entity:
                     self.state[j] = 0
                     self.state[NUM_ENTITIES+j] = 0  
-                    #TODO          
+                    #TODO: mask matches     
 
         #add in context information
         if nextArticle:
-            assert(self.entity!=4) #TODO: handle this assumption better
-            self.state[-6:] = CONTEXT[self.indx][listNum][articleIndx+1][self.entity]
+            j = 4*NUM_ENTITIES     
+            for q in range(NUM_ENTITIES):
+                if self.entity == 4 or self.entity == q:
+                    self.state[j:j+2*CONTEXT_LENGTH] = CONTEXT[self.indx][listNum][articleIndx+1][q]
+                j += 2*CONTEXT_LENGTH
+
 
 
         #update state variables
@@ -921,7 +924,7 @@ def main(args):
             #save the extracted entities
             if args.saveEntities:
                 pickle.dump([TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM], open("train2.entities", "wb"))
-                pickle.dump([TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM], open("test2.entities", "wb"))  
+                pickle.dump([TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM], open("test2.entities", "wb"))
                 return 
 
         else:

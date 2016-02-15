@@ -83,6 +83,7 @@ class Environment:
         self.entity = args.entity
         self.aggregate = args.aggregate
         self.delayedReward = args.delayedReward
+        self.shooterLenientEval = args.shooterLenientEval
         self.listNum = 0 #start off with first list        
 
         self.shuffledIndxs = [range(len(q)) for q in self.newArticles]
@@ -284,29 +285,21 @@ class Environment:
         correct = len(gold.intersection(pred))
         prec = float(correct)/len(pred)
         rec = float(correct)/len(gold)
-        if prec+rec > 0:
-            f1 = (2*prec*rec)/(prec+rec)
+
+        if self.shooterLenientEval:
+            if correct > 0:
+                return 1.
+            else:
+                return 0.
         else:
-            f1 = 0.
-        return f1
-
-    def checkEqualityCity(self, e1, e2):
-
-        return e2!='' and e1.lower() == e2.lower()
-
-        if e2!='' and e1!='':
-            gold = set(e2.lower().split())
-            pred = set(e1.lower().split())
-            correct = len(gold.intersection(pred))
-            prec = float(correct)/len(pred)
-            rec = float(correct)/len(gold)
             if prec+rec > 0:
                 f1 = (2*prec*rec)/(prec+rec)
             else:
                 f1 = 0.
             return f1
 
-        return 0
+    def checkEqualityCity(self, e1, e2):
+        return e2!='' and e1.lower() == e2.lower()
         
 
     def calculateReward(self, oldEntities, newEntities):
@@ -321,6 +314,7 @@ class Environment:
         else:
             rewards.insert(0, 0.)
 
+        # add in city reward
         rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
                 - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
 
@@ -338,6 +332,7 @@ class Environment:
         #TODO: if terminal, give some reward based on how many entities are correct?
 
         # pdb.set_trace()
+
 
         if self.entity == 4:
             return sum(rewards)
@@ -586,6 +581,9 @@ class Environment:
             reward = self.calculateReward(self.originalEntities, newEntities)
         else:
             reward = self.calculateReward(oldEntities, newEntities)
+
+        # negative per step
+        reward -= 0.001
 
         return self.state, reward, self.terminal
 

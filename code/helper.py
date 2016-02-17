@@ -23,6 +23,8 @@ def load_constants():
 
     other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,
     is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num]
+    other_features_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city',
+    'is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num']
     #other_features = []
 
  
@@ -69,3 +71,19 @@ def is_ordinal_word(word):
 def is_ordinal_num(word):
     return contains_digit(word) and (word.endswith('th') or word.endswith('nd') or word.endswith('st'))
 
+def getOtherFeatures(word):
+    features = {}
+    features["is_capital"] = is_capital(word)
+    features["is_digit"] = is_digit(word)
+    features["is_male_first_name"] = is_male_first_name(word)
+    features["is_female_first_name"] = is_female_first_name(word)
+    features["is_last_name"] = is_last_name(word)
+    features["is_full_city"] = is_full_city(word)
+    features["is_partial_city"] = is_partial_city(word)
+    features["contains_digit"] = contains_digit(word)
+    features["is_short_word"]= is_short_word(word)
+    features["is_long_word"] = is_long_word(word)
+    features["is_number_word"] = is_number_word(word)
+    features["is_ordinal_word"] = is_ordinal_word(word)
+    features["is_ordinal_num"] = is_ordinal_num(word)
+    return features

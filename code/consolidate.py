@@ -34,7 +34,9 @@ ARTICLES2, TITLES2, IDENTIFIERS2, DOWNLOADED_ARTICLES2 = [],[],[],[]
 fileName = sys.argv[1]
 #IMP: lists must be of the form train.extra.0
 numLists = int(sys.argv[2])
-trained_model = pickle.load( open(sys.argv[3], "rb" ) )
+trained_model =  str(sys.argv[3])
+if not "crf" in trained_model:
+    trained_model = pickle.load( open(sys.argv[3], "rb" ) )
 
 
 

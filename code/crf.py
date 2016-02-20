@@ -6,7 +6,6 @@ import itertools
 import sys
 import pickle
 import inflect
-import train_crf as crf
 from train import load_data
 import helper
 import re, pdb, collections
@@ -67,8 +66,6 @@ def predict(trained_model, sentence, viterbi, cities):
     return pred
 
 def predictWithConfidences(trained_model, sentence, viterbi, cities):
-    if "crf" in trained_model:
-        return predictCRF(trained_model, sentence, cities)
     if type(trained_model) == str:
         clf, previous_n,next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
     else:
@@ -85,11 +82,6 @@ def predictWithConfidences(trained_model, sentence, viterbi, cities):
 
     return pred, conf_scores, conf_cnts
 
-## Return tag, conf scores, conf counts for CRF
-def predictCRF(trained_model, sentence, cities):
-    tags, confidences = crf.predict(sentence, trained_model)
-    pred, conf_scores, conf_cnts = predict_mode(sentence, tags, confidences, cities)
-    return pred, conf_scores, conf_cnts
 
 # Make predictions using majority voting of the tag
 # sentence - list of words

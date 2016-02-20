@@ -67,15 +67,16 @@ def predict(trained_model, sentence, viterbi, cities):
     return pred
 
 def predictWithConfidences(trained_model, sentence, viterbi, cities):
+    sentence = sentence.replace("_"," ")
+    words = re.findall(r"[\w']+|[.,!?;]", sentence)
+
     if "crf" in trained_model:
-        return predictCRF(trained_model, sentence, cities)
+        return predictCRF(trained_model, words, cities)
     if type(trained_model) == str:
         clf, previous_n,next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
     else:
         #trained_model is an already initialized list of params
         clf, previous_n,next_n, word_vocab,other_features = trained_model
-    sentence = sentence.replace("_"," ")
-    words = re.findall(r"[\w']+|[.,!?;]", sentence)
     y, confidences = predict_tags_n(viterbi, previous_n,next_n, clf, words, word_vocab,other_features)
     tags = []
     for i in range(len(y)):

@@ -130,4 +130,7 @@ test_data, test_identifier = all_data[split_index:], all_identifier[split_index:
 #Feature extraction
 trainX, trainY = featureExtract(balanced_train_data)
 testX, testY = featureExtract(test_data )
-trainer = trainModel()
+
+retrain = False
+if retrain:
+    trainer = trainModel()

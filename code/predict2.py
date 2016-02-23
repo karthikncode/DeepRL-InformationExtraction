@@ -82,7 +82,7 @@ def predictWithConfidences(trained_model, sentence, viterbi, cities):
     for i in range(len(y)):
         tags.append(int(y[i]))
 
-    pred, conf_scores, conf_cnts = predict_mode(words, tags, confidences, cities)    
+    pred, conf_scores, conf_cnts = predict_mode(words, tags, confidences, cities)
 
     return pred, conf_scores, conf_cnts
 
@@ -107,7 +107,7 @@ def predict_mode(sentence, tags, confidences,  cities):
     for j in range(len(sentence)):
         output_entities[int2tags[tags[j]]].append((sentence[j], confidences[j]))
 
-    
+
     output_pred_line = ""
 
     #for shooter (OLD)
@@ -153,14 +153,14 @@ def predict_mode(sentence, tags, confidences,  cities):
                 #print possible_cities
                 #print get_mode(possible_cities)
                 mode, conf = get_mode(possible_cities)
-        
-            output_pred_line += mode            
+
+            output_pred_line += mode
             entity_confidences[tags2int['city']-1] += conf
             entity_cnts[tags2int['city']-1] += 1
 
         elif tag not in ["TAG", "shooterName"]:
-            output_pred_line += ","
-            
+            output_pred_line += " ### "
+
             mode, conf = get_mode(output_entities[tag])
             if mode == "":
                 output_pred_line += "zero"
@@ -196,19 +196,19 @@ def get_mode(l):
     counts = collections.defaultdict(lambda:0)
     Z = collections.defaultdict(lambda:0)
     curr_max = 0
-    arg_max = ""    
+    arg_max = ""
     for element, conf in l:
         try:
             normalised = p.number_to_words(int(element))
         except Exception, e:
             normalised = element.lower()
 
-        
+
         counts[normalised] += conf
         Z[normalised] += 1
 
     for element in counts:
-        if counts[element] > curr_max and element != "" and element != "zero": 
+        if counts[element] > curr_max and element != "" and element != "zero":
             curr_max = counts[element]
             arg_max = element
     return arg_max, (counts[arg_max]/Z[arg_max] if Z[arg_max] > 0 else counts[arg_max])
@@ -229,7 +229,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
             for j in range(previous_n):
                 if i+j+1<len(sentence):
                     dataX[i+j+1,(j+1)*num_features+word_vocab[word_lower]] = 1
-            for j in range(next_n):    
+            for j in range(next_n):
                 if i-j-1 >= 0:
                     dataX[i-j-1,(previous_n+j+1)*num_features+word_vocab[word_lower]] = 1
         for (index, feature_func) in enumerate(other_features):
@@ -249,9 +249,9 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     for i in range(len(sentence)):
         for j in range(previous_n):
             if j < i:
-                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1                
+                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1
         dataYconfidences[i] = clf.predict_proba(dataX[i,:].reshape(1, -1))
-        dataY[i] = np.argmax(dataYconfidences[i])    
+        dataY[i] = np.argmax(dataYconfidences[i])
         dataYconfidences[i] = dataYconfidences[i][0][dataY[i]]
 
     # pdb.set_trace()

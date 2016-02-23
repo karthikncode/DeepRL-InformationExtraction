@@ -77,22 +77,22 @@ class Environment:
         self.indx = indx
         self.originalArticle = originalArticle
         self.newArticles = newArticles #extra articles to process
-        self.goldEntities = goldEntities 
-        self.ignoreDuplicates = args.ignoreDuplicates        
+        self.goldEntities = goldEntities
+        self.ignoreDuplicates = args.ignoreDuplicates
         self.entity = args.entity
         self.aggregate = args.aggregate
         self.delayedReward = args.delayedReward
         self.shooterLenientEval = args.shooterLenientEval
-        self.listNum = 0 #start off with first list        
+        self.listNum = 0 #start off with first list
 
         self.shuffledIndxs = [range(len(q)) for q in self.newArticles]
         if not evalMode and args.shuffleArticles:
             for q in self.shuffledIndxs:
-                shuffle(q) 
-       
+                shuffle(q)
+
         self.state = [0 for i in range(STATE_SIZE)]
         self.terminal = False
-        
+
         self.bestEntities = collections.defaultdict(lambda:'') #current best entities
         self.bestConfidences = collections.defaultdict(lambda:0.)
         self.bestEntitySet = None
@@ -117,7 +117,7 @@ class Environment:
 
         #calculate tf-idf similarities using all the articles related to the original
         self.allArticles = [originalArticle] + [item for sublist in self.newArticles for item in sublist]
-        self.allArticles = [' '.join(q) for q in self.allArticles]        
+        self.allArticles = [' '.join(q) for q in self.allArticles]
 
         if self.indx not in COSINE_SIM:
             # self.tfidf_matrix = TFIDF_MATRICES[0][self.indx]
@@ -130,14 +130,14 @@ class Environment:
 
         #update the initial state
         self.stepNum = 0
-        
 
-        self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates) 
 
-        
-        
+        self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates)
+
+
+
         return
-    
+
     def extractEntitiesWithConfidences(self, article):
         #article is a list of words
         joined_article = ' '.join(article)
@@ -147,7 +147,7 @@ class Environment:
             if conf_cnts[i] > 0:
                 conf_scores[i] /= conf_cnts[i]
 
-        return pred.split(','), conf_scores
+        return pred.split(' ### '), conf_scores
 
     #find the article similarity between original and newArticle[i] (=allArticles[i+1])
     def articleSim(self, indx, listNum, i):
@@ -160,7 +160,7 @@ class Environment:
 
         #use query to get next article
         articleIndx = None
-        listNum = query-1 #convert from 1-based to 0-based         
+        listNum = query-1 #convert from 1-based to 0-based
         if ignoreDuplicates:
             nextArticle = None
             while not nextArticle and self.stepNum < len(self.newArticles[listNum]):
@@ -168,9 +168,9 @@ class Environment:
                 if self.articleSim(self.indx, listNum, articleIndx) < 0.95:
                     nextArticle = self.newArticles[listNum][articleIndx]
                 else:
-                    self.stepNum += 1                
+                    self.stepNum += 1
         else:
-            #get next article            
+            #get next article
             if self.stepNum < len(self.newArticles[listNum]):
                 articleIndx = self.shuffledIndxs[listNum][self.stepNum]
                 nextArticle = self.newArticles[listNum][articleIndx]
@@ -179,12 +179,12 @@ class Environment:
 
         if action != STOP_ACTION:
             # integrate the values into the current DB state
-            entities, confidences = self.prevEntities, self.prevConfidences           
+            entities, confidences = self.prevEntities, self.prevConfidences
 
             # all other tags
             for i in range(NUM_ENTITIES):
                 if action != ACCEPT_ALL and i != action: continue #only perform update for the entity chosen by agent
-               
+
                 self.bestIndex = (self.prevListNum, self.prevArticleIndx) #analysis
                 if self.aggregate == 'majority':
                     self.bestEntitySet[i].append((entities[i], confidences[i]))
@@ -194,11 +194,11 @@ class Environment:
                         #handle shooterName -  add to list or directly replace
                         if not self.bestEntities[i]:
                             self.bestEntities[i] = entities[i]
-                            self.bestConfidences[i] = confidences[i]                        
+                            self.bestConfidences[i] = confidences[i]
                         elif self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
                             self.bestEntities[i] = entities[i] #directly replace
                             # self.bestEntities[i] = self.bestEntities[i] + '|' + entities[i] #add to list
-                            self.bestConfidences[i] = confidences[i]                        
+                            self.bestConfidences[i] = confidences[i]
                     else:
                         if not self.bestEntities[i] or self.aggregate == 'always' or confidences[i] > self.bestConfidences[i]:
                             self.bestEntities[i] = entities[i]
@@ -208,20 +208,20 @@ class Environment:
             if DEBUG:
                 print "entitySet:", self.bestEntitySet
 
-        if nextArticle and action != STOP_ACTION:   
+        if nextArticle and action != STOP_ACTION:
             assert(articleIndx != None)
             if (articleIndx+1) in ENTITIES[self.indx][listNum]:
                 entities, confidences = ENTITIES[self.indx][listNum][articleIndx+1], CONFIDENCES[self.indx][listNum][articleIndx+1]
             else:
                 entities, confidences = self.extractEntitiesWithConfidences(nextArticle)
                 ENTITIES[self.indx][listNum][articleIndx+1], CONFIDENCES[self.indx][listNum][articleIndx+1] = entities, confidences
-            assert(len(entities) == len(confidences))          
+            assert(len(entities) == len(confidences))
         else:
             # print "No next article"
             entities, confidences = [""]*NUM_ENTITIES, [0]*NUM_ENTITIES
             self.terminal = True
 
-        #modify self.state appropriately        
+        #modify self.state appropriately
         # print(self.bestEntities, entities)
         matches = map(self.checkEquality, self.bestEntities.values()[1:-1], entities[1:-1])
         matches.insert(0, self.checkEqualityShooter(self.bestEntities.values()[0], entities[0]))
@@ -250,12 +250,12 @@ class Environment:
             for j in range(NUM_ENTITIES):
                 if j != self.entity:
                     self.state[j] = 0
-                    self.state[NUM_ENTITIES+j] = 0  
-                    #TODO: mask matches     
+                    self.state[NUM_ENTITIES+j] = 0
+                    #TODO: mask matches
 
         #add in context information
         if nextArticle:
-            j = 4*NUM_ENTITIES     
+            j = 4*NUM_ENTITIES
             for q in range(NUM_ENTITIES):
                 if self.entity == 4 or self.entity == q:
                     self.state[j:j+2*CONTEXT_LENGTH] = CONTEXT[self.indx][listNum][articleIndx+1][q]
@@ -272,7 +272,7 @@ class Environment:
         return
 
     # check if two entities are equal. Need to handle city
-    def checkEquality(self, e1, e2):         
+    def checkEquality(self, e1, e2):
         # if gold is unknown, then dont count that
         return e2!='' and (COUNT_ZERO or e2 != 'zero')  and e1.lower() == e2.lower()
 
@@ -299,7 +299,7 @@ class Environment:
 
     def checkEqualityCity(self, e1, e2):
         return e2!='' and e1.lower() == e2.lower()
-        
+
 
     def calculateReward(self, oldEntities, newEntities):
         rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
@@ -326,7 +326,7 @@ class Environment:
             print "newEntities:", newEntities
             print "goldEntities:", self.goldEntities
             print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
-            print rewards            
+            print rewards
 
         #TODO: if terminal, give some reward based on how many entities are correct?
 
@@ -338,7 +338,7 @@ class Environment:
         else:
             return rewards[self.entity]
 
-        
+
 
     #evaluate the bestEntities retrieved so far for a single article
     #IMP: make sure the evaluate variables are properly re-initialized
@@ -363,7 +363,7 @@ class Environment:
             if shooterLenientEval:
                 CORRECT[int2tags[0]] += (1 if correct> 0 else 0)
                 GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
-                PRED[int2tags[0]] += (1 if len(pred) > 0 else 0)            
+                PRED[int2tags[0]] += (1 if len(pred) > 0 else 0)
             else:
                 CORRECT[int2tags[0]] += correct
                 GOLD[int2tags[0]] += len(gold)
@@ -381,11 +381,11 @@ class Environment:
 
 
         #all other tags
-        for i in range(1, NUM_ENTITIES):   
+        for i in range(1, NUM_ENTITIES):
             if COUNT_ZERO or goldEntities[i] != 'zero':
                 # gold = set(goldEntities[i].lower().split())
                 # pred = set(predEntities[i].lower().split())
-                # correct = len(gold.intersection(pred))      
+                # correct = len(gold.intersection(pred))
                 # GOLD[int2tags[i]] += len(gold)
                 # PRED[int2tags[i]] += len(pred)
                 GOLD[int2tags[i]] += 1
@@ -402,13 +402,13 @@ class Environment:
 
 
     def oracleEvaluate(self, goldEntities, entityDic, confDic):
-        # the best possible numbers assuming that just the right information is extracted 
+        # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
         global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
         bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
         bestConf = collections.defaultdict(lambda:0.)
 
-        for stepNum, predEntities in entityDic.items():   
+        for stepNum, predEntities in entityDic.items():
 
             #shooterName first: only add this if gold contains a valid shooter
             if goldEntities[0]!='':
@@ -433,11 +433,11 @@ class Environment:
 
 
             #all other tags
-            for i in range(1, NUM_ENTITIES): 
-                if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
+            for i in range(1, NUM_ENTITIES):
+                if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue
                 gold = set(goldEntities[i].lower().split())
                 pred = set(predEntities[i].lower().split())
-                correct = len(gold.intersection(pred))      
+                correct = len(gold.intersection(pred))
                 if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
                     bestCorrect[int2tags[i]] = correct
                     bestPred[int2tags[i]] = len(pred)
@@ -450,14 +450,14 @@ class Environment:
                 if correct==0:
                     EVALCONF2[int2tags[i]].append(confDic[stepNum][i])
 
-        for i in range(NUM_ENTITIES):    
+        for i in range(NUM_ENTITIES):
             PRED[int2tags[i]] += bestPred[int2tags[i]]
-            CORRECT[int2tags[i]] += bestCorrect[int2tags[i]]     
-            EVALCONF[int2tags[i]].append(bestConf[int2tags[i]])   
+            CORRECT[int2tags[i]] += bestCorrect[int2tags[i]]
+            EVALCONF[int2tags[i]].append(bestConf[int2tags[i]])
 
 
     def thresholdEvaluate(self, goldEntities, thres=0.0):
-        # the best possible numbers assuming that just the right information is extracted 
+        # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
         global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
         global ENTITIES, CONFIDENCES
@@ -465,7 +465,7 @@ class Environment:
         bestConf = collections.defaultdict(lambda:0.)
         bestSim = 0.
         bestEntities = ['','','','']
-        aggEntites = collections.defaultdict(lambda:collections.defaultdict(lambda:0.))       
+        aggEntites = collections.defaultdict(lambda:collections.defaultdict(lambda:0.))
 
         #add in the original entities
         for i in range(NUM_ENTITIES):
@@ -506,7 +506,7 @@ class Environment:
 
 
     def confEvaluate(self, goldEntities, thres=0.0):
-        # the best possible numbers assuming that just the right information is extracted 
+        # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
         global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
         global ENTITIES, CONFIDENCES
@@ -515,7 +515,7 @@ class Environment:
         bestSim = 0.
         bestEntities = ['','','','']
         bestConfidences = [0.,0.,0.,0.]
-        aggEntites = collections.defaultdict(lambda:collections.defaultdict(lambda:0.))       
+        aggEntites = collections.defaultdict(lambda:collections.defaultdict(lambda:0.))
 
         #add in the original entities
         for i in range(NUM_ENTITIES):
@@ -525,9 +525,9 @@ class Environment:
 
 
         for listNum in range(len(self.newArticles)):
-            for i in range(len(self.newArticles[listNum])):  
+            for i in range(len(self.newArticles[listNum])):
                 sim = self.articleSim(self.indx, listNum, i)
-                if sim <= thres: continue  
+                if sim <= thres: continue
                 if (i+1) in ENTITIES[self.indx][listNum]:
                     entities, confidences = ENTITIES[self.indx][listNum][i+1], CONFIDENCES[self.indx][listNum][i+1]
                 else:
@@ -570,12 +570,12 @@ class Environment:
 
         #update pointer to next article
         self.stepNum += 1
-    
+
         self.updateState(action, query, self.ignoreDuplicates)
 
         newEntities = self.bestEntities.values()
 
-    
+
         if self.delayedReward == 'True':
             reward = self.calculateReward(self.originalEntities, newEntities)
         else:
@@ -598,16 +598,16 @@ def loadFile(filename):
                 articles.append(a)
                 titles.append(b)
                 identifiers.append(c)
-                downloaded_articles.append(d)             
+                downloaded_articles.append(d)
             except:
                 break
 
-    identifiers_tmp = []  
-    for e in identifiers:        
+    identifiers_tmp = []
+    for e in identifiers:
         for i in range(NUM_ENTITIES):
-            if type(e[i]) == int or e[i].isdigit():            
+            if type(e[i]) == int or e[i].isdigit():
                 e[i] = int(e[i])
-                e[i] = inflect_engine.number_to_words(e[i])            
+                e[i] = inflect_engine.number_to_words(e[i])
         identifiers_tmp.append(e)
     identifiers = identifiers_tmp
 
@@ -619,10 +619,10 @@ def baselineEval(articles, identifiers, args):
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
     for indx in range(len(articles)):
-        print "INDX:", indx        
+        print "INDX:", indx
         originalArticle = articles[indx][0] #since article has words and tags
         newArticles = [[] for i in range(5)]
-        goldEntities = identifiers[indx]        
+        goldEntities = identifiers[indx]
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, True)
         env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
@@ -641,10 +641,10 @@ def thresholdEval(articles, downloaded_articles, identifiers, args):
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
     for indx in range(len(articles)):
-        print "INDX:", indx        
+        print "INDX:", indx
         originalArticle = articles[indx][0]
         newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
-        goldEntities = identifiers[indx]   
+        goldEntities = identifiers[indx]
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
         env.thresholdEvaluate(env.goldEntities, THRES)
 
@@ -662,10 +662,10 @@ def confEval(articles, downloaded_articles, identifiers, args):
     PRED = collections.defaultdict(lambda:0.)
     THRES = 0.0
     for indx in range(len(articles)):
-        print "INDX:", indx        
+        print "INDX:", indx
         originalArticle = articles[indx][0]
         newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
-        goldEntities = identifiers[indx]   
+        goldEntities = identifiers[indx]
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
         env.confEvaluate(env.goldEntities, THRES)
 
@@ -698,9 +698,9 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
     for indx, lists in ENTITIES.items():
         print '\r', indx, '/', len(ENTITIES),
         for listNum, articles in lists.items():
-            for articleNum, entities in articles.items():    
+            for articleNum, entities in articles.items():
                 CONTEXT[indx][listNum][articleNum] = []
-                if articleNum == 0: 
+                if articleNum == 0:
                     #original article
                     article = [w.lower() for w in ARTICLES[indx][0]] #need only the tokens, not tags
                 else:
@@ -711,9 +711,9 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                 for entityNum, entity in enumerate(entities):
                     vec = []
                     phrase = []
-                    
+
                     if entityNum == 0: #shooter case
-                        entity = set(entity.split('|')) 
+                        entity = set(entity.split('|'))
                         for i, word in enumerate(article):
                             if word in entity:
                                 for j in range(1,context+1):
@@ -735,11 +735,11 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                                 vec.append(float(mat[0,feat_indx]))
                             else:
                                 vec.append(0.)
-                    else:                        
+                    else:
                         for i, word in enumerate(article):
-                            if type(word) == int or word.isdigit() and word < 100:            
+                            if type(word) == int or word.isdigit() and word < 100:
                                 word = int(word)
-                                word = inflect_engine.number_to_words(word)   
+                                word = inflect_engine.number_to_words(word)
                             if word in entity:
                                 for j in range(1,context+1):
                                     if i-j>=0:
@@ -752,7 +752,7 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                                     else:
                                         phrase.append('XYZUNK') #random unseen phrase
                                 break
-                        
+
                         mat = vectorizer.transform([' '.join(phrase)]).toarray()
                         for w in phrase:
                             feat_indx = vocab.get(w)
@@ -780,7 +780,7 @@ def main(args):
     global CORRECT, GOLD, PRED, EVALCONF, EVALCONF2
     global QUERY, ACTION, CHANGES
     global trained_model
-    
+
     print args
 
     trained_model = pickle.load( open(args.modelFile, "rb" ) )
@@ -791,16 +791,16 @@ def main(args):
     if args.contextType == 1:
         TRAIN_CONTEXT = CONTEXT1
     else:
-        TRAIN_CONTEXT = CONTEXT2   
+        TRAIN_CONTEXT = CONTEXT2
 
-    
+
 
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM, CONTEXT1, CONTEXT2 = pickle.load(open(args.testEntities, "rb"))
 
     if args.contextType == 1:
         TEST_CONTEXT = CONTEXT1
     else:
-        TEST_CONTEXT = CONTEXT2 
+        TEST_CONTEXT = CONTEXT2
 
     print len(train_articles)
     print len(test_articles)
@@ -827,7 +827,7 @@ def main(args):
                  TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM)
         baseline.trainAndEval(train_identifiers, test_identifiers, args.entity, COUNT_ZERO)
         return
-    
+
 
     articleNum = 0
     savedArticleNum = 0
@@ -867,7 +867,7 @@ def main(args):
             originalArticle = articles[indx][0] #since article has words and tags
             #IMP: make sure downloaded_articles is of form <indx, listNum>
             newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
-            goldEntities = identifiers[indx]   
+            goldEntities = identifiers[indx]
             env = Environment(originalArticle, newArticles, goldEntities, indx, args, evalMode)
             newstate, reward, terminal = env.state, 0, 'false'
 
@@ -887,10 +887,10 @@ def main(args):
             COSINE_SIM = TEST_COSINE_SIM
             CONTEXT = TEST_CONTEXT
             articles, titles, identifiers, downloaded_articles = test_articles, test_titles, test_identifiers, test_downloaded_articles
-            
+
             # print "##### Evaluation Started ######"
 
-        elif message == "evalEnd":            
+        elif message == "evalEnd":
             print "------------\nEvaluation Stats: (Precision, Recall, F1):"
             outFile.write("------------\nEvaluation Stats: (Precision, Recall, F1):\n")
             for tag in int2tags:
@@ -905,7 +905,7 @@ def main(args):
             outFile2.write("------------\nQsum: " + str(qsum) +  " Asum: " +  str(asum)+'\n')
             for k, val in QUERY.items():
                 outFile2.write("Query " + str(k) + ' ' + str(val/qsum)+'\n')
-            for k, val in ACTION.items():    
+            for k, val in ACTION.items():
                 outFile2.write("Action " + str(k) + ' ' + str(val/asum)+'\n')
             outFile2.write("CHANGES: "+str(CHANGES)+ ' ' + str(float(CHANGES)/len(articles))+"\n")
 
@@ -931,10 +931,10 @@ def main(args):
             if args.saveEntities:
                 pickle.dump([TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM], open("train2.entities", "wb"))
                 pickle.dump([TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM], open("test2.entities", "wb"))
-                return 
+                return
 
         else:
-            # message is "step"            
+            # message is "step"
             action, query = [int(q) for q in message.split()]
 
             if evalMode:
@@ -947,8 +947,8 @@ def main(args):
                 print newstate[4:8]
                 print newstate[8:]
                 print "Entities:", env.prevEntities
-                print "Action:", action, query            
-            newstate, reward, terminal = env.step(action, query)        
+                print "Action:", action, query
+            newstate, reward, terminal = env.step(action, query)
             terminal = 'true' if terminal else 'false'
 
             #remove reward unless terminal
@@ -956,14 +956,14 @@ def main(args):
                 reward = 0
 
             if evalMode and DEBUG and reward != 0:
-                print "Reward:", reward            
+                print "Reward:", reward
                 pdb.set_trace()
-        
+
         if message != "evalStart" and message != "evalEnd":
             #do article eval if terminal
             if evalMode and articleNum <= len(articles) and terminal == 'true':
                 if args.oracle:
-                    env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])                    
+                    env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
@@ -1094,7 +1094,7 @@ if __name__ == '__main__':
     argparser.add_argument("--contextType",
         type = int,
         default = 1,
-        help = "Type of context to consider (1 = counts, 2 = tfidf)")    
+        help = "Type of context to consider (1 = counts, 2 = tfidf)")
 
 
     argparser.add_argument("--saveEntities",
@@ -1107,6 +1107,6 @@ if __name__ == '__main__':
 
     main(args)
 
-    
 
-        
+
+

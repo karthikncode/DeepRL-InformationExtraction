@@ -26,7 +26,7 @@ class Classifier(object):
         classifiers = [] ##List of classifiers
 
         for entity_index in range(num_entities):
-            classifiers.append(MaxEnt(multi_class='ovr', solver='lbfgs'))
+            classifiers.append(MaxEnt())
             X = []
             Y = []
             for article_index in range(len(self.TRAIN_ENTITIES)):

@@ -705,6 +705,9 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                     article = [w.lower() for w in ARTICLES[indx][0]] #need only the tokens, not tags
                 else:
                     article = word_tokenize(DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower())
+                if entities > 4:
+                    print "ENTITIES is ", entities
+                    print "wut even wut"
                 for entityNum, entity in enumerate(entities):
                     vec = []
                     phrase = []

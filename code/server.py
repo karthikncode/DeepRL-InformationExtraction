@@ -1,6 +1,5 @@
 import zmq, time
 import numpy as np
-import copy
 import sys, json, pdb, pickle, operator, collections
 import helper
 import predict2 as predict
@@ -14,7 +13,7 @@ from random import shuffle
 from operator import itemgetter
 import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
-
+from classifier import Classifier
 
 DEBUG = False
 ANALYSIS = False
@@ -231,7 +230,7 @@ class Environment:
         self.state = [0 for i in range(STATE_SIZE)]
         for i in range(NUM_ENTITIES):
             self.state[i] = self.bestConfidences[i] #DB state
-            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state            
+            self.state[NUM_ENTITIES+i] = confidences[i]  #IMP: (original) next article state
             matchScore = float(matches[i])
             if matchScore > 0:
                 self.state[2*NUM_ENTITIES+i] = 1
@@ -792,6 +791,7 @@ def main(args):
         TRAIN_CONTEXT = CONTEXT2   
 
     
+
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM, CONTEXT1, CONTEXT2 = pickle.load(open(args.testEntities, "rb"))
 
     if args.contextType == 1:
@@ -814,10 +814,15 @@ def main(args):
         baselineEval(articles, identifiers, args)
         return
     elif args.thresholdEval:
-        thresholdEval(articles, downloaded_articles, identifiers, args)
+
         return
     elif args.confEval:
         confEval(articles, downloaded_articles, identifiers, args)
+        return
+    elif args.classifierEval:
+        baseline = Classifier(TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM,\
+                 TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM)
+        baseline.trainAndEval(train_identifiers, test_identifiers, args.entity, COUNT_ZERO)
         return
     
 
@@ -1031,6 +1036,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Evaluate baseline performance")
+
+    argparser.add_argument("--classifierEval",
+        type = bool,
+        default = False,
+        help = "Evaluate performance using a simple maxent classifier")
 
     argparser.add_argument("--thresholdEval",
         type = bool,

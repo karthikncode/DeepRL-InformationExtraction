@@ -66,7 +66,7 @@ def extractEntitiesWithConfidences(article):
         if conf_cnts[i] > 0:
             conf_scores[i] /= conf_cnts[i]
 
-    return pred.split(','), conf_scores
+    return pred.split(' ### '), conf_scores
 
 
 ########################### SCRIPT ########################################

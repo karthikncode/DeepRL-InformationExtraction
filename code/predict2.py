@@ -105,7 +105,7 @@ def predict_mode(sentence, tags, confidences,  cities):
         output_entities[tag] = []
 
     for j in range(len(sentence)):
-        output_entities[int2tags[tags[j]]].append((sentence[j], confidences[j]))
+        output_entities[tags[j]].append((sentence[j], confidences[j]))
 
 
     output_pred_line = ""
@@ -125,7 +125,7 @@ def predict_mode(sentence, tags, confidences,  cities):
 
     for tag in int2tags:
         if tag == "city":
-            output_pred_line += ","
+            output_pred_line += " ### "
             possible_city_combos = []
             # pdb.set_trace()
             for permutation in itertools.permutations(output_entities[tag],2):

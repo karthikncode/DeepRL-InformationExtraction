@@ -2,7 +2,7 @@ import json
 import pickle
 
 def load_constants():
-    global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals
+    global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals, other_features_names
 
     cities = pickle.load(open('../data/constants/cities.p','rb'))
     with open('../data/constants/male_first_names.json','rb') as outfile:

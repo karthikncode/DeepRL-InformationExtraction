@@ -74,7 +74,8 @@ def extractEntitiesWithConfidences(article):
             conf_scores[i] /= conf_cnts[i]
 
     result = pred.split(' ### '), conf_scores
-    assert not " ### " in result
+    split =  [" ### " in r for r in result]
+    assert sum(split) == 0
     return result
 
 

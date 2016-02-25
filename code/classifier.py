@@ -103,6 +103,9 @@ class Classifier(object):
                                 [0][entity_index]
                         confidence = self.TEST_CONFIDENCES[article_index][query_index]\
                                 [supporting_article_index][entity_index]
+                        print "QUERY"
+                        print query
+                        print query[0]
                         original_entity = query[0][entity_index].strip().lower()
                         entity = supporting_article[entity_index].strip().lower()
                         entity_match = [1, 0] if original_entity == entity else [0, 1]

@@ -4,6 +4,6 @@ python server.py \
        --modelFile trained_model2.p \
        --entity 4 \
        --aggregate always \
-       --trainEntities consolidated/train+context.5.p\
-       --testEntities consolidated/dev+test+context.5.p\
+       --trainEntities consolidated/train+context.crf.p\
+       --testEntities consolidated/dev+test+context.crf.p\
        --classifierEval True

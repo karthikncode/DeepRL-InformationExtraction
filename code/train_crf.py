@@ -5,12 +5,6 @@ import pycrfsuite as crf
 import helper
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-
-
-
-
-
-
 def trainModel():
     ## extract features
     trainer = crf.Trainer(verbose=True)
@@ -123,6 +117,12 @@ def featureExtract(data):
 
 def articleFeatureExtract(article):
     article_features = []
+    if '.' in article:
+            title = article[:article.index('.')]
+        title_features = {}
+        for t in title:
+            title_features[t] = 1
+
     for token_ind in range(len(article)):
         token = article[token_ind]
         context = {}

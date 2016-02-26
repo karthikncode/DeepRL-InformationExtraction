@@ -24,7 +24,6 @@ def trainModel():
     trainer.set_params({
         'c1': 1.0,   # coefficient for L1 penalty
         'c2': 0,  # coefficient for L2 penalty
-
         # include transitions that are possible, but not observed
         'feature.possible_transitions': True,
         'feature.possible_states': True,
@@ -124,11 +123,25 @@ def featureExtract(data):
 
 def articleFeatureExtract(article):
     article_features = []
-    for token in article:
-        token_features = {}
-        token_features["token"] = token
-        token_features["other"] = helper.getOtherFeatures(token)
-        article_features.append(token_features)
+    for token_ind in range(len(article)):
+        token = article[token_ind]
+        context = {}
+        prev_n = 4
+        next_n = 4
+        for i in range(max(0, token_ind - prev_n), min(token_ind + next_n, len(article))):
+            context_token = article[i]
+            context[context_token] = 1
+            context["other"] = helper.getOtherFeatures(context_token)
+            context["token"] = context_token
+            token_features = {}
+            token_features["context"] = context
+            token_features["title"] = title_features
+            token_features["token"] = token
+            token_features[token]   = 1
+            other_features = helper.getOtherFeatures(token)
+            token_features["other"] = helper.getOtherFeatures(token)
+            article_features.append(token_features)
+        features.append(article_features)
     return article_features
 
 

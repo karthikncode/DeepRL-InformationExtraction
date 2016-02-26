@@ -117,9 +117,9 @@ def featureExtract(data):
 
 def articleFeatureExtract(article):
     article_features = []
+    title_features = {}
     if '.' in article:
         title = article[:article.index('.')]
-        title_features = {}
         for t in title:
             title_features[t] = 1
 
@@ -164,6 +164,6 @@ test_data, test_identifier = all_data[split_index:], all_identifier[split_index:
 trainX, trainY = featureExtract(balanced_train_data)
 testX, testY = featureExtract(test_data )
 
-retrain = True
+retrain = False
 if retrain:
     trainer = trainModel()

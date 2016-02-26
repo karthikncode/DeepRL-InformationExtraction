@@ -86,14 +86,35 @@ def balance_data():
     return filtered_data
 
 
+
 def featureExtract(data):
     features = []
     labels   = []
     for article, article_labels in data:
         article_features = []
-        for token in article:
+        if '.' in article:
+            title = article[:article.index('.')]
+        title_features = {}
+        for t in title:
+#             t = t.lower()
+            title_features[t] = 1
+        for token_ind in range(len(article)):
+            token = article[token_ind]
+            context = {}
+            prev_n = 4
+            next_n = 4
+            for i in range(max(0, token_ind - prev_n), min(token_ind + next_n, len(article))):
+                context_token = article[i]
+                context[context_token] = 1
+                context["other"] = helper.getOtherFeatures(context_token)
+                context["token"] = context_token
+#             token = token.lower()
             token_features = {}
+            token_features["context"] = context
+            token_features["title"] = title_features
             token_features["token"] = token
+            token_features[token]   = 1
+            other_features = helper.getOtherFeatures(token)
             token_features["other"] = helper.getOtherFeatures(token)
             article_features.append(token_features)
         features.append(article_features)
@@ -131,6 +152,6 @@ test_data, test_identifier = all_data[split_index:], all_identifier[split_index:
 trainX, trainY = featureExtract(balanced_train_data)
 testX, testY = featureExtract(test_data )
 
-retrain = False
+retrain = True
 if retrain:
     trainer = trainModel()

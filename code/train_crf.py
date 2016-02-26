@@ -141,7 +141,6 @@ def articleFeatureExtract(article):
             other_features = helper.getOtherFeatures(token)
             token_features["other"] = helper.getOtherFeatures(token)
             article_features.append(token_features)
-        features.append(article_features)
     return article_features
 
 

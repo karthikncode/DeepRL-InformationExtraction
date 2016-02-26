@@ -118,7 +118,7 @@ def featureExtract(data):
 def articleFeatureExtract(article):
     article_features = []
     if '.' in article:
-            title = article[:article.index('.')]
+        title = article[:article.index('.')]
         title_features = {}
         for t in title:
             title_features[t] = 1

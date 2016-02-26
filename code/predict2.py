@@ -89,14 +89,6 @@ def predictWithConfidences(trained_model, sentence, viterbi, cities):
 ## Return tag, conf scores, conf counts for CRF
 def predictCRF(trained_model, sentence, cities):
     tags, confidences = crf.predict(sentence, trained_model)
-    for i in range(len(tags)):
-        #if tags[i] == "woundedNum" or tags[i] == "killedNum":
-        if  tags[i] == "killedNum":
-            window = 4
-            print "--------- ",sentence[i],"--is-",tags[i],"------------"
-            print "SENTENCE", sentence[ max(i - window, 0): min(i+window, len(tags))]
-            print "TAGS",    tags[ max(i - window, 0): min(i+window, len(tags))]
-            print "CONFIDENCES", confidences[ max(i - window, 0): min(i+window, len(tags))]
     pred, conf_scores, conf_cnts = predict_mode(sentence, tags, confidences, cities)
     return pred, conf_scores, conf_cnts
 

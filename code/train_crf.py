@@ -133,14 +133,14 @@ def articleFeatureExtract(article):
             context[context_token] = 1
             context["other"] = helper.getOtherFeatures(context_token)
             context["token"] = context_token
-            token_features = {}
-            token_features["context"] = context
-            token_features["title"] = title_features
-            token_features["token"] = token
-            token_features[token]   = 1
-            other_features = helper.getOtherFeatures(token)
-            token_features["other"] = helper.getOtherFeatures(token)
-            article_features.append(token_features)
+        token_features = {}
+        token_features["context"] = context
+        token_features["title"] = title_features
+        token_features["token"] = token
+        token_features[token]   = 1
+        other_features = helper.getOtherFeatures(token)
+        token_features["other"] = helper.getOtherFeatures(token)
+        article_features.append(token_features)
     return article_features
 
 

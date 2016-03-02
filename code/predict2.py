@@ -87,16 +87,17 @@ def predictWithConfidences(trained_model, sentence, viterbi, cities):
     return pred, conf_scores, conf_cnts
 
 ## Return tag, conf scores, conf counts for CRF
-def predictCRF(trained_model, sentence, cities):
-    tags, confidences = crf.predict(sentence, trained_model)
-    pred, conf_scores, conf_cnts = predict_mode(sentence, tags, confidences, cities)
+def predictCRF(trained_model, words, cities):
+    tags, confidences = crf.predict(words, trained_model)
+    pred, conf_scores, conf_cnts = predict_mode(words, tags, confidences, cities, True)
     return pred, conf_scores, conf_cnts
 
+count_person = 0
 # Make predictions using majority voting of the tag
 # sentence - list of words
 # tags - list of tags corresponding to sentence
 # Returns comma separated preditions of shooterNames, killedNum, woundedNum and city with shooter names separated by '|'
-def predict_mode(sentence, tags, confidences,  cities):
+def predict_mode(sentence, tags, confidences,  cities, crf=False):
     output_entities = {}
     entity_confidences = [0,0,0,0]
     entity_cnts = [0,0,0,0]
@@ -105,9 +106,13 @@ def predict_mode(sentence, tags, confidences,  cities):
         output_entities[tag] = []
 
     for j in range(len(sentence)):
-        output_entities[tags[j]].append((sentence[j], confidences[j]))
-
-
+        ind = "" 
+        if crf:
+            ind = tags[j]
+        else:
+            ind = int2tags[tags[j]]
+        output_entities[ind].append((sentence[j], confidences[j]))
+    
     output_pred_line = ""
 
     #for shooter (OLD)
@@ -170,6 +175,9 @@ def predict_mode(sentence, tags, confidences,  cities):
                 output_pred_line += mode
                 entity_confidences[tags2int[tag]-1] += conf
                 entity_cnts[tags2int[tag]-1] += 1
+
+    assert not (output_pred_line.split(" ### ")[0].strip() == "" and len(output_entities["shooterName"]) >0)
+
     return output_pred_line, entity_confidences, entity_cnts
 
 # Make predictions using majority voting in batch

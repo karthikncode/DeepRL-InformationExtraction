@@ -704,10 +704,9 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                     #original article
                     article = [w.lower() for w in ARTICLES[indx][0]] #need only the tokens, not tags
                 else:
-                    article = word_tokenize(DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower())
-                if len(entities) > 4:
-                    print "ENTITIES is ", entities
-                    print "wut even wut"
+                    article_str = DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower()
+                    print "article_str is", article_str
+                    article = word_tokenize(article_str)
                 for entityNum, entity in enumerate(entities):
                     vec = []
                     phrase = []
@@ -823,6 +822,8 @@ def main(args):
         confEval(articles, downloaded_articles, identifiers, args)
         return
     elif args.classifierEval:
+        print args.trainEntities
+        print args.testEntities
         baseline = Classifier(TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM,\
                  TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM)
         baseline.trainAndEval(train_identifiers, test_identifiers, args.entity, COUNT_ZERO)

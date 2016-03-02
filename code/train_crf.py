@@ -1,11 +1,11 @@
 import train as train
-import time
+import time, random
 import scipy.sparse
 import pycrfsuite as crf
 import helper
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-def trainModel():
+def trainModel(holdback=-1):
     ## extract features
     trainer = crf.Trainer(verbose=True)
     
@@ -19,10 +19,13 @@ def trainModel():
         'c1': 1.0,   # coefficient for L1 penalty
         'c2': 0,  # coefficient for L2 penalty
         # include transitions that are possible, but not observed
+        #'max_iterations': 1,  # stop earlier
+        
+
         'feature.possible_transitions': True,
         'feature.possible_states': True,
     })
-    trainer.train(trained_model)
+    trainer.train(trained_model, holdback)
     return trainer
 
 
@@ -79,41 +82,16 @@ def balance_data():
     return filtered_data
 
 
-
 def featureExtract(data):
     features = []
     labels   = []
     for article, article_labels in data:
-        article_features = []
-        if '.' in article:
-            title = article[:article.index('.')]
-        title_features = {}
-        for t in title:
-#             t = t.lower()
-            title_features[t] = 1
-        for token_ind in range(len(article)):
-            token = article[token_ind]
-            context = {}
-            prev_n = 4
-            next_n = 4
-            for i in range(max(0, token_ind - prev_n), min(token_ind + next_n, len(article))):
-                context_token = article[i]
-                context[context_token] = 1
-                context["other"] = helper.getOtherFeatures(context_token)
-                context["token"] = context_token
-#             token = token.lower()
-            token_features = {}
-            token_features["context"] = context
-            token_features["title"] = title_features
-            token_features["token"] = token
-            token_features[token]   = 1
-            other_features = helper.getOtherFeatures(token)
-            token_features["other"] = helper.getOtherFeatures(token)
-            article_features.append(token_features)
+        article_features = articleFeatureExtract(article)
         features.append(article_features)
         labels.append([train.int2tags[tag] for tag in article_labels])
 
     return features, labels
+
 
 def articleFeatureExtract(article):
     article_features = []
@@ -144,26 +122,40 @@ def articleFeatureExtract(article):
     return article_features
 
 
-training_file = "../data/tagged_data/whole_text_full_city2/train.tag"
-trained_model = "trained_model_crf.p"
-
-
+##SCRIPT
 helper.load_constants()
-#Load data and split into train/dev
-all_data, all_identifier = train.load_data(training_file)
-train_split = .6
-split_index = int(len(all_data)*train_split)
 
-train_data, train_identifier = all_data[:split_index], all_identifier[:split_index]
-balanced_train_data  = balance_data() #Balance data to handle skew
-
-test_data, test_identifier = all_data[split_index:], all_identifier[split_index:]
-
-
-#Feature extraction
-trainX, trainY = featureExtract(balanced_train_data)
-testX, testY = featureExtract(test_data )
-
-retrain = False
+retrain =  True
 if retrain:
-    trainer = trainModel()
+    num_blocks = 5
+    training_file = "../data/tagged_data/whole_text_full_city2/train.tag"
+    dev_file      = "../data/tagged_data/whole_text_full_city2/dev.tag"
+    test_file      = "../data/tagged_data/whole_text_full_city2/test.tag"
+
+    trained_model = "trained_model_crf.p"
+    train_data, train_identifier = train.load_data(training_file)
+    dev_data, dev_identifier = train.load_data(dev_file)
+    test_data, test_identifier = train.load_data(test_file)
+    all_data = train_data + dev_data + test_data
+    all_identifier = train_identifier + dev_identifier + test_identifier
+    len_all_data = len(all_data)
+    indices = range(len_all_data)
+    for j in range(num_blocks):
+        start_test_index = (len_all_data / num_blocks) * j
+        end_test_index   = (len_all_data / num_blocks) * (j+1)
+        train_indices = indices[:start_test_index]
+        if i < 4:
+            train_indices += indices[end_test_index:]
+        test_indices = indices[start_test_index:end_test_index]
+
+        train_data_block, train_identifier_block =[all_data[i] for i in train_indices], [all_identifier[i] for i in train_indices]
+        
+        test_data_block, test_identifier_block =  [all_data[i] for i in test_indices], [all_identifier[i] for i in test_indices]
+        # test_data, test_identifier = train.load_data(test_file)
+
+        #Feature extraction
+        trainX, trainY = featureExtract(train_data_block )
+        testX, testY = featureExtract(test_data_block )
+        trainer = trainModel(1)
+        print "YALA cross val iter", j, "complete"
+

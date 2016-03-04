@@ -65,6 +65,7 @@ end
 
 
 function env:getActions()   
-    return {0,1,2,3,4, 5} -- actions for selecting each entity or stopping
+    return {0,1,2,3,4,5,999} -- actions for selecting each entity or stopping
     -- Action 5 - ignore all entities
+    -- Action 999 - take all entities
 end

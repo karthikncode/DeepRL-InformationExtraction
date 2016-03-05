@@ -1,9 +1,12 @@
 import json
 import pickle
+import nltk.data, nltk.tag
 
 def load_constants():
-    global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals, other_features_names
+    global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals, other_features_names, \
+        tagger
 
+    tagger = nltk.data.load(nltk.tag._POS_TAGGER)
     cities = pickle.load(open('../data/constants/cities.p','rb'))
     with open('../data/constants/male_first_names.json','rb') as outfile:
         male_first_names = set(json.load(outfile))
@@ -71,6 +74,9 @@ def is_ordinal_word(word):
 def is_ordinal_num(word):
     return contains_digit(word) and (word.endswith('th') or word.endswith('nd') or word.endswith('st'))
 
+def part_of_speech(word):
+    return tagger.tag([word])[0][1]
+
 def getOtherFeatures(word):
     features = {}
     features["is_capital"] = is_capital(word)
@@ -86,4 +92,5 @@ def getOtherFeatures(word):
    # features["is_number_word"] = is_number_word(word)
    # features["is_ordinal_word"] = is_ordinal_word(word)
    # features["is_ordinal_num"] = is_ordinal_num(word)
+    features["POS_tag"] = part_of_speech(word)
     return features

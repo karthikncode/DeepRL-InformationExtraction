@@ -77,6 +77,9 @@ def is_ordinal_num(word):
 def part_of_speech(word):
     return tagger.tag([word])[0][1]
 
+def captilized(word):
+    return word.istitle()
+
 def getOtherFeatures(word):
     features = {}
     features["is_capital"] = is_capital(word)
@@ -89,8 +92,9 @@ def getOtherFeatures(word):
    # features["contains_digit"] = contains_digit(word)
     features["is_short_word"]= is_short_word(word)
     features["is_long_word"] = is_long_word(word)
+    features["is_cap"] = captilized(word)
    # features["is_number_word"] = is_number_word(word)
    # features["is_ordinal_word"] = is_ordinal_word(word)
    # features["is_ordinal_num"] = is_ordinal_num(word)
-    features["POS_tag"] = part_of_speech(word)
+   # features["POS_tag"] = part_of_speech(word)
     return features

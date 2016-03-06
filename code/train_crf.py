@@ -3,28 +3,26 @@ import time, random
 import scipy.sparse
 import pycrfsuite as crf
 import helper
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import sent_tokenize, word_tokenize 
 from nltk.tag import pos_tag
 
 def trainModel(holdback=-1):
     ## extract features
     trainer = crf.Trainer(verbose=True)
-    
+
     for xseq, yseq in zip(trainX, trainY):
         trainer.append(xseq, yseq, group = 0)
 
     for xseq, yseq in zip(testX, testY):
         trainer.append(xseq, yseq, group = 1)
-        
+
     trainer.set_params({
         'c1': 1.0,   # coefficient for L1 penalty
-        'c2': 1.0,  # coefficient for L2 penalty
+        'c2': 1e-3,  # coefficient for L2 penalty
         # include transitions that are possible, but not observed
         'max_iterations': 200,  # stop earlier
-        
-
-        'feature.possible_transitions': True,
-        'feature.possible_states': True,
+        #'feature.possible_transitions': True,
+        #'feature.possible_states': True,
     })
     trainer.train(trained_model, holdback)
     return trainer
@@ -93,7 +91,6 @@ def featureExtract(data, prev_n = 4, next_n = 4):
 
     return features, labels
 
-
 def articleFeatureExtract(article, prev_n = 4, next_n = 4):
     article_features = []
     title_features = {}
@@ -101,7 +98,9 @@ def articleFeatureExtract(article, prev_n = 4, next_n = 4):
     if '.' in article:
         title = article[:article.index('.')]
         for t in title:
-            title_features[t] = 1
+            other_title_features = helper.getOtherFeatures(t)
+            other_title_features[t] = 1
+            title_features[t] = other_title_features
     for token_ind in range(len(article)):
         token = article[token_ind]
         context = {}
@@ -111,7 +110,7 @@ def articleFeatureExtract(article, prev_n = 4, next_n = 4):
             context["other"] = helper.getOtherFeatures(context_token)
             context["token"] = context_token
         token_features = {}
- #       token_features["pos_tag"] = pos_tags[token_ind][1]
+        #        token_features["pos_tag"] = pos_tags[token_ind][1]
         token_features["context"] = context
         token_features["title"] = title_features
         token_features["token"] = token
@@ -122,7 +121,6 @@ def articleFeatureExtract(article, prev_n = 4, next_n = 4):
             token_features[str(i)] = True
         article_features.append(token_features)
     return article_features
-
 
 ##SCRIPT
 print "reload helper"

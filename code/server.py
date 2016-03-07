@@ -257,13 +257,13 @@ class Environment:
 
         #add in context information
         if nextArticle:
-            j = 4*NUM_ENTITIES     
+            j = 4*NUM_ENTITIES+1     
             for q in range(NUM_ENTITIES):
                 if self.entity == 4 or self.entity == q:
                     self.state[j:j+2*CONTEXT_LENGTH] = CONTEXT[self.indx][listNum][articleIndx+1][q]
                 j += 2*CONTEXT_LENGTH
 
-
+        # pdb.set_trace()
 
         #update state variables
         self.prevEntities = entities

@@ -410,47 +410,48 @@ class Environment:
         bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
         bestConf = collections.defaultdict(lambda:0.)
 
-        for stepNum, predEntities in entityDic.items():   
+        for stepNum, predEntitiesDic in entityDic.items():   
+            for listNum, predEntities in predEntitiesDic.items():
 
-            #shooterName first: only add this if gold contains a valid shooter
-            if goldEntities[0]!='':
-                gold = set(goldEntities[0].lower().split('|'))
+                #shooterName first: only add this if gold contains a valid shooter
+                if goldEntities[0]!='':
+                    gold = set(goldEntities[0].lower().split('|'))
 
-                pred = set(predEntities[0].lower().split('|'))
-                correct = len(gold.intersection(pred))
+                    pred = set(predEntities[0].lower().split('|'))
+                    correct = 1. if len(gold.intersection(pred)) > 0 else 0
 
-                if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
-                    # print "Correct: ", correct
-                    # print "Gold:", gold
-                    # print "pred:", pred
-                    bestCorrect[int2tags[0]] = correct
-                    bestPred[int2tags[0]] = len(pred)
-                    bestConf[int2tags[0]] = confDic[stepNum][0]
+                    if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
+                        # print "Correct: ", correct
+                        # print "Gold:", gold
+                        # print "pred:", pred
+                        bestCorrect[int2tags[0]] = correct
+                        bestPred[int2tags[0]] = 1 if len(pred) > 0 else 0.
+                        bestConf[int2tags[0]] = confDic[stepNum][listNum][0]
 
-                if stepNum == 0:
-                    GOLD[int2tags[0]] += len(gold)
+                    if stepNum == 0 and listNum == 0:
+                        GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
 
-                if correct==0:
-                    EVALCONF2[int2tags[0]].append(confDic[stepNum][0])
+                    if correct==0:
+                        EVALCONF2[int2tags[0]].append(confDic[stepNum][listNum][0])
 
 
-            #all other tags
-            for i in range(1, NUM_ENTITIES): 
-                if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
-                gold = set(goldEntities[i].lower().split())
-                pred = set(predEntities[i].lower().split())
-                correct = len(gold.intersection(pred))      
-                if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
-                    bestCorrect[int2tags[i]] = correct
-                    bestPred[int2tags[i]] = len(pred)
-                    bestConf[int2tags[i]] = confDic[stepNum][i]
-                    # print "Correct: ", correct
-                    # print "Gold:", gold
-                    # print "pred:", pred
-                if stepNum == 0:
-                    GOLD[int2tags[i]] += len(gold)
-                if correct==0:
-                    EVALCONF2[int2tags[i]].append(confDic[stepNum][i])
+                #all other tags
+                for i in range(1, NUM_ENTITIES): 
+                    if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
+                    gold = set(goldEntities[i].lower().split())
+                    pred = set(predEntities[i].lower().split())
+                    correct = len(gold.intersection(pred))      
+                    if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                        bestCorrect[int2tags[i]] = correct
+                        bestPred[int2tags[i]] = len(pred)
+                        bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
+                        # print "Correct: ", correct
+                        # print "Gold:", gold
+                        # print "pred:", pred
+                    if stepNum == 0 and listNum == 0:
+                        GOLD[int2tags[i]] += len(gold)
+                    if correct==0:
+                        EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
 
         for i in range(NUM_ENTITIES):    
             PRED[int2tags[i]] += bestPred[int2tags[i]]
@@ -961,16 +962,18 @@ def main(args):
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
                 #for analysis
-                if ANALYSIS and evalMode and env.bestEntities.values()[args.entity].lower() != env.originalEntities[args.entity].lower() and reward > 0:
-                    CHANGES += 1
-                    try:
-                        print "Entities:", 'best', env.bestEntities.values()[args.entity], 'orig', env.originalEntities[args.entity], 'gold', env.goldEntities[args.entity]
-                        print ' '.join(originalArticle)
-                        print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-                        print ' '.join(newArticles[env.bestIndex[0]][env.bestIndex[1]])
-                        print "----------------------------"
-                    except:
-                        pass
+                for entityNum in [0,1,2,3]:
+                    if ANALYSIS and evalMode and env.bestEntities.values()[entityNum].lower() != env.originalEntities[entityNum].lower() and reward > 0:
+                        CHANGES += 1
+                        try:
+                            print "ENTITY:", entityNum
+                            print "Entities:", 'best', env.bestEntities.values()[entityNum], 'orig', env.originalEntities[entityNum], 'gold', env.goldEntities[entityNum]
+                            print ' '.join(originalArticle)
+                            print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+                            print ' '.join(newArticles[env.bestIndex[0]][env.bestIndex[1]])
+                            print "----------------------------"
+                        except:
+                            pass
 
             #send message (IMP: only for newGame or step messages)
             outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal

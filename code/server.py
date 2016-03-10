@@ -25,6 +25,7 @@ int2tags = ['shooterName','numKilled', 'numWounded', 'city']
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
+CONTEXT_TYPE = None
 STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
 STOP_ACTION = 4
 IGNORE_ALL = STOP_ACTION + 1
@@ -158,7 +159,7 @@ class Environment:
 
     # update the state based on the decision from DQN
     def updateState(self, action, query, ignoreDuplicates=False):
-        global CONTEXT
+        global CONTEXT, CONTEXT_TYPE
 
         #use query to get next article
         articleIndx = None
@@ -256,7 +257,7 @@ class Environment:
                     #TODO: mask matches     
 
         #add in context information
-        if nextArticle:
+        if nextArticle and CONTEXT_TYPE != 0:
             j = 4*NUM_ENTITIES+1     
             for q in range(NUM_ENTITIES):
                 if self.entity == 4 or self.entity == q:
@@ -780,6 +781,7 @@ def main(args):
     global CORRECT, GOLD, PRED, EVALCONF, EVALCONF2
     global QUERY, ACTION, CHANGES
     global trained_model
+    global CONTEXT_TYPE
     
     print args
 
@@ -792,6 +794,8 @@ def main(args):
         TRAIN_CONTEXT = CONTEXT1
     else:
         TRAIN_CONTEXT = CONTEXT2   
+
+    CONTEXT_TYPE = args.contextType
 
     
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM, CONTEXT1, CONTEXT2 = pickle.load(open(args.testEntities, "rb"))
@@ -1085,7 +1089,7 @@ if __name__ == '__main__':
     argparser.add_argument("--contextType",
         type = int,
         default = 1,
-        help = "Type of context to consider (1 = counts, 2 = tfidf)")    
+        help = "Type of context to consider (1 = counts, 2 = tfidf, 0 = none)")    
 
 
     argparser.add_argument("--saveEntities",

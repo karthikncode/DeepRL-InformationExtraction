@@ -4,6 +4,8 @@ import sys, argparse
 import matplotlib.pyplot as plt
 import math
 import numpy as np
+# import seaborn as sns
+# sns.set(style='ticks', palette='Set2')
 
 # plt.gcf().subplots_adjust(bottom=0.15)
 # plt.gcf().subplots_adjust(right=1.05)
@@ -53,6 +55,7 @@ for tl in ax2.get_yticklabels():
     tl.set_color('black')
     tl.set_fontsize(17)
 # plt.show()
+# sns.regplot(x, y, ax=ax1)
 plt.savefig('plots/plot.pdf', bbox_inches='tight')
 
 

@@ -23,6 +23,7 @@ COUNT_ZERO = False
 #Global variables
 int2tags = ['shooterName','numKilled', 'numWounded', 'city']
 NUM_ENTITIES = len(int2tags)
+NUM_QUERY_TYPES = 5
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
 CONTEXT_TYPE = None
@@ -132,7 +133,7 @@ class Environment:
                 cnt += len(sublist)
 
         #update the initial state
-        self.stepNum = 0
+        self.stepNum = [0 for q in range(NUM_QUERY_TYPES)]
         
 
         self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates) 
@@ -166,16 +167,16 @@ class Environment:
         listNum = query-1 #convert from 1-based to 0-based         
         if ignoreDuplicates:
             nextArticle = None
-            while not nextArticle and self.stepNum < len(self.newArticles[listNum]):
+            while not nextArticle and self.stepNum[listNum] < len(self.newArticles[listNum]):
                 articleIndx = self.shuffledIndxs[listNum][self.stepNum]
                 if self.articleSim(self.indx, listNum, articleIndx) < 0.95:
                     nextArticle = self.newArticles[listNum][articleIndx]
                 else:
-                    self.stepNum += 1                
+                    self.stepNum[listNum] += 1                
         else:
             #get next article            
-            if self.stepNum < len(self.newArticles[listNum]):
-                articleIndx = self.shuffledIndxs[listNum][self.stepNum]
+            if self.stepNum[listNum] < len(self.newArticles[listNum]):
+                articleIndx = self.shuffledIndxs[listNum][self.stepNum[listNum]]
                 nextArticle = self.newArticles[listNum][articleIndx]
             else:
                 nextArticle = None
@@ -573,7 +574,8 @@ class Environment:
         oldEntities = copy.copy(self.bestEntities.values())
 
         #update pointer to next article
-        self.stepNum += 1
+        listNum = query-1
+        self.stepNum[listNum] += 1
     
         self.updateState(action, query, self.ignoreDuplicates)
 
@@ -851,6 +853,9 @@ def main(args):
     socket.bind("tcp://*:%s" % port)
     print "Started server on port", port
 
+    #for analysis
+    stepCnt = 0
+
     # server loop
     while True:
         #  Wait for next request from client
@@ -897,6 +902,8 @@ def main(args):
                 f1 = (2*prec*rec)/(prec+rec)
                 print tag, prec, rec, f1, "########", CORRECT[tag], PRED[tag], GOLD[tag]
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
+            print "StepCnt (total, average):", stepCnt, float(stepCnt)/len(articles)
+            outFile.write("StepCnt (total, average): " + str(stepCnt)+ ' ' + str(float(stepCnt)/len(articles)) + '\n')
 
             qsum = sum(QUERY.values())
             asum = sum(ACTION.values())
@@ -964,6 +971,8 @@ def main(args):
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])                    
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
+
+                stepCnt += sum(env.stepNum)
 
                 #for analysis
                 for entityNum in [0,1,2,3]:

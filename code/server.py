@@ -904,6 +904,7 @@ def main(args):
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
             print "StepCnt (total, average):", stepCnt, float(stepCnt)/len(articles)
             outFile.write("StepCnt (total, average): " + str(stepCnt)+ ' ' + str(float(stepCnt)/len(articles)) + '\n')
+            stepCnt = 0
 
             qsum = sum(QUERY.values())
             asum = sum(ACTION.values())

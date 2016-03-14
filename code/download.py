@@ -8,7 +8,8 @@ from train import load_data
 
 NUM_ENTITIES = 4
 
-EXTRA_QUERY='( injured | wounded | victim )' 
+EXTRA_QUERY='( guilty | counterfeit | contaminated )'
+#EXTRA_QUERY='( injured | wounded | victim )' 
 #EXTRA_QUERY='( suspect | shooter | identified | arrested | charged )'
 
 if __name__ == '__main__':

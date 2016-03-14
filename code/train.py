@@ -7,8 +7,11 @@ import sys
 import pickle
 import helper
 
-tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
-int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
+
+#tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
+tags2int={'TAG':0, 'food':1, 'adulterant':2, 'location':3, 'year':4}
+#int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
+int2tags=['TAG', 'food', 'adulterant', 'location', 'year']
 tags = [0,1,2,3,4]
 
 # main loop

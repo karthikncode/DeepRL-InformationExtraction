@@ -27,13 +27,13 @@ if __name__ == '__main__':
             try:
                 with open(saveFile, "wb" ) as f:
                     articles = query.download_articles_from_query(title+' '+ source, summary,'bing')
-                    if len(articles) >= 0:
+                    if len(articles) > 0:
                         article = articles[0]
                         f.write(article)
                         f.flush()
                         f.close()
-                    downloaded_articles[saveFile] = article
-                    pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
+                        downloaded_articles[saveFile] = article
+                        pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
             except Exception, e:
                 pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
                 raise e

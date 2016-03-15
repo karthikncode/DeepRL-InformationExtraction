@@ -85,16 +85,12 @@ while not  entry == '':
         out_ident = ','.join(gold_ents) + ", " + title
         rand = random.random()
         f = ''
-        if rand < 2:#train_cut:
+        if rand < train_cut:
             f = train
-            print "TRAIN"
         elif rand < dev_cut:
             f = dev
-            print "DEV"
         else:
             f = test
-
-            print "TEST"
         f.write(out_ident + '\n')
         f.write(tagged_body + '\n')
 

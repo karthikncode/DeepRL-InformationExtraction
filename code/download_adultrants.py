@@ -13,7 +13,7 @@ if __name__ == '__main__':
     # downloaded_articles = {}
     downloaded_articles = pickle.load(open('EMA_downloaded_articles_dump.p', 'rb'))
 
-    for incident_id in incidents.keys():
+    for incident_ind, incident_id in enumerate(incidents.keys()):
         incident = incidents[incident_id]
         summary = incident['Incident_Summary']
         citations = incident['citations']
@@ -21,6 +21,7 @@ if __name__ == '__main__':
             saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
             title = citation['Title']
             source = citation['Source']
+            print "Now downloading ", incident_ind, "/", len(incidents), "pt", citation_ind
             if saveFile in downloaded_articles:
                 print saveFile, "skipped"
                 continue

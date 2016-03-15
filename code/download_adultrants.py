@@ -25,23 +25,23 @@ if __name__ == '__main__':
             if saveFile in downloaded_articles:
                 print saveFile, "skipped"
                 continue
-            try:
-                with open(saveFile, "wb" ) as f:
-                    articles = query.download_articles_from_query(title+' '+ source, summary,'bing')
-                    if len(articles) > 0:
-                        article = articles[0]
-                        f.write(article)
-                        f.flush()
-                        f.close()
-                        downloaded_articles[saveFile] = article
-                        pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
-                    else:
-                        downloaded_articles[saveFile] = "None"
-                        pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
-            except Exception, e:
-                downloaded_articles[saveFile] = "None"
-                pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
-                raise e
+            # try:
+            with open(saveFile, "wb" ) as f:
+                articles = query.download_articles_from_query(title+' '+ source, summary,'bing')
+                if len(articles) > 0:
+                    article = articles[0]
+                    f.write(article)
+                    f.flush()
+                    f.close()
+                    downloaded_articles[saveFile] = article
+                    pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
+                else:
+                    downloaded_articles[saveFile] = "None"
+                    pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
+            # except Exception, e:
+            #     downloaded_articles[saveFile] = "None"
+            #     pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
+            #     # raise e
             print "Saved to file", saveFile
         print
     #save to file

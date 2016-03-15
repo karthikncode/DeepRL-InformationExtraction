@@ -27,7 +27,10 @@ if __name__ == '__main__':
                 continue
             # try:
             with open(saveFile, "wb" ) as f:
-                articles = query.download_articles_from_query(title+' '+ source, summary,'bing')
+                query_text = title+' '+ source
+                clean_query = query_text.encode("ascii", "ignore")
+                clean_summary= summary.encode("ascii", "ignore")
+                articles = query.download_articles_from_query(clean_query, clean_summary,'bing')
                 if len(articles) > 0:
                     article = articles[0]
                     f.write(article)

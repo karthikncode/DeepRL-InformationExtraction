@@ -24,8 +24,6 @@ int2allFeilds = \
 'Distributed_Location']
 int2citationFeilds = ['Authors', 'Date', 'Title', 'Source']
 
-incidents = {}
-
 def login(driver):
 	login = driver.find_element_by_name("login")
 	password = driver.find_element_by_name("password")
@@ -79,23 +77,44 @@ def setupUpSearchPage(driver):
 	rows = body.find_elements_by_css_selector("tr")
 	return rows
 
+def getToPage(driver, page_ind):
+	nextPage = driver.find_element_by_partial_link_text(str(page_ind+1))
+	nextPage.send_keys(Keys.RETURN)
+
 def scrapeSearchPage(driver, page_ind):
+	
+	getToPage(driver, page_ind)
+	info = driver.find_element_by_id("DataTables_Table_0_info")
+	print info.text
 	rows =setupUpSearchPage(driver)
 	for row_ind in range(len(rows)):
+		assert not str(page_ind*100 + row_ind) in seen
+		seen[str(page_ind*100 + row_ind)] = True
 		row = rows[row_ind]
 		cols = row.find_elements_by_css_selector("td")
 		incident_id, btn = get_id(cols[-1])
+		if incident_id in incidents:
+			#print 'skipped incident:', (page_ind*100 + row_ind)
+			continue
 		scrapeIncidentPage(driver, btn, incident_id)
 		print 'scraped incident:', (page_ind*100 + row_ind)
-		rows = setupUpSearchPage(driver)
+		if not row_ind == len(rows) - 1:
+			getToPage(driver, page_ind)
+			rows = setupUpSearchPage(driver)
 
-driver = webdriver.Firefox()
-driver.get('https://www.foodshield.org/member/login')
-getToDatabase(driver)
-scrapeSearchPage(driver, 0)
-for i in range(5):
-	nextPage = driver.find_element_by_partial_link_text("Next")
-	nextPage.click()
-	scrapeSearchPage(driver, i+1)
-
-pickle.dump(incidents, open('EMA_dump.p', 'wb'))
+# incidents = {}
+incidents = pickle.load(open('EMA_dump.p', 'rb'))
+assert len(incidents.keys()) > 0
+print "Incidents size is", len(incidents.keys())
+seen = {}
+try:
+	driver = webdriver.Firefox()
+	driver.get('https://www.foodshield.org/member/login')
+	getToDatabase(driver)
+	for i in range(6):
+		scrapeSearchPage(driver, i)
+	pickle.dump(incidents, open('EMA_dump.p', 'wb'))
+except Exception, e:
+	pickle.dump(incidents, open('EMA_dump.p', 'wb'))
+	print "Indicedents dump size is", len(incidents.keys())
+	raise e

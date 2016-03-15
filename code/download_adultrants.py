@@ -16,6 +16,8 @@ if __name__ == '__main__':
     for incident_ind, incident_id in enumerate(incidents.keys()):
         incident = incidents[incident_id]
         summary = incident['Incident_Summary']
+        if not 'citations' in incident:
+            continue
         citations = incident['citations']
         for citation_ind, citation in enumerate(citations):
             saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"

@@ -266,8 +266,8 @@ def get_related_urls_from_bing(query_text):
         print "something wrong"
         return []
     results = json['d']['results']
-    article_urls = [item['Url'] for item in results][:20]
-
+    #article_urls = [item['Url'] for item in results][:20]
+    article_urls = [item['Url'] for item in results][:10]
     return article_urls
 
 def get_related_urls_from_google(query_text):

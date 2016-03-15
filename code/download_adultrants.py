@@ -34,6 +34,9 @@ if __name__ == '__main__':
                         f.close()
                         downloaded_articles[saveFile] = article
                         pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
+                    else:
+                        downloaded_articles[saveFile] = "None"
+                        pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
             except Exception, e:
                 pickle.dump(downloaded_articles, open('EMA_downloaded_articles_dump.p', 'wb'))
                 raise e

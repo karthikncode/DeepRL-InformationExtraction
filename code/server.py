@@ -87,7 +87,8 @@ class Environment:
         self.aggregate = args.aggregate
         self.delayedReward = args.delayedReward
         self.shooterLenientEval = args.shooterLenientEval
-        self.listNum = 0 #start off with first list        
+        self.listNum = 0 #start off with first list    
+        self.rlbasicEval = args.rlbasicEval    
 
         self.shuffledIndxs = [range(len(q)) for q in self.newArticles]
         if not evalMode and args.shuffleArticles:
@@ -164,7 +165,14 @@ class Environment:
 
         #use query to get next article
         articleIndx = None
-        listNum = query-1 #convert from 1-based to 0-based         
+
+        if self.rlbasicEval:
+            #ignore the query decision from the agent
+            listNum = self.listNum
+            self.listNum += 1
+            if self.listNum == NUM_QUERY_TYPES: self.listNum = 0
+        else:
+            listNum = query-1 #convert from 1-based to 0-based         
         if ignoreDuplicates:
             nextArticle = None
             while not nextArticle and self.stepNum[listNum] < len(self.newArticles[listNum]):
@@ -1059,6 +1067,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Evaluate with best conf ")
+
+    argparser.add_argument("--rlbasicEval",
+        type = bool,
+        default = False,
+        help = "Evaluate with RL agent that takes only reconciliation decisions.")
 
     argparser.add_argument("--shuffleArticles",
         type = bool,

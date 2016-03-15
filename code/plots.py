@@ -4,8 +4,6 @@ import sys, argparse
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-# import seaborn as sns
-# sns.set(style='ticks', palette='Set2')
 
 # plt.gcf().subplots_adjust(bottom=0.15)
 # plt.gcf().subplots_adjust(right=1.05)
@@ -17,7 +15,7 @@ f1 = [0.0] + map(float, file(sys.argv[1]).read().split('\n')[1:-1])
 
 g = file(sys.argv[2]).read().split('------------\n')
 
-max_epochs = 80
+max_epochs = 100
 N = min(max_epochs, len(f1))
 
 colors = ['r', 'm', 'b', 'g']
@@ -55,7 +53,6 @@ for tl in ax2.get_yticklabels():
     tl.set_color('black')
     tl.set_fontsize(17)
 # plt.show()
-# sns.regplot(x, y, ax=ax1)
 plt.savefig('plots/plot.pdf', bbox_inches='tight')
 
 

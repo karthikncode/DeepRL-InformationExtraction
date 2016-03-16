@@ -249,7 +249,6 @@ if __name__ == "__main__":
                 f.write(new_body + '\n')
                 
             f.flush()
-        break
 
     train.close()
     dev.close()

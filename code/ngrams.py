@@ -17,7 +17,7 @@ with open(sys.argv[1], 'r') as inFile:
         tokens = f[i].split()
         for j, token in enumerate(tokens):
             if '_TAG' not in token:                
-                tag = token.split('_')[1]
+                tag = "_".join(token.split('_')[1:])
                 if SENTENCE_CONTEXT:
                     contextList = []
                     k=1

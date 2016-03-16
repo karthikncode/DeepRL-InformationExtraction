@@ -138,7 +138,6 @@ if __name__ == "__main__":
     ratios = {}
     correct = [0] * len(int2tags[:1])
     for incident_id in incidents.keys():
-        print "new incident"
         incident = incidents[incident_id]
         if not 'citations' in incident:
             continue

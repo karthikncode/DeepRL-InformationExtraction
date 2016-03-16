@@ -118,7 +118,7 @@ def getTags(article, ents):
 if __name__ == "__main__":
 
     train = open('../data/tagged_data/EMA/train.tag', 'w')
-    dev = open('../data/tagged_data/EMA/ev.tag', 'w')
+    dev = open('../data/tagged_data/EMA/dev.tag', 'w')
     test = open('../data/tagged_data/EMA/test.tag', 'w')
     
     incidents = pickle.load(open('EMA_dump.p', 'rb'))

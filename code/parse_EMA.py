@@ -196,8 +196,28 @@ if __name__ == "__main__":
 
             cleaned_identifier = out_ident
             cleaned_body = tagged_body
-            f.write(cleaned_identifier + '\n')
-            f.write(cleaned_body + '\n')
+            try:
+                f.write(cleaned_identifier + '\n')
+            except Exception, e:
+                new_ident = ""
+                for c in cleaned_identifier:
+                    try:
+                        new_ident += c.encode("ascii", "ignore")
+                    except Exception, e:
+                        new_ident += ""
+                f.write(new_ident + '\n')
+            
+            try:
+                f.write(cleaned_body + '\n')
+            except Exception, e:
+                new_body = ""
+                for c in cleaned_identifier:
+                    try:
+                        new_body += c.encode("ascii", "ignore")
+                    except Exception, e:
+                        new_body += ""
+                f.write(new_body + '\n')
+                
             f.flush()
 
     train.close()

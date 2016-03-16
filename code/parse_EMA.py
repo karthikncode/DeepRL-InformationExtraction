@@ -66,7 +66,6 @@ def filterArticles(articles):
                         correct[tags2int[ent]] += 1
                 gold_num[tags2int[ent]] += 1
                     
-    assert len(relevant_articles) == len(articles)
     oracle_scores = [(correct[i]*1./gold_num[i], int2tags[i]) if gold_num[i] > 100 else 0 for i in range(len(int2tags))]
     print "num articles is", len(relevant_articles)
     return relevant_articles, oracle_scores

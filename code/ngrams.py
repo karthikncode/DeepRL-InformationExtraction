@@ -2,6 +2,7 @@
 
 import sys, pdb, collections
 from operator import itemgetter
+from nltk.corpus import stopwords
 import pdb
 
 CONTEXT = 5
@@ -9,6 +10,7 @@ CONTEXT = 5
 SENTENCE_CONTEXT = True
 
 contextWords = collections.defaultdict(lambda:collections.defaultdict(lambda:0.))
+stop = stopwords.words('english')
 
 with open(sys.argv[1], 'r') as inFile:
 
@@ -32,7 +34,7 @@ with open(sys.argv[1], 'r') as inFile:
                     contextList = [q.split('_')[0] for q in tokens[max(0, j-CONTEXT) : min(len(tokens), j+CONTEXT)]]
                 for word in contextList:
                     word = word.lower()
-                    if word.isalpha():
+                    if word.isalpha() and not word in stop:
                         contextWords[tag][word] += 1
 
 # print stats

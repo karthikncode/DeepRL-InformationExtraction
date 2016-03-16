@@ -69,7 +69,7 @@ def filterArticles(articles):
 
                     if clean_g in clean_article.lower():
                         if not saveFile in relevant_articles:
-                            relevant_articles[saveFile] = article
+                            relevant_articles[saveFile] = clean_article
                         correct[tags2int[ent]] += 1
                 gold_num[tags2int[ent]] += 1
 
@@ -144,7 +144,8 @@ if __name__ == "__main__":
 
     ratios = {}
     correct = [0] * len(int2tags[:1])
-    for incident_id in incidents.keys():
+    for ind, incident_id in enumerate(incidents.keys()):
+        print ind,'/',len(incidents.keys)
         incident = incidents[incident_id]
         if not 'citations' in incident:
             continue

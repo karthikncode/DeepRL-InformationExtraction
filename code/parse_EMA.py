@@ -7,6 +7,7 @@ import itertools
 import sys
 import pickle
 import helper
+from __future__ import unicode_literals
 
 tokenizer = WordTokenizer()
 int2tags = \

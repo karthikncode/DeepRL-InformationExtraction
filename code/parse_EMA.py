@@ -47,7 +47,7 @@ def filterArticles(articles):
                     continue
                 gold = incident[ent]
 
-                if ent in ['Consumer_Brand', 'Perpetrator', 'Adulterated_Food_Product', 'Affected_Food_Product']:
+                if ent in ['Affected_Food_Product']:
                     gold_list = gold.split(';')
                 elif ent in ["Produced_Location", "Distributed_Location"]:
                     country = gold.split(',')
@@ -60,16 +60,20 @@ def filterArticles(articles):
                     if g in ['', 'none', 'unknown', "0"]:
                         continue
                     clean_g = g.encode("ascii", "ignore")
-                    clean_article = ""
-                    for c in article:
+                    clean_tokens = []
+                    for c in tokenizer.tokenize(article):
                         try:
-                            clean_article += c.encode("ascii", "ignore")
+                            clean_tokens.append(c.encode("ascii", "ignore"))
                         except Exception, e:
-                            clean_article += ""
-
+                            pass
+                    clean_article = " ".join(clean_tokens)
                     if clean_g in clean_article.lower():
                         if not saveFile in relevant_articles:
-                            relevant_articles[saveFile] = clean_article
+                            relevant_articles[saveFile] = clean_article.lower()
+                        if False:
+                            print clean_g
+                            ind = clean_article.lower().index(clean_g)
+                            print clean_article[max(0, ind - 100): min(len(clean_article), ind + 100)]
                         correct[tags2int[ent]] += 1
                 gold_num[tags2int[ent]] += 1
 
@@ -144,7 +148,7 @@ def getTags(article, ents):
 
         label = 0
         if len(labels) > 0:
-            label = labels[0]
+            label = random.choice(labels)
         tags.append(label)
     return tags
 
@@ -175,21 +179,13 @@ if __name__ == "__main__":
     ratios = {}
     correct = [0] * (len(int2tags)-1)
     count = 0
-    for ind, incident_id in enumerate(incidents.keys()):#[3:]):
+    for ind, incident_id in enumerate(incidents.keys()[20:]):
         print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
         if not 'citations' in incident:
             continue
-        for citation_ind, citation in enumerate(incident['citations']):
-            title = incident['citations'][citation_ind]['Title']
-            saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
-            if not saveFile in relevant_articles:
-                continue
-            article = relevant_articles[saveFile]
-            tokens = tokenizer.tokenize(article)
-            ents = []
-            count += 1
-            for ent in int2tags[1:]:
+        ents = []
+        for ent in int2tags[1:]:
                 if ent in incident:
                     gold = incident[ent].encode('ascii', 'ignore')
                     if ent in ['Affected_Food_Product']:
@@ -204,12 +200,24 @@ if __name__ == "__main__":
                     ents.append("|".join(gold_list))
                 else:
                     ents.append('')
+        pprint.pprint(ents)
+        for citation_ind, citation in enumerate(incident['citations']):
+            title = incident['citations'][citation_ind]['Title']
+            saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
+            if not saveFile in relevant_articles:
+                continue
+            article = relevant_articles[saveFile]
+            #raw_input()
+            tokens = tokenizer.tokenize(article)[:1000]
+            count += 1
+            
             tags = getTags(tokens, ents)
-
+            correct_pass = [0] * (len(int2tags)-1)
             for ent_ind in range(1,len(int2tags)):
                 if ent_ind in tags:
                     correct[ent_ind - 1] += 1
-
+                    correct_pass[ent_ind - 1] += 1
+            pprint.pprint(correct_pass)
             tagged_body = ""
             for token, tag in zip(tokens, tags):
                 try:

@@ -90,8 +90,9 @@ def asciiEnts(ent_tokens):
         try:
             ascii_tokens.append(en.encode("ascii", "ignore").lower())
         except Exception, e:
-            print "that should not be possible"
-            print en
+            # print "that should not be possible"
+            # print en
+            ascii_tokens.append(en)
             pass
     return ascii_tokens
 def getTags(article, ents):
@@ -124,7 +125,7 @@ def getTags(article, ents):
                 if len(ent_tokens) > 1:
                     cleaned_ent_tokens = cleanEnts(ent_tokens)
                     if token in cleaned_ent_tokens:
-                        ind = ent_tokens.index(token)
+                        ind = asciiEnts(ent_tokens).index(token)
                         context = article[ max(0,i-ind): min(len(article), i + len(ent_tokens)- ind)]
                         if False:
                             print "clean_ents_tokens", "tokens"
@@ -173,7 +174,8 @@ if __name__ == "__main__":
 
     ratios = {}
     correct = [0] * (len(int2tags)-1)
-    for ind, incident_id in enumerate(incidents.keys()):#[104:]):
+    count = 0
+    for ind, incident_id in enumerate(incidents.keys()):#[3:]):
         print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
         if not 'citations' in incident:
@@ -186,6 +188,7 @@ if __name__ == "__main__":
             article = relevant_articles[saveFile]
             tokens = tokenizer.tokenize(article)
             ents = []
+            count += 1
             for ent in int2tags[1:]:
                 if ent in incident:
                     gold = incident[ent].encode('ascii', 'ignore')
@@ -247,12 +250,12 @@ if __name__ == "__main__":
                     except Exception, e:
                         new_body += ""
                 f.write(new_body + '\n')
-                
             f.flush()
+            ratios =[(correct[i] * 1. / count, int2tags[i+1]) for i in range(len(correct))]
+            pprint.pprint(ratios)
 
     train.close()
     dev.close()
     test.close()
-    ratios =[(correct[i] * 1. / len(relevant_articles), int2tags[i+1]) for i in range(len(correct))]
-    pprint.pprint(ratios)
+
 

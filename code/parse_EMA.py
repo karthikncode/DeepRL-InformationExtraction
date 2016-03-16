@@ -109,8 +109,12 @@ def getTags(article, ents):
                     if cleaned_ent_tokens in cleanEnts(context):
                         labels.append(j+1)
             else:
-                if ent.lower().strip() in token.lower().strip():
-                    labels.append(j+1)
+                try:
+                    if ent.lower().strip() in token.lower().strip():
+                        labels.append(j+1)
+                except Exception, e:
+                    print "skip"
+
         label = 0
         if len(labels) == 1:
             label = labels[0]

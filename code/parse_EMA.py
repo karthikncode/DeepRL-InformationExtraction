@@ -183,8 +183,8 @@ if __name__ == "__main__":
             else:
                 f = test
 
-            cleaned_identifier = out_ident.encode("ascii", "ignore")
-            cleaned_body = tagged_body.encode("ascii", "ignore")
+            cleaned_identifier = out_ident.decode('utf-8')
+            cleaned_body = tagged_body.decode('utf-8')
             f.write(out_ident + '\n')
             f.write(tagged_body + '\n')
             f.flush()

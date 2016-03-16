@@ -98,7 +98,7 @@ def getTags(article, ents):
                     if token in clean_possible_ents:
                         ind = possible_ents.index(token)
                         context = article[ max(0,i-ind): max(len(article), i + len(possible_ents)- ind)]
-                        if cleanEnts(context) == clean_possible_ents:
+                        if clean_possible_ents in cleanEnts(context):
                             labels.append(j+1)
                             break
             elif len(ent_tokens) > 1:
@@ -106,12 +106,11 @@ def getTags(article, ents):
                 if token in cleaned_ent_tokens:
                     ind = ent_tokens.index(token)
                     context = article[ max(0,i-ind): max(len(article), i + len(ent_tokens)- ind)]
-                    if cleanEnts(context) == cleaned_ent_tokens:
+                    if cleaned_ent_tokens in cleanEnts(context):
                         labels.append(j+1)
             else:
-                if token.lower().strip() == ent.lower().strip():
+                if ent.lower().strip() in token.lower().strip():
                     labels.append(j+1)
-        assert len(labels) <= 1
         label = 0
         if len(labels) == 1:
             label = labels[0]
@@ -143,7 +142,7 @@ if __name__ == "__main__":
         relevant_articles = pickle.load(open('EMA_filtered_articles.p', 'rb'))
 
     ratios = {}
-    correct = [0] * len(int2tags[:1])
+    correct = [0] * (len(int2tags)-1)
     for ind, incident_id in enumerate(incidents.keys()):
         print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
@@ -174,9 +173,10 @@ if __name__ == "__main__":
                     ents.append('')
             tags = getTags(tokens, ents)
 
-            for ent_ind, ent in enumerate(int2tags[1:]):
+            for ent_ind in range(1,len(int2tags)):
                 if ent_ind in tags:
                     correct[ent_ind - 1] += 1
+
             tagged_body = ""
             for token, tag in zip(tokens, tags):
                 try:

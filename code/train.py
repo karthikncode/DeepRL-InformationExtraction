@@ -9,10 +9,21 @@ import helper
 
 
 #tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
-tags2int={'TAG':0, 'food':1, 'adulterant':2, 'location':3, 'year':4}
-#int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
-int2tags=['TAG', 'food', 'adulterant', 'location', 'year']
-tags = [0,1,2,3,4]
+# tags2int={'TAG':0, 'food':1, 'adulterant':2, 'location':3, 'year':4}
+# #int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
+# int2tags=['TAG', 'food', 'adulterant', 'location', 'year']
+# tags = [0,1,2,3,4]
+tags = [0,1,2,3]
+int2tags = \
+['TAG',\
+'Affected_Food_Product',\
+'Produced_Location',\
+'Distributed_Location']
+tags2int = \
+{'TAG':0,\
+'Affected_Food_Product':1, \
+'Produced_Location':2, \
+'Distributed_Location':3 }
 
 # main loop
 def main(training_file,trained_model,previous_n,next_n, c, prune):
@@ -121,7 +132,12 @@ def separate_word_tag(sentence):
         #if i > 20:
         #    break
         words.append(part.split("_")[0])
-        tags.append(tags2int[part.split("_")[1]])
+        tag = "_".join(part.split("_")[1:])
+        try:
+            tags.append(tags2int[tag])
+            words.append(part.split("_")[0])
+        except Exception, e:
+            pass
     return [words,tags]
 
 # return a list of raw sentences (unprocessed)

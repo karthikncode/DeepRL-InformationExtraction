@@ -60,7 +60,6 @@ def filterArticles(articles):
                     if g in ['', 'none', 'unknown', "0"]:
                         continue
                     clean_g = g.encode("ascii", "ignore")
-                    print article
                     clean_article = ""
                     for c in article:
                         try:

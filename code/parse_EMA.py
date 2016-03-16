@@ -128,7 +128,7 @@ if __name__ == "__main__":
     dev_cut   = .20
     test_cut  = .20
 
-    refilter = False
+    refilter = True
     if refilter:
         relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
         pprint.pprint(unfilitered_scores)

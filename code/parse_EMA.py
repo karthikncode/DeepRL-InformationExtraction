@@ -1,0 +1,186 @@
+from nltk.tokenize import PunktWordTokenizer as WordTokenizer
+import random
+import pprint
+import scipy.sparse
+import time
+import itertools
+import sys
+import pickle
+import helper
+
+tokenizer = WordTokenizer()
+int2tags = \
+['TAG',\
+'Adulterated_Food_Product',\
+'Produced_Location',\
+'Distributed_Location']
+tags2int = \
+{'TAG':0,\
+'Adulterated_Food_Product':1, \
+'Produced_Location':2, \
+'Distributed_Location':3 }
+int2citationFeilds = ['Authors', 'Date', 'Title', 'Source']
+
+def filterArticles(articles):
+    relevant_articles = {}
+    count = 0
+    correct = [0] * len(int2tags)
+    gold_num = [0] * len(int2tags)
+    helper.load_constants()
+    print "Num incidents", len(incidents)
+    print "Num unfilitered articles", len(articles)
+    for incident_id in incidents.keys():
+        incident = incidents[incident_id]
+        if not 'citations' in incident:
+            continue
+        for citation_ind, citation in enumerate(incident['citations']):
+            saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
+            if not saveFile in articles:
+                continue
+            count +=1
+            article = articles[saveFile]
+            tokens = tokenizer.tokenize(article)
+            for ent in int2tags:
+                if not ent in incident:
+                    continue
+                gold = incident[ent]
+
+                if ent in ['Consumer_Brand', 'Perpetrator', 'Adulterated_Food_Product', 'Affected_Food_Product']:
+                    gold_list = gold.split(';')
+                elif ent in ["Produced_Location", "Distributed_Location"]:
+                    country = gold.split(',')
+                    gold_list = gold.split(',')
+                else:
+                    gold_list = [gold]
+
+                for g in gold_list:
+                    g = g.lower().strip()
+                    if g in ['', 'none', 'unknown', "0"]:
+                        continue
+                    clean_g = g.encode("ascii", "ignore")
+                    clean_article = article#.decode().encode("ascii", "ignore")
+                    if clean_g in clean_article.lower():
+                        if not saveFile in relevant_articles:
+                            relevant_articles[saveFile] = tokens
+                            pickle.dump(downloaded_articles, open('EMA_filtered_articles.p', 'wb'))
+                        correct[tags2int[ent]] += 1
+                gold_num[tags2int[ent]] += 1
+                    
+    assert len(relevant_articles) == len(articles)
+    oracle_scores = [(correct[i]*1./gold_num[i], int2tags[i]) if gold_num[i] > 100 else 0 for i in range(len(int2tags))]
+    print "num articles is", len(relevant_articles)
+    return relevant_articles, oracle_scores
+
+def cleanEnts(ent_tokens):
+    return [x.strip().lower() if (not x in generic and x.isalpha()) else "" for x in ent_tokens]
+
+def getTags(article, ents):
+    tags = []
+    for i, token in enumerate(article):
+        labels = []
+        token = token.lower().strip()
+        for j, ent in enumerate(ents):
+            ent = ent.strip().lower()
+            ent_tokens = tokenizer.tokenize(ent)
+            if "|" in ent:
+                ent_set = ent.split("|")
+                for possible_ent in ent_set:
+                    possible_ents = tokenizer.tokenize(possible_ent)
+                    clean_possible_ents = cleanEnts(possible_ents)
+                    if token in clean_possible_ents:
+                        ind = possible_ents.index(token)
+                        context = article[ max(0,i-ind): max(len(article), i + len(possible_ents)- ind)]
+                        if cleanEnts(context) == clean_possible_ents:
+                            labels.append(j+1)
+                            break
+            elif len(ent_tokens) > 1:
+                cleaned_ent_tokens = cleanEnts(ent_tokens)
+                if token in cleaned_ent_tokens:
+                    ind = ent_tokens.index(token)
+                    context = article[ max(0,i-ind): max(len(article), i + len(ent_tokens)- ind)]
+                    if cleanEnts(context) == cleaned_ent_tokens:
+                        labels.append(j+1)
+            else:
+                if token.lower().strip() == ent.lower().strip():
+                    labels.append(j+1)
+        assert len(labels) <= 1
+        label = 0
+        if len(labels) == 1:
+            label = labels[0]
+        tags.append(label)
+    return tags
+
+        
+
+
+
+if __name__ == "__main__":
+
+    train = open('../data/tagged_data/train.tag', 'w')
+    dev = open('../data/tagged_data/dev.tag', 'w')
+    test = open('../data/tagged_data/test.tag', 'w')
+    
+    incidents = pickle.load(open('EMA_dump.p', 'rb'))
+    downloaded_articles = pickle.load(open('EMA_downloaded_articles_dump.p', 'rb'))
+
+    train_cut = .60
+    dev_cut   = .20
+    test_cut  = .20
+
+    refilter = True
+    if refilter:
+        relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
+        pprint.pprint(unfilitered_scores)
+    else:
+        relevant_articles = pickle.load(open('EMA_filtered_articles.p', 'rb'))
+
+    ratios = {}
+    correct = [0] * len(int2tags)
+    gold_num = [0] * len(int2tags)
+    for incident_id in incidents.keys()[:1]:
+        incident = incidents[incident_id]
+        if not 'citations' in incident:
+            continue
+        for citation_ind, citation in enumerate(incident['citations']):
+            title = incident['citations']['Title']
+            saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
+            if not saveFile in relevant_articles:
+                continue
+            article = relevant_articles[saveFile]
+            ents = []
+            for ent in int2tags:
+                if ent in incident:
+                    gold = incident[ent]
+                    if ent in ['Affected_Food_Product']:
+                        gold_list = gold.split(';')
+                    elif ent in ["Produced_Location", "Distributed_Location"]:
+                        gold_list = []
+                        locations =  gold.split(',')
+                        for loc in locations:
+                            gold_list += loc.split(';')
+                    else:
+                        gold_list = [gold]
+                    ents.append("|".join(gold_list))
+                else:
+                    ents.append('')
+            tags = getTags(article, ents)
+            tagged_body = ""
+            for token, tag in zip(trimmed_article_tokens, tags):
+                tagged_body += token + "_" + int2tags[tag] + " "
+            out_ident = ','.join(gold_ents) + ", " + title
+
+            rand = random.random()
+            f = ''
+            if rand < train_cut:
+                f = train
+            elif rand < dev_cut:
+                f = dev
+            else:
+                f = test
+            f.write(out_ident + '\n')
+            f.write(tagged_body + '\n')
+            f.flush()
+    train.close()
+    dev.close()
+    test.close()
+

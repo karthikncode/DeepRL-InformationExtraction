@@ -11,15 +11,17 @@ import helper
 tokenizer = WordTokenizer()
 int2tags = \
 ['TAG',\
-'Adulterated_Food_Product',\
+'Affected_Food_Product',\
 'Produced_Location',\
 'Distributed_Location']
 tags2int = \
 {'TAG':0,\
-'Adulterated_Food_Product':1, \
+'Affected_Food_Product':1, \
 'Produced_Location':2, \
 'Distributed_Location':3 }
 int2citationFeilds = ['Authors', 'Date', 'Title', 'Source']
+generic = ["city", "centre", "county", "street", "road", "and", "in", "town", "village"]
+
 
 def filterArticles(articles):
     relevant_articles = {}
@@ -39,7 +41,6 @@ def filterArticles(articles):
                 continue
             count +=1
             article = articles[saveFile]
-            tokens = tokenizer.tokenize(article)
             for ent in int2tags:
                 if not ent in incident:
                     continue
@@ -61,10 +62,11 @@ def filterArticles(articles):
                     clean_article = article#.decode().encode("ascii", "ignore")
                     if clean_g in clean_article.lower():
                         if not saveFile in relevant_articles:
-                            relevant_articles[saveFile] = tokens
-                            pickle.dump(downloaded_articles, open('EMA_filtered_articles.p', 'wb'))
+                            relevant_articles[saveFile] = article
                         correct[tags2int[ent]] += 1
                 gold_num[tags2int[ent]] += 1
+
+    pickle.dump(downloaded_articles, open('EMA_filtered_articles.p', 'wb'))
                     
     oracle_scores = [(correct[i]*1./gold_num[i], int2tags[i]) if gold_num[i] > 100 else 0 for i in range(len(int2tags))]
     print "num articles is", len(relevant_articles)
@@ -115,9 +117,9 @@ def getTags(article, ents):
 
 if __name__ == "__main__":
 
-    train = open('../data/tagged_data/train.tag', 'w')
-    dev = open('../data/tagged_data/dev.tag', 'w')
-    test = open('../data/tagged_data/test.tag', 'w')
+    train = open('../data/tagged_data/EMA/train.tag', 'w')
+    dev = open('../data/tagged_data/EMA/ev.tag', 'w')
+    test = open('../data/tagged_data/EMA/test.tag', 'w')
     
     incidents = pickle.load(open('EMA_dump.p', 'rb'))
     downloaded_articles = pickle.load(open('EMA_downloaded_articles_dump.p', 'rb'))
@@ -126,7 +128,7 @@ if __name__ == "__main__":
     dev_cut   = .20
     test_cut  = .20
 
-    refilter = True
+    refilter = False
     if refilter:
         relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
         pprint.pprint(unfilitered_scores)
@@ -134,20 +136,21 @@ if __name__ == "__main__":
         relevant_articles = pickle.load(open('EMA_filtered_articles.p', 'rb'))
 
     ratios = {}
-    correct = [0] * len(int2tags)
-    gold_num = [0] * len(int2tags)
-    for incident_id in incidents.keys()[:1]:
+    correct = [0] * len(int2tags[:1])
+    for incident_id in incidents.keys():
+        print "new incident"
         incident = incidents[incident_id]
         if not 'citations' in incident:
             continue
         for citation_ind, citation in enumerate(incident['citations']):
-            title = incident['citations']['Title']
+            title = incident['citations'][citation_ind]['Title']
             saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
             if not saveFile in relevant_articles:
                 continue
             article = relevant_articles[saveFile]
+            tokens = tokenizer.tokenize(article)
             ents = []
-            for ent in int2tags:
+            for ent in int2tags[1:]:
                 if ent in incident:
                     gold = incident[ent]
                     if ent in ['Affected_Food_Product']:
@@ -162,11 +165,15 @@ if __name__ == "__main__":
                     ents.append("|".join(gold_list))
                 else:
                     ents.append('')
-            tags = getTags(article, ents)
+            tags = getTags(tokens, ents)
+
+            for ent_ind, ent in enumerate(int2tags[1:]):
+                if ent_ind in tags:
+                    correct[ent_ind - 1] += 1
             tagged_body = ""
-            for token, tag in zip(trimmed_article_tokens, tags):
+            for token, tag in zip(tokens, tags):
                 tagged_body += token + "_" + int2tags[tag] + " "
-            out_ident = ','.join(gold_ents) + ", " + title
+            out_ident = ','.join(ents) + ", " + title
 
             rand = random.random()
             f = ''
@@ -182,4 +189,6 @@ if __name__ == "__main__":
     train.close()
     dev.close()
     test.close()
+    ratios =[(correct[i] * 1. / len(relevant_articles), int2tags[i+1]) for i in range(len(correct))]
+    pprint.pprint(ratios)
 

@@ -169,7 +169,7 @@ if __name__ == "__main__":
     dev_cut   = .20
     test_cut  = .20
 
-    refilter = True
+    refilter = False
     if refilter:
         relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
         pprint.pprint(unfilitered_scores)
@@ -216,7 +216,7 @@ if __name__ == "__main__":
                 if ent_ind in tags:
                     correct_pass[ent_ind - 1] += 1
 
-            if correct_pass == [0] * (len(int2tags)-1):
+            if sum(correct_pass) <= 1 :
                 continue
 
             for c_i, c in enumerate(correct_pass):
@@ -235,7 +235,7 @@ if __name__ == "__main__":
             f = ''
             if rand < train_cut:
                 f = train
-            elif rand < dev_cut:
+            elif rand < train_cut+dev_cut:
                 f = dev
             else:
                 f = test

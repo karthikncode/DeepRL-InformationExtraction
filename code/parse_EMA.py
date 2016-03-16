@@ -145,7 +145,6 @@ def getTags(article, ents):
         if len(labels) > 0:
             label = labels[0]
         tags.append(label)
-    print ents
     return tags
 
         
@@ -174,7 +173,7 @@ if __name__ == "__main__":
 
     ratios = {}
     correct = [0] * (len(int2tags)-1)
-    for ind, incident_id in enumerate(incidents.keys()[104:]):
+    for ind, incident_id in enumerate(incidents.keys()):#[104:]):
         print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
         if not 'citations' in incident:

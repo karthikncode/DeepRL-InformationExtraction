@@ -218,7 +218,7 @@ if __name__ == "__main__":
 
             if correct_pass == [0] * (len(int2tags)-1):
                 continue
-                
+
             for c_i, c in enumerate(correct_pass):
                 correct[c_i] += c
             count += 1
@@ -265,6 +265,7 @@ if __name__ == "__main__":
                 f.write(new_body + '\n')
             f.flush()
             ratios =[(correct[i] * 1. / count, int2tags[i+1]) for i in range(len(correct))]
+            print "End number of documents", count
             pprint.pprint(ratios)
 
     train.close()

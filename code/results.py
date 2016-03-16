@@ -6,7 +6,7 @@ import pdb
 f = file(sys.argv[1]).read().split('------------\n')
 entity = int(sys.argv[2])
 k = int(sys.argv[3]) if len(sys.argv)>3 else 100
-n = int(sys.argv[4]) if len(sys.argv) > 4 else 5
+n = int(sys.argv[4]) if len(sys.argv) > 4 else 20
 
 total = 0.
 cnt = 0.

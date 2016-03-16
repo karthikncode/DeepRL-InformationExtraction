@@ -72,6 +72,7 @@ QUERY = collections.defaultdict(lambda:0.)
 ACTION = collections.defaultdict(lambda:0.)
 CHANGES = 0
 evalMode = False
+STAT_POSITIVE, STAT_NEGATIVE = 0, 0 #stat. sign.
 
 CONTEXT = None
 
@@ -139,8 +140,6 @@ class Environment:
 
         self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates) 
 
-        
-        
         return
     
     def extractEntitiesWithConfidences(self, article):
@@ -350,6 +349,39 @@ class Environment:
         else:
             return rewards[self.entity]
 
+    def calculateStatSign(self, oldEntities, newEntities):
+        rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
+                    int(self.checkEquality(newEntities[2], self.goldEntities[2])) - int(self.checkEquality(oldEntities[2], self.goldEntities[2]))]
+
+
+        #add in shooter reward
+        if self.goldEntities[0]:
+            rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
+                    - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+        else:
+            rewards.insert(0, 0.)
+
+        # add in city reward
+        rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
+                - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
+
+        # if shooter_reward != 0:
+        #     print "Shooter reward", shooter_reward
+
+        if DEBUG:
+            #print
+            print "oldEntities", oldEntities
+            print "newEntities:", newEntities
+            print "goldEntities:", self.goldEntities
+            print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
+            print rewards            
+
+        #TODO: if terminal, give some reward based on how many entities are correct?
+
+        # pdb.set_trace()
+
+
+        return rewards
         
 
     #evaluate the bestEntities retrieved so far for a single article
@@ -792,6 +824,7 @@ def main(args):
     global QUERY, ACTION, CHANGES
     global trained_model
     global CONTEXT_TYPE
+    global STAT_POSITIVE, STAT_NEGATIVE
     
     print args
 
@@ -892,6 +925,8 @@ def main(args):
             evalMode = True
             savedArticleNum = articleNum
             articleNum = 0
+            stepCnt = 0
+            STAT_POSITIVE, STAT_NEGATIVE = [0 for i in range(NUM_ENTITIES)], [0 for i in range(NUM_ENTITIES)]
 
             ENTITIES = TEST_ENTITIES
             CONFIDENCES = TEST_CONFIDENCES
@@ -912,7 +947,7 @@ def main(args):
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
             print "StepCnt (total, average):", stepCnt, float(stepCnt)/len(articles)
             outFile.write("StepCnt (total, average): " + str(stepCnt)+ ' ' + str(float(stepCnt)/len(articles)) + '\n')
-            stepCnt = 0
+            
 
             qsum = sum(QUERY.values())
             asum = sum(ACTION.values())
@@ -922,11 +957,12 @@ def main(args):
             for k, val in ACTION.items():    
                 outFile2.write("Action " + str(k) + ' ' + str(val/asum)+'\n')
             outFile2.write("CHANGES: "+str(CHANGES)+ ' ' + str(float(CHANGES)/len(articles))+"\n")
+            outFile2.write("STAT_POSITIVE, STAT_NEGATIVE "+str(STAT_POSITIVE) + ', ' +str(STAT_NEGATIVE)+'\n')
 
             #for analysis
             # pdb.set_trace()
 
-            evalMode = False
+            evalMode = False            
             articleNum = savedArticleNum
 
             ENTITIES = TRAIN_ENTITIES
@@ -982,6 +1018,14 @@ def main(args):
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
                 stepCnt += sum(env.stepNum)
+
+                #stat sign
+                vals = env.calculateStatSign(env.originalEntities, env.bestEntities.values())
+                for i, val in enumerate(vals):
+                    if val > 0:
+                        STAT_POSITIVE[i] += val
+                    else:
+                        STAT_NEGATIVE[i] -= val
 
                 #for analysis
                 for entityNum in [0,1,2,3]:

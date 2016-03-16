@@ -179,7 +179,10 @@ if __name__ == "__main__":
                     correct[ent_ind - 1] += 1
             tagged_body = ""
             for token, tag in zip(tokens, tags):
-                tagged_body += token + "_" + int2tags[tag] + " "
+                try:
+                    tagged_body += token + "_" + int2tags[tag] + " "
+                except Exception, e:
+                    tagged_body += ""
             out_ident = ','.join(ents) + ", " + title
 
             rand = random.random()

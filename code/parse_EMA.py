@@ -80,45 +80,72 @@ def filterArticles(articles):
     return relevant_articles, oracle_scores
 
 def cleanEnts(ent_tokens):
-    return [x.strip().lower() if (not x in generic and x.isalpha()) else "" for x in ent_tokens]
+    ascii_tokens = asciiEnts(ent_tokens)
+    result = [x.strip().lower() if (not x in generic and x.isalpha()) else "" for x in ascii_tokens]
+    return result
 
+def asciiEnts(ent_tokens):
+    ascii_tokens = []
+    for en in ent_tokens:
+        try:
+            ascii_tokens.append(en.encode("ascii", "ignore").lower())
+        except Exception, e:
+            print "that should not be possible"
+            print en
+            pass
+    return ascii_tokens
 def getTags(article, ents):
     tags = []
     for i, token in enumerate(article):
         labels = []
         token = token.lower().strip()
-        for j, ent in enumerate(ents):
-            ent = ent.strip().lower()
-            ent_tokens = tokenizer.tokenize(ent)
+        for j in range(len(ents)):
+            ent = ents[j]
+
             if "|" in ent:
                 ent_set = ent.split("|")
                 for possible_ent in ent_set:
                     possible_ents = tokenizer.tokenize(possible_ent)
                     clean_possible_ents = cleanEnts(possible_ents)
                     if token in clean_possible_ents:
-                        ind = possible_ents.index(token)
-                        context = article[ max(0,i-ind): max(len(article), i + len(possible_ents)- ind)]
-                        if clean_possible_ents in cleanEnts(context):
+                        ind = asciiEnts(possible_ents).index(token)
+                        context = article[ max(0,i-ind): min(len(article), i + len(possible_ents)- ind)]
+                        if False:
+                            print "clean_ents", "tokens"
+                            print clean_possible_ents
+                            print "**"
+                            print cleanEnts(context)
+                            print "-------"
+                        if clean_possible_ents == cleanEnts(context):
                             labels.append(j+1)
                             break
-            elif len(ent_tokens) > 1:
-                cleaned_ent_tokens = cleanEnts(ent_tokens)
-                if token in cleaned_ent_tokens:
-                    ind = ent_tokens.index(token)
-                    context = article[ max(0,i-ind): max(len(article), i + len(ent_tokens)- ind)]
-                    if cleaned_ent_tokens in cleanEnts(context):
-                        labels.append(j+1)
             else:
-                try:
-                    if ent.lower().strip() in token.lower().strip():
-                        labels.append(j+1)
-                except Exception, e:
-                    print "skip"
+                ent_tokens = tokenizer.tokenize(ent)
+                if len(ent_tokens) > 1:
+                    cleaned_ent_tokens = cleanEnts(ent_tokens)
+                    if token in cleaned_ent_tokens:
+                        ind = ent_tokens.index(token)
+                        context = article[ max(0,i-ind): min(len(article), i + len(ent_tokens)- ind)]
+                        if False:
+                            print "clean_ents_tokens", "tokens"
+                            print cleaned_ent_tokens
+                            print "**"
+                            print cleanEnts(context)
+                            print "-------"
+                        if cleaned_ent_tokens == cleanEnts(context):
+                            labels.append(j+1)
+                else:
+                    try:
+                        if cleanEnts([ent]) == cleanEnts([token]):
+                            labels.append(j+1)
+                    except Exception, e:
+                        pass
 
         label = 0
-        if len(labels) == 1:
+        if len(labels) > 0:
             label = labels[0]
         tags.append(label)
+    print ents
     return tags
 
         
@@ -147,7 +174,7 @@ if __name__ == "__main__":
 
     ratios = {}
     correct = [0] * (len(int2tags)-1)
-    for ind, incident_id in enumerate(incidents.keys()):
+    for ind, incident_id in enumerate(incidents.keys()[104:]):
         print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
         if not 'citations' in incident:
@@ -162,7 +189,7 @@ if __name__ == "__main__":
             ents = []
             for ent in int2tags[1:]:
                 if ent in incident:
-                    gold = incident[ent]
+                    gold = incident[ent].encode('ascii', 'ignore')
                     if ent in ['Affected_Food_Product']:
                         gold_list = gold.split(';')
                     elif ent in ["Produced_Location", "Distributed_Location"]:
@@ -223,6 +250,7 @@ if __name__ == "__main__":
                 f.write(new_body + '\n')
                 
             f.flush()
+        break
 
     train.close()
     dev.close()

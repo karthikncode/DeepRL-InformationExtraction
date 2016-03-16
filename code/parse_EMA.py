@@ -41,7 +41,7 @@ def filterArticles(articles):
             if not saveFile in articles:
                 continue
             count +=1
-            article = articles[saveFile].encode("ascii", "ignore")
+            article = articles[saveFile].decode("utf8").encode("ascii", "ignore")
             for ent in int2tags:
                 if not ent in incident:
                     continue
@@ -162,7 +162,7 @@ if __name__ == "__main__":
                             gold_list += loc.split(';')
                     else:
                         gold_list = [gold]
-                    ents.append("|".join(gold_list).encode("ascii","ignore"))
+                    ents.append("|".join(gold_list).decode("utf8").encode("ascii","ignore"))
                 else:
                     ents.append('')
             tags = getTags(tokens, ents)
@@ -184,10 +184,10 @@ if __name__ == "__main__":
             else:
                 f = test
 
-            cleaned_identifier = out_ident
-            cleaned_body = tagged_body
-            f.write(out_ident + '\n')
-            f.write(tagged_body + '\n')
+            cleaned_identifier = out_ident.decode("utf8").encode("ascii","ignore")
+            cleaned_body = tagged_body.decode("utf8").encode("ascii","ignore")
+            f.write(cleaned_identifier + '\n')
+            f.write(cleaned_body + '\n')
             f.flush()
 
     train.close()

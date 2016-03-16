@@ -135,7 +135,7 @@ if __name__ == "__main__":
     dev_cut   = .20
     test_cut  = .20
 
-    refilter = True
+    refilter = False
     if refilter:
         relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
         pprint.pprint(unfilitered_scores)
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     ratios = {}
     correct = [0] * len(int2tags[:1])
     for ind, incident_id in enumerate(incidents.keys()):
-        print ind,'/',len(incidents.keys)
+        print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
         if not 'citations' in incident:
             continue

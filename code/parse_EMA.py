@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from nltk.tokenize import PunktWordTokenizer as WordTokenizer
 import random
 import pprint
@@ -7,7 +8,6 @@ import itertools
 import sys
 import pickle
 import helper
-from __future__ import unicode_literals
 
 tokenizer = WordTokenizer()
 int2tags = \
@@ -41,7 +41,7 @@ def filterArticles(articles):
             if not saveFile in articles:
                 continue
             count +=1
-            article = articles[saveFile]
+            article = articles[saveFile].encode("utf-8", "ignore")
             for ent in int2tags:
                 if not ent in incident:
                     continue
@@ -162,7 +162,7 @@ if __name__ == "__main__":
                             gold_list += loc.split(';')
                     else:
                         gold_list = [gold]
-                    ents.append("|".join(gold_list))
+                    ents.append("|".join(gold_list).encode("utf-8","ignore"))
                 else:
                     ents.append('')
             tags = getTags(tokens, ents)
@@ -184,8 +184,8 @@ if __name__ == "__main__":
             else:
                 f = test
 
-            cleaned_identifier = out_ident.decode('utf-8')
-            cleaned_body = tagged_body.decode('utf-8')
+            cleaned_identifier = out_ident
+            cleaned_body = tagged_body
             f.write(out_ident + '\n')
             f.write(tagged_body + '\n')
             f.flush()

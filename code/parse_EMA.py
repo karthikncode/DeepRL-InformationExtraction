@@ -41,7 +41,7 @@ def filterArticles(articles):
             if not saveFile in articles:
                 continue
             count +=1
-            article = articles[saveFile].decode("utf8").encode("ascii", "ignore")
+            article = articles[saveFile]
             for ent in int2tags:
                 if not ent in incident:
                     continue
@@ -60,7 +60,14 @@ def filterArticles(articles):
                     if g in ['', 'none', 'unknown', "0"]:
                         continue
                     clean_g = g.encode("ascii", "ignore")
-                    clean_article = article#.decode().encode("ascii", "ignore")
+                    print article
+                    clean_article = ""
+                    for c in article:
+                        try:
+                            clean_article += c.encode("ascii", "ignore")
+                        except Exception, e:
+                            clean_article += ""
+
                     if clean_g in clean_article.lower():
                         if not saveFile in relevant_articles:
                             relevant_articles[saveFile] = article
@@ -162,7 +169,7 @@ if __name__ == "__main__":
                             gold_list += loc.split(';')
                     else:
                         gold_list = [gold]
-                    ents.append("|".join(gold_list).decode("utf8").encode("ascii","ignore"))
+                    ents.append("|".join(gold_list))
                 else:
                     ents.append('')
             tags = getTags(tokens, ents)
@@ -184,8 +191,8 @@ if __name__ == "__main__":
             else:
                 f = test
 
-            cleaned_identifier = out_ident.decode("utf8").encode("ascii","ignore")
-            cleaned_body = tagged_body.decode("utf8").encode("ascii","ignore")
+            cleaned_identifier = out_ident
+            cleaned_body = tagged_body
             f.write(cleaned_identifier + '\n')
             f.write(cleaned_body + '\n')
             f.flush()

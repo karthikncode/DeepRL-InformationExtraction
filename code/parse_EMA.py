@@ -169,7 +169,7 @@ if __name__ == "__main__":
     dev_cut   = .20
     test_cut  = .20
 
-    refilter = False
+    refilter = True
     if refilter:
         relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
         pprint.pprint(unfilitered_scores)
@@ -209,14 +209,19 @@ if __name__ == "__main__":
             article = relevant_articles[saveFile]
             #raw_input()
             tokens = tokenizer.tokenize(article)[:1000]
-            count += 1
             
             tags = getTags(tokens, ents)
             correct_pass = [0] * (len(int2tags)-1)
             for ent_ind in range(1,len(int2tags)):
                 if ent_ind in tags:
-                    correct[ent_ind - 1] += 1
                     correct_pass[ent_ind - 1] += 1
+
+            if correct_pass == [0] * (len(int2tags)-1):
+                continue
+                
+            for c_i, c in enumerate(correct_pass):
+                correct[c_i] += c
+            count += 1
             pprint.pprint(correct_pass)
             tagged_body = ""
             for token, tag in zip(tokens, tags):

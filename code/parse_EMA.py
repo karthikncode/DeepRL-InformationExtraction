@@ -182,9 +182,13 @@ if __name__ == "__main__":
                 f = dev
             else:
                 f = test
+
+            cleaned_identifier = out_ident.encode("ascii", "ignore")
+            cleaned_body = tagged_body.encode("ascii", "ignore")
             f.write(out_ident + '\n')
             f.write(tagged_body + '\n')
             f.flush()
+
     train.close()
     dev.close()
     test.close()

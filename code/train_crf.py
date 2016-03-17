@@ -65,13 +65,14 @@ def featureExtract(data, identifier,  prev_n = 4, next_n = 4):
     labels   = []
     for index in range(len(data)):
         article = data[index][0]
-        gold    = identifier[index].split(',')[:4]
-        article_features, article_labels = articleFeatureExtract(article, gold, prev_n, next_n)
+        article_labels = [train.int2tags[t] for t in data[index][1]]
+        # gold    = identifier[index].split(',')[:len(train.int2tags)-1]
+        article_features = articleFeatureExtract(article, prev_n, next_n)
         features.append(article_features)
         labels.append(article_labels)
     return features, labels
 
-def articleFeatureExtract(article, gold=None, prev_n = 4, next_n = 4):
+def articleFeatureExtract(article, prev_n = 4, next_n = 4):
     article_features = []
     title_features = {}
     labels = []
@@ -106,7 +107,7 @@ def articleFeatureExtract(article, gold=None, prev_n = 4, next_n = 4):
         #if token_ind < 10:
         #    token_features[str(token_ind)] = 1
         article_features.append(token_features)
-
+        gold = False
         if gold:
             clean_token = token.strip().lower()
             if helper.is_number_word(clean_token):
@@ -116,28 +117,27 @@ def articleFeatureExtract(article, gold=None, prev_n = 4, next_n = 4):
             label = ''
             for i in range(len(gold)):
                 gold_ent = gold[i].strip().lower()
-                if gold_ent == '' or gold_ent == '0':
+                # print "gold ent", gold_ent
+                if gold_ent == '' or gold_ent == 'none' or gold_ent == 'unknown':
                     continue
-                tag = train.int2tags[i+1]
-                if i >0:
-                    if gold_ent == clean_token:
+                tag = train.int2tags[i]
+                gold_set_ors = set(gold_ent.split('|'))
+                # print "gold_set_ors", gold_set_ors
+                gold_set = []
+                for g in gold_set_ors:
+                    gold_set.extend(g.split())
+                gold_set = set(gold_set)
+                # print "gold_set", gold_set
+                # print "clean_token", clean_token
+                if clean_token in gold_set:
                         label_l.append(tag)
-
-                    if i == 3 and len(gold_ent.split()) > 1:
-                        for g in gold_ent.split():
-                            if g == clean_token:
-                                label_l.append(tag)
-                                break
-                else:
-                    gold_set = set(gold_ent.split('|'))
-                    if clean_token in gold_set:
-                        label_l.append(tag)
-            if len(label_l) > 1:
-                print label_l
-                print "gold", gold, "token", clean_token
-                label = label_l[0]
-            elif len(label_l) == 1:
-                label = label_l[0]
+                if gold_ent == clean_token:
+                    label_l.append(tag)
+                
+            if len(label_l) > 0:
+                # print label_l
+                # print "gold", gold, "token", clean_token
+                label = random.choice(label_l)
             else:
                 label = "TAG"
             labels.append(label)
@@ -156,14 +156,14 @@ retrain =  True
 if retrain:
     num_blocks = 1
     ## num_blocks = 5
-    training_file = "../data/tagged_data/whole_text_full_city2/train.tag"
-    dev_file      = "../data/tagged_data/whole_text_full_city2/dev.tag"
-    test_file      = "../data/tagged_data/whole_text_full_city2/test.tag"
+    training_file = "../data/tagged_data/EMA/train.tag"
+    dev_file      = "../data/tagged_data/EMA/dev.tag"
+    test_file      = "../data/tagged_data/EMA/test.tag"
 
-    trained_model = "trained_model_crf.p"
+    trained_model = "trained_model_crf.EMA.p"
     print "load files"
     train_data, train_identifier = train.load_data(training_file)
-    dev_data, dev_identifier = train.load_data(dev_file)
+    # dev_data, dev_identifier = train.load_data(dev_file)
     print "End load files"
     test_data, test_identifier = train.load_data(test_file)
     #all_data = train_data + dev_data + test_data
@@ -194,7 +194,7 @@ if retrain:
         print "Done Feature extract on train set"
         #trainX, trainY = featureExtract(dev_data, prev_n, next_n)
         print "Start Feature extract on test set"
-        testX, testY = featureExtract(dev_data, dev_identifier, prev_n, next_n)
+        testX, testY = featureExtract(test_data, test_identifier, prev_n, next_n)
         print "Done Feature extract on test set"
         #testX, testY = featureExtract(train_data[split_index:], prev_n, next_n)
         trainer = trainModel(1)

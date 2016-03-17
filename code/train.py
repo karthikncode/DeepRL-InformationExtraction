@@ -117,6 +117,7 @@ def get_feature_matrix_n(previous_n,next_n,data, num_words, word_vocab, other_fe
                     dataX[curr_word,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags) * j + dataY[curr_word-j-1]] = 1
             if i < first_n:
                 dataX[curr_word,(previous_n+next_n+1)*num_features + len(word_vocab) + previous_n * len(tags)+i] = 1
+            assert len(sentence[0]) == len(sentence[1])
             dataY[curr_word] = sentence[1][i]
             curr_word += 1
     return dataX, dataY
@@ -131,7 +132,6 @@ def separate_word_tag(sentence):
         i+=1
         #if i > 20:
         #    break
-        words.append(part.split("_")[0])
         tag = "_".join(part.split("_")[1:])
         try:
             tags.append(tags2int[tag])
@@ -167,8 +167,8 @@ def save_list_first_names(infile_path,outfile_path):
 
 
 if __name__ == "__main__":
-    training_file = "../data/tagged_data/whole_text_full_city2/train.tag" #sys.argv[1]
-    trained_model = "trained_model3.p" #sys.argv[2]
+    training_file = "../data/tagged_data/EMA/train.tag" #sys.argv[1]
+    trained_model = "trained_model.EMA.p" #sys.argv[2]
     previous_n = 0 #sys.argv[3]
     next_n = 4
     c = 10

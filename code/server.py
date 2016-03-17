@@ -20,12 +20,15 @@ ANALYSIS = False
 COUNT_ZERO = False
 
 #Global variables
-int2tags = ['shooterName','numKilled', 'numWounded', 'city']
+int2tags = \
+['Affected_Food_Product',\
+'Produced_Location',\
+'Distributed_Location']
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
-STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
-STOP_ACTION = 4
+STATE_SIZE = len(int2tags)*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
+STOP_ACTION = len(int2tags)
 ACCEPT_ALL = STOP_ACTION+1
 
 

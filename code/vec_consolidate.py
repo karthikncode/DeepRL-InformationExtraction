@@ -41,7 +41,10 @@ fileName = sys.argv[1]
 numLists = int(sys.argv[2])
 trained_model = sys.argv[3]
 if not "crf" in trained_model:
+    print "NOT CRF"
     trained_model = pickle.load( open(sys.argv[3], "rb" ) )
+else:
+    print "CRF"
 
 
 #function to build the dictionary for words to be used for context features

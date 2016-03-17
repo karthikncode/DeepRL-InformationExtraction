@@ -152,7 +152,7 @@ reload(helper)
 helper.load_constants()
 print "end load helper"
 
-retrain =  True
+retrain =  False
 if retrain:
     num_blocks = 1
     ## num_blocks = 5

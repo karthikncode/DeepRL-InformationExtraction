@@ -12,9 +12,21 @@ import helper
 import re, pdb, collections
 
 p = inflect.engine()
-tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
-int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
-tags = [0,1,2,3,4]
+# tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
+# int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
+# tags = [0,1,2,3,4]
+tags = [0,1,2,3]
+int2tags = \
+['TAG',\
+'Affected_Food_Product',\
+'Produced_Location',\
+'Distributed_Location']
+tags2int = \
+{'TAG':0,\
+'Affected_Food_Product':1, \
+'Produced_Location':2, \
+'Distributed_Location':3 }
+
 helper.load_constants()
 
 # main loop
@@ -68,7 +80,23 @@ def predict(trained_model, sentence, viterbi, cities):
 
 def predictWithConfidences(trained_model, sentence, viterbi, cities):
     sentence = sentence.replace("_"," ")
+
     words = re.findall(r"[\w']+|[.,!?;]", sentence)
+    cleanedSentence = []
+
+    i = 0
+    while i < len(words):
+        token = sentence[i]
+        end_token_range = i
+        for j in range(i+1,len(words)):
+            new_token = words[j]
+            if new_token == token:
+                end_token_range = j
+            else:
+                cleanedSentence.append(words[i])
+                break
+        i = end_token_range + 1
+    words = cleanedSentence
 
     if "crf" in trained_model:
         return predictCRF(trained_model, words, cities)
@@ -97,7 +125,92 @@ count_person = 0
 # sentence - list of words
 # tags - list of tags corresponding to sentence
 # Returns comma separated preditions of shooterNames, killedNum, woundedNum and city with shooter names separated by '|'
-def predict_mode(sentence, tags, confidences,  cities, crf=False):
+def predict_ema_mode(sentence, tags, confidences):
+
+    original_tags = tags
+
+    output_entities = {}
+    entity_confidences = [0,0,0]
+    entity_cnts = [0,0,0]
+
+    for tag in int2tags:
+        output_entities[tag] = []
+
+    cleanedSentence = []
+    cleanedTags = []
+    # print "TAGS", tags
+    i = 0
+    print "len sentence", len(sentence)
+    while i < len(sentence):
+        tag = int2tags[tags[i]]
+        end_range = i
+        if not tag == "TAG":
+            for j in range(i+1,len(sentence)):
+                new_tag = int2tags[tags[j]]
+                if new_tag == tag:
+                    # print "get get it", new_tag, tag, sentence[i], sentence[j]
+                    # print tag
+                    # print sentence[i],  sentence[j]
+                    # print sentence[i:j+1]
+                    # print "LOVE IT"
+                    end_range = j
+                else:
+                    break
+            # print "end_range", end_range
+        cleanedSentence.append( " ".join(sentence[i:end_range+1]))
+        cleanedTags.append(tags2int[tag]) 
+        # if not tag == "TAG":
+            # print tag, "tokens", " ".join(sentence[i:end_range+1])
+            # print "---------"
+        i = end_range + 1
+
+    # print "clean sentence"
+    # print cleanedSentence
+    # print "cleanedTags", cleanedTags
+
+    assert set(tags) == set(cleanedTags)
+    sentence = cleanedSentence
+    tags = cleanedTags
+    for j in range(len(sentence)):
+        ind = "" 
+        ind = int2tags[tags[j]]
+        output_entities[ind].append((sentence[j], confidences[j]))
+    
+    output_pred_line = ""
+
+    # mode, conf = get_mode(output_entities["shooterName"])
+    # output_pred_line += mode
+    # entity_confidences[tags2int['shooterName']-1] += conf
+    # entity_cnts[tags2int['shooterName']-1] += 1
+
+    for tag in int2tags[1:]:
+        # pdb.set_trace()
+        #one idea, if ent isn't in countries, try 1perm, two perm and stop there. then run something akin to #tryCities
+            
+        mode, conf = get_mode(output_entities[tag])
+        if mode == "":
+            assert not tags2int[tag] in tags 
+            assert not tags2int[tag] in original_tags 
+            output_pred_line += "unknown"
+            entity_confidences[tags2int[tag]-1] += 0
+            entity_cnts[tags2int[tag]-1] += 1
+        else:
+            output_pred_line += mode
+            entity_confidences[tags2int[tag]-1] += conf
+            entity_cnts[tags2int[tag]-1] += 1
+
+        if not tag == int2tags[-1]:
+            output_pred_line += " ### "
+
+
+    print "OUTPUT_PRED_LINE", output_pred_line
+
+    return output_pred_line, entity_confidences, entity_cnts
+
+
+def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= True):
+    if ema:
+        return predict_ema_mode(sentence, tags, confidences)
     output_entities = {}
     entity_confidences = [0,0,0,0]
     entity_cnts = [0,0,0,0]

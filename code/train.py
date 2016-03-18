@@ -162,8 +162,8 @@ def save_list_first_names(infile_path,outfile_path):
 
 
 if __name__ == "__main__":
-    training_file = "../data/tagged_data/EMA2/train.3.tag" #sys.argv[1]
-    trained_model = "trained_model.EMA.3.p" #sys.argv[2]
+    training_file = "../data/tagged_data/EMA2/train.2.tag" #sys.argv[1]
+    trained_model = "trained_model.EMA.2.p" #sys.argv[2]
     previous_n = 0 #sys.argv[3]
     next_n = 4
     c = 10

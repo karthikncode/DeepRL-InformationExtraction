@@ -14,74 +14,28 @@ int2tags = \
 ['TAG',\
 'Affected_Food_Product',\
 'Produced_Location',\
-'Distributed_Location']
+'Consumer_Brand',\
+'Adulterant']
 tags2int = \
 {'TAG':0,\
 'Affected_Food_Product':1, \
 'Produced_Location':2, \
-'Distributed_Location':3 }
+'Consumer_Brand':3, \
+'Adulterant':4}
+# int2tags = \
+# ['TAG',\
+# 'Affected_Food_Product',\
+# 'Produced_Location',\
+# 'Distributed_Location']
+
+# tags2int = \
+# {'TAG':0,\
+# 'Affected_Food_Product':1, \
+# 'Produced_Location':2, \
+# 'Distributed_Location':3 }
 int2citationFeilds = ['Authors', 'Date', 'Title', 'Source']
 generic = ["city", "centre", "county", "street", "road", "and", "in", "town", "village"]
 
-
-def filterArticles(articles):
-    relevant_articles = {}
-    count = 0
-    correct = [0] * len(int2tags)
-    gold_num = [0] * len(int2tags)
-    helper.load_constants()
-    print "Num incidents", len(incidents)
-    print "Num unfilitered articles", len(articles)
-    for incident_id in incidents.keys():
-        incident = incidents[incident_id]
-        if not 'citations' in incident:
-            continue
-        for citation_ind, citation in enumerate(incident['citations']):
-            saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
-            if not saveFile in articles:
-                continue
-            count +=1
-            article = articles[saveFile]
-            for ent in int2tags:
-                if not ent in incident:
-                    continue
-                gold = incident[ent]
-
-                if ent in ['Affected_Food_Product']:
-                    gold_list = gold.split(';')
-                elif ent in ["Produced_Location", "Distributed_Location"]:
-                    country = gold.split(',')
-                    gold_list = gold.split(',')
-                else:
-                    gold_list = [gold]
-
-                for g in gold_list:
-                    g = g.lower().strip()
-                    if g in ['', 'none', 'unknown', "0"]:
-                        continue
-                    clean_g = g.encode("ascii", "ignore")
-                    clean_tokens = []
-                    for c in tokenizer.tokenize(article):
-                        try:
-                            clean_tokens.append(c.encode("ascii", "ignore"))
-                        except Exception, e:
-                            pass
-                    clean_article = " ".join(clean_tokens)
-                    if clean_g in clean_article.lower():
-                        if not saveFile in relevant_articles:
-                            relevant_articles[saveFile] = clean_article.lower()
-                        if False:
-                            print clean_g
-                            ind = clean_article.lower().index(clean_g)
-                            print clean_article[max(0, ind - 100): min(len(clean_article), ind + 100)]
-                        correct[tags2int[ent]] += 1
-                gold_num[tags2int[ent]] += 1
-
-    pickle.dump(downloaded_articles, open('EMA_filtered_articles.p', 'wb'))
-                    
-    oracle_scores = [(correct[i]*1./gold_num[i], int2tags[i]) if gold_num[i] > 100 else 0 for i in range(len(int2tags))]
-    print "num articles is", len(relevant_articles)
-    return relevant_articles, oracle_scores
 
 def cleanEnts(ent_tokens):
     ascii_tokens = asciiEnts(ent_tokens)
@@ -99,6 +53,38 @@ def asciiEnts(ent_tokens):
             ascii_tokens.append(en)
             pass
     return ascii_tokens
+
+def cleanIdent(out_ident, tmp):
+    cleaned_identifier = out_ident
+    try:
+        tmp.write(cleaned_identifier + '\n')
+    except Exception, e:
+        new_ident = ""
+        for c in cleaned_identifier:
+            try:
+                new_ident += c.encode("ascii", "ignore")
+            except Exception, e:
+                new_ident += ""
+        cleaned_identifier = new_ident;
+    return cleaned_identifier
+
+def cleanBody(body, tmp):
+    cleanBody = body
+    try:
+        tmp.write(cleaned_body + '\n')
+    except Exception, e:
+        new_body = ""
+        for c in cleaned_identifier:
+            try:
+                new_body += c.encode("ascii", "ignore")
+            except Exception, e:
+                new_body += ""
+        cleaned_body = new_body
+    return cleanBody
+
+
+
+
 def getTags(article, ents):
     tags = []
     for i, token in enumerate(article):
@@ -154,60 +140,82 @@ def getTags(article, ents):
 
         
 
-
+def writeToFiles(files_dict, write_buffer):
+    for file in write_buffer.keys():
+        f = files_dict[file]
+        write_file = write_buffer[file]
+        for i in range(len(write_file)):
+            ident = False
+            body = False
+            data = write_file[i]
+            if data == 0:
+                ents = ["unknown" for ent in int2tags[1:]]
+                title = "skip_article_title"
+                ident = ",".join(ents) + ", " + title
+                body  = "skip_body"
+                f.write(ident + "\n")
+                f.write(body + "\n")
+            else:
+                ident, body = data
+            assert body and ident
+            f.write(ident + "\n")
+            f.write(body + "\n")
+        f.flush()
+        f.close()
 
 if __name__ == "__main__":
 
-    train = open('../data/tagged_data/EMA/train.tag', 'w')
-    dev = open('../data/tagged_data/EMA/dev.tag', 'w')
-    test = open('../data/tagged_data/EMA/test.tag', 'w')
-    
-    incidents = pickle.load(open('EMA_dump.p', 'rb'))
-    downloaded_articles = pickle.load(open('EMA_downloaded_articles_dump.p', 'rb'))
+    tmp   = open('../data/tagged_data/EMA2/tmp.3.tag', 'w')
+    train = open('../data/tagged_data/EMA2/train.3.tag', 'w') ##This is EMA on the server
+    dev = open('../data/tagged_data/EMA2/dev.3.tag', 'w')
+    test = open('../data/tagged_data/EMA2/test.3.tag', 'w')
 
-    train_cut = .60
-    dev_cut   = .20
-    test_cut  = .20
+    saveBuffer = pickle.load (open('saveFileToPartitionAndIndex.p','rb'))
+    incidents = pickle.load( open('EMA_dump.p', 'rb'))
+    downloaded_articles = pickle.load(open('EMA_downloaded_articles_dump.p.server', 'rb'))
 
-    refilter = False
-    if refilter:
-        relevant_articles, unfilitered_scores = filterArticles(downloaded_articles)
-        pprint.pprint(unfilitered_scores)
-    else:
-        relevant_articles = pickle.load(open('EMA_filtered_articles.p', 'rb'))
+    files = {'train': train, 'dev': dev, 'test': test}
+
+    NUM_TRAIN  = 416
+    NUM_DEV    = 146
+    NUM_TEST   = 124
+
+    write_buffer = {'train':[0]*NUM_TRAIN, 'dev':[0]*NUM_DEV, 'test':[0]*NUM_TEST}
+   
+    relevant_articles = pickle.load(open('EMA_filtered_articles.p.server', 'rb'))
 
     ratios = {}
     correct = [0] * (len(int2tags)-1)
     count = 0
-    for ind, incident_id in enumerate(incidents.keys()[20:]):
+    for ind, incident_id in enumerate(incidents.keys()):
         print ind,'/',len(incidents.keys())
         incident = incidents[incident_id]
         if not 'citations' in incident:
             continue
         ents = []
         for ent in int2tags[1:]:
-                if ent in incident:
-                    gold = incident[ent].encode('ascii', 'ignore')
-                    if ent in ['Affected_Food_Product']:
-                        gold_list = gold.split(';')
-                    elif ent in ["Produced_Location", "Distributed_Location"]:
-                        gold_list = []
-                        locations =  gold.split(',')
-                        for loc in locations:
-                            gold_list += loc.split(';')
-                    else:
-                        gold_list = [gold]
+                if ent == "Adulterant":
+                    key = "Adulterant(s)"
+                else:
+                    key = ent
+                if key in incident:
+                    gold = incident[key].encode('ascii', 'ignore')
+                    # print '----------'
+                    # print ent, gold
+                    gold_split_semi = gold.split(';')                    
+                    gold_list = []
+                    for semi in gold_split_semi:
+                            gold_list += semi.split(',')
                     ents.append("|".join(gold_list))
                 else:
                     ents.append('')
-        pprint.pprint(ents)
+        
         for citation_ind, citation in enumerate(incident['citations']):
             title = incident['citations'][citation_ind]['Title']
             saveFile = "../data/raw_data/"+ incident_id+"_"+str(citation_ind)+".raw"
-            if not saveFile in relevant_articles:
+            if not saveFile in relevant_articles or not saveFile in saveBuffer:
                 continue
             article = relevant_articles[saveFile]
-            #raw_input()
             tokens = tokenizer.tokenize(article)[:1000]
             
             tags = getTags(tokens, ents)
@@ -216,60 +224,39 @@ if __name__ == "__main__":
                 if ent_ind in tags:
                     correct_pass[ent_ind - 1] += 1
 
-            if sum(correct_pass) <= 1 :
+            if sum(correct_pass) < 1 :
                 continue
 
             for c_i, c in enumerate(correct_pass):
                 correct[c_i] += c
             count += 1
-            pprint.pprint(correct_pass)
+
+            out_ident = ','.join(ents) + ", " + title
+            cleaned_identifier = cleanIdent(out_ident, tmp)
+
             tagged_body = ""
             for token, tag in zip(tokens, tags):
                 try:
                     tagged_body += token + "_" + int2tags[tag] + " "
                 except Exception, e:
                     tagged_body += ""
-            out_ident = ','.join(ents) + ", " + title
+            cleaned_body = cleanBody(tagged_body, tmp)
 
-            rand = random.random()
-            f = ''
-            if rand < train_cut:
-                f = train
-            elif rand < train_cut+dev_cut:
-                f = dev
-            else:
-                f = test
+            outputFiles = saveBuffer[saveFile]
+            for file, index in outputFiles:
+                write_buffer[file][index] = (cleaned_identifier, cleaned_body)
 
-            cleaned_identifier = out_ident
-            cleaned_body = tagged_body
-            try:
-                f.write(cleaned_identifier + '\n')
-            except Exception, e:
-                new_ident = ""
-                for c in cleaned_identifier:
-                    try:
-                        new_ident += c.encode("ascii", "ignore")
-                    except Exception, e:
-                        new_ident += ""
-                f.write(new_ident + '\n')
-            
-            try:
-                f.write(cleaned_body + '\n')
-            except Exception, e:
-                new_body = ""
-                for c in cleaned_identifier:
-                    try:
-                        new_body += c.encode("ascii", "ignore")
-                    except Exception, e:
-                        new_body += ""
-                f.write(new_body + '\n')
-            f.flush()
-            ratios =[(correct[i] * 1. / count, int2tags[i+1]) for i in range(len(correct))]
-            print "End number of documents", count
-            pprint.pprint(ratios)
 
-    train.close()
-    dev.close()
-    test.close()
+    ratios =[(correct[i] * 1. / count, int2tags[i+1]) for i in range(len(correct))]
+    pprint.pprint(ratios)
+    print "Total docs ", count
 
+    for key in write_buffer.keys():
+        fails = sum([w == 0 for w in write_buffer[key]])
+        print key, "fails",fails
+
+
+    assert sum([ len(saveBuffer[f]) for f in saveBuffer ]) == sum([len(write_buffer[t]) for t in ["train", "test", "dev"] ])
+
+    writeToFiles(files, write_buffer)
 

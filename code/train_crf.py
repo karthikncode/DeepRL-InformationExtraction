@@ -141,62 +141,63 @@ def articleFeatureExtract(article, prev_n = 4, next_n = 4):
             else:
                 label = "TAG"
             labels.append(label)
-    if gold:
-        return article_features, labels
-    else:
-        return article_features
+   
+    return article_features
 
-##SCRIPT
-print "reload helper"
-reload(helper)
-helper.load_constants()
-print "end load helper"
 
-retrain =  False
-if retrain:
-    num_blocks = 1
-    ## num_blocks = 5
-    training_file = "../data/tagged_data/EMA/train.tag"
-    dev_file      = "../data/tagged_data/EMA/dev.tag"
-    test_file      = "../data/tagged_data/EMA/test.tag"
+if __name__ == '__main__':
+    ##SCRIPT
+    print "reload helper"
+    reload(helper)
+    helper.load_constants()
+    print "end load helper"
 
-    trained_model = "trained_model_crf.EMA.p"
-    print "load files"
-    train_data, train_identifier = train.load_data(training_file)
-    # dev_data, dev_identifier = train.load_data(dev_file)
-    print "End load files"
-    test_data, test_identifier = train.load_data(test_file)
-    #all_data = train_data + dev_data + test_data
-    #all_identifier = train_identifier + dev_identifier + test_identifier
-    #len_all_data = len(all_data)
-    #indices = range(len_all_data)
-    for j in range(num_blocks):
-        # start_test_index = (len_all_data / num_blocks) * j
-        # end_test_index   = (len_all_data / num_blocks) * (j+1)
-        # train_indices = indices[:start_test_index]
-        # if j < 4:
-        #     train_indices += indices[end_test_index:]
-        # test_indices = indices[start_test_index:end_test_index]
+    retrain =  True
+    if retrain:
+        num_blocks = 1
+        ## num_blocks = 5
+        training_file = "../data/tagged_data/EMA2/train.3.tag"
+        dev_file      = "../data/tagged_data/EMA2/dev.3.tag"
+        test_file      = "../data/tagged_data/EMA2/test.3.tag"
 
-        # train_data_block, train_identifier_block =[all_data[i] for i in train_indices], [all_identifier[i] for i in train_indices]
+        trained_model = "trained_model_crf.EMA.3.p"
+        print "load files"
+        train_data, train_identifier = train.load_data(training_file)
+        # dev_data, dev_identifier = train.load_data(dev_file)
+        print "End load files"
+        test_data, test_identifier = train.load_data(dev_file)
+        #all_data = train_data + dev_data + test_data
+        #all_identifier = train_identifier + dev_identifier + test_identifier
+        #len_all_data = len(all_data)
+        #indices = range(len_all_data)
+        for j in range(num_blocks):
+            # start_test_index = (len_all_data / num_blocks) * j
+            # end_test_index   = (len_all_data / num_blocks) * (j+1)
+            # train_indices = indices[:start_test_index]
+            # if j < 4:
+            #     train_indices += indices[end_test_index:]
+            # test_indices = indices[start_test_index:end_test_index]
+
+            # train_data_block, train_identifier_block =[all_data[i] for i in train_indices], [all_identifier[i] for i in train_indices]
+            
+            # test_data_block, test_identifier_block =  [all_data[i] for i in test_indices], [all_identifier[i] for i in test_indices]
+            # test_data, test_identifier = train.load_data(test_file)
+
         
-        # test_data_block, test_identifier_block =  [all_data[i] for i in test_indices], [all_identifier[i] for i in test_indices]
-        # test_data, test_identifier = train.load_data(test_file)
-
-        #Feature extraction
-        #trainX, trainY = featureExtract(train_data_block)
-        #testX, testY = featureExtract(test_data_block )
-        prev_n = 2
-        next_n = 2
-        train_split = 1
-        print "Start Feature extract on train set"
-        trainX, trainY = featureExtract(train_data,train_identifier, prev_n, next_n )
-        print "Done Feature extract on train set"
-        #trainX, trainY = featureExtract(dev_data, prev_n, next_n)
-        print "Start Feature extract on test set"
-        testX, testY = featureExtract(test_data, test_identifier, prev_n, next_n)
-        print "Done Feature extract on test set"
-        #testX, testY = featureExtract(train_data[split_index:], prev_n, next_n)
-        trainer = trainModel(1)
-        print "YALA with context size being", prev_n, next_n, "complet"
+            #Feature extraction
+            #trainX, trainY = featureExtract(train_data_block)
+            #testX, testY = featureExtract(test_data_block )
+            prev_n = 2
+            next_n = 2
+            train_split = 1
+            print "Start Feature extract on train set"
+            trainX, trainY = featureExtract(train_data,train_identifier, prev_n, next_n )
+            print "Done Feature extract on train set"
+            #trainX, trainY = featureExtract(dev_data, prev_n, next_n)
+            print "Start Feature extract on test set"
+            testX, testY = featureExtract(test_data, test_identifier, prev_n, next_n)
+            print "Done Feature extract on test set"
+            #testX, testY = featureExtract(train_data[split_index:], prev_n, next_n)
+            trainer = trainModel(1)
+            print "YALA with context size being", prev_n, next_n, "complet"
 

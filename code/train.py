@@ -6,6 +6,7 @@ import itertools
 import sys
 import pickle
 import helper
+import parse_EMA
 
 
 #tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
@@ -13,18 +14,10 @@ import helper
 # #int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
 # int2tags=['TAG', 'food', 'adulterant', 'location', 'year']
 # tags = [0,1,2,3,4]
-tags = [0,1,2,3]
-int2tags = \
-['TAG',\
-'Affected_Food_Product',\
-'Produced_Location',\
-'Distributed_Location']
-tags2int = \
-{'TAG':0,\
-'Affected_Food_Product':1, \
-'Produced_Location':2, \
-'Distributed_Location':3 }
 
+int2tags = parse_EMA.int2tags
+tags2int = parse_EMA.tags2int
+tags = range(len(tags2int))
 # main loop
 def main(training_file,trained_model,previous_n,next_n, c, prune):
     helper.load_constants()
@@ -88,6 +81,8 @@ def get_feature_matrix_n(previous_n,next_n,data, num_words, word_vocab, other_fe
     dataX = scipy.sparse.lil_matrix((num_words, total_features))
     curr_word = 0
     for sentence in data:
+        if sentence == 'skip_body':
+            continue
         other_words_lower = set([s.lower for s in sentence[0]])
         for i in range(len(sentence[0])):
             word = sentence[0][i]
@@ -167,8 +162,8 @@ def save_list_first_names(infile_path,outfile_path):
 
 
 if __name__ == "__main__":
-    training_file = "../data/tagged_data/EMA/train.tag" #sys.argv[1]
-    trained_model = "trained_model.EMA.p" #sys.argv[2]
+    training_file = "../data/tagged_data/EMA2/train.3.tag" #sys.argv[1]
+    trained_model = "trained_model.EMA.3.p" #sys.argv[2]
     previous_n = 0 #sys.argv[3]
     next_n = 4
     c = 10

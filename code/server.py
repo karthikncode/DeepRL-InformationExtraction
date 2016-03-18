@@ -14,16 +14,15 @@ from operator import itemgetter
 import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
 from classifier import Classifier
+import parse_EMA
 
 DEBUG = False
 ANALYSIS = False
 COUNT_ZERO = False
 
 #Global variables
-int2tags = \
-['Affected_Food_Product',\
-'Produced_Location',\
-'Distributed_Location']
+int2tags = parse_EMA.int2tags
+
 NUM_ENTITIES = len(int2tags)
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3

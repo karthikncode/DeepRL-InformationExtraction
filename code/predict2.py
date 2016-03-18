@@ -10,22 +10,16 @@ import train_crf as crf
 from train import load_data
 import helper
 import re, pdb, collections
+import parse_EMA
 
 p = inflect.engine()
 # tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
 # int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
 # tags = [0,1,2,3,4]
-tags = [0,1,2,3]
-int2tags = \
-['TAG',\
-'Affected_Food_Product',\
-'Produced_Location',\
-'Distributed_Location']
-tags2int = \
-{'TAG':0,\
-'Affected_Food_Product':1, \
-'Produced_Location':2, \
-'Distributed_Location':3 }
+
+int2tags = parse_EMA.int2tags
+tags2int = parse_EMA.tags2int
+tags = range(len(int2tags))
 
 helper.load_constants()
 
@@ -75,7 +69,8 @@ def predict(trained_model, sentence, viterbi, cities):
     tags = []
     for i in range(len(y)):
         tags.append(int(y[i]))
-    pred = predict_mode(words, tags, cities)
+
+    pred = predict_mode(words, tags, tmp_conf, cities)
     return pred
 
 def predictWithConfidences(trained_model, sentence, viterbi, cities):

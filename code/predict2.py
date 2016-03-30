@@ -10,15 +10,15 @@ import train_crf as crf
 from train import load_data
 import helper
 import re, pdb, collections
-import parse_EMA
+import constants
 
 p = inflect.engine()
 # tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
 # int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
 # tags = [0,1,2,3,4]
 
-int2tags = parse_EMA.int2tags
-tags2int = parse_EMA.tags2int
+int2tags = constants.int2tags
+tags2int = constants.tags2int
 tags = range(len(int2tags))
 
 helper.load_constants()
@@ -203,7 +203,7 @@ def predict_ema_mode(sentence, tags, confidences):
     return output_pred_line, entity_confidences, entity_cnts
 
 
-def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= True):
+def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
     if ema:
         return predict_ema_mode(sentence, tags, confidences)
     output_entities = {}

@@ -15,14 +15,14 @@ from operator import itemgetter
 import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
 from classifier import Classifier
-import parse_EMA
+import constants
 
 DEBUG = False
 ANALYSIS = False
 COUNT_ZERO = False
 
 #Global variables
-int2tags = parse_EMA.int2tags
+int2tags = constants.int2tags
 
 NUM_ENTITIES = len(int2tags)
 NUM_QUERY_TYPES = 5
@@ -139,7 +139,7 @@ class Environment:
         #update the initial state
         self.stepNum = [0 for q in range(NUM_QUERY_TYPES)]
         
-
+        self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates) 
 
         return
 

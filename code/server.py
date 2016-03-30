@@ -1,5 +1,6 @@
 import zmq, time
 import numpy as np
+import copy
 import sys, json, pdb, pickle, operator, collections
 import helper
 import predict2 as predict
@@ -24,11 +25,14 @@ COUNT_ZERO = False
 int2tags = parse_EMA.int2tags
 
 NUM_ENTITIES = len(int2tags)
+NUM_QUERY_TYPES = 5
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
-STATE_SIZE = len(int2tags)*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
-STOP_ACTION = len(int2tags)
-ACCEPT_ALL = STOP_ACTION+1
+CONTEXT_TYPE = None
+STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
+STOP_ACTION = 4
+IGNORE_ALL = STOP_ACTION + 1
+ACCEPT_ALL = 999 #arbitrary
 
 
 trained_model = None
@@ -70,6 +74,7 @@ QUERY = collections.defaultdict(lambda:0.)
 ACTION = collections.defaultdict(lambda:0.)
 CHANGES = 0
 evalMode = False
+STAT_POSITIVE, STAT_NEGATIVE = 0, 0 #stat. sign.
 
 CONTEXT = None
 
@@ -85,7 +90,8 @@ class Environment:
         self.aggregate = args.aggregate
         self.delayedReward = args.delayedReward
         self.shooterLenientEval = args.shooterLenientEval
-        self.listNum = 0 #start off with first list
+        self.listNum = 0 #start off with first list    
+        self.rlbasicEval = args.rlbasicEval    
 
         self.shuffledIndxs = [range(len(q)) for q in self.newArticles]
         if not evalMode and args.shuffleArticles:
@@ -131,11 +137,8 @@ class Environment:
                 cnt += len(sublist)
 
         #update the initial state
-        self.stepNum = 0
-
-
-        self.updateState(ACCEPT_ALL, 1, self.ignoreDuplicates)
-
+        self.stepNum = [0 for q in range(NUM_QUERY_TYPES)]
+        
 
 
         return
@@ -158,23 +161,30 @@ class Environment:
 
     # update the state based on the decision from DQN
     def updateState(self, action, query, ignoreDuplicates=False):
-        global CONTEXT
+        global CONTEXT, CONTEXT_TYPE
 
         #use query to get next article
         articleIndx = None
-        listNum = query-1 #convert from 1-based to 0-based
+
+        if self.rlbasicEval:
+            #ignore the query decision from the agent
+            listNum = self.listNum
+            self.listNum += 1
+            if self.listNum == NUM_QUERY_TYPES: self.listNum = 0
+        else:
+            listNum = query-1 #convert from 1-based to 0-based         
         if ignoreDuplicates:
             nextArticle = None
-            while not nextArticle and self.stepNum < len(self.newArticles[listNum]):
+            while not nextArticle and self.stepNum[listNum] < len(self.newArticles[listNum]):
                 articleIndx = self.shuffledIndxs[listNum][self.stepNum]
                 if self.articleSim(self.indx, listNum, articleIndx) < 0.95:
                     nextArticle = self.newArticles[listNum][articleIndx]
                 else:
-                    self.stepNum += 1
+                    self.stepNum[listNum] += 1                
         else:
-            #get next article
-            if self.stepNum < len(self.newArticles[listNum]):
-                articleIndx = self.shuffledIndxs[listNum][self.stepNum]
+            #get next article            
+            if self.stepNum[listNum] < len(self.newArticles[listNum]):
+                articleIndx = self.shuffledIndxs[listNum][self.stepNum[listNum]]
                 nextArticle = self.newArticles[listNum][articleIndx]
             else:
                 nextArticle = None
@@ -256,14 +266,14 @@ class Environment:
                     #TODO: mask matches
 
         #add in context information
-        if nextArticle:
-            j = 4*NUM_ENTITIES
+        if nextArticle and CONTEXT_TYPE != 0:
+            j = 4*NUM_ENTITIES+1     
             for q in range(NUM_ENTITIES):
                 if self.entity == 4 or self.entity == q:
                     self.state[j:j+2*CONTEXT_LENGTH] = CONTEXT[self.indx][listNum][articleIndx+1][q]
                 j += 2*CONTEXT_LENGTH
 
-
+        # pdb.set_trace()
 
         #update state variables
         self.prevEntities = entities
@@ -340,6 +350,40 @@ class Environment:
         else:
             return rewards[self.entity]
 
+    def calculateStatSign(self, oldEntities, newEntities):
+        rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
+                    int(self.checkEquality(newEntities[2], self.goldEntities[2])) - int(self.checkEquality(oldEntities[2], self.goldEntities[2]))]
+
+
+        #add in shooter reward
+        if self.goldEntities[0]:
+            rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
+                    - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+        else:
+            rewards.insert(0, 0.)
+
+        # add in city reward
+        rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
+                - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
+
+        # if shooter_reward != 0:
+        #     print "Shooter reward", shooter_reward
+
+        if DEBUG:
+            #print
+            print "oldEntities", oldEntities
+            print "newEntities:", newEntities
+            print "goldEntities:", self.goldEntities
+            print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
+            print rewards            
+
+        #TODO: if terminal, give some reward based on how many entities are correct?
+
+        # pdb.set_trace()
+
+
+        return rewards
+        
 
 
     #evaluate the bestEntities retrieved so far for a single article
@@ -410,47 +454,48 @@ class Environment:
         bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
         bestConf = collections.defaultdict(lambda:0.)
 
-        for stepNum, predEntities in entityDic.items():
+        for stepNum, predEntitiesDic in entityDic.items():   
+            for listNum, predEntities in predEntitiesDic.items():
 
-            #shooterName first: only add this if gold contains a valid shooter
-            if goldEntities[0]!='':
-                gold = set(goldEntities[0].lower().split('|'))
+                #shooterName first: only add this if gold contains a valid shooter
+                if goldEntities[0]!='':
+                    gold = set(goldEntities[0].lower().split('|'))
 
-                pred = set(predEntities[0].lower().split('|'))
-                correct = len(gold.intersection(pred))
+                    pred = set(predEntities[0].lower().split('|'))
+                    correct = 1. if len(gold.intersection(pred)) > 0 else 0
 
-                if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
-                    # print "Correct: ", correct
-                    # print "Gold:", gold
-                    # print "pred:", pred
-                    bestCorrect[int2tags[0]] = correct
-                    bestPred[int2tags[0]] = len(pred)
-                    bestConf[int2tags[0]] = confDic[stepNum][0]
+                    if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
+                        # print "Correct: ", correct
+                        # print "Gold:", gold
+                        # print "pred:", pred
+                        bestCorrect[int2tags[0]] = correct
+                        bestPred[int2tags[0]] = 1 if len(pred) > 0 else 0.
+                        bestConf[int2tags[0]] = confDic[stepNum][listNum][0]
 
-                if stepNum == 0:
-                    GOLD[int2tags[0]] += len(gold)
+                    if stepNum == 0 and listNum == 0:
+                        GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
 
-                if correct==0:
-                    EVALCONF2[int2tags[0]].append(confDic[stepNum][0])
+                    if correct==0:
+                        EVALCONF2[int2tags[0]].append(confDic[stepNum][listNum][0])
 
 
-            #all other tags
-            for i in range(1, NUM_ENTITIES):
-                if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue
-                gold = set(goldEntities[i].lower().split())
-                pred = set(predEntities[i].lower().split())
-                correct = len(gold.intersection(pred))
-                if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
-                    bestCorrect[int2tags[i]] = correct
-                    bestPred[int2tags[i]] = len(pred)
-                    bestConf[int2tags[i]] = confDic[stepNum][i]
-                    # print "Correct: ", correct
-                    # print "Gold:", gold
-                    # print "pred:", pred
-                if stepNum == 0:
-                    GOLD[int2tags[i]] += len(gold)
-                if correct==0:
-                    EVALCONF2[int2tags[i]].append(confDic[stepNum][i])
+                #all other tags
+                for i in range(1, NUM_ENTITIES): 
+                    if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
+                    gold = set(goldEntities[i].lower().split())
+                    pred = set(predEntities[i].lower().split())
+                    correct = len(gold.intersection(pred))      
+                    if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                        bestCorrect[int2tags[i]] = correct
+                        bestPred[int2tags[i]] = len(pred)
+                        bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
+                        # print "Correct: ", correct
+                        # print "Gold:", gold
+                        # print "pred:", pred
+                    if stepNum == 0 and listNum == 0:
+                        GOLD[int2tags[i]] += len(gold)
+                    if correct==0:
+                        EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
 
         for i in range(NUM_ENTITIES):
             PRED[int2tags[i]] += bestPred[int2tags[i]]
@@ -571,8 +616,9 @@ class Environment:
         oldEntities = copy.copy(self.bestEntities.values())
 
         #update pointer to next article
-        self.stepNum += 1
-
+        listNum = query-1
+        self.stepNum[listNum] += 1
+    
         self.updateState(action, query, self.ignoreDuplicates)
 
         newEntities = self.bestEntities.values()
@@ -706,9 +752,7 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                     #original article
                     article = [w.lower() for w in ARTICLES[indx][0]] #need only the tokens, not tags
                 else:
-                    article_str = DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower()
-                    print "article_str is", article_str
-                    article = word_tokenize(article_str)
+                    article = word_tokenize(DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower())
                 for entityNum, entity in enumerate(entities):
                     vec = []
                     phrase = []
@@ -781,7 +825,9 @@ def main(args):
     global CORRECT, GOLD, PRED, EVALCONF, EVALCONF2
     global QUERY, ACTION, CHANGES
     global trained_model
-
+    global CONTEXT_TYPE
+    global STAT_POSITIVE, STAT_NEGATIVE
+    
     print args
 
     trained_model = pickle.load( open(args.modelFile, "rb" ) )
@@ -794,8 +840,9 @@ def main(args):
     else:
         TRAIN_CONTEXT = CONTEXT2
 
+    CONTEXT_TYPE = args.contextType
 
-
+    
     test_articles, test_titles, test_identifiers, test_downloaded_articles, TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM, CONTEXT1, CONTEXT2 = pickle.load(open(args.testEntities, "rb"))
 
     if args.contextType == 1:
@@ -818,7 +865,7 @@ def main(args):
         baselineEval(articles, identifiers, args)
         return
     elif args.thresholdEval:
-
+        thresholdEval(articles, downloaded_articles, identifiers, args)
         return
     elif args.confEval:
         confEval(articles, downloaded_articles, identifiers, args)
@@ -856,6 +903,9 @@ def main(args):
     socket.bind("tcp://*:%s" % port)
     print "Started server on port", port
 
+    #for analysis
+    stepCnt = 0
+
     # server loop
     while True:
         #  Wait for next request from client
@@ -884,6 +934,8 @@ def main(args):
             evalMode = True
             savedArticleNum = articleNum
             articleNum = 0
+            stepCnt = 0
+            STAT_POSITIVE, STAT_NEGATIVE = [0 for i in range(NUM_ENTITIES)], [0 for i in range(NUM_ENTITIES)]
 
             ENTITIES = TEST_ENTITIES
             CONFIDENCES = TEST_CONFIDENCES
@@ -902,6 +954,9 @@ def main(args):
                 f1 = (2*prec*rec)/(prec+rec)
                 print tag, prec, rec, f1, "########", CORRECT[tag], PRED[tag], GOLD[tag]
                 outFile.write(' '.join([str(tag), str(prec), str(rec), str(f1)])+'\n')
+            print "StepCnt (total, average):", stepCnt, float(stepCnt)/len(articles)
+            outFile.write("StepCnt (total, average): " + str(stepCnt)+ ' ' + str(float(stepCnt)/len(articles)) + '\n')
+            
 
             qsum = sum(QUERY.values())
             asum = sum(ACTION.values())
@@ -911,11 +966,12 @@ def main(args):
             for k, val in ACTION.items():
                 outFile2.write("Action " + str(k) + ' ' + str(val/asum)+'\n')
             outFile2.write("CHANGES: "+str(CHANGES)+ ' ' + str(float(CHANGES)/len(articles))+"\n")
+            outFile2.write("STAT_POSITIVE, STAT_NEGATIVE "+str(STAT_POSITIVE) + ', ' +str(STAT_NEGATIVE)+'\n')
 
             #for analysis
             # pdb.set_trace()
 
-            evalMode = False
+            evalMode = False            
             articleNum = savedArticleNum
 
             ENTITIES = TRAIN_ENTITIES
@@ -970,17 +1026,29 @@ def main(args):
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
 
+                stepCnt += sum(env.stepNum)
+
+                #stat sign
+                vals = env.calculateStatSign(env.originalEntities, env.bestEntities.values())
+                for i, val in enumerate(vals):
+                    if val > 0:
+                        STAT_POSITIVE[i] += val
+                    else:
+                        STAT_NEGATIVE[i] -= val
+
                 #for analysis
-                if ANALYSIS and evalMode and env.bestEntities.values()[args.entity].lower() != env.originalEntities[args.entity].lower() and reward > 0:
-                    CHANGES += 1
-                    try:
-                        print "Entities:", 'best', env.bestEntities.values()[args.entity], 'orig', env.originalEntities[args.entity], 'gold', env.goldEntities[args.entity]
-                        print ' '.join(originalArticle)
-                        print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-                        print ' '.join(newArticles[env.bestIndex[0]][env.bestIndex[1]])
-                        print "----------------------------"
-                    except:
-                        pass
+                for entityNum in [0,1,2,3]:
+                    if ANALYSIS and evalMode and env.bestEntities.values()[entityNum].lower() != env.originalEntities[entityNum].lower() and reward > 0:
+                        CHANGES += 1
+                        try:
+                            print "ENTITY:", entityNum
+                            print "Entities:", 'best', env.bestEntities.values()[entityNum], 'orig', env.originalEntities[entityNum], 'gold', env.goldEntities[entityNum]
+                            print ' '.join(originalArticle)
+                            print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+                            print ' '.join(newArticles[env.bestIndex[0]][env.bestIndex[1]])
+                            print "----------------------------"
+                        except:
+                            pass
 
             #send message (IMP: only for newGame or step messages)
             outMsg = 'state, reward, terminal = ' + str(newstate) + ',' + str(reward)+','+terminal
@@ -1058,6 +1126,11 @@ if __name__ == '__main__':
         default = False,
         help = "Evaluate with best conf ")
 
+    argparser.add_argument("--rlbasicEval",
+        type = bool,
+        default = False,
+        help = "Evaluate with RL agent that takes only reconciliation decisions.")
+
     argparser.add_argument("--shuffleArticles",
         type = bool,
         default = False,
@@ -1097,7 +1170,7 @@ if __name__ == '__main__':
     argparser.add_argument("--contextType",
         type = int,
         default = 1,
-        help = "Type of context to consider (1 = counts, 2 = tfidf)")
+        help = "Type of context to consider (1 = counts, 2 = tfidf, 0 = none)")    
 
 
     argparser.add_argument("--saveEntities",

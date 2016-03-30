@@ -11,18 +11,14 @@ import numpy as np
 
 
 #rewards first
-f1 = map(float, file(sys.argv[1]).read().split('\n')[1:-1])
+f1 = [0.0] + map(float, file(sys.argv[1]).read().split('\n')[1:-1])
 
 g = file(sys.argv[2]).read().split('------------\n')
-entity = int(sys.argv[3])
-f2 = []
-for ele in g[1:]:
-    f2.append(float(ele.split('\n')[entity+1].split()[-1]))
 
-max_epochs = 40
+max_epochs = 100
 N = min(max_epochs, len(f1))
 
-colors = ['red', 'orange', 'b']
+colors = ['r', 'm', 'b', 'g']
 markers = ['x', 6, '.']
 # linestyles = ['-', '--', '-.', ':']
 
@@ -30,7 +26,7 @@ linestyles = ['-', '-','-']
 labels = ['LSTM-DQN', 'BI-DQN', 'BOW-DQN']
 
 fig, ax1 = plt.subplots()
-ax1.plot(np.arange(N), f1[:N], 'b-')
+ax1.plot(np.arange(N), f1[:N], 'k-', linewidth=2)
 ax1.set_xlabel('Epoch', fontsize=20)
 # Make the y-axis label and tick labels match the line color.
 ax1.set_ylabel('Reward', color='black', fontsize=20)
@@ -42,8 +38,17 @@ for tl in ax1.get_xticklabels():
     tl.set_fontsize(17)
 
 ax2 = ax1.twinx()
-ax2.plot(np.arange(N), f2[:N], 'r--')
-ax2.set_ylabel('Accuracy', color='black', fontsize=20)
+entity = int(sys.argv[3])
+initial_values = [45.2, 69.7, 68.6, 53.7]
+for entity in [0,1,2,3]:
+# for entity in [entity]:
+    f2 = [initial_values[entity]]
+    for ele in g[1:]:
+        f2.append(100.0 * float(ele.split('\n')[entity+1].split()[-1]))
+   
+    ax2.plot(np.arange(N), f2[:N], colors[entity]+'--', linewidth=2)
+
+ax2.set_ylabel('Accuracy (%)', color='black', fontsize=20)
 for tl in ax2.get_yticklabels():
     tl.set_color('black')
     tl.set_fontsize(17)

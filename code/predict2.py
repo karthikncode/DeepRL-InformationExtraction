@@ -374,7 +374,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     return dataY, dataYconfidences
 
 if __name__ == "__main__":
-    trained_model = "trained_model.p" #sys.argv[1]
+    trained_model = "trained_model2.p" #sys.argv[1]
     testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" #sys.argv[2]
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

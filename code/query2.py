@@ -241,8 +241,9 @@ def similarities_without_duplicates(tfidf_matrix,length):
 
 
 def get_related_urls_from_bing(query_text):
-    BING_API_KEY = 'WvT9Yo4AQHnS7tdCTePQRgRjhHvGOwMJZVjBbMMPSAI' #new key
+    #BING_API_KEY = 'WvT9Yo4AQHnS7tdCTePQRgRjhHvGOwMJZVjBbMMPSAI' #new key
     # BING_API_KEY = 'q52coTH39rJGmzKKzAeWbrQzDvNIj5OI437Hmwyb5U0' 
+    BING_API_KEY = 'Kd/1GUxxE6EPf5H5sX3xL2zS13g0us7HFhjaQ1TKOog' #Yala's key
     credentialBing = 'Basic ' + (':%s' % BING_API_KEY).encode('base64').rstrip()
     searchString = '%27'+urllib.urlencode({"q": query_text})+'%27'
 
@@ -257,9 +258,9 @@ def get_related_urls_from_bing(query_text):
             count += 1
             response = urllib2.urlopen(request) 
         except Exception, e:
-            if count > 10:
+            if count > 3:
                 return []
-            time.sleep(1)
+            time.sleep(.3)
             pass
     json = simplejson.load(response)
     if json.get('d').get('results') is None:
@@ -267,7 +268,7 @@ def get_related_urls_from_bing(query_text):
         return []
     results = json['d']['results']
     article_urls = [item['Url'] for item in results][:20]
-
+    # article_urls = [item['Url'] for item in results][:6]
     return article_urls
 
 def get_related_urls_from_google(query_text):

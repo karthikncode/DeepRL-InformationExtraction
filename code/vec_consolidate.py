@@ -39,7 +39,12 @@ ARTICLES2, TITLES2, IDENTIFIERS2, DOWNLOADED_ARTICLES2 = [],[],[],[] #just a pla
 fileName = sys.argv[1]
 #IMP: lists must be of the form train.extra.0
 numLists = int(sys.argv[2])
-trained_model = pickle.load( open(sys.argv[3], "rb" ) )
+trained_model = sys.argv[3]
+if not "crf" in trained_model:
+    print "NOT CRF"
+    trained_model = pickle.load( open(sys.argv[3], "rb" ) )
+else:
+    print "CRF"
 
 
 #function to build the dictionary for words to be used for context features
@@ -64,7 +69,7 @@ def extractEntitiesWithConfidences(article):
         if conf_cnts[i] > 0:
             conf_scores[i] /= conf_cnts[i]
 
-    return pred.split(','), conf_scores
+    return pred.split(' ### '), conf_scores
 
 
 ########################### SCRIPT ########################################

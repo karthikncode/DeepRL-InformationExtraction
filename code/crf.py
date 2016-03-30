@@ -6,21 +6,14 @@ import itertools
 import sys
 import pickle
 import inflect
-import train_crf as crf
 from train import load_data
 import helper
 import re, pdb, collections
-import constants
 
 p = inflect.engine()
-# tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
-# int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
-# tags = [0,1,2,3,4]
-
-int2tags = constants.int2tags
-tags2int = constants.tags2int
-tags = range(len(int2tags))
-
+tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
+int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
+tags = [0,1,2,3,4]
 helper.load_constants()
 
 # main loop
@@ -69,143 +62,32 @@ def predict(trained_model, sentence, viterbi, cities):
     tags = []
     for i in range(len(y)):
         tags.append(int(y[i]))
-
-    pred = predict_mode(words, tags, tmp_conf, cities)
+    pred = predict_mode(words, tags, cities)
     return pred
 
 def predictWithConfidences(trained_model, sentence, viterbi, cities):
-    sentence = sentence.replace("_"," ")
-
-    words = re.findall(r"[\w']+|[.,!?;]", sentence)
-    cleanedSentence = []
-
-    i = 0
-    while i < len(words):
-        token = sentence[i]
-        end_token_range = i
-        for j in range(i+1,len(words)):
-            new_token = words[j]
-            if new_token == token:
-                end_token_range = j
-            else:
-                cleanedSentence.append(words[i])
-                break
-        i = end_token_range + 1
-    words = cleanedSentence
-
-    if "crf" in trained_model:
-        return predictCRF(trained_model, words, cities)
     if type(trained_model) == str:
         clf, previous_n,next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
     else:
         #trained_model is an already initialized list of params
         clf, previous_n,next_n, word_vocab,other_features = trained_model
+    sentence = sentence.replace("_"," ")
+    words = re.findall(r"[\w']+|[.,!?;]", sentence)
     y, confidences = predict_tags_n(viterbi, previous_n,next_n, clf, words, word_vocab,other_features)
     tags = []
     for i in range(len(y)):
         tags.append(int(y[i]))
 
-    pred, conf_scores, conf_cnts = predict_mode(words, tags, confidences, cities)
+    pred, conf_scores, conf_cnts = predict_mode(words, tags, confidences, cities)    
 
     return pred, conf_scores, conf_cnts
 
-## Return tag, conf scores, conf counts for CRF
-def predictCRF(trained_model, words, cities):
-    tags, confidences = crf.predict(words, trained_model)
-    pred, conf_scores, conf_cnts = predict_mode(words, tags, confidences, cities, True)
-    return pred, conf_scores, conf_cnts
 
-count_person = 0
 # Make predictions using majority voting of the tag
 # sentence - list of words
 # tags - list of tags corresponding to sentence
 # Returns comma separated preditions of shooterNames, killedNum, woundedNum and city with shooter names separated by '|'
-def predict_ema_mode(sentence, tags, confidences):
-
-    original_tags = tags
-
-    output_entities = {}
-    entity_confidences = [0,0,0]
-    entity_cnts = [0,0,0]
-
-    for tag in int2tags:
-        output_entities[tag] = []
-
-    cleanedSentence = []
-    cleanedTags = []
-    # print "TAGS", tags
-    i = 0
-    print "len sentence", len(sentence)
-    while i < len(sentence):
-        tag = int2tags[tags[i]]
-        end_range = i
-        if not tag == "TAG":
-            for j in range(i+1,len(sentence)):
-                new_tag = int2tags[tags[j]]
-                if new_tag == tag:
-                    # print "get get it", new_tag, tag, sentence[i], sentence[j]
-                    # print tag
-                    # print sentence[i],  sentence[j]
-                    # print sentence[i:j+1]
-                    # print "LOVE IT"
-                    end_range = j
-                else:
-                    break
-            # print "end_range", end_range
-        cleanedSentence.append( " ".join(sentence[i:end_range+1]))
-        cleanedTags.append(tags2int[tag]) 
-        # if not tag == "TAG":
-            # print tag, "tokens", " ".join(sentence[i:end_range+1])
-            # print "---------"
-        i = end_range + 1
-
-    # print "clean sentence"
-    # print cleanedSentence
-    # print "cleanedTags", cleanedTags
-
-    assert set(tags) == set(cleanedTags)
-    sentence = cleanedSentence
-    tags = cleanedTags
-    for j in range(len(sentence)):
-        ind = "" 
-        ind = int2tags[tags[j]]
-        output_entities[ind].append((sentence[j], confidences[j]))
-    
-    output_pred_line = ""
-
-    # mode, conf = get_mode(output_entities["shooterName"])
-    # output_pred_line += mode
-    # entity_confidences[tags2int['shooterName']-1] += conf
-    # entity_cnts[tags2int['shooterName']-1] += 1
-
-    for tag in int2tags[1:]:
-        # pdb.set_trace()
-        #one idea, if ent isn't in countries, try 1perm, two perm and stop there. then run something akin to #tryCities
-            
-        mode, conf = get_mode(output_entities[tag])
-        if mode == "":
-            assert not tags2int[tag] in tags 
-            assert not tags2int[tag] in original_tags 
-            output_pred_line += "unknown"
-            entity_confidences[tags2int[tag]-1] += 0
-            entity_cnts[tags2int[tag]-1] += 1
-        else:
-            output_pred_line += mode
-            entity_confidences[tags2int[tag]-1] += conf
-            entity_cnts[tags2int[tag]-1] += 1
-
-        if not tag == int2tags[-1]:
-            output_pred_line += " ### "
-
-
-    print "OUTPUT_PRED_LINE", output_pred_line
-
-    return output_pred_line, entity_confidences, entity_cnts
-
-
-def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
-    if ema:
-        return predict_ema_mode(sentence, tags, confidences)
+def predict_mode(sentence, tags, confidences,  cities):
     output_entities = {}
     entity_confidences = [0,0,0,0]
     entity_cnts = [0,0,0,0]
@@ -214,12 +96,8 @@ def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
         output_entities[tag] = []
 
     for j in range(len(sentence)):
-        ind = "" 
-        if crf:
-            ind = tags[j]
-        else:
-            ind = int2tags[tags[j]]
-        output_entities[ind].append((sentence[j], confidences[j]))
+        output_entities[int2tags[tags[j]]].append((sentence[j], confidences[j]))
+
     
     output_pred_line = ""
 
@@ -238,7 +116,7 @@ def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
 
     for tag in int2tags:
         if tag == "city":
-            output_pred_line += " ### "
+            output_pred_line += ","
             possible_city_combos = []
             # pdb.set_trace()
             for permutation in itertools.permutations(output_entities[tag],2):
@@ -266,14 +144,14 @@ def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
                 #print possible_cities
                 #print get_mode(possible_cities)
                 mode, conf = get_mode(possible_cities)
-
-            output_pred_line += mode
+        
+            output_pred_line += mode            
             entity_confidences[tags2int['city']-1] += conf
             entity_cnts[tags2int['city']-1] += 1
 
         elif tag not in ["TAG", "shooterName"]:
-            output_pred_line += " ### "
-
+            output_pred_line += ","
+            
             mode, conf = get_mode(output_entities[tag])
             if mode == "":
                 output_pred_line += "zero"
@@ -283,9 +161,6 @@ def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
                 output_pred_line += mode
                 entity_confidences[tags2int[tag]-1] += conf
                 entity_cnts[tags2int[tag]-1] += 1
-
-    assert not (output_pred_line.split(" ### ")[0].strip() == "" and len(output_entities["shooterName"]) >0)
-
     return output_pred_line, entity_confidences, entity_cnts
 
 # Make predictions using majority voting in batch
@@ -312,19 +187,19 @@ def get_mode(l):
     counts = collections.defaultdict(lambda:0)
     Z = collections.defaultdict(lambda:0)
     curr_max = 0
-    arg_max = ""
+    arg_max = ""    
     for element, conf in l:
         try:
             normalised = p.number_to_words(int(element))
         except Exception, e:
             normalised = element.lower()
 
-
+        
         counts[normalised] += conf
         Z[normalised] += 1
 
     for element in counts:
-        if counts[element] > curr_max and element != "" and element != "zero":
+        if counts[element] > curr_max and element != "" and element != "zero": 
             curr_max = counts[element]
             arg_max = element
     return arg_max, (counts[arg_max]/Z[arg_max] if Z[arg_max] > 0 else counts[arg_max])
@@ -345,7 +220,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
             for j in range(previous_n):
                 if i+j+1<len(sentence):
                     dataX[i+j+1,(j+1)*num_features+word_vocab[word_lower]] = 1
-            for j in range(next_n):
+            for j in range(next_n):    
                 if i-j-1 >= 0:
                     dataX[i-j-1,(previous_n+j+1)*num_features+word_vocab[word_lower]] = 1
         for (index, feature_func) in enumerate(other_features):
@@ -365,16 +240,16 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     for i in range(len(sentence)):
         for j in range(previous_n):
             if j < i:
-                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1
+                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1                
         dataYconfidences[i] = clf.predict_proba(dataX[i,:].reshape(1, -1))
-        dataY[i] = np.argmax(dataYconfidences[i])
+        dataY[i] = np.argmax(dataYconfidences[i])    
         dataYconfidences[i] = dataYconfidences[i][0][dataY[i]]
 
     # pdb.set_trace()
     return dataY, dataYconfidences
 
 if __name__ == "__main__":
-    trained_model = "trained_model2.p" #sys.argv[1]
+    trained_model = "trained_model.p" #sys.argv[1]
     testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" #sys.argv[2]
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

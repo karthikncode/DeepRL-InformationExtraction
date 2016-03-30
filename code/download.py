@@ -6,9 +6,10 @@ import sys, pickle, pdb
 import query2 as query
 from train import load_data
 
-NUM_ENTITIES = 4
+NUM_ENTITIES = 3
 
-EXTRA_QUERY='( injured | wounded | victim )' 
+EXTRA_QUERY='(adulterated | scandal | countries | fake)'
+# EXTRA_QUERY='( injured | wounded | victim )' 
 #EXTRA_QUERY='( suspect | shooter | identified | arrested | charged )'
 
 if __name__ == '__main__':
@@ -16,6 +17,7 @@ if __name__ == '__main__':
 
     trainFile = sys.argv[1]
     saveFile = sys.argv[2]
+    extra_query = sys.argv[3]
     
     #load data and process identifiers
     articles, identifiers = load_data(trainFile)
@@ -38,7 +40,7 @@ if __name__ == '__main__':
 
     with open(saveFile, "wb" ) as f:
         for i in range(len(titles)):        
-            tmp = query.download_articles_from_query(titles[i]+' '+EXTRA_QUERY,' '.join(articles[i][0]),'bing')
+            tmp = query.download_articles_from_query(titles[i]+' '+extra_query,' '.join(articles[i][0]),'bing')
             downloaded_articles.append(tmp)            
             pickle.dump([articles[i], titles[i], identifiers[i], downloaded_articles[i]], f)        
             print '\r',i,'/',len(titles)

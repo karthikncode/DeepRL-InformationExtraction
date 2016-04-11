@@ -22,10 +22,11 @@ Consolidate the articles:
 
 
 ### Running the code
-  - First run the server:  
+  * `cd code/`
+  * First run the server:  
     `python server.py --port 7000 --trainEntities consolidated/train+context.5.p --testEntities consolidated/dev+test+context.5.p --outFile outputs/tmp2.out --modelFile trained_model2.p --entity 4 --aggregate always --shooterLenientEval True --delayedReward False --contextType 2` 
 
-  - Then run the agent:  
+  * Then run the agent:  
     `./run_cpu 7000 logs/tmp/`  
     Make sure the port numbers for the server and agent match up.
 

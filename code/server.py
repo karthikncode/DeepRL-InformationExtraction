@@ -1183,6 +1183,7 @@ if __name__ == '__main__':
 
     main(args)
 
-
+#sample
+#python server.py --port 7000 --trainEntities consolidated/train+context.5.p --testEntities consolidated/dev+test+context.5.p --outFile outputs/tmp2.out --modelFile trained_model2.p --entity 4 --aggregate always --shooterLenientEval True --delayedReward False --contextType 2
 
 

@@ -3,7 +3,7 @@ import numpy as np
 import copy
 import sys, json, pdb, pickle, operator, collections
 import helper
-import predict2 as predict
+import predict as predict
 from train import load_data
 from itertools import izip
 import inflect

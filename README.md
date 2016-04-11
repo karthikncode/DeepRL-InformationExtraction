@@ -22,7 +22,7 @@ Consolidate the articles:
 
 
 ### Running the code
-  * `cd code/`
+  * Change to the code directory: `cd code/`
   * First run the server:  
     `python server.py --port 7000 --trainEntities consolidated/train+context.5.p --testEntities consolidated/dev+test+context.5.p --outFile outputs/tmp2.out --modelFile trained_model2.p --entity 4 --aggregate always --shooterLenientEval True --delayedReward False --contextType 2` 
 

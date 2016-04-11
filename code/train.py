@@ -9,12 +9,6 @@ import helper
 import parse_EMA
 
 
-#tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
-# tags2int={'TAG':0, 'food':1, 'adulterant':2, 'location':3, 'year':4}
-# #int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
-# int2tags=['TAG', 'food', 'adulterant', 'location', 'year']
-# tags = [0,1,2,3,4]
-
 int2tags = parse_EMA.int2tags
 tags2int = parse_EMA.tags2int
 tags = range(len(tags2int))
@@ -125,8 +119,6 @@ def separate_word_tag(sentence):
     i = 0
     for part in parts:
         i+=1
-        #if i > 20:
-        #    break
         tag = "_".join(part.split("_")[1:])
         try:
             tags.append(tags2int[tag])

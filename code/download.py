@@ -3,7 +3,7 @@
 #trainFile = '../data/tagged_data/whole_text_full_city/train.tag'
 
 import sys, pickle, pdb
-import query2 as query
+import query as query
 from train import load_data
 
 NUM_ENTITIES = 3

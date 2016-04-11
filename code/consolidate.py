@@ -9,7 +9,7 @@ import copy
 import sys, json, pdb, pickle, operator, collections
 from itertools import izip
 import inflect
-import predict2 as predict
+import predict as predict
 import helper
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer

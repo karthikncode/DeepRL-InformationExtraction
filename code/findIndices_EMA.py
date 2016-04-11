@@ -8,18 +8,12 @@ import itertools
 import sys
 import pickle
 import helper
+import constants
+
 
 tokenizer = WordTokenizer()
-int2tags = \
-['TAG',\
-'Affected_Food_Product',\
-'Produced_Location',\
-'Distributed_Location']
-tags2int = \
-{'TAG':0,\
-'Affected_Food_Product':1, \
-'Produced_Location':2, \
-'Distributed_Location':3 }
+int2tags = constants.int2tags
+tags2int = constants.tags2int
 int2citationFeilds = ['Authors', 'Date', 'Title', 'Source']
 generic = ["city", "centre", "county", "street", "road", "and", "in", "town", "village"]
 

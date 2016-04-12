@@ -286,8 +286,6 @@ def get_related_urls_from_google(query_text):
     return article_urls
 
 if __name__ == '__main__':
-    #original_text = "About an hour after revelers at a house party in Hawthorne rang in 2013, a gunman opened fire, killing one person and injuring three others, authorities said.  Police stopped a vehicle that sped away from the residence at the corner of 135th Street and Cerise Avenue and found an individual with a gunshot wound inside, the Los Angeles County Sheriff's Department said in a statement. The man was transported to a local hospital, where he was later pronounced dead.  Three other victims, some of the roughly 40 people who gathered for the New Year’s Eve party, were hospitalized with gunshot wounds that authorities described as non-life-threatening.  Sheriff's homicide detectives, working with the Hawthorne Police Department, started combing the scene for evidence early Tuesday morning.  Investigators didn’t immediately have any information on a suspect or a motive.  ALSO:  Woman fights back, escapes kidnappers in Encinitas  Search and rescue teams save stranded man and dogs  -- Marisa Gerber"
-    #print get_predictions_from_query("One killed, 3 injured in Hawthorne New Year's Eve party shooting",original_text,'bing')\
     event_dict =  build_event_dict('../data/metadata/original/2013MASTER.csv')
     test = test_queries(event_dict)
     print test

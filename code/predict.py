@@ -13,9 +13,6 @@ import re, pdb, collections
 import constants
 
 p = inflect.engine()
-# tags2int = {"TAG": 0, "shooterName":1, "killedNum":2, "woundedNum":3, "city":4}
-# int2tags = ["TAG",'shooterName','killedNum','woundedNum','city']
-# tags = [0,1,2,3,4]
 
 int2tags = constants.int2tags
 tags2int = constants.tags2int
@@ -34,11 +31,10 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
     else:
         clf, previous_n, next_n, word_vocab,other_features = trained_model
 
-    #print("predicting")
+
     tic = time.clock()
     f = open(output_tags,'w')
-    #print len(test_data)
-    #print len(identifier)
+
     for i in range(len(test_data)+len(identifier)):
         if i%2 == 1:
             y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
@@ -143,25 +139,16 @@ def predict_ema_mode(sentence, tags, confidences):
             for j in range(i+1,len(sentence)):
                 new_tag = int2tags[tags[j]]
                 if new_tag == tag:
-                    # print "get get it", new_tag, tag, sentence[i], sentence[j]
-                    # print tag
-                    # print sentence[i],  sentence[j]
-                    # print sentence[i:j+1]
-                    # print "LOVE IT"
+      
                     end_range = j
                 else:
                     break
-            # print "end_range", end_range
         cleanedSentence.append( " ".join(sentence[i:end_range+1]))
         cleanedTags.append(tags2int[tag]) 
-        # if not tag == "TAG":
-            # print tag, "tokens", " ".join(sentence[i:end_range+1])
-            # print "---------"
+
         i = end_range + 1
 
-    # print "clean sentence"
-    # print cleanedSentence
-    # print "cleanedTags", cleanedTags
+  
 
     assert set(tags) == set(cleanedTags)
     sentence = cleanedSentence
@@ -370,7 +357,6 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
         dataY[i] = np.argmax(dataYconfidences[i])
         dataYconfidences[i] = dataYconfidences[i][0][dataY[i]]
 
-    # pdb.set_trace()
     return dataY, dataYconfidences
 
 if __name__ == "__main__":

@@ -1,13 +1,3 @@
---[[
-Copyright (c) 2014 Google Inc.
-
-See LICENSE file for full terms of limited license.
-]]
-
---[[ Rectified Linear Unit.
-
-The output is max(0, input).
---]]
 
 local Rectifier, parent = torch.class('nn.Rectifier', 'nn.Module')
 

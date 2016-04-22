@@ -11,7 +11,8 @@ NUM_ENTITIES = 3
 #EMA queries
 #EXTRA_QUERY='( state | country | india | china | province )'
 #EXTRA_QUERY='( adulterated | fake | food | products | samples )'
-EXTRA_QUERY='( food | oil | milk | honey | price | brands | formula )'
+#EXTRA_QUERY='( food | oil | milk | honey | price | brands | formula )'
+EXTRA_QUERY=''
 
 
 # EXTRA_QUERY='(adulterated | scandal | countries | fake)'

@@ -6,6 +6,7 @@ import itertools
 import sys
 import pickle
 import helper
+import constants
 
 int2tags = constants.int2tags
 tags2int = constants.tags2int

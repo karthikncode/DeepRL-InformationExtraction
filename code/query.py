@@ -2,7 +2,7 @@
 from __future__ import division
 import urllib
 import simplejson
-from predict import predict
+# from predict import predict
 from scrape import download_article
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -152,12 +152,12 @@ def number_of_overlaps(searched_urls, original_urls):
                     break
     return number
 
-def get_predictions_from_query(query_text,original_text,search_engine_name):
-    selected_texts = get_related_articles_from_query(query_text,original_text,search_engine_name)
-    predictions = []
-    for text in selected_texts:
-        predictions.append(predict("trained_model.p", text, False, helper.cities)) # NOTE: Add cities later
-    return predictions
+# def get_predictions_from_query(query_text,original_text,search_engine_name):
+#     selected_texts = get_related_articles_from_query(query_text,original_text,search_engine_name)
+#     predictions = []
+#     for text in selected_texts:
+#         predictions.append(predict("trained_model.p", text, False, helper.cities)) # NOTE: Add cities later
+#     return predictions
 
 def download_articles_from_query(query_text,original_text,search_engine_name):
     if search_engine_name == 'google':

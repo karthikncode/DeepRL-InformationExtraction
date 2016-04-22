@@ -9,7 +9,8 @@ from train import load_data
 NUM_ENTITIES = 3
 
 #EMA queries
-EXTRA_QUERY='( state | country | india | china | province )'
+#EXTRA_QUERY='( state | country | india | china | province )'
+EXTRA_QUERY='( adulterated | fake | food | products | samples )'
 # EXTRA_QUERY='(  )'
 
 

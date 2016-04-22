@@ -320,63 +320,63 @@ sS'Number_of_Deaths'
 p161
 V0
 p162
-sS'Year_Ended'
-p163
-V2013
-p164
 sS'citations'
-p165
-(lp166
-(dp167
+p163
+(lp164
+(dp165
 S'Date'
-p168
+p166
 V2013-07-08
-p169
+p167
 sS'Source'
-p170
+p168
 Vglobaltimes
-p171
+p169
 sS'Title'
-p172
+p170
 V43-year-old chicken feet snacks smell of foul play
-p173
+p171
 sS'Authors'
-p174
+p172
 VXinhua
-p175
-sa(dp176
-g168
+p173
+sa(dp174
+g166
 V2013-07-08
-p177
-sg170
+p175
+sg168
 Vtelegraph.co.uk
-p178
-sg172
-VChinese police discover chicken feet for sale 46 years past sell-by date
-p179
-sg174
-VTom Phillips
-p180
-sa(dp181
-g168
-V2013-07-12
-p182
+p176
 sg170
-VHuffington Post
-p183
+VChinese police discover chicken feet for sale 46 years past sell-by date
+p177
 sg172
+VTom Phillips
+p178
+sa(dp179
+g166
+V2013-07-12
+p180
+sg168
+VHuffington Post
+p181
+sg170
 V46-Year-Old Expired Chinese Chicken Feet Seized In Illegal Food Smuggling Bust In Nanning
-p184
-sg174
+p182
+sg172
 VDavidson, Kavitha
-p185
+p183
 sasS'Primary_Method_of_Adulteration'
-p186
+p184
 VArtificial Enhancement
-p187
+p185
 sS'Consumer_Brand'
-p188
+p186
 Vunknown
+p187
+sS'Year_Ended'
+p188
+V2013
 p189
 sS'Distributed_Location'
 p190
@@ -412,105 +412,105 @@ sS'Produced_Location'
 p205
 VEast Africa, Zambia
 p206
-sS'Year_Began'
-p207
-V2013
-p208
 sS'Adulterant(s)'
-p209
+p207
 Varomatic aldehydes
-p210
+p208
 sS'Number_of_References'
-p211
+p209
 V3
-p212
+p210
 sS'Perpetrator'
-p213
+p211
 VZambeef
-p214
+p212
 sS'Food_Category'
-p215
+p213
 VMeat Products
-p216
-sS'Potential_Public_Health_Impact'
-p217
-VAromatic aldehydes may be carcinogenic.
-p218
-sS'Number_of_Deaths'
-p219
-V0
-p220
-sS'Year_Ended'
-p221
-V2013
-p222
-sS'Consumer_Brand'
-p223
-Vunknown
-p224
-sS'citations'
-p225
-(lp226
-(dp227
-S'Date'
-p228
-V2013-06-23
-p229
-sS'Source'
-p230
-VZambia Daily Mail
-p231
-sS'Authors'
-p232
-VNOMSA NKANA and MUNIDE ZULU
-p233
-sS'Title'
-p234
-VMore \u2018beef\u2019 on Zambeef
-p235
-sa(dp236
-g228
-V2013-06-20
-p237
-sg230
-Vpostzambia
-p238
-sg232
-VMwala Kalaluka, Fridah Nkonde and Agnes Changala
-p239
-sg234
-VIt's true Zambeef's beef has aldehyde
-p240
-sa(dp241
-g228
-V2013-06-21
-p242
-sg230
-VThe Independent Observer
-p243
-sg232
-g25
-sg234
-VZambeef meat contains aromatic aldehyde used to embalm dead bodies
-p244
-sasS'Primary_Method_of_Adulteration'
-p245
-VArtificial Enhancement
-p246
-sS'Distributed_Location'
-p247
-VEast Africa, Zambia
-p248
-sS'Number_of_Illnesses'
-p249
-g220
-sS'Adulterated_Food_Product'
-p250
-Vbeef
-p251
+p214
 sS'Incident_Summary'
-p252
+p215
 VZambeef, the largest beef producer in Zambia, was accused of treating imported beef with aromatic aldehydes, a powerful industrial preservative. No illnesses or deaths were reported. The preservatives were used to keep the imported beef fresh for a significant period of time. The adulteration was detected following inspections of the product.
+p216
+sS'Number_of_Deaths'
+p217
+V0
+p218
+sS'Consumer_Brand'
+p219
+Vunknown
+p220
+sS'citations'
+p221
+(lp222
+(dp223
+S'Date'
+p224
+V2013-06-23
+p225
+sS'Source'
+p226
+VZambia Daily Mail
+p227
+sS'Authors'
+p228
+VNOMSA NKANA and MUNIDE ZULU
+p229
+sS'Title'
+p230
+VMore \u2018beef\u2019 on Zambeef
+p231
+sa(dp232
+g224
+V2013-06-20
+p233
+sg226
+Vpostzambia
+p234
+sg228
+VMwala Kalaluka, Fridah Nkonde and Agnes Changala
+p235
+sg230
+VIt's true Zambeef's beef has aldehyde
+p236
+sa(dp237
+g224
+V2013-06-21
+p238
+sg226
+VThe Independent Observer
+p239
+sg228
+g25
+sg230
+VZambeef meat contains aromatic aldehyde used to embalm dead bodies
+p240
+sasS'Primary_Method_of_Adulteration'
+p241
+VArtificial Enhancement
+p242
+sS'Year_Ended'
+p243
+V2013
+p244
+sS'Distributed_Location'
+p245
+VEast Africa, Zambia
+p246
+sS'Number_of_Illnesses'
+p247
+g218
+sS'Adulterated_Food_Product'
+p248
+Vbeef
+p249
+sS'Potential_Public_Health_Impact'
+p250
+VAromatic aldehydes may be carcinogenic.
+p251
+sS'Year_Began'
+p252
+V2013
 p253
 ssV343
 p254
@@ -2462,72 +2462,72 @@ sg205
 VSoutheast Asia, India; South America, Brazil
 p1011
 sg207
-VUnknown
+Vexpired meat; mislabeled meat; smuggled frozen meat
 p1012
 sg209
-Vexpired meat; mislabeled meat; smuggled frozen meat
+V2
 p1013
 sg211
-V2
+Vunknown
 p1014
 sg213
-Vunknown
+VMeat Products
 p1015
 sg215
-VMeat Products
+VMore than 100,000 metric tons of smuggled frozen meat worth up to 3 billion yuan ($483 million) was confiscated by Chinese authorities as a result of a crackdown that took place in 14 different provinces. Officials reported that the perpetrators smuggled the meat from India and Brazil through countries such as Vietnam and Hong Kong to decrease its cost. Moreover, most of the sealed meat products were far older than their true expiration dates and some of the meat was reportedly more than 40 years old. Because the meat was kept under poor sanitary conditions and repeatedly frozen and thawed, it might have been contaminated with pathogenic organisms.
 p1016
 sg217
-VConsumption of expired meat maintained in poor sanitary conditions increases the risk of infection by pathogenic organisms.
-p1017
+g218
 sg219
-g220
-sg221
-V2015
-p1018
-sg223
 Vunknown
-p1019
-sg225
-(lp1020
-(dp1021
-g228
+p1017
+sg221
+(lp1018
+(dp1019
+g224
 V2015-06-25
+p1020
+sg226
+VFood Safety News
+p1021
+sg228
+VUnknown
 p1022
 sg230
-VFood Safety News
-p1023
-sg232
-VUnknown
-p1024
-sg234
 VChinese Authorities Seize More Than 100,000 Tons of 40-Year-Old Frozen Meat
-p1025
-sa(dp1026
-g228
+p1023
+sa(dp1024
+g224
 V2015-06-24
+p1025
+sg226
+VChinea Daily
+p1026
+sg228
+VHe Na
 p1027
 sg230
-VChinea Daily
-p1028
-sg232
-VHe Na
-p1029
-sg234
 V14 gangs busted for smuggling frozen meat
-p1030
-sasg245
+p1028
+sasg241
 VIntentional Distribution of Contaminated Product
+p1029
+sg243
+V2015
+p1030
+sg245
+VEast Asia, China
 p1031
 sg247
-VEast Asia, China
-p1032
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef; chicken wings; pork
+p1032
+sg250
+VConsumption of expired meat maintained in poor sanitary conditions increases the risk of infection by pathogenic organisms.
 p1033
 sg252
-VMore than 100,000 metric tons of smuggled frozen meat worth up to 3 billion yuan ($483 million) was confiscated by Chinese authorities as a result of a crackdown that took place in 14 different provinces. Officials reported that the perpetrators smuggled the meat from India and Brazil through countries such as Vietnam and Hong Kong to decrease its cost. Moreover, most of the sealed meat products were far older than their true expiration dates and some of the meat was reportedly more than 40 years old. Because the meat was kept under poor sanitary conditions and repeatedly frozen and thawed, it might have been contaminated with pathogenic organisms.
+VUnknown
 p1034
 ssV199
 p1035
@@ -3308,97 +3308,97 @@ sg205
 VSouthern Africa, South Africa
 p1297
 sg207
-VUnknown
+Vchicken; donkey; gluten; goat; pork; soy; water buffalo
 p1298
 sg209
-Vchicken; donkey; gluten; goat; pork; soy; water buffalo
+V4
 p1299
 sg211
-V4
+Vunknown
 p1300
 sg213
-Vunknown
+VMeat Products
 p1301
 sg215
-VMeat Products
+VA study of meat products in South Africa determined that out of 139 tested products, 68% had been adulterated with soy, gluten, donkey, goat, water buffalo, pork, and chicken. The adulterated products include minced meats, burger patties, deli meats, sausages and dried meats. Despite local regulations around the mislabeling of meat contents, the regulations were not adequately enforced allowing for the adulteration to take place. The researchers used DNA and ELISA tests to detect undeclared meat and plant products.
 p1302
 sg217
-VUnknown.
-p1303
+g218
 sg219
-g220
-sg221
-V2013
-p1304
-sg223
 Vunknown
-p1305
-sg225
-(lp1306
-(dp1307
-g228
+p1303
+sg221
+(lp1304
+(dp1305
+g224
 V2013-02-26
+p1306
+sg226
+VThe Guardian
+p1307
+sg228
+VAnonymous
 p1308
 sg230
-VThe Guardian
-p1309
-sg232
-VAnonymous
-p1310
-sg234
 VWater buffalo, donkey and goat found in South African meat products
-p1311
-sa(dp1312
-g228
+p1309
+sa(dp1310
+g224
 V2013-02-25
+p1311
+sg226
+VStellenbosch University
+p1312
+sg228
+VAnonymous
 p1313
 sg230
-VStellenbosch University
-p1314
-sg232
-VAnonymous
-p1315
-sg234
 VSA consumers also cheated with meat products, SU study finds
-p1316
-sa(dp1317
-g228
+p1314
+sa(dp1315
+g224
 V2013-02-26
+p1316
+sg226
+VBBC News
+p1317
+sg228
+VAnonymous
 p1318
 sg230
-VBBC News
-p1319
-sg232
-VAnonymous
-p1320
-sg234
 VSouth Africa study finds donkey meat sold as beef
-p1321
-sa(dp1322
-g228
+p1319
+sa(dp1320
+g224
 g25
-sg230
+sg226
 VFood Control
-p1323
-sg232
+p1321
+sg228
 VDonna-Maree Cawthorn, Harris A. Steinman, and Louwrens C. Hoffman
-p1324
-sg234
+p1322
+sg230
 VA high incidence of species substitution and mislabelling detected in meat products sold in South Africa
-p1325
-sasg245
+p1323
+sasg241
 VDilution
+p1324
+sg243
+V2013
+p1325
+sg245
+VSouthern Africa, South Africa
 p1326
 sg247
-VSouthern Africa, South Africa
-p1327
-sg249
-g220
-sg250
+g218
+sg248
 Vburger patties; deli meats; dried meat; minced meat; sausage
+p1327
+sg250
+VUnknown.
 p1328
 sg252
-VA study of meat products in South Africa determined that out of 139 tested products, 68% had been adulterated with soy, gluten, donkey, goat, water buffalo, pork, and chicken. The adulterated products include minced meats, burger patties, deli meats, sausages and dried meats. Despite local regulations around the mislabeling of meat contents, the regulations were not adequately enforced allowing for the adulteration to take place. The researchers used DNA and ELISA tests to detect undeclared meat and plant products.
+VUnknown
 p1329
 ssV274
 p1330
@@ -4418,71 +4418,71 @@ sg205
 VNorth America, Canada
 p1687
 sg207
-V2010
+VE. coli
 p1688
 sg209
-VE. coli
-p1689
+g1013
 sg211
-g1014
-sg213
 VPitt Meadows Meats
+p1689
+sg213
+VMeat Products
 p1690
 sg215
-VMeat Products
+VIn British Columbia, Canada, a meat processor knowingly sold beef and lamb products that were contaminated with E. coli O157:H7. In September 2010, 1,500 kilograms (3,300 pounds) of Halal-labeled meat products were sold to the market prior to receiving lab results. The company subsequently received a positive test result for E. coli, but did not recall the contaminated meat from the market. The incident was discovered after a plant employee informed the Canadian Food Inspection Agency (CFIA) about the positive test result. It is believed that one of the triggers for this adulteration was an increased demand for halal meat for the celebrations of Ramadan.
 p1691
 sg217
-VE. coli O157: H7 can cause severe illness and death
-p1692
+g218
 sg219
-g220
-sg221
-V2010
-p1693
-sg223
 VPitt Meadows Meats
-p1694
-sg225
-(lp1695
-(dp1696
-g228
+p1692
+sg221
+(lp1693
+(dp1694
+g224
 V2015-04-14
+p1695
+sg226
+VFood Safety News
+p1696
+sg228
+VCathy Siegner
 p1697
 sg230
-VFood Safety News
-p1698
-sg232
-VCathy Siegner
-p1699
-sg234
 VCanadian Halal Processor Pleads Guilty in Tainted Meat Case
-p1700
-sa(dp1701
-g228
+p1698
+sa(dp1699
+g224
 V2015-04-13
+p1700
+sg226
+VThe Province
+p1701
+sg228
+VJennifer Saltman
 p1702
 sg230
-VThe Province
-p1703
-sg232
-VJennifer Saltman
-p1704
-sg234
 VPitt Meadows company fined $125,000 for selling E. coli-tainted beef
-p1705
-sasg245
+p1703
+sasg241
 VIntentional Distribution of Contaminated Product
+p1704
+sg243
+V2010
+p1705
+sg245
+VNorth America, Canada
 p1706
 sg247
-VNorth America, Canada
-p1707
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef; Halal-labeled meat products; lamb
+p1707
+sg250
+VE. coli O157: H7 can cause severe illness and death
 p1708
 sg252
-VIn British Columbia, Canada, a meat processor knowingly sold beef and lamb products that were contaminated with E. coli O157:H7. In September 2010, 1,500 kilograms (3,300 pounds) of Halal-labeled meat products were sold to the market prior to receiving lab results. The company subsequently received a positive test result for E. coli, but did not recall the contaminated meat from the market. The incident was discovered after a plant employee informed the Canadian Food Inspection Agency (CFIA) about the positive test result. It is believed that one of the triggers for this adulteration was an increased demand for halal meat for the celebrations of Ramadan.
+V2010
 p1709
 ssV523
 p1710
@@ -4563,84 +4563,84 @@ sg205
 VEastern Europe, Poland; Western Europe, Italy
 p1736
 sg207
-VUnknown
+Vmislabeled ham; Polish ham
 p1737
 sg209
-Vmislabeled ham; Polish ham
-p1738
+g1013
 sg211
-g1014
-sg213
 Vindividual actors
+p1738
+sg213
+VMeat Products
 p1739
 sg215
-VMeat Products
+VIn Italy, a fraudulent production of ham was discovered. The ham, which was originally produced in Poland, was repackaged and distributed with counterfeit labels of Italian ham brands, even those of the consortium of Parma ham. Likely, the adulteration was motivated by the fact that Italian brands are well known for their quality and therefore sold at a premium price. Even though the fraudulent production is stopped and all the equipment is seized, investigators still have to determine where the mislabeled meat was distributed and sold.
 p1740
 sg217
-VUnknown
-p1741
+g218
 sg219
-g220
-sg221
-V2015
-p1742
-sg223
 VParma ham producers; 'prosciutto di Parma stagionato italiano'
-p1743
-sg225
-(lp1744
-(dp1745
-g228
+p1741
+sg221
+(lp1742
+(dp1743
+g224
 V2015-06-29
+p1744
+sg226
+VThe Local
+p1745
+sg228
+VPatrick Browne
 p1746
 sg230
-VThe Local
-p1747
-sg232
-VPatrick Browne
-p1748
-sg234
 VItaly's food police bust Polish ham scam
-p1749
-sa(dp1750
-g228
+p1747
+sa(dp1748
+g224
 V2015-06-28
+p1749
+sg226
+VL'Huffington Post
+p1750
+sg228
+VUnknown
 p1751
 sg230
-VL'Huffington Post
-p1752
-sg232
-VUnknown
-p1753
-sg234
 VVillaricca, prosciutti polacchi venduti con l'etichetta "di Parma". Sequestrato un laboratorio clandestino, due persone denunciate
-p1754
-sa(dp1755
-g228
+p1752
+sa(dp1753
+g224
 V2015-06-29
+p1754
+sg226
+VRadio Poland
+p1755
+sg228
+VUnknown
 p1756
 sg230
-VRadio Poland
-p1757
-sg232
-VUnknown
-p1758
-sg234
 VPoles charged after bogus Parma ham sting
-p1759
-sasg245
+p1757
+sasg241
 VCounterfeit
+p1758
+sg243
+V2015
+p1759
+sg245
+Vunknown
 p1760
 sg247
-Vunknown
-p1761
-sg249
-g220
-sg250
+g218
+sg248
 VItalian ham
+p1761
+sg250
+VUnknown
 p1762
 sg252
-VIn Italy, a fraudulent production of ham was discovered. The ham, which was originally produced in Poland, was repackaged and distributed with counterfeit labels of Italian ham brands, even those of the consortium of Parma ham. Likely, the adulteration was motivated by the fact that Italian brands are well known for their quality and therefore sold at a premium price. Even though the fraudulent production is stopped and all the equipment is seized, investigators still have to determine where the mislabeled meat was distributed and sold.
+VUnknown
 p1763
 ssV528
 p1764
@@ -5259,84 +5259,84 @@ sg205
 VEast Asia, China
 p1976
 sg207
-V2011
+VExpired duck meat
 p1977
 sg209
-VExpired duck meat
-p1978
+g210
 sg211
-g212
-sg213
 VWalmart
+p1978
+sg213
+VMeat Products
 p1979
 sg215
-VMeat Products
+VA Walmart store in Chongqing China sold duck meat that had passed its expiration date. Expired smoked duck meat was fried before it was then sold to consumers. Customer complaints led to an official investigation of the incident.
 p1980
 sg217
-VUnknown.
-p1981
+g218
 sg219
-g220
-sg221
-V2011
-p1982
-sg223
 VWalmart
-p1983
-sg225
-(lp1984
-(dp1985
-g228
+p1981
+sg221
+(lp1982
+(dp1983
+g224
 V2011-03-13
+p1984
+sg226
+VThe China Post
+p1985
+sg228
+VAnonymous
 p1986
 sg230
-VThe China Post
-p1987
-sg232
-VAnonymous
-p1988
-sg234
 VWal-Mart in China caught selling expired duck meat China city
-p1989
-sa(dp1990
-g228
+p1987
+sa(dp1988
+g224
 V2011-03-12
+p1989
+sg226
+VXinhua Net
+p1990
+sg228
+VAnonymous
 p1991
 sg230
-VXinhua Net
-p1992
-sg232
-VAnonymous
-p1993
-sg234
 VWal-Mart apologizes for sales of expired food in SW China city
-p1994
-sa(dp1995
-g228
+p1992
+sa(dp1993
+g224
 V2011-03-10
+p1994
+sg226
+VWant China Times
+p1995
+sg228
+VAnonymous
 p1996
 sg230
-VWant China Times
-p1997
-sg232
-VAnonymous
-p1998
-sg234
 VChongqing Wal-Mart caught selling expired duck meat
-p1999
-sasg245
+p1997
+sasg241
 VMislabeling
+p1998
+sg243
+V2011
+p1999
+sg245
+VEast Asia, China
 p2000
 sg247
-VEast Asia, China
-p2001
-sg249
-g220
-sg250
+g218
+sg248
 VDuck meat
+p2001
+sg250
+VUnknown.
 p2002
 sg252
-VA Walmart store in Chongqing China sold duck meat that had passed its expiration date. Expired smoked duck meat was fried before it was then sold to consumers. Customer complaints led to an official investigation of the incident.
+V2011
 p2003
 ssV445
 p2004
@@ -9585,69 +9585,69 @@ sg205
 VNorth America, Mexico
 p3486
 sg207
-VUnknown
+VClenbuterol
 p3487
 sg209
-VClenbuterol
-p3488
+g1013
 sg211
-g1014
-sg213
 V6 suspects
+p3488
+sg213
+VMeat Products
 p3489
 sg215
-VMeat Products
+VThe Federal Commission for Protection Against Health Risks (COFEPRIS) , in coordination with the Attorney General's Office and the Ministry of Agriculture, Livestock , Fisheries and Food detected illegal use of clenbuterol to fatten cattle in Veracruz. The health authority ordered the quarantine of 1,400 kilograms of beef and the destruction of more than 1,050 kilograms. 72 blood and urine samples taken and analyzed in the pens by mobile units, and seven samples from six different feeders resulted positive for the use of clenbuterol, so the health authority requested the intervention of the Federal Public Ministry of illegal presumption.
 p3490
 sg217
-VClenbuterol is not approved for use in food-producing animals and can cause palpitations, tremors, dizziness, nausea, and increased anxiety if ingested by humans.
-p3491
+g218
 sg219
-g220
-sg221
-V2010
-p3492
-sg223
 Vunknown brands
-p3493
-sg225
-(lp3494
-(dp3495
-g228
+p3491
+sg221
+(lp3492
+(dp3493
+g224
 V2010-02-05
-p3496
-sg230
+p3494
+sg226
 VSECRETARÍA DE SALUD, MÉXICO
-p3497
-sg232
+p3495
+sg228
 g25
-sg234
-VCOMUNICADO DE PRENSA No. 044: COFEPRIS detecta uso de clembuterol para engordar ganado en Veracruz
-p3498
-sa(dp3499
-g228
-V2010-02-06
-p3500
 sg230
+VCOMUNICADO DE PRENSA No. 044: COFEPRIS detecta uso de clembuterol para engordar ganado en Veracruz
+p3496
+sa(dp3497
+g224
+V2010-02-06
+p3498
+sg226
 VPRESIDENCIA DE LA REPÚBLICA, MÉXICO
-p3501
-sg232
+p3499
+sg228
 g25
-sg234
+sg230
 VCOFEPRIS detecta uso de clembuterol para engordar ganado en Veracruz
-p3502
-sasg245
+p3500
+sasg241
 VArtificial Enhancement
+p3501
+sg243
+V2010
+p3502
+sg245
+VNorth America, Mexico
 p3503
 sg247
-VNorth America, Mexico
-p3504
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef
+p3504
+sg250
+VClenbuterol is not approved for use in food-producing animals and can cause palpitations, tremors, dizziness, nausea, and increased anxiety if ingested by humans.
 p3505
 sg252
-VThe Federal Commission for Protection Against Health Risks (COFEPRIS) , in coordination with the Attorney General's Office and the Ministry of Agriculture, Livestock , Fisheries and Food detected illegal use of clenbuterol to fatten cattle in Veracruz. The health authority ordered the quarantine of 1,400 kilograms of beef and the destruction of more than 1,050 kilograms. 72 blood and urine samples taken and analyzed in the pens by mobile units, and seven samples from six different feeders resulted positive for the use of clenbuterol, so the health authority requested the intervention of the Federal Public Ministry of illegal presumption.
+VUnknown
 p3506
 ssV558
 p3507
@@ -10135,71 +10135,71 @@ sg205
 Vunknown
 p3688
 sg207
-VUnknown
+Vgoat meat
 p3689
 sg209
-Vgoat meat
-p3690
+g1013
 sg211
-g1014
-sg213
 VFarmbox Meats; individual actors
+p3690
+sg213
+VMeat Products
 p3691
 sg215
-VMeat Products
+VAfter being found innocent with regard to horse meat which happened in the UK in 2013, Farmbox Meats company was investigated further. According to the prosecution, 19 boxes of goat meat falsely labelled as lamb or mutton meat were found at Farmbox Meats. This mislabeled meat was marketed as genuine British lamb despite the fact that the meat was slaughtered, sealed, and packaged abroad. Another violation that comes along with this adulteration is that the company failed to comply with the rule that food should be traceable from the farmyard to the fork. The records kept in Farmbox Meats were found "extremely negligent." As a result of investigation, the owner and the manager of the company were arrested and pleaded guilty.
 p3692
 sg217
-VUnknown
-p3693
+g218
 sg219
-g220
-sg221
-V2015
-p3694
-sg223
 Vunknown
-p3695
-sg225
-(lp3696
-(dp3697
-g228
+p3693
+sg221
+(lp3694
+(dp3695
+g224
 V2015-05-19
+p3696
+sg226
+Vmeatinfo.co.uk
+p3697
+sg228
+VAidan Fortune
 p3698
 sg230
-Vmeatinfo.co.uk
-p3699
-sg232
-VAidan Fortune
-p3700
-sg234
 VFarmbox Meats duo found guilty of falsely labelling goat meat as lamb and mutton - See more at: http://www.meatinfo.co.uk/news/fullstory.php/aid/18232/Farmbox_Meats_duo_found_guilty_of_falsely_labelling_goat_meat_as_lamb_and_mutton.html#sthash.KgLl9w7w.dp
-p3701
-sa(dp3702
-g228
+p3699
+sa(dp3700
+g224
 V2015-05-19
+p3701
+sg226
+VExpress
+p3702
+sg228
+VRebecca Perring
 p3703
 sg230
-VExpress
-p3704
-sg232
-VRebecca Perring
-p3705
-sg234
 VHave you been eating GOAT? UK meat industry rocked as bosses admit to faking British lamb
-p3706
-sasg245
+p3704
+sasg241
 VMislabeling
+p3705
+sg243
+V2015
+p3706
+sg245
+VWestern Europe, United Kingdom
 p3707
 sg247
-VWestern Europe, United Kingdom
-p3708
-sg249
-g220
-sg250
+g218
+sg248
 Vlamb meat; mutton meat
+p3708
+sg250
+VUnknown
 p3709
 sg252
-VAfter being found innocent with regard to horse meat which happened in the UK in 2013, Farmbox Meats company was investigated further. According to the prosecution, 19 boxes of goat meat falsely labelled as lamb or mutton meat were found at Farmbox Meats. This mislabeled meat was marketed as genuine British lamb despite the fact that the meat was slaughtered, sealed, and packaged abroad. Another violation that comes along with this adulteration is that the company failed to comply with the rule that food should be traceable from the farmyard to the fork. The records kept in Farmbox Meats were found "extremely negligent." As a result of investigation, the owner and the manager of the company were arrested and pleaded guilty.
+VUnknown
 p3710
 ssV553
 p3711
@@ -10280,59 +10280,59 @@ sg205
 VNorth America, United States
 p3737
 sg207
-V2014
+Vand pork products; Beef; misbranded chicken
 p3738
 sg209
-Vand pork products; Beef; misbranded chicken
+V1
 p3739
 sg211
-V1
+VLQNN Inc
 p3740
 sg213
-VLQNN Inc
+VMeat Products
 p3741
 sg215
-VMeat Products
+VLQNN Inc. of Garden Grove, CA, firm was found guilty in selling misbranded meat products. The firm was processing chicken, beef, and pork products from federally inspected establishments and re-packaging them such that the products were inspected by USDA even though no such inspection was conducted. Thus, the unauthorized use of a USDA mark of inspection could potentially mislead consumers to buying unsafe food products. The various poultry, beef and pork items were produced between May 18, 2014, and May 18, 2015. Approximately 213,192 pounds of such products are demanded to be recalled due to misbranding.
 p3742
 sg217
-VUnknown
-p3743
+g218
 sg219
-g220
-sg221
-V2015
-p3744
-sg223
 VB.B.G. Beef Jerky (Kho Bo); Banh Bao Pork & Egg Steamed Bun; Banh Bao Trung Cut Pork & Quail Egg Steamed Bun Vietnamese Style; Chicken Pate Chaud; CurryBeef Jerky (Kho Bo); Fruit Beef Jerky (Kho Bo); Por Pate Chaud; Sliced Oil Browned Turkey Premium Breast Meat Fully Cooked; Sliced Salami Meat with Wine Fully Cooked
-p3745
-sg225
-(lp3746
-(dp3747
-g228
+p3743
+sg221
+(lp3744
+(dp3745
+g224
 V2015-05-20
+p3746
+sg226
+VFood Safety News
+p3747
+sg228
+VUnknown
 p3748
 sg230
-VFood Safety News
-p3749
-sg232
-VUnknown
-p3750
-sg234
 VPrepared Meat Products Recalled for Lack of USDA Inspection, Misbranding
-p3751
-sasg245
+p3749
+sasg241
 VMislabeling
+p3750
+sg243
+V2015
+p3751
+sg245
+VNorth America, United States
 p3752
 sg247
-VNorth America, United States
-p3753
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef; chicken; pork
+p3753
+sg250
+VUnknown
 p3754
 sg252
-VLQNN Inc. of Garden Grove, CA, firm was found guilty in selling misbranded meat products. The firm was processing chicken, beef, and pork products from federally inspected establishments and re-packaging them such that the products were inspected by USDA even though no such inspection was conducted. Thus, the unauthorized use of a USDA mark of inspection could potentially mislead consumers to buying unsafe food products. The various poultry, beef and pork items were produced between May 18, 2014, and May 18, 2015. Approximately 213,192 pounds of such products are demanded to be recalled due to misbranding.
+V2014
 p3755
 ssV238
 p3756
@@ -11532,84 +11532,84 @@ sg205
 VWestern Europe, Scotland; Western Europe, United Kingdom
 p4197
 sg207
-VUnknown
+VBeef; chicken; pork; turkey
 p4198
 sg209
-VBeef; chicken; pork; turkey
-p4199
+g210
 sg211
-g212
-sg213
 VUK takeaways
+p4199
+sg213
+VMeat Products
 p4200
 sg215
-VMeat Products
+VIn response to the on-going concern about lamb dilution in UK takeaways, FSA sampled 307 lamb containing dishes including but are not limited to Indian style takeaway meals, lamb kebabs, oriental style takeaway meals, and other style takeaway meals. As the result of investigation, 65 samples were found to contain meats other than lamb. Furthermore, 42 samples contained various proportions of beef, chicken, pork, and turkey which in total accounted for more than 1% of the meat sample. Despite the mislabeled meat, some analyzed meals also contained traces of undeclared allergens and colors. Though officials suspect that the allergens (peanuts and almonds) and colors (Sunset Yellow, or E110, and Ponceau 4R, or E124) were in the meals as a result of cross contamination and improper handling techniques, these additives might have adversely influenced the health of the with allergies.
 p4201
 sg217
-VUndeclared allergens may cause adverse reactions in those with allergies
-p4202
+g218
 sg219
-g220
-sg221
-V2015
-p4203
-sg223
 Vunknown
-p4204
-sg225
-(lp4205
-(dp4206
-g228
+p4202
+sg221
+(lp4203
+(dp4204
+g224
 V2015-02-09
+p4205
+sg226
+VFood Standards Agency
+p4206
+sg228
+VUnknown
 p4207
 sg230
-VFood Standards Agency
-p4208
-sg232
-VUnknown
-p4209
-sg234
 VFSA lamb takeaway survey
-p4210
-sa(dp4211
-g228
+p4208
+sa(dp4209
+g224
 V2015-01-20
+p4210
+sg226
+VFood Standards Agency
+p4211
+sg228
+VUnknown
 p4212
 sg230
-VFood Standards Agency
-p4213
-sg232
-VUnknown
-p4214
-sg234
 VTesting for the verification for the presence of undeclared meat species and allergens in lamb products from takeaway outlet
-p4215
-sa(dp4216
-g228
+p4213
+sa(dp4214
+g224
 V2015-02-09
+p4215
+sg226
+VThe Guardian
+p4216
+sg228
+VRebecca Smithers
 p4217
 sg230
-VThe Guardian
-p4218
-sg232
-VRebecca Smithers
-p4219
-sg234
 VOne in five lamb takeaways still contaminated with other meat, FSA says
-p4220
-sasg245
+p4218
+sasg241
 VMislabeling
+p4219
+sg243
+V2015
+p4220
+sg245
+VWestern Europe, Scotland; Western Europe, United Kingdom
 p4221
 sg247
-VWestern Europe, Scotland; Western Europe, United Kingdom
-p4222
-sg249
-g220
-sg250
+g218
+sg248
 Vlamb
+p4222
+sg250
+VUndeclared allergens may cause adverse reactions in those with allergies
 p4223
 sg252
-VIn response to the on-going concern about lamb dilution in UK takeaways, FSA sampled 307 lamb containing dishes including but are not limited to Indian style takeaway meals, lamb kebabs, oriental style takeaway meals, and other style takeaway meals. As the result of investigation, 65 samples were found to contain meats other than lamb. Furthermore, 42 samples contained various proportions of beef, chicken, pork, and turkey which in total accounted for more than 1% of the meat sample. Despite the mislabeled meat, some analyzed meals also contained traces of undeclared allergens and colors. Though officials suspect that the allergens (peanuts and almonds) and colors (Sunset Yellow, or E110, and Ponceau 4R, or E124) were in the meals as a result of cross contamination and improper handling techniques, these additives might have adversely influenced the health of the with allergies.
+VUnknown
 p4224
 ssV610
 p4225
@@ -12059,58 +12059,58 @@ sg205
 VNorth America, United States, Arizona
 p4380
 sg207
-V2010
+VLower cost beef; Lower cost beef; Other Beef Types
 p4381
 sg209
-VLower cost beef; Lower cost beef; Other Beef Types
-p4382
+g3739
 sg211
-g3740
-sg213
 VAJ Fine Foods
+p4382
+sg213
+VMeat Products
 p4383
 sg215
-VMeat Products
+VAJ\u2019s Fine Foods, the Arizona-based retailer (operated by Bashas\u2019 Inc), was accused of selling meat which was diluted with additional lower cost meats. Consequently, customers paid more for lower quality meats. This adulteration took place at AJ\u2019s locations in the Phoenix area and one in Tucson between January 2010 and February 2012. In the statement, Bashas\u2019 outlined two specific wrongs: First, meat department members at some AJ\u2019s stores mislabeled USDA Choice steaks as USDA Prime (a higher grade that costs more, resulting in customers being overcharged). Secondly, meat department members at some AJ\u2019s stores added cuts of expensive prime and choice steak to American-style Kobe ground beef in order to improve the consistency of the grind. Overall, the company will be paying $1.4 million to area food banks as restitution and plan on disciplining or firing the workers responsible for mislabeling.
 p4384
 sg217
-VUnknown.
-p4385
+g218
 sg219
-g220
-sg221
-V2012
-p4386
-sg223
 VAJ Fine Foods
-p4387
-sg225
-(lp4388
-(dp4389
-g228
+p4385
+sg221
+(lp4386
+(dp4387
+g224
 V2013-09-03
+p4388
+sg226
+VConsumerist.com
+p4389
+sg228
+VMary Beth Quirk
 p4390
 sg230
-VConsumerist.com
-p4391
-sg232
-VMary Beth Quirk
-p4392
-sg234
 VAJ\u2019s Fine Foods Parent To Pay $1.4M After Charging Customers More For Mislabeled Meat
-p4393
-sasg245
+p4391
+sasg241
 VDilution
+p4392
+sg243
+V2012
+p4393
+sg245
+VNorth America, United States
 p4394
 sg247
-VNorth America, United States
-p4395
-sg249
-g220
-sg250
+g218
+sg248
 VKobe Beef; USDA Prime Steaks
+p4395
+sg250
+VUnknown.
 p4396
 sg252
-VAJ\u2019s Fine Foods, the Arizona-based retailer (operated by Bashas\u2019 Inc), was accused of selling meat which was diluted with additional lower cost meats. Consequently, customers paid more for lower quality meats. This adulteration took place at AJ\u2019s locations in the Phoenix area and one in Tucson between January 2010 and February 2012. In the statement, Bashas\u2019 outlined two specific wrongs: First, meat department members at some AJ\u2019s stores mislabeled USDA Choice steaks as USDA Prime (a higher grade that costs more, resulting in customers being overcharged). Secondly, meat department members at some AJ\u2019s stores added cuts of expensive prime and choice steak to American-style Kobe ground beef in order to improve the consistency of the grind. Overall, the company will be paying $1.4 million to area food banks as restitution and plan on disciplining or firing the workers responsible for mislabeling.
+V2010
 p4397
 ssV688
 p4398
@@ -12125,58 +12125,58 @@ sg205
 VSoutheast Asia, Taiwan
 p4402
 sg207
-V2015
+Vadditional meat species
 p4403
 sg209
-Vadditional meat species
-p4404
+g3739
 sg211
-g3740
-sg213
 VUnknown breakfast stores
+p4404
+sg213
+VMeat Products
 p4405
 sg215
-VMeat Products
+VThe Tainan City Government Health Bureau conducted tests on breakfast store hamburger patties in Tainan, Taiwan. The bureau\u2019s report on 108 hamburger patties, collected from 81 breakfast stores in Tainan over six months showed that about 47 percent of \u201cpork patties\u201d contained beef, 50 percent of \u201cchicken patties\u201d contained pork, and about 30 percent of \u201cbeef patties\u201d contained pork. Among the breakfast stores examined, 70 percent were individual stores and 30 percent were branches of breakfast chain stores. The Bureau's Deputy Director-General (\u9ec3\u6587\u6b63) said the samples were collected by bureau staff acting as consumers, not through a formal inspection procedure, adding that further tests were required and that fines would not be imposed on patty manufacturers.
 p4406
 sg217
-VUnknown.
-p4407
+g218
 sg219
-g220
-sg221
-V2015
-p4408
-sg223
 Vunknown
-p4409
-sg225
-(lp4410
-(dp4411
-g228
+p4407
+sg221
+(lp4408
+(dp4409
+g224
 V2015-10-06
+p4410
+sg226
+VTaipei Times (Taiwan News)
+p4411
+sg228
+VLee I-chia
 p4412
 sg230
-VTaipei Times (Taiwan News)
-p4413
-sg232
-VLee I-chia
-p4414
-sg234
 VMixed Meat Patties Probed
-p4415
-sasg245
+p4413
+sasg241
 VDilution
+p4414
+sg243
+V2015
+p4415
+sg245
+VSoutheast Asia, Taiwan
 p4416
 sg247
-VSoutheast Asia, Taiwan
-p4417
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef; chicken; pork
+p4417
+sg250
+VUnknown.
 p4418
 sg252
-VThe Tainan City Government Health Bureau conducted tests on breakfast store hamburger patties in Tainan, Taiwan. The bureau\u2019s report on 108 hamburger patties, collected from 81 breakfast stores in Tainan over six months showed that about 47 percent of \u201cpork patties\u201d contained beef, 50 percent of \u201cchicken patties\u201d contained pork, and about 30 percent of \u201cbeef patties\u201d contained pork. Among the breakfast stores examined, 70 percent were individual stores and 30 percent were branches of breakfast chain stores. The Bureau's Deputy Director-General (\u9ec3\u6587\u6b63) said the samples were collected by bureau staff acting as consumers, not through a formal inspection procedure, adding that further tests were required and that fines would not be imposed on patty manufacturers.
+V2015
 p4419
 ssV685
 p4420
@@ -12377,58 +12377,58 @@ sg205
 VWestern Europe
 p4490
 sg207
-V2014
+Vdyes; addition of water; additives; illegal sulphites; milk proteins; other meats; spices
 p4491
 sg209
-Vdyes; addition of water; additives; illegal sulphites; milk proteins; other meats; spices
-p4492
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p4492
+sg213
+VMeat Products
 p4493
 sg215
-VMeat Products
+VIn this new report \u201cClose-up on the meat we eat \u2013 Consumers want honest labels,\u201d BEUC member organisations analysed a range of meat-based foods to check their labels, their ingredients and to check for the presence of undeclared or illegal food additives. Their findings exposed frequent cases of confusing product names; incomplete labels which fail to highlight added water; use of illegal food additives; use of undeclared mechanically-separated meat and fraudulent use of other species as a substitute, e.g. turkey kebab sold as veal.
 p4494
 sg217
-VUnknown
-p4495
+g218
 sg219
-g220
-sg221
-V2015
-p4496
-sg223
 Vunknown
-p4497
-sg225
-(lp4498
-(dp4499
-g228
+p4495
+sg221
+(lp4496
+(dp4497
+g224
 V2015-11-04
+p4498
+sg226
+VBEUC The European Consumer Organization
+p4499
+sg228
+VBEUC The European Consumer Organization
 p4500
 sg230
-VBEUC The European Consumer Organization
-p4501
-sg232
-VBEUC The European Consumer Organization
-p4502
-sg234
 VClose-up on the meat we eat: Consumers want honest labels
-p4503
-sasg245
+p4501
+sasg241
 VDilution
+p4502
+sg243
+V2015
+p4503
+sg245
+VWestern Europe
 p4504
 sg247
-VWestern Europe
-p4505
-sg249
-g220
-sg250
+g218
+sg248
 VFresh meat product; Meat products
+p4505
+sg250
+VUnknown
 p4506
 sg252
-VIn this new report \u201cClose-up on the meat we eat \u2013 Consumers want honest labels,\u201d BEUC member organisations analysed a range of meat-based foods to check their labels, their ingredients and to check for the presence of undeclared or illegal food additives. Their findings exposed frequent cases of confusing product names; incomplete labels which fail to highlight added water; use of illegal food additives; use of undeclared mechanically-separated meat and fraudulent use of other species as a substitute, e.g. turkey kebab sold as veal.
+V2014
 p4507
 ssV686
 p4508
@@ -12443,57 +12443,57 @@ sg205
 VSouthern Africa, South Africa
 p4512
 sg207
-VUnknown
+VBeef; giraffe; kangaroo; lamb; other game meats; pork; zebra
 p4513
 sg209
-VBeef; giraffe; kangaroo; lamb; other game meats; pork; zebra
-p4514
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p4514
+sg213
+VMeat Products
 p4515
 sg215
-VMeat Products
+VGame meats are popular in South Africa due to being considered as a healthy alternative to beef. Yet, the unscrupulous traders tend to substitute the expensive game meat with cheaper kinds. Researchers form the University of the Western Cape investigated this issue and revealed that out of 146 samples of the acquired meat products, only 45 were labeled correctly. When the beef samples are excluded from the count, the rates of adulteration increase significantly. Thus, out of 132 samples of the game meat 101 were not genuine. Moreover, 43 of the samples that were found to be adulterated used beef meat as a substituent. In addition, meats from kangaroo and giraffe, which are not commonly traded in the market, were also used to adulterate the game meats.
 p4516
 sg217
-VUnknown
-p4517
+g218
 sg219
-g220
-sg221
-V2013
-p4518
-sg223
 Vunknown
-p4519
-sg225
-(lp4520
-(dp4521
-g228
+p4517
+sg221
+(lp4518
+(dp4519
+g224
 g25
-sg230
+sg226
 VInvestigative Genetics
-p4522
-sg232
+p4520
+sg228
 VMaria Eugenia D\u2019Amato, Evguenia Alechine, Kevin Wesley Cloete, Sean Davison and Daniel Corach
-p4523
-sg234
+p4521
+sg230
 VWhere is the game? Wild meat products authentication in South Africa: a case study
-p4524
-sasg245
+p4522
+sasg241
 VSubstitution
+p4523
+sg243
+V2013
+p4524
+sg245
+VSouthern Africa, South Africa
 p4525
 sg247
-VSouthern Africa, South Africa
-p4526
-sg249
-g220
-sg250
+g218
+sg248
 VGame Meats
+p4526
+sg250
+VUnknown
 p4527
 sg252
-VGame meats are popular in South Africa due to being considered as a healthy alternative to beef. Yet, the unscrupulous traders tend to substitute the expensive game meat with cheaper kinds. Researchers form the University of the Western Cape investigated this issue and revealed that out of 146 samples of the acquired meat products, only 45 were labeled correctly. When the beef samples are excluded from the count, the rates of adulteration increase significantly. Thus, out of 132 samples of the game meat 101 were not genuine. Moreover, 43 of the samples that were found to be adulterated used beef meat as a substituent. In addition, meats from kangaroo and giraffe, which are not commonly traded in the market, were also used to adulterate the game meats.
+VUnknown
 p4528
 ssV680
 p4529
@@ -12799,57 +12799,57 @@ sg205
 VEast Asia, China
 p4632
 sg207
-V2014
+VSulfur dioxide
 p4633
 sg209
-VSulfur dioxide
-p4634
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p4634
+sg213
+VMeat Products
 p4635
 sg215
-VMeat Products
+VFresh beef sold at a market in Hong Kong was adulterated with sulfur dioxide, a preservative not permitted for use in fresh meat. Sulfur dioxide was used by meat traders in order to make products appear fresher. The adulteration was detected when a sample of fresh beef was tested under the Centre for Food Safety's targeted food surveillance project.
 p4636
 sg217
-VUnknown.
-p4637
+g218
 sg219
-g220
-sg221
-V2014
-p4638
-sg223
 Vunknown
-p4639
-sg225
-(lp4640
-(dp4641
-g228
+p4637
+sg221
+(lp4638
+(dp4639
+g224
 V2014-11-20
-p4642
-sg230
+p4640
+sg226
 VCentre for Food Safety
-p4643
-sg232
+p4641
+sg228
 g25
-sg234
+sg230
 VSulphur dioxide found in fresh beef sample by CFS
-p4644
-sasg245
+p4642
+sasg241
 VArtificial Enhancement
+p4643
+sg243
+V2014
+p4644
+sg245
+VEast Asia, China
 p4645
 sg247
-VEast Asia, China
-p4646
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef
+p4646
+sg250
+VUnknown.
 p4647
 sg252
-VFresh beef sold at a market in Hong Kong was adulterated with sulfur dioxide, a preservative not permitted for use in fresh meat. Sulfur dioxide was used by meat traders in order to make products appear fresher. The adulteration was detected when a sample of fresh beef was tested under the Centre for Food Safety's targeted food surveillance project.
+V2014
 p4648
 ssV133
 p4649
@@ -13179,98 +13179,98 @@ sg205
 VEast Asia, China
 p4776
 sg207
-V2007
+VClenbuterol
 p4777
 sg209
-VClenbuterol
-p4778
+g1299
 sg211
-g1300
-sg213
 VShuanghui Food Co. Ltd
+p4778
+sg213
+VMeat Products
 p4779
 sg215
-VMeat Products
+VClenbuterol, a banned pig-feed additive, was produced and fed to pigs in China and the meat from these pigs was processed and sold to Chinese consumers in Jiangsu and Henan provinces. Clenbuterol was used to burn fat and accelerate muscle-building in swine. Experts cited the size of the Chinese agricultural sector and presence of "loopholes" in random sample inspection as reasons why clenbuterol use went undetected. The incident was made public following a television report on widespread clenbuterol use.
 p4780
 sg217
-VIngestion of clenbuterol can cause nausea and dizziness.
-p4781
+g218
 sg219
-g220
-sg221
-V2011
-p4782
-sg223
 Vunknown
-p4783
-sg225
-(lp4784
-(dp4785
-g228
+p4781
+sg221
+(lp4782
+(dp4783
+g224
 V2011-03-17
+p4784
+sg226
+VSouth China Morning Post
+p4785
+sg228
+VZhuang Pinghui
 p4786
 sg230
-VSouth China Morning Post
-p4787
-sg232
-VZhuang Pinghui
-p4788
-sg234
 VOfficials suspenOfficials suspended over pig-feed expose
-p4789
-sa(dp4790
-g228
+p4787
+sa(dp4788
+g224
 V2011-03-23
+p4789
+sg226
+VTime
+p4790
+sg228
+VJessie Jiang
 p4791
 sg230
-VTime
-p4792
-sg232
-VJessie Jiang
-p4793
-sg234
 VChina: Tainted Pork Renews Food Safety Fears
-p4794
-sa(dp4795
-g228
+p4792
+sa(dp4793
+g224
 V2011-07-26
+p4794
+sg226
+VSouth China Morning Post
+p4795
+sg228
+VZhuang Pinghui
 p4796
 sg230
-VSouth China Morning Post
-p4797
-sg232
-VZhuang Pinghui
-p4798
-sg234
 V5 jailed in tainted pork scandal
-p4799
-sa(dp4800
-g228
+p4797
+sa(dp4798
+g224
 V2011-04-25
+p4799
+sg226
+VChina Daily
+p4800
+sg228
+VZhou Wenting
 p4801
 sg230
-VChina Daily
-p4802
-sg232
-VZhou Wenting
-p4803
-sg234
 VTainted food sends more than 300 to hospitals
-p4804
-sasg245
+p4802
+sasg241
 VArtificial Enhancement
+p4803
+sg243
+V2011
+p4804
+sg245
+VEast Asia, China
 p4805
 sg247
-VEast Asia, China
-p4806
-sg249
 V377
+p4806
+sg248
+Vpork
 p4807
 sg250
-Vpork
+VIngestion of clenbuterol can cause nausea and dizziness.
 p4808
 sg252
-VClenbuterol, a banned pig-feed additive, was produced and fed to pigs in China and the meat from these pigs was processed and sold to Chinese consumers in Jiangsu and Henan provinces. Clenbuterol was used to burn fat and accelerate muscle-building in swine. Experts cited the size of the Chinese agricultural sector and presence of "loopholes" in random sample inspection as reasons why clenbuterol use went undetected. The incident was made public following a television report on widespread clenbuterol use.
+V2007
 p4809
 ssV134
 p4810
@@ -15415,84 +15415,84 @@ sg205
 VEastern Europe, Russia
 p5567
 sg207
-VUnknown
+Vmislabeled fresh meat product
 p5568
 sg209
-Vmislabeled fresh meat product
-p5569
+g1013
 sg211
-g1014
-sg213
 VAuchan
+p5569
+sg213
+VMeat Products
 p5570
 sg215
-VMeat Products
+VInvestigation by Russian food regulator Rosselkhoznadzor of hypermarket chain Auchan revealed that the fresh meat supplied to retailer was mislabeled with respect to its expiration dates. Despite the fact that by the law meat is considered safe for human consumption during 24 - 48 hours period, the meat labels in Auchan suggested that the meat products were safe for 48 - 72 hours. Considering that the meat was simply cut and packaged and no other treatments were performed, it is very likely that the meat products were mislabeled in order to bring additional profits to the retailer. Almost 250 kg of the adulterated products were seized by the authorities.
 p5571
 sg217
-VUnknown
-p5572
+g218
 sg219
-g220
-sg221
-V2015
-p5573
-sg223
 Vunknown
-p5574
-sg225
-(lp5575
-(dp5576
-g228
+p5572
+sg221
+(lp5573
+(dp5574
+g224
 V2015-07-30
+p5575
+sg226
+V\u0420\u0418\u0410 \u041d\u043e\u0432\u043e\u0441\u0442\u0438
+p5576
+sg228
+VUnknown
 p5577
 sg230
-V\u0420\u0418\u0410 \u041d\u043e\u0432\u043e\u0441\u0442\u0438
-p5578
-sg232
-VUnknown
-p5579
-sg234
 V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440: "\u0410\u0448\u0430\u043d" \u0438\u0441\u043a\u0443\u0441\u0441\u0442\u0432\u0435\u043d\u043d\u043e \u043f\u0440\u043e\u0434\u043b\u0435\u0432\u0430\u0435\u0442 \u0441\u0440\u043e\u043a\u0438 \u0433\u043e\u0434\u043d\u043e\u0441\u0442\u0438 \u043c\u044f\u0441\u0430
-p5580
-sa(dp5581
-g228
+p5578
+sa(dp5579
+g224
 V2015-07-30
+p5580
+sg226
+VInterfax
+p5581
+sg228
+VUnknown
 p5582
 sg230
-VInterfax
-p5583
-sg232
-VUnknown
-p5584
-sg234
 V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440 \u0443\u043b\u0438\u0447\u0438\u043b "\u0410\u0448\u0430\u043d" \u0432 \u0442\u043e\u0440\u0433\u043e\u0432\u043b\u0435 \u043f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d\u043d\u044b\u043c \u043c\u044f\u0441\u043e\u043c
-p5585
-sa(dp5586
-g228
+p5583
+sa(dp5584
+g224
 V2015-07-31
+p5585
+sg226
+Vnn.ru
+p5586
+sg228
+V\u041e\u043a\u0441\u0430\u043d\u0430 \u041d\u0435\u0441\u0442\u0435\u0440\u043e\u0432\u0430
 p5587
 sg230
-Vnn.ru
-p5588
-sg232
-V\u041e\u043a\u0441\u0430\u043d\u0430 \u041d\u0435\u0441\u0442\u0435\u0440\u043e\u0432\u0430
-p5589
-sg234
 V\u0412 "\u0410\u0448\u0430\u043d\u0435" \u043d\u0430\u0448\u043b\u0438 \u043c\u044f\u0441\u043e \u0441 \u043f\u0440\u043e\u0434\u043b\u0435\u043d\u043d\u044b\u043c \u0441\u0440\u043e\u043a\u043e\u043c \u0433\u043e\u0434\u043d\u043e\u0441\u0442\u0438 \u0438 \u043f\u0438\u0446\u0446\u0443 \u0441 \u043f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d\u043d\u043e\u0439 \u043a\u043e\u043b\u0431\u0430\u0441\u043e\u0439
-p5590
-sasg245
+p5588
+sasg241
 VMislabeling
+p5589
+sg243
+V2015
+p5590
+sg245
+VEastern Europe, Russia
 p5591
 sg247
-VEastern Europe, Russia
-p5592
-sg249
-g220
-sg250
+g218
+sg248
 VFresh meat product
+p5592
+sg250
+VUnknown
 p5593
 sg252
-VInvestigation by Russian food regulator Rosselkhoznadzor of hypermarket chain Auchan revealed that the fresh meat supplied to retailer was mislabeled with respect to its expiration dates. Despite the fact that by the law meat is considered safe for human consumption during 24 - 48 hours period, the meat labels in Auchan suggested that the meat products were safe for 48 - 72 hours. Considering that the meat was simply cut and packaged and no other treatments were performed, it is very likely that the meat products were mislabeled in order to bring additional profits to the retailer. Almost 250 kg of the adulterated products were seized by the authorities.
+VUnknown
 p5594
 ssV379
 p5595
@@ -15705,71 +15705,71 @@ sg205
 VEast Asia, China
 p5665
 sg207
-VUnknown
+Vindustrial salts; paraffin wax; pork
 p5666
 sg209
-Vindustrial salts; paraffin wax; pork
-p5667
+g1013
 sg211
-g1014
-sg213
 Vunknown
+p5667
+sg213
+VMeat Products
 p5668
 sg215
-VMeat Products
+VPork adulterated with chemicals such as industrial salts and paraffin wax was sold as beef in Xi'an China. No illnesses or deaths were reported. The adulterants changed the color and taste of the meat so that it resembled beef. It is not known how the adulteration was discovered.
 p5669
 sg217
-VUnknown.
-p5670
+g218
 sg219
-g220
-sg221
-V2013
-p5671
-sg223
 Vunknown
-p5672
-sg225
-(lp5673
-(dp5674
-g228
+p5670
+sg221
+(lp5671
+(dp5672
+g224
 V2013-09-19
+p5673
+sg226
+Vglobhttp://www.globalmeatnews.com/Industry-Markets/Fake-beef-found-in-Chinaalmeatnews.com
+p5674
+sg228
+VCarina Perkins
 p5675
 sg230
-Vglobhttp://www.globalmeatnews.com/Industry-Markets/Fake-beef-found-in-Chinaalmeatnews.com
-p5676
-sg232
-VCarina Perkins
-p5677
-sg234
 VFake Beef found in China
-p5678
-sa(dp5679
-g228
+p5676
+sa(dp5677
+g224
 V2013-09-20
+p5678
+sg226
+VYahoo News
+p5679
+sg228
+VJeanette Tan
 p5680
 sg230
-VYahoo News
-p5681
-sg232
-VJeanette Tan
-p5682
-sg234
 VChinese police seize more than 20,000kg of fake beef
-p5683
-sasg245
+p5681
+sasg241
 VSubstitution
+p5682
+sg243
+V2013
+p5683
+sg245
+VEast Asia, China
 p5684
 sg247
-VEast Asia, China
-p5685
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef
+p5685
+sg250
+VUnknown.
 p5686
 sg252
-VPork adulterated with chemicals such as industrial salts and paraffin wax was sold as beef in Xi'an China. No illnesses or deaths were reported. The adulterants changed the color and taste of the meat so that it resembled beef. It is not known how the adulteration was discovered.
+VUnknown
 p5687
 ssV372
 p5688
@@ -16859,57 +16859,57 @@ sg205
 VNorth America, United States
 p6051
 sg207
-V2008
+VUnited States Beef
 p6052
 sg209
-VUnited States Beef
-p6053
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p6053
+sg213
+VMeat Products
 p6054
 sg215
-VMeat Products
+VIn South Korea more than 451 tons of beef from the United States was labeled as Australian or South Korean beef. Trends in mislabeling the source of US beef have been tied to the suspension of US beef imports first over the risk of mad cow disease and again after zilpaterol, a feed additive not approved in South Korea, was detected in some US beef. Reports cited the lower cost of US beef as the primary reason behind labeling the US beef as Australian or South Korean beef. The mislabeling was discovered during food inspections.
 p6055
 sg217
-VUnknown.
-p6056
+g218
 sg219
-g220
-sg221
-VUnknown
-p6057
-sg223
 Vunknown
-p6058
-sg225
-(lp6059
-(dp6060
-g228
+p6056
+sg221
+(lp6057
+(dp6058
+g224
 V2013-10-14
-p6061
-sg230
+p6059
+sg226
 VFood Navigator Asia
-p6062
-sg232
+p6060
+sg228
 g25
-sg234
+sg230
 VRampant Mislabelling of Beef in Korea
-p6063
-sasg245
+p6061
+sasg241
 VTransshipment/Origin Masking
+p6062
+sg243
+VUnknown
+p6063
+sg245
+VEast Asia, South Korea
 p6064
 sg247
-VEast Asia, South Korea
-p6065
-sg249
-g220
-sg250
+g218
+sg248
 VAustralian Beef; South Korean Beef
+p6065
+sg250
+VUnknown.
 p6066
 sg252
-VIn South Korea more than 451 tons of beef from the United States was labeled as Australian or South Korean beef. Trends in mislabeling the source of US beef have been tied to the suspension of US beef imports first over the risk of mad cow disease and again after zilpaterol, a feed additive not approved in South Korea, was detected in some US beef. Reports cited the lower cost of US beef as the primary reason behind labeling the US beef as Australian or South Korean beef. The mislabeling was discovered during food inspections.
+V2008
 p6067
 ssV392
 p6068
@@ -19518,97 +19518,97 @@ sg205
 VEastern Europe, Russia
 p6954
 sg207
-VUnknown
+VExpired smoked sausage
 p6955
 sg209
-VExpired smoked sausage
-p6956
+g1299
 sg211
-g1300
-sg213
 VAuchan
+p6956
+sg213
+VMeat Products
 p6957
 sg215
-VMeat Products
+VIn Auchan, a huge food retailer chain in Russia, utilization of expired meat products was observed by Russian food regulator Rosselkhoznadzor. In particular, pizza produced in Auchan on July 20th, 2015 contained smoked sausage product "pepperoni" with a shelf life of up to July 5th, 2015. Such act is a sever violation of the Federal Law of 02.01.2000 \u211629-FZ "On quality and food safety." Auchan's representatives confirmed presence of the expired smoked sausage in their refrigerators, yet, they claim that the sausage was assigned for disposal.
 p6958
 sg217
-VUnknown
-p6959
+g218
 sg219
-g220
-sg221
-V2015
-p6960
-sg223
 Vunknown
-p6961
-sg225
-(lp6962
-(dp6963
-g228
+p6959
+sg221
+(lp6960
+(dp6961
+g224
 V2015-07-31
+p6962
+sg226
+V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440
+p6963
+sg228
+VUnknown
 p6964
 sg230
-V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440
-p6965
-sg232
-VUnknown
-p6966
-sg234
 V\u041e \u0432\u044b\u044f\u0432\u043b\u0435\u043d\u0438\u0438 \u043d\u043e\u0432\u044b\u0445 \u043d\u0430\u0440\u0443\u0448\u0435\u043d\u0438\u0439 \u0432 \u0445\u043e\u0434\u0435 \u0432\u043d\u0435\u043f\u043b\u0430\u043d\u043e\u0432\u043e\u0439 \u0432\u044b\u0435\u0437\u0434\u043d\u043e\u0439 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440\u043e\u043c \u041e\u041e\u041e «\u0410\u0428\u0410\u041d»
-p6967
-sa(dp6968
-g228
+p6965
+sa(dp6966
+g224
 V2015-07-31
+p6967
+sg226
+Vnn.ru
+p6968
+sg228
+V\u041e\u043a\u0441\u0430\u043d\u0430 \u041d\u0435\u0441\u0442\u0435\u0440\u043e\u0432\u0430
 p6969
 sg230
-Vnn.ru
-p6970
-sg232
-V\u041e\u043a\u0441\u0430\u043d\u0430 \u041d\u0435\u0441\u0442\u0435\u0440\u043e\u0432\u0430
-p6971
-sg234
 V\u0412 "\u0410\u0448\u0430\u043d\u0435" \u043d\u0430\u0448\u043b\u0438 \u043c\u044f\u0441\u043e \u0441 \u043f\u0440\u043e\u0434\u043b\u0435\u043d\u043d\u044b\u043c \u0441\u0440\u043e\u043a\u043e\u043c \u0433\u043e\u0434\u043d\u043e\u0441\u0442\u0438 \u0438 \u043f\u0438\u0446\u0446\u0443 \u0441 \u043f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d\u043d\u043e\u0439 \u043a\u043e\u043b\u0431\u0430\u0441\u043e\u0439
-p6972
-sa(dp6973
-g228
+p6970
+sa(dp6971
+g224
 V2015-07-31
+p6972
+sg226
+V\u0422\u0410\u0421\u0421
+p6973
+sg228
+VUnknown
 p6974
 sg230
-V\u0422\u0410\u0421\u0421
-p6975
-sg232
-VUnknown
-p6976
-sg234
 V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440\u0443 \u043d\u0435 \u043f\u043e\u043d\u0440\u0430\u0432\u0438\u043b\u0430\u0441\u044c \u043f\u0438\u0446\u0446\u0430 \u0432 "\u0410\u0448\u0430\u043d\u0435"
-p6977
-sa(dp6978
-g228
+p6975
+sa(dp6976
+g224
 V2015-07-31
+p6977
+sg226
+V\u041c\u043e\u0441\u043b\u0435\u043d\u0442\u0430
+p6978
+sg228
+VUnknown
 p6979
 sg230
-V\u041c\u043e\u0441\u043b\u0435\u043d\u0442\u0430
-p6980
-sg232
-VUnknown
-p6981
-sg234
 V«\u0410\u0448\u0430\u043d» \u0432 \u0434\u0435\u0440\u0435\u0432\u043d\u0435 \u041c\u0430\u0440\u0444\u0438\u043d\u043e \u0443\u043b\u0438\u0447\u0438\u043b\u0438 \u0432 \u0432\u044b\u043f\u0443\u0441\u043a\u0435 \u043d\u0435\u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0439 \u043f\u0438\u0446\u0446\u044b
-p6982
-sasg245
+p6980
+sasg241
 VMislabeling
+p6981
+sg243
+V2015
+p6982
+sg245
+VEastern Europe, Russia
 p6983
 sg247
-VEastern Europe, Russia
-p6984
-sg249
-g220
-sg250
+g218
+sg248
 VSmoked Sausage
+p6984
+sg250
+VUnknown
 p6985
 sg252
-VIn Auchan, a huge food retailer chain in Russia, utilization of expired meat products was observed by Russian food regulator Rosselkhoznadzor. In particular, pizza produced in Auchan on July 20th, 2015 contained smoked sausage product "pepperoni" with a shelf life of up to July 5th, 2015. Such act is a sever violation of the Federal Law of 02.01.2000 \u211629-FZ "On quality and food safety." Auchan's representatives confirmed presence of the expired smoked sausage in their refrigerators, yet, they claim that the sausage was assigned for disposal.
+VUnknown
 p6986
 ssV453
 p6987
@@ -20850,58 +20850,58 @@ sg205
 VEastern Europe, Russia
 p7406
 sg207
-VUnknown
+Vbenzoic acid (preservative); collagenic animal protein; Sodium Nitrite; sorbic acid; soy protein; starch
 p7407
 sg209
-Vbenzoic acid (preservative); collagenic animal protein; Sodium Nitrite; sorbic acid; soy protein; starch
-p7408
+g3739
 sg211
-g3740
-sg213
 V"\u041c\u0438\u043a\u043e\u044f\u043d" [\u201cMikoyan\u201d]; "\u0422\u0414 \u0420\u0443\u0431\u043b\u0435\u0432\u0441\u043a\u0438\u0439" [\u201cTD Rublevskiy\u201d]; "\u0427\u0435\u0440\u043a\u0438\u0437\u043e\u0432\u0441\u043a\u0438\u0439 \u041c\u041f\u0417" [\u201cCherkizovskiy MPZ\u201d]; \u0410\u041e "\u041d\u043e\u0432\u0430\u044f \u0421\u0442\u043e\u043b\u0438\u0446\u0430" [New Capital JSC]; \u0417\u0410\u041e "\u041c\u0438\u043a\u043e\u044f\u043d\u043e\u0432\u0441\u043a\u0438\u0439 \u043c\u044f\u0441\u043e\u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0442" [Mikoyanovskiy meat-packing plant CJSC]; \u0417\u0410\u041e «\u041c\u0417 «\u0421\u0442\u0443\u043f\u0438\u043d\u043e-\u041e\u0441\u0442\u0430\u043d\u043a\u0438\u043d\u043e» [MZ "Stupino-Ostankino CJSC]; \u041e\u0410\u041e "\u041c\u044f\u0441\u043e\u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0442 \u041a\u043b\u0438\u043d\u0441\u043a\u0438\u0439" [Meat Processing Plant "Klinskij" JSC]; \u041e\u041e\u041e "\u0414\u044b\u043c\u043e\u0432\u0441\u043a\u043e\u0435 \u043a\u043e\u043b\u0431\u0430\u0441\u043d\u043e\u0435 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u043e"[Dymovskoe Sausage Production LLC"]; \u041e\u041e\u041e "\u041c\u0415\u0422\u0410\u0422\u0420" [Metatr LLC]; \u041e\u041e\u041e "\u041f\u0418\u0422-\u041f\u0420\u041e\u0414\u0423\u041a\u0422" [Pit- Product LLC]
+p7408
+sg213
+VMeat Products
 p7409
 sg215
-VMeat Products
+V"Doktorskaya" is a very popular sausage product in Russia, which was formulated in USSR. To call a sausage "Doktorskaya" a producer should satisfy several strict requirements specified by GOST standards. Yet, in a recent check conducted by Roskontrol, which is a quality check agency, 10 out of 13 producers of sausage "Doktorskaya" were found to be adulterating their production. Thus, in several cases collagen protein was used to increase the apparent levels of protein. Soy-based products were also used to increase the apparent amount of protein and as stabilizers. Starch and various preservatives were also found in sausages labeled with GOST trademark, even though GOST prohibits these substances. In addition, high amount of phosphates, benzoic acid and sorbic acid were also found in couple samples even though they are banned according to GOST standards. Lastly, several producers simply did not indicate the correct amount of various substances in their products.
 p7410
 sg217
-VDue to the excess of phosphate calcium excretion from human bodies can occurs. Regular consumption of foods with phosphates contributes to the development of osteoporosis. Once in a human, sodium nitrite is converted to nitrosamine, which is a carcinogen. Thus, it is not recommended to consume foods with sodium nitrite in large quantities.
-p7411
+g218
 sg219
-g220
-sg221
-V2015
-p7412
-sg223
 V"Doktorskaya" sausage" ["Doctoral Sausage"]; various brands
-p7413
-sg225
-(lp7414
-(dp7415
-g228
+p7411
+sg221
+(lp7412
+(dp7413
+g224
 V2015-08-11
+p7414
+sg226
+VRoscontrol
+p7415
+sg228
+VUnknown
 p7416
 sg230
-VRoscontrol
-p7417
-sg232
-VUnknown
-p7418
-sg234
 V10 from 13 the popular stamps of doctoral sausage they are dangerous for the health!
-p7419
-sasg245
+p7417
+sasg241
 VMislabeling
+p7418
+sg243
+V2015
+p7419
+sg245
+VEastern Europe, Russia
 p7420
 sg247
-VEastern Europe, Russia
-p7421
-sg249
-g220
-sg250
+g218
+sg248
 V"Doktorskaya" sausage
+p7421
+sg250
+VDue to the excess of phosphate calcium excretion from human bodies can occurs. Regular consumption of foods with phosphates contributes to the development of osteoporosis. Once in a human, sodium nitrite is converted to nitrosamine, which is a carcinogen. Thus, it is not recommended to consume foods with sodium nitrite in large quantities.
 p7422
 sg252
-V"Doktorskaya" is a very popular sausage product in Russia, which was formulated in USSR. To call a sausage "Doktorskaya" a producer should satisfy several strict requirements specified by GOST standards. Yet, in a recent check conducted by Roskontrol, which is a quality check agency, 10 out of 13 producers of sausage "Doktorskaya" were found to be adulterating their production. Thus, in several cases collagen protein was used to increase the apparent levels of protein. Soy-based products were also used to increase the apparent amount of protein and as stabilizers. Starch and various preservatives were also found in sausages labeled with GOST trademark, even though GOST prohibits these substances. In addition, high amount of phosphates, benzoic acid and sorbic acid were also found in couple samples even though they are banned according to GOST standards. Lastly, several producers simply did not indicate the correct amount of various substances in their products.
+VUnknown
 p7423
 ssV182
 p7424
@@ -25286,71 +25286,71 @@ sg205
 VNorth America, United States
 p8906
 sg207
-V2012
+Vmislabeled product marked as USDA certified ground beef
 p8907
 sg209
-Vmislabeled product marked as USDA certified ground beef
-p8908
+g1013
 sg211
-g1014
-sg213
 Vindividual actor
+p8908
+sg213
+VMeat Products
 p8909
 sg215
-VMeat Products
+VA man was sentenced for meat mislabeling. As a result of inspection conducted by federal inspectors in Romans II meat processing company in Norfolk, NE, 300 pounds of sausages, 400 pounds of beef jerky, bacon and deer meat in bags labeled as ground pork were seized. The listed meat was labeled as ground pork. Moreover, the label bore the USDA mark of inspection which in fact was never grated by the authorities. To justify the act of adulteration, the man insisted that the meat was being help for special customers and thus there was not need to label it appropriately.
 p8910
 sg217
-VUnknown
-p8911
+g218
 sg219
-g220
-sg221
-V2013
-p8912
-sg223
 Vunknown
-p8913
-sg225
-(lp8914
-(dp8915
-g228
+p8911
+sg221
+(lp8912
+(dp8913
+g224
 V2013-07-29
+p8914
+sg226
+VJournalStar.com
+p8915
+sg228
+VNicholas Bergin
 p8916
 sg230
-VJournalStar.com
-p8917
-sg232
-VNicholas Bergin
-p8918
-sg234
 VMan gets probation for falsely labeling meat as USDA inspected
-p8919
-sa(dp8920
-g228
+p8917
+sa(dp8918
+g224
 V2013-07-30
+p8919
+sg226
+VFood Safty News
+p8920
+sg228
+VUnknown
 p8921
 sg230
-VFood Safty News
-p8922
-sg232
-VUnknown
-p8923
-sg234
 VNebraska Man Gets Probation for Mislabeling Meat
-p8924
-sasg245
+p8922
+sasg241
 VSubstitution
+p8923
+sg243
+V2013
+p8924
+sg245
+VNorth America, United States
 p8925
 sg247
-VNorth America, United States
-p8926
-sg249
-g220
-sg250
+g218
+sg248
 Vbacon; Beef jerky; deer bologna; deer sausages; Deer sticks; uncooked deer meat
+p8926
+sg250
+VUnknown
 p8927
 sg252
-VA man was sentenced for meat mislabeling. As a result of inspection conducted by federal inspectors in Romans II meat processing company in Norfolk, NE, 300 pounds of sausages, 400 pounds of beef jerky, bacon and deer meat in bags labeled as ground pork were seized. The listed meat was labeled as ground pork. Moreover, the label bore the USDA mark of inspection which in fact was never grated by the authorities. To justify the act of adulteration, the man insisted that the meat was being help for special customers and thus there was not need to label it appropriately.
+V2012
 p8928
 ssV696
 p8929
@@ -25365,58 +25365,58 @@ sg205
 VSoutheast Asia, Malaysia
 p8933
 sg207
-V2015
+Vundeclared meat species
 p8934
 sg209
-Vundeclared meat species
-p8935
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p8935
+sg213
+VMeat Products
 p8936
 sg215
-VMeat Products
+VIn this study, 143 prepacked beef and poultry products were purchased from several national and international supermarket chains in Malaysia. These samples were analysed for the presence of common meat species (buffalo, cattle, chicken, goat, sheep, duck and goose) and meats prohibited by Islamic laws (\u201cHaram\u201d) using species-specific primers. The results showed that 112 or 78.3% of samples were mislabelled, attributed by the false declaration of species and/or presence of undeclared meat species. Exact results show that 49/58 of beef products; 62/84 of chicken products; and 1/1 of duck products were mislabelled due to species substitution. The highest incidence of species substitution (\u226580%) was detected in beef sausages, meatballs and ground meats; while no incidence of species substitution in cooked whole muscle meats was noted. Overall, this economically motivated adulteration holds potential financial, health and conservation impacts on Malaysian communities.
 p8937
 sg217
-VUnknown.
-p8938
+g218
 sg219
-g220
-sg221
-V2015
-p8939
-sg223
 Vunknown
-p8940
-sg225
-(lp8941
-(dp8942
-g228
+p8938
+sg221
+(lp8939
+(dp8940
+g224
 V2015-10-28
+p8941
+sg226
+VScience Direct
+p8942
+sg228
+VLi-Oon Chuah, Xiao Bin He, Mohd Esah Effarizah, Zainal Abidin Syahariza, Ahamed Kamal Shamila-Syuhada, Gulam Rusul
 p8943
 sg230
-VScience Direct
-p8944
-sg232
-VLi-Oon Chuah, Xiao Bin He, Mohd Esah Effarizah, Zainal Abidin Syahariza, Ahamed Kamal Shamila-Syuhada, Gulam Rusul
-p8945
-sg234
 VMislabelling of beef and poultry products sold in Malaysia
-p8946
-sasg245
+p8944
+sasg241
 VSubstitution
+p8945
+sg243
+V2015
+p8946
+sg245
+VSoutheast Asia, Malaysia
 p8947
 sg247
-VSoutheast Asia, Malaysia
-p8948
-sg249
-g220
-sg250
+g218
+sg248
 VBeef products; poultry products
+p8948
+sg250
+VUnknown.
 p8949
 sg252
-VIn this study, 143 prepacked beef and poultry products were purchased from several national and international supermarket chains in Malaysia. These samples were analysed for the presence of common meat species (buffalo, cattle, chicken, goat, sheep, duck and goose) and meats prohibited by Islamic laws (\u201cHaram\u201d) using species-specific primers. The results showed that 112 or 78.3% of samples were mislabelled, attributed by the false declaration of species and/or presence of undeclared meat species. Exact results show that 49/58 of beef products; 62/84 of chicken products; and 1/1 of duck products were mislabelled due to species substitution. The highest incidence of species substitution (\u226580%) was detected in beef sausages, meatballs and ground meats; while no incidence of species substitution in cooked whole muscle meats was noted. Overall, this economically motivated adulteration holds potential financial, health and conservation impacts on Malaysian communities.
+V2015
 p8950
 ssV697
 p8951
@@ -25577,58 +25577,58 @@ sg205
 VOceania, Australia; North America, United States; North America, Canada
 p9005
 sg207
-VUnknown
+VBeef; horse meat; pork
 p9006
 sg209
-VBeef; horse meat; pork
-p9007
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p9007
+sg213
+VMeat Products
 p9008
 sg215
-VMeat Products
+VA total of 48 samples of various fresh and frozen meat kinds were collected by researchers for DNA analysis. The samples were purchased from 5 online specialty meat distributors and 4 retail outlets in Orange County, CA. The study revealed that 10 out of the 48 samples were mislabeled. Though some of the mislabeling might have occurred due to cross-contamination and mishandling, the researchers indicate that several samples labeled as black bear burgers, yak burgers, ground kangaroo, and ground bison were diluted with a lower economical value meat. For example, ground yak is sold for US $19.69/kg while ground beef is sold for ground beef US $9.14/kg. In the study, it was revealed that the product labeled as yak burger was actually made of beef, thus signifying economical motivation to the adulteration. In addition to dilution of products with a lower value meat, the researchers also found presence of horse meat in the samples label as ground bison and ground lamb meat. One should note that sale of horse meat in the USA is illegal.
 p9009
 sg217
-VUnknown
-p9010
+g218
 sg219
-g220
-sg221
-V2015
-p9011
-sg223
 Vunknown
-p9012
-sg225
-(lp9013
-(dp9014
-g228
+p9010
+sg221
+(lp9011
+(dp9012
+g224
 V2015-05-19
+p9013
+sg226
+VFood Control
+p9014
+sg228
+VDawn E. Kane and Rosalee S. Hellberg
 p9015
 sg230
-VFood Control
-p9016
-sg232
-VDawn E. Kane and Rosalee S. Hellberg
-p9017
-sg234
 VIdentification of species in ground meat products sold on the U.S. commercial market using DNA-based methods
-p9018
-sasg245
+p9016
+sasg241
 VDilution
+p9017
+sg243
+V2015
+p9018
+sg245
+VNorth America, United States
 p9019
 sg247
-VNorth America, United States
-p9020
-sg249
-g220
-sg250
+g218
+sg248
 VBison; Black bear; Kangaroo; lamb; Yak
+p9020
+sg250
+VUnknown
 p9021
 sg252
-VA total of 48 samples of various fresh and frozen meat kinds were collected by researchers for DNA analysis. The samples were purchased from 5 online specialty meat distributors and 4 retail outlets in Orange County, CA. The study revealed that 10 out of the 48 samples were mislabeled. Though some of the mislabeling might have occurred due to cross-contamination and mishandling, the researchers indicate that several samples labeled as black bear burgers, yak burgers, ground kangaroo, and ground bison were diluted with a lower economical value meat. For example, ground yak is sold for US $19.69/kg while ground beef is sold for ground beef US $9.14/kg. In the study, it was revealed that the product labeled as yak burger was actually made of beef, thus signifying economical motivation to the adulteration. In addition to dilution of products with a lower value meat, the researchers also found presence of horse meat in the samples label as ground bison and ground lamb meat. One should note that sale of horse meat in the USA is illegal.
+VUnknown
 p9022
 ssV698
 p9023
@@ -25839,97 +25839,97 @@ sg205
 VWestern Europe, United Kingdom
 p9095
 sg207
-VUnknown
+VBeef; chicken; turkey; unidentified meat
 p9096
 sg209
-VBeef; chicken; turkey; unidentified meat
-p9097
+g1299
 sg211
-g1300
-sg213
 Vindividual actor
+p9097
+sg213
+VMeat Products
 p9098
 sg215
-VMeat Products
+VTwo studies of restaurants in the United Kingdom determined that dishes sold as lamb frequently contain other meats such as beef, chicken, or turkey. In some cases, the non-lamb meat could not be identified. One study was performed by the Food Standards Agency (FSA) and found 30%of the sampled meals contained other types of meat or no lamb at all. A separate study performed by a consumer group found that 40% of sampled meals contained other types of meat or no lamb at all. There is an economic incentive to adulterate lamb with less expensive meat. The adulteration was detected following investigations by the FSA and a consumer group, \u201cWhich?\u201d
 p9099
 sg217
-VUnknown.
-p9100
+g218
 sg219
-g220
-sg221
-V2014
-p9101
-sg223
 Vnone
-p9102
-sg225
-(lp9103
-(dp9104
-g228
+p9100
+sg221
+(lp9101
+(dp9102
+g224
 V2014-04-17
+p9103
+sg226
+VBBC News
+p9104
+sg228
+VUnknown
 p9105
 sg230
-VBBC News
-p9106
-sg232
-VUnknown
-p9107
-sg234
 VLamb curries and kebabs 'often another meat'
-p9108
-sa(dp9109
-g228
+p9106
+sa(dp9107
+g224
 V2014-04-16
+p9108
+sg226
+Vwhich.com
+p9109
+sg228
+VUnknown
 p9110
 sg230
-Vwhich.com
-p9111
-sg232
-VUnknown
-p9112
-sg234
 VFood fraud: What's in your takeaway?
-p9113
-sa(dp9114
-g228
+p9111
+sa(dp9112
+g224
 V2014-04-16
+p9113
+sg226
+VDaily Mail
+p9114
+sg228
+VPoulter, Sean
 p9115
 sg230
-VDaily Mail
-p9116
-sg232
-VPoulter, Sean
-p9117
-sg234
 VIs there rat in your kebab?
-p9118
-sa(dp9119
-g228
+p9116
+sa(dp9117
+g224
 V2014-04-16
+p9118
+sg226
+VThe Guardian
+p9119
+sg228
+VLawrence, Felicity
 p9120
 sg230
-VThe Guardian
-p9121
-sg232
-VLawrence, Felicity
-p9122
-sg234
 VFSA orders tests on takeaways after lamb meals found to contain other meat
-p9123
-sasg245
+p9121
+sasg241
 VDilution
+p9122
+sg243
+V2014
+p9123
+sg245
+VWestern Europe, United Kingdom
 p9124
 sg247
-VWestern Europe, United Kingdom
-p9125
-sg249
-g220
-sg250
+g218
+sg248
 VKebab; lamb; Lamb curry
+p9125
+sg250
+VUnknown.
 p9126
 sg252
-VTwo studies of restaurants in the United Kingdom determined that dishes sold as lamb frequently contain other meats such as beef, chicken, or turkey. In some cases, the non-lamb meat could not be identified. One study was performed by the Food Standards Agency (FSA) and found 30%of the sampled meals contained other types of meat or no lamb at all. A separate study performed by a consumer group found that 40% of sampled meals contained other types of meat or no lamb at all. There is an economic incentive to adulterate lamb with less expensive meat. The adulteration was detected following investigations by the FSA and a consumer group, \u201cWhich?\u201d
+VUnknown
 p9127
 ssV541
 p9128
@@ -26403,58 +26403,58 @@ sg205
 Vunknown
 p9291
 sg207
-V2014
+VBeef; pork; sheep meat
 p9292
 sg209
-VBeef; pork; sheep meat
-p9293
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p9293
+sg213
+VMeat Products
 p9294
 sg215
-VMeat Products
+VFood Standard Agency (FSA) of the UK revealed that out of 426 tests conducted for meat identification on 665 samples of pre-packaged foods in 2014, 44 incidents of meat adulteration were uncovered. Though the agency did not reveal information about where the meat was produced or sold neither it provided the brand names, FSA declared that among the most widespread adulteration was dilution of minced steak and lamb burgers with undeclared pork; inclusion of undeclared beef into "pure" sliced lamb and black pudding; and sale of sheep meat as goat meet.
 p9295
 sg217
-VUnknown
-p9296
+g218
 sg219
-g220
-sg221
-V2015
-p9297
-sg223
 Vunknown
-p9298
-sg225
-(lp9299
-(dp9300
-g228
+p9296
+sg221
+(lp9297
+(dp9298
+g224
 V2015-05-29
+p9299
+sg226
+VThe Grocer
+p9300
+sg228
+VCarina Perkins
 p9301
 sg230
-VThe Grocer
-p9302
-sg232
-VCarina Perkins
-p9303
-sg234
 VFSA reveals details of meat adulteration tests
-p9304
-sasg245
+p9302
+sasg241
 VDilution
+p9303
+sg243
+V2015
+p9304
+sg245
+VWestern Europe, United Kingdom
 p9305
 sg247
-VWestern Europe, United Kingdom
-p9306
-sg249
-g220
-sg250
+g218
+sg248
 Vblack pudding; goat meet; lamb burgers; minced steak; sliced lamb
+p9306
+sg250
+VUnknown
 p9307
 sg252
-VFood Standard Agency (FSA) of the UK revealed that out of 426 tests conducted for meat identification on 665 samples of pre-packaged foods in 2014, 44 incidents of meat adulteration were uncovered. Though the agency did not reveal information about where the meat was produced or sold neither it provided the brand names, FSA declared that among the most widespread adulteration was dilution of minced steak and lamb burgers with undeclared pork; inclusion of undeclared beef into "pure" sliced lamb and black pudding; and sale of sheep meat as goat meet.
+V2014
 p9308
 ssV120
 p9309
@@ -27322,71 +27322,71 @@ sg205
 VEast Asia, China
 p9614
 sg207
-VUnknown
+VClenbuterol
 p9615
 sg209
-VClenbuterol
-p9616
+g1013
 sg211
-g1014
-sg213
 Vindividual actor
+p9616
+sg213
+VMeat Products
 p9617
 sg215
-VMeat Products
+VPork from pigs that had been fed clenbuterol, a banned pig-feed additive, was sold to consumers across 66 Chinese markets. More than 300 people fell ill and were hospitalized in Shanghai after eating the meat. Farmers used the clenbuterol to produce leaner pork. The incident was detected following the reported illnesses and hospitalizations.
 p9618
 sg217
-VClenbuterol can cause illness and even death in humans if pork containing clenbuterol is ingested.
-p9619
+g218
 sg219
-g220
-sg221
-V2006
-p9620
-sg223
 Vunknown
-p9621
-sg225
-(lp9622
-(dp9623
-g228
+p9619
+sg221
+(lp9620
+(dp9621
+g224
 V2006-03-11
-p9624
-sg230
+p9622
+sg226
 VBBC Monitoring Asia Pacific
-p9625
-sg232
+p9623
+sg228
 g25
-sg234
+sg230
 VChinese police arrest three over food poisoning of 300 people
-p9626
-sa(dp9627
-g228
+p9624
+sa(dp9625
+g224
 V2006-09-20
+p9626
+sg226
+VAASV News Archive
+p9627
+sg228
+VHarry Snelson
 p9628
 sg230
-VAASV News Archive
-p9629
-sg232
-VHarry Snelson
-p9630
-sg234
 VClenbuterol-fed Pigs Lead to Food Poisoning in China
-p9631
-sasg245
+p9629
+sasg241
 VArtificial Enhancement
+p9630
+sg243
+V2006
+p9631
+sg245
+VEast Asia, China
 p9632
 sg247
-VEast Asia, China
-p9633
-sg249
 V300
+p9633
+sg248
+Vpork
 p9634
 sg250
-Vpork
+VClenbuterol can cause illness and even death in humans if pork containing clenbuterol is ingested.
 p9635
 sg252
-VPork from pigs that had been fed clenbuterol, a banned pig-feed additive, was sold to consumers across 66 Chinese markets. More than 300 people fell ill and were hospitalized in Shanghai after eating the meat. Farmers used the clenbuterol to produce leaner pork. The incident was detected following the reported illnesses and hospitalizations.
+VUnknown
 p9636
 ssV417
 p9637
@@ -27885,72 +27885,72 @@ sg205
 VMexico
 p9817
 sg207
-VUnknown
+VClenbuterol
 p9818
 sg209
-VClenbuterol
-p9819
+g1013
 sg211
-g1014
-sg213
 Vunknown
+p9819
+sg213
+VMeat Products
 p9820
 sg215
-VMeat Products
+VBeef in Mexico was found to be tainted with clenbuterol, a banned growth enhancer. In 2010, 297 individuals visited the emergency room after eating tainted meat. In 2007, 795 people were hospitalized following consumption of clenbuterol-tainted meat. Some ranchers in Mexico use clenbuterol because it bulks up beef cattle and thereby increases profits. Detection has been difficult both because clenbuterol produces leaner and pinker meat that is preferred by consumers and also because some ranchers reportedly sell beef to smaller slaughterhouses operated by municipalities where federal inspections may not routinely take place. Slaughterhouse inspections conducted by federal authorities continued to detect the presence of clenbuterol in cattle as recent as 2014.
 p9821
 sg217
-VClenbuterol can cause heart palpitations, tremors, dizziness, nausea and increased anxiety if ingested.
-p9822
+g218
 sg219
-g220
-sg221
-V2014
-p9823
-sg223
 Vunknown
-p9824
-sg225
-(lp9825
-(dp9826
-g228
+p9822
+sg221
+(lp9823
+(dp9824
+g224
 V2014-10-07
+p9825
+sg226
+VMcClatchy-Tribune News Service
+p9826
+sg228
+VJohnson, Tim
 p9827
 sg230
-VMcClatchy-Tribune News Service
-p9828
-sg232
-VJohnson, Tim
-p9829
-sg234
 VBanned growth chemical remains a problem in beef in central Mexico
-p9830
-sa(dp9831
-g228
+p9828
+sa(dp9829
+g224
 V2011-06-13
+p9830
+sg226
+VMcClatchy-Tribune News Service
+p9831
+sg228
+VJohnson, Tim
 p9832
 sg230
-VMcClatchy-Tribune News Service
-p9833
-sg232
-VJohnson, Tim
-p9834
-sg234
 VIn Mexico, soccer stars' drug tests reveal steroids in meat
-p9835
-sasg245
+p9833
+sasg241
 VArtificial Enhancement
+p9834
+sg243
+V2014
+p9835
+sg245
+VMexico
 p9836
 sg247
-VMexico
-p9837
-sg249
 V1,092
+p9837
+sg248
+Vbeef
 p9838
 sg250
-Vbeef
+VClenbuterol can cause heart palpitations, tremors, dizziness, nausea and increased anxiety if ingested.
 p9839
 sg252
-VBeef in Mexico was found to be tainted with clenbuterol, a banned growth enhancer. In 2010, 297 individuals visited the emergency room after eating tainted meat. In 2007, 795 people were hospitalized following consumption of clenbuterol-tainted meat. Some ranchers in Mexico use clenbuterol because it bulks up beef cattle and thereby increases profits. Detection has been difficult both because clenbuterol produces leaner and pinker meat that is preferred by consumers and also because some ranchers reportedly sell beef to smaller slaughterhouses operated by municipalities where federal inspections may not routinely take place. Slaughterhouse inspections conducted by federal authorities continued to detect the presence of clenbuterol in cattle as recent as 2014.
+VUnknown
 p9840
 ssV418
 p9841
@@ -27965,71 +27965,71 @@ sg205
 VEast Asia, China
 p9845
 sg207
-VUnknown
+VClenbuterol
 p9846
 sg209
-VClenbuterol
-p9847
+g1013
 sg211
-g1014
-sg213
 Vunknown
+p9847
+sg213
+VMeat Products
 p9848
 sg215
-VMeat Products
+VPork from pigs that had been fed clenbuterol, a banned pig-feed additive, was sold to consumers in the Chinese province of Guangdong. At least 70 people fell ill after eating the pork tainted with clenbuterol. Farmers used the clenbuterol to produce leaner pork. The incident was detected following the reported illnesses.
 p9849
 sg217
-VClenbuterol can cause illness and even death in humans if pork containing clenbuterol is ingested.
-p9850
+g218
 sg219
-g220
-sg221
-V2009
-p9851
-sg223
 Vunknown
-p9852
-sg225
-(lp9853
-(dp9854
-g228
+p9850
+sg221
+(lp9851
+(dp9852
+g224
 V2009-02-23
-p9855
-sg230
+p9853
+sg226
 VThe New Zealand Herald
-p9856
-sg232
+p9854
+sg228
 g25
-sg234
+sg230
 V70 sick from tainted Chinese pig organs
-p9857
-sa(dp9858
-g228
+p9855
+sa(dp9856
+g224
 V2009-02-23
+p9857
+sg226
+VThe New York Times
+p9858
+sg228
+VMICHAEL WINES
 p9859
 sg230
-VThe New York Times
-p9860
-sg232
-VMICHAEL WINES
-p9861
-sg234
 VPig Organs Tainted With a Banned Steroid Sicken 70 in China
-p9862
-sasg245
+p9860
+sasg241
 VArtificial Enhancement
+p9861
+sg243
+V2009
+p9862
+sg245
+VEast Asia, China
 p9863
 sg247
-VEast Asia, China
-p9864
-sg249
 V70
+p9864
+sg248
+Vpork
 p9865
 sg250
-Vpork
+VClenbuterol can cause illness and even death in humans if pork containing clenbuterol is ingested.
 p9866
 sg252
-VPork from pigs that had been fed clenbuterol, a banned pig-feed additive, was sold to consumers in the Chinese province of Guangdong. At least 70 people fell ill after eating the pork tainted with clenbuterol. Farmers used the clenbuterol to produce leaner pork. The incident was detected following the reported illnesses.
+VUnknown
 p9867
 ssV419
 p9868
@@ -29812,57 +29812,57 @@ sg205
 VNorth America, United States, California
 p10472
 sg207
-V1991
+Vlamb; low grade ground beef; pork; poultry
 p10473
 sg209
-Vlamb; low grade ground beef; pork; poultry
-p10474
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p10474
+sg213
+VMeat Products
 p10475
 sg215
-VMeat Products
+VA California grocery store chain substituted low-grade ground beef or other species, such as pork, lamb and poultry, into packages labeled as ground chuck and ground sirloin. The adulteration was discovered during an investigation by state authorities.
 p10476
 sg217
-VUnknown.
-p10477
+g218
 sg219
-g220
-sg221
-V1994
-p10478
-sg223
 VLucky Stores
-p10479
-sg225
-(lp10480
-(dp10481
-g228
+p10477
+sg221
+(lp10478
+(dp10479
+g224
 V1994-01-27
-p10482
-sg230
+p10480
+sg226
 VThe Associated Press
-p10483
-sg232
+p10481
+sg228
 g25
-sg234
+sg230
 VLucky Settles Over Meat Mislabeling
-p10484
-sasg245
+p10482
+sasg241
 VDilution
+p10483
+sg243
+V1994
+p10484
+sg245
+VNorth America, United States, California
 p10485
 sg247
-VNorth America, United States, California
-p10486
-sg249
-g220
-sg250
+g218
+sg248
 Vground beef; Ground chuck; ground sirloin
+p10486
+sg250
+VUnknown.
 p10487
 sg252
-VA California grocery store chain substituted low-grade ground beef or other species, such as pork, lamb and poultry, into packages labeled as ground chuck and ground sirloin. The adulteration was discovered during an investigation by state authorities.
+V1991
 p10488
 ssV389
 p10489
@@ -29877,57 +29877,57 @@ sg205
 VNorth America, United States, California
 p10493
 sg207
-V1989
+Vchicken; expired ground beef; lamb; pork
 p10494
 sg209
-Vchicken; expired ground beef; lamb; pork
-p10495
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p10495
+sg213
+VMeat Products
 p10496
 sg215
-VMeat Products
+VGround beef adulterated with chicken, lamb and pork, was found in Pak 'N Save chains across California. It was also reported that expired ground beef was mixed with fresh ground beef. The meats used to adulterate the ground beef were lower priced that 100% ground beef.
 p10497
 sg217
-VUnknown.
-p10498
+g218
 sg219
-g220
-sg221
-V1993
-p10499
-sg223
 Vunknown
-p10500
-sg225
-(lp10501
-(dp10502
-g228
+p10498
+sg221
+(lp10499
+(dp10500
+g224
 V1993-08-12
-p10503
-sg230
+p10501
+sg226
 VThe Associated Press
-p10504
-sg232
+p10502
+sg228
 g25
-sg234
+sg230
 VSafeway Settles Meat Labeling Case For $6.35 Million
-p10505
-sasg245
+p10503
+sasg241
 VDilution
+p10504
+sg243
+V1993
+p10505
+sg245
+VNorth America, United States, California
 p10506
 sg247
-VNorth America, United States, California
-p10507
-sg249
-g220
-sg250
+g218
+sg248
 Vground beef
+p10507
+sg250
+VUnknown.
 p10508
 sg252
-VGround beef adulterated with chicken, lamb and pork, was found in Pak 'N Save chains across California. It was also reported that expired ground beef was mixed with fresh ground beef. The meats used to adulterate the ground beef were lower priced that 100% ground beef.
+V1989
 p10509
 ssV151
 p10510
@@ -30100,135 +30100,135 @@ sg205
 VEastern Europe, Poland; Eastern Europe, Romania
 p10568
 sg207
-V2012
+Vhorse meat
 p10569
 sg209
-Vhorse meat
+V7
 p10570
 sg211
-V7
+VABP Food Group; Comigel; Dalepak; Dunnes Stores; Freeza Meats; Liffey meats; Rangeland Foods; Silvercrest Foods; Spanghero
 p10571
 sg213
-VABP Food Group; Comigel; Dalepak; Dunnes Stores; Freeza Meats; Liffey meats; Rangeland Foods; Silvercrest Foods; Spanghero
+VMeat Products
 p10572
 sg215
-VMeat Products
+VHorse meat was detected in a number of products labeled as beef across several European countries and elsewhere. Affected products included frozen meals, frozen lasagna, and frozen beef burgers. The product passed through complex supply chains that involved several countries, but the horse meat ultimately originated from suppliers in Poland and Romania. It is believed that the high price of beef created an incentive to adulterate products with less expensive meat such as horse meat. Experts believe the complexity of the supply chains combined with failures in auditing and regulation systems allowed the adulteration to take place. European meat traders also forged paperwork such as invoices, labels, and declarations to sell horse meat as beef. The incident was first detected by the Food Safety Authority in Ireland following tests of frozen beef burgers and frozen meals. There are conflicting reports regarding whether the tests were part of random surveillance or if the authority had been tipped off prior to testing.
 p10573
 sg217
-VUnknown.
-p10574
+g218
 sg219
-g220
-sg221
-V2013
-p10575
-sg223
 VAldi; Asda; Coop; Findus; Ikea; Kaiser's Tengelmann; Lidl; Nestle; Real; Sainsbury's; Tesco
-p10576
-sg225
-(lp10577
-(dp10578
-g228
+p10574
+sg221
+(lp10575
+(dp10576
+g224
 V2013-02-15
-p10579
-sg230
+p10577
+sg226
 VThe Guardian
-p10580
-sg232
+p10578
+sg228
 g25
-sg234
-VHow the horsemeat scandal unfolded \u2013 timeline
-p10581
-sa(dp10582
-g228
-V2013-02-19
-p10583
 sg230
+VHow the horsemeat scandal unfolded \u2013 timeline
+p10579
+sa(dp10580
+g224
+V2013-02-19
+p10581
+sg226
 VGlobal Post
-p10584
-sg232
+p10582
+sg228
 g25
-sg234
+sg230
 VHorsemeat for beef scandal: the main countries affected
-p10585
-sa(dp10586
-g228
+p10583
+sa(dp10584
+g224
 V2013-02-15
+p10585
+sg226
+VThe Guardian
+p10586
+sg228
+VFelicity Lawrence
 p10587
 sg230
-VThe Guardian
-p10588
-sg232
-VFelicity Lawrence
-p10589
-sg234
 VHorsemeat scandal: the essential guide
-p10590
-sa(dp10591
-g228
+p10588
+sa(dp10589
+g224
 V2013-02-25
+p10590
+sg226
+VNew York Times
+p10591
+sg228
+VAndrew Higgins, Stephen Castle
 p10592
 sg230
-VNew York Times
-p10593
-sg232
-VAndrew Higgins, Stephen Castle
-p10594
-sg234
 VIkea Recalls Meatballs After Detection of Horse Meat
-p10595
-sa(dp10596
-g228
+p10593
+sa(dp10594
+g224
 V2015-04-08
+p10595
+sg226
+VFood Safety News
+p10596
+sg228
+VFlynn, Dan
 p10597
 sg230
-VFood Safety News
-p10598
-sg232
-VFlynn, Dan
-p10599
-sg234
 VDutch Court Sends Meat Trader to Jail in European Horse Meat Scandal
-p10600
-sa(dp10601
-g228
+p10598
+sa(dp10599
+g224
 V2015-04-26
+p10600
+sg226
+VBangkok Post
+p10601
+sg228
+VAFP
 p10602
 sg230
-VBangkok Post
-p10603
-sg232
-VAFP
-p10604
-sg234
 VEurope busts horsemeat traffickers
-p10605
-sa(dp10606
-g228
+p10603
+sa(dp10604
+g224
 V2013-02-25
+p10605
+sg226
+VHuffington Post
+p10606
+sg228
+VRitter, Karl
 p10607
 sg230
-VHuffington Post
-p10608
-sg232
-VRitter, Karl
-p10609
-sg234
 VHorse Meat In Ikea's Swedish Meatballs, Czech Authorities Say
-p10610
-sasg245
+p10608
+sasg241
 VDilution
+p10609
+sg243
+V2013
+p10610
+sg245
+VWestern Europe, United Kingdom; Western Europe, Ireland; Western Europe, France; Western Europe, Sweden; Western Europe, Germany; Western Europe, Switzerland; Western Europe, Netherlands; Western Europe, Norway; Western Europe, Denmark; Western Europe, Austria; Eastern Europe, Bulgaria; Western Europe, Finland; Western Europe, Belgium; Western Europe, Spain; Western Europe, Italy; Western Europe, Portugal; Southeast Asia, Thailand; Eastern Europe, Hungary; Eastern Europe, Slovakia; Western Europe, Cyprus; East Asia, China; Central America and the Caribbean, Dominican Republic
 p10611
 sg247
-VWestern Europe, United Kingdom; Western Europe, Ireland; Western Europe, France; Western Europe, Sweden; Western Europe, Germany; Western Europe, Switzerland; Western Europe, Netherlands; Western Europe, Norway; Western Europe, Denmark; Western Europe, Austria; Eastern Europe, Bulgaria; Western Europe, Finland; Western Europe, Belgium; Western Europe, Spain; Western Europe, Italy; Western Europe, Portugal; Southeast Asia, Thailand; Eastern Europe, Hungary; Eastern Europe, Slovakia; Western Europe, Cyprus; East Asia, China; Central America and the Caribbean, Dominican Republic
-p10612
-sg249
-g220
-sg250
+g218
+sg248
 Vground beef
+p10612
+sg250
+VUnknown.
 p10613
 sg252
-VHorse meat was detected in a number of products labeled as beef across several European countries and elsewhere. Affected products included frozen meals, frozen lasagna, and frozen beef burgers. The product passed through complex supply chains that involved several countries, but the horse meat ultimately originated from suppliers in Poland and Romania. It is believed that the high price of beef created an incentive to adulterate products with less expensive meat such as horse meat. Experts believe the complexity of the supply chains combined with failures in auditing and regulation systems allowed the adulteration to take place. European meat traders also forged paperwork such as invoices, labels, and declarations to sell horse meat as beef. The incident was first detected by the Food Safety Authority in Ireland following tests of frozen beef burgers and frozen meals. There are conflicting reports regarding whether the tests were part of random surveillance or if the authority had been tipped off prior to testing.
+V2012
 p10614
 ssV65
 p10615
@@ -31226,90 +31226,90 @@ sg205
 VNorth America, United States, California
 p10958
 sg207
-V2012
+VBeef from unhealthy cattle; Beef unfit for human consumption
 p10959
 sg209
-VBeef from unhealthy cattle; Beef unfit for human consumption
-p10960
+g1299
 sg211
-g1300
-sg213
 VRancho Feeding Corporation
+p10960
+sg213
+VMeat Products
 p10961
 sg215
-VMeat Products
+VEmployees at Rancho Feeding Corporation, a slaughterhouse in California, were charged with knowingly processing and distributing meat from diseased cattle. The incident resulted in a recall of over 8.7 million pounds of beef, including both whole carcasses and beef products. The recall affected stores in 45 states, Washington, DC., Guam and Puerto Rico. Stores affected include 7-11, Albertsons, Family Dollar, Kroger, Piggly-Wiggly, Walgreens, Target, Chevron, Food 4 Less, Rite Aide, Safeway, and Wal-mart. The meat was used in packaged foods including Nestle\u2019s Hot Pockets. The incident involved four employees who allegedly developed a scheme to bypass USDA inspectors. The slaughterhouse first purchased less expensive cattle that exhibited signs of eye disease. Many of these cattle were determined to be unfit for human consumption due to illness and were labeled as \u201cUSDA condemned\u201d by USDA inspectors. Employees involved in the scheme removed the \u201cUSDA condemned\u201d stamps from the cattle carcasses and moved forward with processing the cattle for sale and distribution. Another approach involved tampering with post-mortem inspections. Employees would place heads from healthy cows and place those next to the carcasses of unhealthy cows so that USDA inspectors were not aware that they were inspecting the carcass of a cow that did not pass an ante-mortem inspection. The incident was uncovered after the USDA determined that some products had not been properly inspected.
 p10962
 sg217
-VUnknown
-p10963
+g218
 sg219
-g220
-sg221
-V2014
-p10964
-sg223
 VHot Pockets
-p10965
-sg225
-(lp10966
-(dp10967
-g228
+p10963
+sg221
+(lp10964
+(dp10965
+g224
+g25
+sg226
+VFood Safety News
+p10966
+sg228
 g25
 sg230
-VFood Safety News
-p10968
-sg232
-g25
-sg234
 VProcessor Recalls Beef Products Distributed Without Proper USDA Inspection
-p10969
-sa(dp10970
-g228
+p10967
+sa(dp10968
+g224
 g25
-sg230
+sg226
 VWall Street Journal
-p10971
-sg232
+p10969
+sg228
 VGee, Kelsey
-p10972
-sg234
+p10970
+sg230
 VCalifornia Bad Beef Case: Four Indicted
-p10973
-sa(dp10974
-g228
+p10971
+sa(dp10972
+g224
 g25
-sg230
+sg226
 VUnited States Justice Department
-p10975
-sg232
-g25
-sg234
-VGrand Jury Indictment
-p10976
-sa(dp10977
-g228
+p10973
+sg228
 g25
 sg230
-VFood Safety News
-p10978
-sg232
+VGrand Jury Indictment
+p10974
+sa(dp10975
+g224
 g25
-sg234
+sg226
+VFood Safety News
+p10976
+sg228
+g25
+sg230
 VStores in 45 States, Guam, Puerto Rico Affected by Expanding Rancho Beef Recall
-p10979
-sasg245
+p10977
+sasg241
 VIntentional Distribution of Contaminated Product
+p10978
+sg243
+V2014
+p10979
+sg245
+VNorth America, United States, Washington; North America, United States, Oregon; North America, United States, California; North America, United States, Idaho; North America, United States, Nevada; North America, United States, Arizona; North America, United States, Utah; North America, United States, Montana; North America, United States, Wyoming; North America, United States, Colorado; North America, United States, New Mexico; North America, United States, North Dakota; North America, United States, South Dakota; North America, United States, Nebraska; North America, United States, Kansas; North America, United States, Oklahoma; North America, United States, Texas; North America, United States, Minnesota; North America, United States, Iowa; North America, United States, Missouri; North America, United States, Arkansas; North America, United States, Louisiana; North America, United States, Wisconsin; North America, United States, Illinois; North America, United States, Michigan; North America, United States, Indiana; North America, United States, Kentucky; North America, United States, Tennessee; North America, United States, Mississippi; North America, United States, Ohio; North America, United States, Alabama; North America, United States, Georgia; North America, United States, Florida; North America, United States, South Carolina; North America, United States, North Carolina; North America, United States, Virginia; North America, United States, Maryland; North America, United States, Delaware; North America, United States, New Jersey; North America, United States, Pennsylvania; North America, United States, New York; North America, United States, Vermont; North America, United States, New Hampshire; Oceania, Guam; Central America and the Caribbean, Puerto Rico; North America, United States; North America, United States, Alaska; North America, United States, Hawaii
 p10980
 sg247
-VNorth America, United States, Washington; North America, United States, Oregon; North America, United States, California; North America, United States, Idaho; North America, United States, Nevada; North America, United States, Arizona; North America, United States, Utah; North America, United States, Montana; North America, United States, Wyoming; North America, United States, Colorado; North America, United States, New Mexico; North America, United States, North Dakota; North America, United States, South Dakota; North America, United States, Nebraska; North America, United States, Kansas; North America, United States, Oklahoma; North America, United States, Texas; North America, United States, Minnesota; North America, United States, Iowa; North America, United States, Missouri; North America, United States, Arkansas; North America, United States, Louisiana; North America, United States, Wisconsin; North America, United States, Illinois; North America, United States, Michigan; North America, United States, Indiana; North America, United States, Kentucky; North America, United States, Tennessee; North America, United States, Mississippi; North America, United States, Ohio; North America, United States, Alabama; North America, United States, Georgia; North America, United States, Florida; North America, United States, South Carolina; North America, United States, North Carolina; North America, United States, Virginia; North America, United States, Maryland; North America, United States, Delaware; North America, United States, New Jersey; North America, United States, Pennsylvania; North America, United States, New York; North America, United States, Vermont; North America, United States, New Hampshire; Oceania, Guam; Central America and the Caribbean, Puerto Rico; North America, United States; North America, United States, Alaska; North America, United States, Hawaii
-p10981
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef; Hot pockets; Whole beef carcass
+p10981
+sg250
+VUnknown
 p10982
 sg252
-VEmployees at Rancho Feeding Corporation, a slaughterhouse in California, were charged with knowingly processing and distributing meat from diseased cattle. The incident resulted in a recall of over 8.7 million pounds of beef, including both whole carcasses and beef products. The recall affected stores in 45 states, Washington, DC., Guam and Puerto Rico. Stores affected include 7-11, Albertsons, Family Dollar, Kroger, Piggly-Wiggly, Walgreens, Target, Chevron, Food 4 Less, Rite Aide, Safeway, and Wal-mart. The meat was used in packaged foods including Nestle\u2019s Hot Pockets. The incident involved four employees who allegedly developed a scheme to bypass USDA inspectors. The slaughterhouse first purchased less expensive cattle that exhibited signs of eye disease. Many of these cattle were determined to be unfit for human consumption due to illness and were labeled as \u201cUSDA condemned\u201d by USDA inspectors. Employees involved in the scheme removed the \u201cUSDA condemned\u201d stamps from the cattle carcasses and moved forward with processing the cattle for sale and distribution. Another approach involved tampering with post-mortem inspections. Employees would place heads from healthy cows and place those next to the carcasses of unhealthy cows so that USDA inspectors were not aware that they were inspecting the carcass of a cow that did not pass an ante-mortem inspection. The incident was uncovered after the USDA determined that some products had not been properly inspected.
+V2012
 p10983
 ssV505
 p10984
@@ -31769,124 +31769,124 @@ sg205
 VEastern Europe, Russia
 p11141
 sg207
-VUnknown
+Vchicken; horse meat; lamb; pork
 p11142
 sg209
-Vchicken; horse meat; lamb; pork
+V6
 p11143
 sg211
-V6
+Vunknown
 p11144
 sg213
-Vunknown
+VMeat Products
 p11145
 sg215
-VMeat Products
+VAccording to Russian food regulator Rosselkhoznadzor, 15 out of 17 samples of ground pork and ground beef sold in Auchan, one of the largest food retailers in Russia, were found to be diluted. DNA analysis revealed that the samples of ground beef contained unreported pork, lamb, and chicken; the samples of ground pork were diluted with lamb, chicken, and beef. Testing of pork samples also detected the presence of horse DNA. Auchan representatives claimed that not all of the meat sold was produced and packaged by Auchan and indicated they were awaiting more details from Rosselkhoznadzor.
 p11146
 sg217
-VUnknown
-p11147
+g218
 sg219
-g220
-sg221
-V2015
-p11148
-sg223
 VAuchan
-p11149
-sg225
-(lp11150
-(dp11151
-g228
+p11147
+sg221
+(lp11148
+(dp11149
+g224
 V2015-08-07
+p11150
+sg226
+VGlobalMeatNews.com
+p11151
+sg228
+VMichelle Perrett
 p11152
 sg230
-VGlobalMeatNews.com
-p11153
-sg232
-VMichelle Perrett
-p11154
-sg234
 VAuchan responds to Russia food fraud case
-p11155
-sa(dp11156
-g228
+p11153
+sa(dp11154
+g224
 V2015-08-04
+p11155
+sg226
+V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440
+p11156
+sg228
+VUnknown
 p11157
 sg230
-V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440
-p11158
-sg232
-VUnknown
-p11159
-sg234
 V\u041e \u0432\u044b\u044f\u0432\u043b\u0435\u043d\u0438\u0438 \u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440\u043e\u043c \u0447\u0443\u0436\u0435\u0440\u043e\u0434\u043d\u043e\u0439 \u0414\u041d\u041a \u0432 \u0441\u0432\u0438\u043d\u043e\u043c \u0444\u0430\u0440\u0448\u0435 \u0442\u043e\u0440\u0433\u043e\u0432\u043e\u0439 \u0441\u0435\u0442\u0438 «\u0410\u0448\u0430\u043d»
-p11160
-sa(dp11161
-g228
+p11158
+sa(dp11159
+g224
 V2015-08-04
+p11160
+sg226
+V\u0420\u0411\u041a
+p11161
+sg228
+V\u041d\u0430\u0441\u0442\u044f \u0411\u0435\u0440\u0435\u0437\u0438\u043d\u0430
 p11162
 sg230
-V\u0420\u0411\u041a
-p11163
-sg232
-V\u041d\u0430\u0441\u0442\u044f \u0411\u0435\u0440\u0435\u0437\u0438\u043d\u0430
-p11164
-sg234
 V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440 \u043d\u0430\u0448\u0435\u043b \u0414\u041d\u041a \u043b\u043e\u0448\u0430\u0434\u0438 \u0432 \u0441\u0432\u0438\u043d\u043e\u043c \u0444\u0430\u0440\u0448\u0435 \u0438\u0437 «\u0410\u0448\u0430\u043d\u0430»
-p11165
-sa(dp11166
-g228
+p11163
+sa(dp11164
+g224
 V2015-08-04
+p11165
+sg226
+V\u0422\u0410\u0421\u0421
+p11166
+sg228
+VUnknown
 p11167
 sg230
-V\u0422\u0410\u0421\u0421
-p11168
-sg232
-VUnknown
-p11169
-sg234
 V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440 \u0432\u044b\u044f\u0432\u0438\u043b \u0432 \u0441\u0432\u0438\u043d\u043e\u043c \u0444\u0430\u0440\u0448\u0435 \u0438\u0437 "\u0410\u0448\u0430\u043d\u0430" \u0414\u041d\u041a \u043b\u043e\u0448\u0430\u0434\u0438
-p11170
-sa(dp11171
-g228
+p11168
+sa(dp11169
+g224
 V2015-08-04
+p11170
+sg226
+VInterfax
+p11171
+sg228
+VUnknown
 p11172
 sg230
-VInterfax
-p11173
-sg232
-VUnknown
-p11174
-sg234
 V\u041f\u043e\u0447\u0442\u0438 \u0432 90% \u043c\u044f\u0441\u043d\u043e\u0439 \u043f\u0440\u043e\u0434\u0443\u043a\u0446\u0438\u0438 \u0438\u0437 "\u0410\u0448\u0430\u043d\u0430" \u043e\u0431\u043d\u0430\u0440\u0443\u0436\u0435\u043d\u044b \u0447\u0443\u0436\u0435\u0440\u043e\u0434\u043d\u044b\u0435 \u0414\u041d\u041a
-p11175
-sa(dp11176
-g228
+p11173
+sa(dp11174
+g224
 V2015-08-04
+p11175
+sg226
+V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440
+p11176
+sg228
+VUnknown
 p11177
 sg230
-V\u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440
-p11178
-sg232
-VUnknown
-p11179
-sg234
 V\u041e \u0432\u044b\u044f\u0432\u043b\u0435\u043d\u0438\u0438 \u0444\u0430\u043b\u044c\u0441\u0438\u0444\u0438\u0446\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u043e\u0439 \u043f\u0440\u043e\u0434\u0443\u043a\u0446\u0438\u0438 \u0432 \u0440\u0430\u043c\u043a\u0430\u0445 \u043f\u0440\u043e\u0432\u0435\u0434\u0435\u043d\u043e\u0439 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442\u0430\u043c\u0438 \u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0420\u043e\u0441\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u0430\u0434\u0437\u043e\u0440\u0430 \u043f\u043e \u0433\u043e\u0440\u043e\u0434\u0443 \u041c\u043e\u0441\u043a\u0432\u0430, \u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u043e\u0439 \u0438 \u0422\u0443\u043b\u044c\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u044f\u043c \u0432\u043d\u0435\u043f\u043b\u0430\u043d\u043e\u0432\u043e\u0439 \u0432\u044b\u0435\u0437\u0434\u043d\u043e\u0439 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u041e\u041e\u041e «\u0410\u0428\u0410\u041d»
-p11180
-sasg245
+p11178
+sasg241
 VDilution
+p11179
+sg243
+V2015
+p11180
+sg245
+VEastern Europe, Russia
 p11181
 sg247
-VEastern Europe, Russia
-p11182
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef; pork
+p11182
+sg250
+VUnknown
 p11183
 sg252
-VAccording to Russian food regulator Rosselkhoznadzor, 15 out of 17 samples of ground pork and ground beef sold in Auchan, one of the largest food retailers in Russia, were found to be diluted. DNA analysis revealed that the samples of ground beef contained unreported pork, lamb, and chicken; the samples of ground pork were diluted with lamb, chicken, and beef. Testing of pork samples also detected the presence of horse DNA. Auchan representatives claimed that not all of the meat sold was produced and packaged by Auchan and indicated they were awaiting more details from Rosselkhoznadzor.
+VUnknown
 p11184
 ssV632
 p11185
@@ -31901,58 +31901,58 @@ sg205
 VEast Asia, China
 p11189
 sg207
-VUnknown
+Vchemicals; chicken; pig's blood; pork
 p11190
 sg209
-Vchemicals; chicken; pig's blood; pork
-p11191
+g3739
 sg211
-g3740
-sg213
 Vindividual actors; Su Cheng Foodstuffs Co.
+p11191
+sg213
+VMeat Products
 p11192
 sg215
-VMeat Products
+VIn China, Su Cheng Foodstuffs Co. was accused in using chemicals and pig's blood to make chicken and pork look like beef. The investigation was triggered by a purchase made by a police officer. According to his report, the beef he bought was not overly cheaper than other beef sold on the market but was very salty and very tender compared to usual beef. Experts suggest that such substitution is done to earn higher profits.
 p11193
 sg217
-VSome of the additives used for substitution of beef may be carcinogenic
-p11194
+g218
 sg219
-g220
-sg221
-V2015
-p11195
-sg223
 Vunknonw; unknown
-p11196
-sg225
-(lp11197
-(dp11198
-g228
+p11194
+sg221
+(lp11195
+(dp11196
+g224
 V2015-07-06
+p11197
+sg226
+VGlobalMeatNews.com
+p11198
+sg228
+VMark Godfrey
 p11199
 sg230
-VGlobalMeatNews.com
-p11200
-sg232
-VMark Godfrey
-p11201
-sg234
 VSu Cheng Foodstuffs investigated over food fraud
-p11202
-sasg245
+p11200
+sasg241
 VSubstitution
+p11201
+sg243
+V2015
+p11202
+sg245
+VEast Asia, China
 p11203
 sg247
-VEast Asia, China
-p11204
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef
+p11204
+sg250
+VSome of the additives used for substitution of beef may be carcinogenic
 p11205
 sg252
-VIn China, Su Cheng Foodstuffs Co. was accused in using chemicals and pig's blood to make chicken and pork look like beef. The investigation was triggered by a purchase made by a police officer. According to his report, the beef he bought was not overly cheaper than other beef sold on the market but was very salty and very tender compared to usual beef. Experts suggest that such substitution is done to earn higher profits.
+VUnknown
 p11206
 ssV634
 p11207
@@ -32558,71 +32558,71 @@ sg205
 VSouth America, Brazil
 p11418
 sg207
-V2013
+VSmuggled beef
 p11419
 sg209
-VSmuggled beef
-p11420
+g1013
 sg211
-g1014
-sg213
 Vindividual actors
+p11420
+sg213
+VMeat Products
 p11421
 sg215
-VMeat Products
+VBrazilian beef was smuggled into China and sold to Chinese consumers during a ban on Brazilian beef imports. China banned beef imports from Brazil due to cases of Bovine spongiform encephalopathy (BSE) in Brazil. Police identified eight \u201cbeef-trafficking rings\u201d that sold smuggled beef below the price of local beef which attracted many local buyers. The perpetrators sold locally produced beef at markets while hiding the smuggled beef in warehouses and only sold the smuggled beef through special orders. It is not clear if all end consumers were aware of the origin of the product. The adulteration was detected following a tip-off about beef from \u201cquestionable sources\u201d being sold a below market prices.
 p11422
 sg217
-VUnknown.
-p11423
+g218
 sg219
-g220
-sg221
-V2014
-p11424
-sg223
 Vunknown
-p11425
-sg225
-(lp11426
-(dp11427
-g228
+p11423
+sg221
+(lp11424
+(dp11425
+g224
 V2014-12-03
+p11426
+sg226
+VFood Navigator Asia
+p11427
+sg228
+VWhitehead, RJ
 p11428
 sg230
-VFood Navigator Asia
-p11429
-sg232
-VWhitehead, RJ
-p11430
-sg234
 V27 arrested for smuggling beef that had been banned amid BSE scare
-p11431
-sa(dp11432
-g228
+p11429
+sa(dp11430
+g224
 V2014-12-01
+p11431
+sg226
+VSouth China Morning Post
+p11432
+sg228
+VWan, Adrian
 p11433
 sg230
-VSouth China Morning Post
-p11434
-sg232
-VWan, Adrian
-p11435
-sg234
 VJiangsu police nab 27 for smuggling beef from Brazil
-p11436
-sasg245
+p11434
+sasg241
 VTransshipment/Origin Masking
+p11435
+sg243
+V2014
+p11436
+sg245
+VEast Asia, China
 p11437
 sg247
-VEast Asia, China
-p11438
-sg249
-g220
-sg250
+g218
+sg248
 Vbeef
+p11438
+sg250
+VUnknown.
 p11439
 sg252
-VBrazilian beef was smuggled into China and sold to Chinese consumers during a ban on Brazilian beef imports. China banned beef imports from Brazil due to cases of Bovine spongiform encephalopathy (BSE) in Brazil. Police identified eight \u201cbeef-trafficking rings\u201d that sold smuggled beef below the price of local beef which attracted many local buyers. The perpetrators sold locally produced beef at markets while hiding the smuggled beef in warehouses and only sold the smuggled beef through special orders. It is not clear if all end consumers were aware of the origin of the product. The adulteration was detected following a tip-off about beef from \u201cquestionable sources\u201d being sold a below market prices.
+V2013
 p11440
 ssV463
 p11441
@@ -33648,84 +33648,84 @@ sg205
 VWestern Europe, United Kingdom
 p11788
 sg207
-VUnknown
+VBeef; chicken
 p11789
 sg209
-VBeef; chicken
-p11790
+g210
 sg211
-g212
-sg213
 VManchester Superstore Ltd
+p11790
+sg213
+VMeat Products
 p11791
 sg215
-VMeat Products
+VThe incident was discovered after a sample of "lamb" taken from a takeout restaurant was found to contain 28% beef. Further investigation of the incident led to a meat supplier who was selling diluted lamb. In June, 2014, testing conducted on the ground lamb supplied by the supplier in question revealed that only 20% of the sample was lamb while the remaining 80% was beef. Despite the warnings, the supplier continued to sell adulterated product which was confirmed by another round of testing in August 2015. Samples taken during the second round of testing contained 50% beef and 1% chicken. The supermarket was fined £20,000 for ignoring the warnings about the quality of the minced lamb and for selling the ground beef, which typically costs only half of the price of ground lamb, as genuine minced lamb.
 p11792
 sg217
-VUnknown
-p11793
+g218
 sg219
-g220
-sg221
-V2014
-p11794
-sg223
 Vunknown
-p11795
-sg225
-(lp11796
-(dp11797
-g228
+p11793
+sg221
+(lp11794
+(dp11795
+g224
 V2015-08-29
+p11796
+sg226
+VManchester Evening News
+p11797
+sg228
+VJohn Scheerhout
 p11798
 sg230
-VManchester Evening News
-p11799
-sg232
-VJohn Scheerhout
-p11800
-sg234
 VCurry Mile superstore fined for selling 'lamb' mince made almost entirely with beef
-p11801
-sa(dp11802
-g228
+p11799
+sa(dp11800
+g224
 V2015-08-31
+p11801
+sg226
+VMirror
+p11802
+sg228
+VJohn Scheerhout
 p11803
 sg230
-VMirror
-p11804
-sg232
-VJohn Scheerhout
-p11805
-sg234
 VMost read Top Videos News Politics Football Sport Celebs TV & Film Weird News TRENDINGCALAIS MIGRANT CRISISREVENGE PORNNEXT LABOUR LEADERISISUK WEATHER Technology Money Travel Fashion Mums Home News UK News Crime Supermarket supplying takeaways and restau
-p11806
-sa(dp11807
-g228
+p11804
+sa(dp11805
+g224
 V2015-09-01
+p11806
+sg226
+VMancunian Matters
+p11807
+sg228
+VAndrew Greaves
 p11808
 sg230
-VMancunian Matters
-p11809
-sg232
-VAndrew Greaves
-p11810
-sg234
 VBogus meat: Manchester supermarket slapped with £20k fine after selling lamb mince bulked out with beef
-p11811
-sasg245
+p11809
+sasg241
 VDilution
+p11810
+sg243
+V2014
+p11811
+sg245
+VWestern Europe, United Kingdom
 p11812
 sg247
-VWestern Europe, United Kingdom
-p11813
-sg249
-g220
-sg250
+g218
+sg248
 Vground lamb
+p11813
+sg250
+VUnknown
 p11814
 sg252
-VThe incident was discovered after a sample of "lamb" taken from a takeout restaurant was found to contain 28% beef. Further investigation of the incident led to a meat supplier who was selling diluted lamb. In June, 2014, testing conducted on the ground lamb supplied by the supplier in question revealed that only 20% of the sample was lamb while the remaining 80% was beef. Despite the warnings, the supplier continued to sell adulterated product which was confirmed by another round of testing in August 2015. Samples taken during the second round of testing contained 50% beef and 1% chicken. The supermarket was fined £20,000 for ignoring the warnings about the quality of the minced lamb and for selling the ground beef, which typically costs only half of the price of ground lamb, as genuine minced lamb.
+VUnknown
 p11815
 ssV433
 p11816
@@ -33740,84 +33740,84 @@ sg205
 VEast Asia, China
 p11820
 sg207
-VUnknown
+VFox Meat
 p11821
 sg209
-VFox Meat
-p11822
+g1013
 sg211
-g1014
-sg213
 Vunknown
+p11822
+sg213
+VMeat Products
 p11823
 sg215
-VMeat Products
+VFox meat was added to donkey meat in China. The donkey meat was sold in Walmart chains across China and the meat was supplied by an unnamed meat supplier. It was not clear what incentive existed to adulterate the donkey meat with fox meat. The incident was detected after tests performed by the Shandong provincial Food and Drug Administration detected fox DNA in the product.
 p11824
 sg217
-VUnknown.
-p11825
+g218
 sg219
-g220
-sg221
-V2014
-p11826
-sg223
 VWalmart
-p11827
-sg225
-(lp11828
-(dp11829
-g228
+p11825
+sg221
+(lp11826
+(dp11827
+g224
 V2014-01-02
+p11828
+sg226
+VNBC News
+p11829
+sg228
+VJourdan, Adam
 p11830
 sg230
-VNBC News
-p11831
-sg232
-VJourdan, Adam
-p11832
-sg234
 VWal-Mart recalls 'Five Spice' donkey meat in China after tests reveal fox
-p11833
-sa(dp11834
-g228
+p11831
+sa(dp11832
+g224
 V2014-01-02
+p11833
+sg226
+VBBC News
+p11834
+sg228
+VAnonymous
 p11835
 sg230
-VBBC News
-p11836
-sg232
-VAnonymous
-p11837
-sg234
 VWal-Mart recalls donkey meat in China
-p11838
-sa(dp11839
-g228
+p11836
+sa(dp11837
+g224
 V2014-01-02
+p11838
+sg226
+VWall Street Journal
+p11839
+sg228
+VBurkitt, Laurie
 p11840
 sg230
-VWall Street Journal
-p11841
-sg232
-VBurkitt, Laurie
-p11842
-sg234
 VWal-Mart Recalls Donkey Meat in China
-p11843
-sasg245
+p11841
+sasg241
 VDilution
+p11842
+sg243
+V2014
+p11843
+sg245
+VEast Asia, China
 p11844
 sg247
-VEast Asia, China
-p11845
-sg249
-g220
-sg250
+g218
+sg248
 VDonkey Meat
+p11845
+sg250
+VUnknown.
 p11846
 sg252
-VFox meat was added to donkey meat in China. The donkey meat was sold in Walmart chains across China and the meat was supplied by an unnamed meat supplier. It was not clear what incentive existed to adulterate the donkey meat with fox meat. The incident was detected after tests performed by the Shandong provincial Food and Drug Administration detected fox DNA in the product.
+VUnknown
 p11847
 ssV357
 p11848
@@ -33898,57 +33898,57 @@ sg205
 VNorth America, United States, Nebraska
 p11874
 sg207
-VUnknown
+VBacon; Beef Jerky; Venison
 p11875
 sg209
-VBacon; Beef Jerky; Venison
-p11876
+g3739
 sg211
-g3740
-sg213
 VInc.; individual actor; Romans II
+p11876
+sg213
+VMeat Products
 p11877
 sg215
-VMeat Products
+VA meat processing company in Nebraska mislabeled hundreds of pounds of sausages, beef jerky, and deer meat products. The meat products in question were all labeled "ground pork" and also labeled as inspected by the USDA, but had not actually undergone USDA inspection. It is not clear if any mislabeled meat products were actually sold to consumers. The mislabeled meat was found during an inspection by the USDA and the incident was traced back to an individual employee.
 p11878
 sg217
-VUnknown.
-p11879
+g218
 sg219
-g220
-sg221
-V2012
-p11880
-sg223
 Vunknown
-p11881
-sg225
-(lp11882
-(dp11883
-g228
+p11879
+sg221
+(lp11880
+(dp11881
+g224
 V2013-07-31
-p11884
-sg230
+p11882
+sg226
 Vfoodsafetynews.com
-p11885
-sg232
+p11883
+sg228
 g25
-sg234
+sg230
 VNebraska Man Gets Probation for Mislabeling Meat
-p11886
-sasg245
+p11884
+sasg241
 VMislabeling
+p11885
+sg243
+V2012
+p11886
+sg245
+VNorth America, United States, Nebraska
 p11887
 sg247
-VNorth America, United States, Nebraska
-p11888
-sg249
-g220
-sg250
+g218
+sg248
 VGround Pork
+p11888
+sg250
+VUnknown.
 p11889
 sg252
-VA meat processing company in Nebraska mislabeled hundreds of pounds of sausages, beef jerky, and deer meat products. The meat products in question were all labeled "ground pork" and also labeled as inspected by the USDA, but had not actually undergone USDA inspection. It is not clear if any mislabeled meat products were actually sold to consumers. The mislabeled meat was found during an inspection by the USDA and the incident was traced back to an individual employee.
+VUnknown
 p11890
 ssV354
 p11891
@@ -35293,58 +35293,58 @@ sg205
 VUnited States
 p12349
 sg207
-V2014
+Vadditional meat species
 p12350
 sg209
-Vadditional meat species
-p12351
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p12351
+sg213
+VMeat Products
 p12352
 sg215
-VMeat Products
+VThe purpose of this study was to perform a market survey to identify species in game meats sold within the United States using DNA barcoding. They found that ten out of 54 commercial game meat products tested in the study were inaccurately mislabeled. One product was identified as a vulnerable species but was legally sold and four products were identified as near threatened species but were legally sold. The conclusion of the research suggests that over half of species substitutions may have been economically motivated.
 p12353
 sg217
-VUnknown
-p12354
+g218
 sg219
-g220
-sg221
-V2015
-p12355
-sg223
 Vunknown
-p12356
-sg225
-(lp12357
-(dp12358
-g228
+p12354
+sg221
+(lp12355
+(dp12356
+g224
 V2015-05-20
+p12357
+sg226
+VFood Control
+p12358
+sg228
+VCharles A. Quinto, Rebecca Tinoco, Rosalee S. Hellberg
 p12359
 sg230
-VFood Control
-p12360
-sg232
-VCharles A. Quinto, Rebecca Tinoco, Rosalee S. Hellberg
-p12361
-sg234
 VDNA Barcoding Reveals Mislabeling of Game Meat Species on the U.S. Commercial Market
-p12362
-sasg245
+p12360
+sasg241
 VDilution
+p12361
+sg243
+V2015
+p12362
+sg245
+VUnited States
 p12363
 sg247
-VUnited States
-p12364
-sg249
-g220
-sg250
+g218
+sg248
 VGame Meats
+p12364
+sg250
+VUnknown
 p12365
 sg252
-VThe purpose of this study was to perform a market survey to identify species in game meats sold within the United States using DNA barcoding. They found that ten out of 54 commercial game meat products tested in the study were inaccurately mislabeled. One product was identified as a vulnerable species but was legally sold and four products were identified as near threatened species but were legally sold. The conclusion of the research suggests that over half of species substitutions may have been economically motivated.
+V2014
 p12366
 ssV674
 p12367
@@ -35620,58 +35620,58 @@ sg205
 VUnited States
 p12460
 sg207
-VUnknown
+Vadditional meat species; horse meat; lower cost meats
 p12461
 sg209
-Vadditional meat species; horse meat; lower cost meats
-p12462
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p12462
+sg213
+VMeat Products
 p12463
 sg215
-VMeat Products
+VIn this study, ten out of 48 ground meat products tested were mislabeled. A total of nine products contained additional species (usually lower-cost) not listed on the label. Interestingly, online specialty meat distributors had the highest rate of mislabeled products on the commercial market. Whereas, local supermarkets had the lowest rate of mislabeled products. Horsemeat, which is illegal to sell in the U.S. was detected in two of the samples acquired from online specialty meat distributors. Overall, the mislabelling detected in this study appears to be due to either intentional mixing of lower-cost meat species into higher cost products or unintentional mixing of meat species due to cross-contamination during processing.
 p12464
 sg217
-VThe presence additional species in products labeled as only containing one species is concerning for individuals that are intentionally avoiding these species due to a meat allergy. While meat allergies are uncommon, they can have serious health consequences, such as hives, asthma or even anaphylactic shock.
-p12465
+g218
 sg219
-g220
-sg221
-V2015
-p12466
-sg223
 Vunknown
-p12467
-sg225
-(lp12468
-(dp12469
-g228
+p12465
+sg221
+(lp12466
+(dp12467
+g224
 V2015-05-19
+p12468
+sg226
+VScience Direct
+p12469
+sg228
+VDawn E. Kane and Rosalee S. Hellberg
 p12470
 sg230
-VScience Direct
-p12471
-sg232
-VDawn E. Kane and Rosalee S. Hellberg
-p12472
-sg234
 VIdentification of species in ground meat products sold on the U.S. commercial market using DNA-based methods
-p12473
-sasg245
+p12471
+sasg241
 VDilution
+p12472
+sg243
+V2015
+p12473
+sg245
+VUnited States
 p12474
 sg247
-VUnited States
-p12475
-sg249
-g220
-sg250
+g218
+sg248
 VMeat products; Meat products
+p12475
+sg250
+VThe presence additional species in products labeled as only containing one species is concerning for individuals that are intentionally avoiding these species due to a meat allergy. While meat allergies are uncommon, they can have serious health consequences, such as hives, asthma or even anaphylactic shock.
 p12476
 sg252
-VIn this study, ten out of 48 ground meat products tested were mislabeled. A total of nine products contained additional species (usually lower-cost) not listed on the label. Interestingly, online specialty meat distributors had the highest rate of mislabeled products on the commercial market. Whereas, local supermarkets had the lowest rate of mislabeled products. Horsemeat, which is illegal to sell in the U.S. was detected in two of the samples acquired from online specialty meat distributors. Overall, the mislabelling detected in this study appears to be due to either intentional mixing of lower-cost meat species into higher cost products or unintentional mixing of meat species due to cross-contamination during processing.
+VUnknown
 p12477
 ssV670
 p12478
@@ -36859,58 +36859,58 @@ sg205
 VWestern Europe, Netherlands
 p12879
 sg207
-VUnknown
+Vturkey meat
 p12880
 sg209
-Vturkey meat
-p12881
+g3739
 sg211
-g3740
-sg213
 Vindividual actors
+p12881
+sg213
+VMeat Products
 p12882
 sg215
-VMeat Products
+VAccording to a study done by the KRO television program Keuringsdienst van Waarde, four out of 10 bought samples of lamb were not lamb at all. In fact, the four samples appeared to be turkey meat, which is much cheaper than ham. Economic profit that butchers can make by selling the substituted meat is the primary incentive for this adulteration.
 p12883
 sg217
-VUnknown
-p12884
+g218
 sg219
-g220
-sg221
-V2015
-p12885
-sg223
 Vunknown
-p12886
-sg225
-(lp12887
-(dp12888
-g228
+p12884
+sg221
+(lp12885
+(dp12886
+g224
 V2015-04-16
+p12887
+sg226
+VNlTImes.nl
+p12888
+sg228
+VJanene Van Jaarsveldt
 p12889
 sg230
-VNlTImes.nl
-p12890
-sg232
-VJanene Van Jaarsveldt
-p12891
-sg234
 VTurkey Sold as Lamb Meat Latest Dutch Food Fraud Case
-p12892
-sasg245
+p12890
+sasg241
 VSubstitution
+p12891
+sg243
+V2015
+p12892
+sg245
+VWestern Europe, Netherlands
 p12893
 sg247
-VWestern Europe, Netherlands
-p12894
-sg249
-g220
-sg250
+g218
+sg248
 Vlamb
+p12894
+sg250
+VUnknown
 p12895
 sg252
-VAccording to a study done by the KRO television program Keuringsdienst van Waarde, four out of 10 bought samples of lamb were not lamb at all. In fact, the four samples appeared to be turkey meat, which is much cheaper than ham. Economic profit that butchers can make by selling the substituted meat is the primary incentive for this adulteration.
+VUnknown
 p12896
 ssV531
 p12897
@@ -37792,84 +37792,84 @@ sg205
 VEastern Europe, Bulgaria
 p13200
 sg207
-V2013
+Vhorse meat
 p13201
 sg209
-Vhorse meat
-p13202
+g210
 sg211
-g212
-sg213
 VAktual; Expo Foods Limited
+p13202
+sg213
+VMeat Products
 p13203
 sg215
-VMeat Products
+VSpecialty pork sausage sold in a United Kingdom convenience store was found to contain 46 percent horse meat. The Bulgarian sausage known as Lukana Chumerna was imported from meat producers in Bulgaria. It is believed that the ethnic food supplier that sold the sausage to the convenience store had not properly vetted the meat producer in Bulgaria. The incident was discovered after an informal test was performed on the product by a county trading standards council.
 p13204
 sg217
-VUnknown.
-p13205
+g218
 sg219
-g220
-sg221
-V2014
-p13206
-sg223
 VLondis
-p13207
-sg225
-(lp13208
-(dp13209
-g228
+p13205
+sg221
+(lp13206
+(dp13207
+g224
 V2014-10-03
+p13208
+sg226
+VNews Shopper
+p13209
+sg228
+VTIm MacFarlan
 p13210
 sg230
-VNews Shopper
-p13211
-sg232
-VTIm MacFarlan
-p13212
-sg234
 VDartford Londis supplier Expo Foods fined after horsemeat found in Bulgarian salami
-p13213
-sa(dp13214
-g228
+p13211
+sa(dp13212
+g224
 V2014-10-03
+p13213
+sg226
+VThe Telegraph
+p13214
+sg228
+VClaire Carter
 p13215
 sg230
-VThe Telegraph
-p13216
-sg232
-VClaire Carter
-p13217
-sg234
 VPork sausage sold in Londis store is 50 per cent horse meat
-p13218
-sa(dp13219
-g228
+p13216
+sa(dp13217
+g224
 V2014-10-03
+p13218
+sg226
+VDaily Mail
+p13219
+sg228
+VAlex Finnis
 p13220
 sg230
-VDaily Mail
-p13221
-sg232
-VAlex Finnis
-p13222
-sg234
 VPork sausage sold in Londis store was found to contain 46% horse meat
-p13223
-sasg245
+p13221
+sasg241
 VDilution
+p13222
+sg243
+V2014
+p13223
+sg245
+VWestern Europe, United Kingdom
 p13224
 sg247
-VWestern Europe, United Kingdom
-p13225
-sg249
-g220
-sg250
+g218
+sg248
 VLukanka Chumerna; sausage
+p13225
+sg250
+VUnknown.
 p13226
 sg252
-VSpecialty pork sausage sold in a United Kingdom convenience store was found to contain 46 percent horse meat. The Bulgarian sausage known as Lukana Chumerna was imported from meat producers in Bulgaria. It is believed that the ethnic food supplier that sold the sausage to the convenience store had not properly vetted the meat producer in Bulgaria. The incident was discovered after an informal test was performed on the product by a county trading standards council.
+V2013
 p13227
 ssV421
 p13228
@@ -38525,110 +38525,110 @@ sg205
 VNorth America, United States, Iowa
 p13457
 sg207
-V2007
+VNon-Halal beef
 p13458
 sg209
-VNon-Halal beef
-p13459
+g1299
 sg211
-g1300
-sg213
 VMidamar Corporation
+p13459
+sg213
+VMeat Products
 p13460
 sg215
-VMeat Products
+VAn Iowa beef producer, Midamar Corporation, was charged with selling non-Halal beef products labeled as Halal to consumers in Malaysia and Indonesia. The owner of Midamar Corporation also operated Islamic Services of America (ISA) to certify food products as Halal. ISA was one of only a few organizations approved by Malaysia and Indonesia to certify Halal beef imports. Midamar Corporation accepted orders for Halal beef from overseas consumers and then fulfilled these orders with beef products from a slaughter and production facility that was not certified by Malaysia and Indonesia for export. The USDA establishment number and labels from the original facility were removed and replaced with the Midamar Corporation USDA establishment number. False export certificates were also used. A former employee also testified that the producer substituted Kosher beef for Halal beef without involving Muslim experts in Halal slaughter practices. A USDA and Internal Revenue Service investigation led to the discovery of the incident.
 p13461
 sg217
-VUnknown.
-p13462
+g218
 sg219
-g220
-sg221
-V2014
-p13463
-sg223
 Vunknown
-p13464
-sg225
-(lp13465
-(dp13466
-g228
+p13462
+sg221
+(lp13463
+(dp13464
+g224
 V2014-10-28
+p13465
+sg226
+VFood Safety News
+p13466
+sg228
+VDan Flynn
 p13467
 sg230
-VFood Safety News
-p13468
-sg232
-VDan Flynn
-p13469
-sg234
 VIowa Beef Producer Charged With Falsifying Halal Shipments
-p13470
-sa(dp13471
-g228
+p13468
+sa(dp13469
+g224
 V2014-10-24
+p13470
+sg226
+VThe Gazette
+p13471
+sg228
+VTrish Mehaffey
 p13472
 sg230
-VThe Gazette
-p13473
-sg232
-VTrish Mehaffey
-p13474
-sg234
 VMidamar founder charged in \u2018Halal\u2019 beef export scheme
-p13475
-sa(dp13476
-g228
+p13473
+sa(dp13474
+g224
 V2015-01-09
+p13475
+sg226
+VFood Safety News
+p13476
+sg228
+VUnknown
 p13477
 sg230
-VFood Safety News
-p13478
-sg232
-VUnknown
-p13479
-sg234
 VEx-Midamar Operations Manager Will Testify Against Former Employers
-p13480
-sa(dp13481
-g228
+p13478
+sa(dp13479
+g224
 V0215-02-18
+p13480
+sg226
+VFood Safety News
+p13481
+sg228
+VDan Flynn
 p13482
 sg230
-VFood Safety News
-p13483
-sg232
-VDan Flynn
-p13484
-sg234
 VFounder of Iowa\u2019s \u2018Halal\u2019 Beef-Exporting Businesses Gets Trial Postponed
-p13485
-sa(dp13486
-g228
+p13483
+sa(dp13484
+g224
 V2015-07-13
+p13485
+sg226
+VFood Safety News
+p13486
+sg228
+VDan Flynn
 p13487
 sg230
-VFood Safety News
-p13488
-sg232
-VDan Flynn
-p13489
-sg234
 VJury Finds Aossey Guilty of 15 Counts in Exporting Scheme
-p13490
-sasg245
+p13488
+sasg241
 VMislabeling
+p13489
+sg243
+V2014
+p13490
+sg245
+VSoutheast Asia, Indonesia; Southeast Asia, Malaysia
 p13491
 sg247
-VSoutheast Asia, Indonesia; Southeast Asia, Malaysia
-p13492
-sg249
-g220
-sg250
+g218
+sg248
 VHalal beef
+p13492
+sg250
+VUnknown.
 p13493
 sg252
-VAn Iowa beef producer, Midamar Corporation, was charged with selling non-Halal beef products labeled as Halal to consumers in Malaysia and Indonesia. The owner of Midamar Corporation also operated Islamic Services of America (ISA) to certify food products as Halal. ISA was one of only a few organizations approved by Malaysia and Indonesia to certify Halal beef imports. Midamar Corporation accepted orders for Halal beef from overseas consumers and then fulfilled these orders with beef products from a slaughter and production facility that was not certified by Malaysia and Indonesia for export. The USDA establishment number and labels from the original facility were removed and replaced with the Midamar Corporation USDA establishment number. False export certificates were also used. A former employee also testified that the producer substituted Kosher beef for Halal beef without involving Muslim experts in Halal slaughter practices. A USDA and Internal Revenue Service investigation led to the discovery of the incident.
+V2007
 p13494
 ssV426
 p13495
@@ -39832,70 +39832,70 @@ sg205
 VCentral America and the Caribbean, Puerto Rico
 p13916
 sg207
-V2009
+VRotten pork; Spoiled pork
 p13917
 sg209
-VRotten pork; Spoiled pork
-p13918
+g1013
 sg211
-g1014
-sg213
 VJoshua Enterprise
+p13918
+sg213
+VMeat Products
 p13919
 sg215
-VMeat Products
+VA food distribution company in Puerto Rico knowingly sold pork that was unfit for human consumption. The company, Joshua Enterprise, purchased over 50,000 pounds of pork shoulder from a transporter. Upon receipt of the pork shoulder, the transport company informed the food distribution company that pork had \u201csuffered temperature abuse\u201d during transport. Despite this knowledge, Joshua Enterprise went through with the purchase and ultimately sold or offered for sale the affected product. Approximately 42,000 pounds of the affected product were sold before the incident was discovered. The incident was discovered after USDA inspections determined that samples of the pork shoulders were not fit for human consumption.
 p13920
 sg217
-VUnknown.
-p13921
+g218
 sg219
-g220
-sg221
-V2010
-p13922
-sg223
 Vnone
-p13923
-sg225
-(lp13924
-(dp13925
-g228
+p13921
+sg221
+(lp13922
+(dp13923
+g224
 V2015-12-03
+p13924
+sg226
+VFood Safety News
+p13925
+sg228
+VFlynn, Dan
 p13926
 sg230
-VFood Safety News
-p13927
-sg232
-VFlynn, Dan
-p13928
-sg234
 VFSIS Report: Man Sentenced for Selling Pork Despite Temperature Abuse During Transport
-p13929
-sa(dp13930
-g228
+p13927
+sa(dp13928
+g224
 V2014-10-09
-p13931
-sg230
+p13929
+sg226
 VUnited States Department of Justice
-p13932
-sg232
+p13930
+sg228
 g25
-sg234
+sg230
 VBusinessman Pleads Guilty To Selling Putrid Pork Meat
-p13933
-sasg245
+p13931
+sasg241
 VIntentional Distribution of Contaminated Product
+p13932
+sg243
+V2010
+p13933
+sg245
+VCentral America and the Caribbean, Puerto Rico
 p13934
 sg247
-VCentral America and the Caribbean, Puerto Rico
-p13935
-sg249
-g220
-sg250
+g218
+sg248
 Vpork; Pork shoulder
+p13935
+sg250
+VUnknown.
 p13936
 sg252
-VA food distribution company in Puerto Rico knowingly sold pork that was unfit for human consumption. The company, Joshua Enterprise, purchased over 50,000 pounds of pork shoulder from a transporter. Upon receipt of the pork shoulder, the transport company informed the food distribution company that pork had \u201csuffered temperature abuse\u201d during transport. Despite this knowledge, Joshua Enterprise went through with the purchase and ultimately sold or offered for sale the affected product. Approximately 42,000 pounds of the affected product were sold before the incident was discovered. The incident was discovered after USDA inspections determined that samples of the pork shoulders were not fit for human consumption.
+V2009
 p13937
 ssV229
 p13938
@@ -39976,92 +39976,92 @@ sg205
 VEast Asia, China
 p13964
 sg207
-V2008
+VPork from diseased pig
 p13965
 sg209
-VPork from diseased pig
-p13966
+g1299
 sg211
-g1300
-sg213
 Vindividual actors
+p13966
+sg213
+VMeat Products
 p13967
 sg215
-VMeat Products
+VContaminated pork products and cooking oil from diseased animals were knowingly sold across 11 provinces in China. More than 100 people were arrested in a multi-year operation that involved the sale of pigs that died from diseases at very low prices to producers. The contaminated pork was processed into bacon, ham, and cooking oil. The perpetrators were able to get around the regulatory system by bribing food supervising authorities. Government livestock insurance agents were also bribed into notifying producers when insurance claims related to swine deaths were filed. Producers were then able to quickly purchase the contaminated pork from farmers at prices significantly below market values. It is not clear how the incident was detected.
 p13968
 sg217
-VUnknown
-p13969
+g218
 sg219
-g220
-sg221
-V2013
-p13970
-sg223
 Vnone
-p13971
-sg225
-(lp13972
-(dp13973
-g228
+p13969
+sg221
+(lp13970
+(dp13971
+g224
 V2015-12-01
-p13974
-sg230
+p13972
+sg226
 VFood Safety News
-p13975
-sg232
+p13973
+sg228
 g25
-sg234
+sg230
 VChinese Police Arrest More Than 100 People for Selling Contaminated Pork
+p13974
+sa(dp13975
+g224
+V2015-12-01
 p13976
-sa(dp13977
-g228
-V2015-12-01
-p13978
-sg230
+sg226
 VBBC News
-p13979
-sg232
+p13977
+sg228
 g25
-sg234
+sg230
 VChinese police arrest 110 for selling 'contaminated pork'
-p13980
-sa(dp13981
-g228
+p13978
+sa(dp13979
+g224
 V2015-12-01
-p13982
-sg230
+p13980
+sg226
 VThe Japan Times
-p13983
-sg232
-g25
-sg234
-VIn latest scandal, China arrests dozens for selling pork from diseased pigs
-p13984
-sa(dp13985
-g228
+p13981
+sg228
 g25
 sg230
-VCBC News
-p13986
-sg232
+VIn latest scandal, China arrests dozens for selling pork from diseased pigs
+p13982
+sa(dp13983
+g224
 g25
-sg234
+sg226
+VCBC News
+p13984
+sg228
+g25
+sg230
 VChina hit by new food safety scandal
-p13987
-sasg245
+p13985
+sasg241
 VIntentional Distribution of Contaminated Product
+p13986
+sg243
+V2013
+p13987
+sg245
+VEast Asia, China
 p13988
 sg247
-VEast Asia, China
-p13989
-sg249
-g220
-sg250
+g218
+sg248
 Vpork
+p13989
+sg250
+VUnknown
 p13990
 sg252
-VContaminated pork products and cooking oil from diseased animals were knowingly sold across 11 provinces in China. More than 100 people were arrested in a multi-year operation that involved the sale of pigs that died from diseases at very low prices to producers. The contaminated pork was processed into bacon, ham, and cooking oil. The perpetrators were able to get around the regulatory system by bribing food supervising authorities. Government livestock insurance agents were also bribed into notifying producers when insurance claims related to swine deaths were filed. Producers were then able to quickly purchase the contaminated pork from farmers at prices significantly below market values. It is not clear how the incident was detected.
+V2008
 p13991
 ssV227
 p13992
@@ -40613,97 +40613,97 @@ sg205
 VWestern Europe, Ireland
 p14178
 sg207
-VUnknown
+Vbeef hearts; mislabeled beef products; mislabeled Halal product
 p14179
 sg209
-Vbeef hearts; mislabeled beef products; mislabeled Halal product
-p14180
+g1299
 sg211
-g1300
-sg213
 VFreeza Meats Ltd
+p14180
+sg213
+VMeat Products
 p14181
 sg215
-VMeat Products
+VFreeza Meats Ltd, an Irish company which was involved in a horse meat scandal in 2013, found guilty in another twelve offences against the Food Safety Order (NI) 1991 and the General Food Regulations (NI) 2004. The company was supplying to the market adulterated beef products. In these meat products the genuine ingredients were diluted with cheaper products, i.e. beef hearts; the cheaper ingredients were not declared as an ingredient on the label. Freeza Meats also admitted packaging Halal burgers that were not Halal. To decrease the production costs, the company used meat not slaughtered in Halal ways so they were able to save on hiring a Muslim preacher that had to be present during the Halal met preparation. To this date, the company was announced to be out of the market.
 p14182
 sg217
-VUnknown
-p14183
+g218
 sg219
-g220
-sg221
-V2015
-p14184
-sg223
 Vunknown
-p14185
-sg225
-(lp14186
-(dp14187
-g228
+p14183
+sg221
+(lp14184
+(dp14185
+g224
 V2015-06-29
+p14186
+sg226
+VBBC News
+p14187
+sg228
+VUnknown
 p14188
 sg230
-VBBC News
-p14189
-sg232
-VUnknown
-p14190
-sg234
 VFood company Freeza Meats fined £70,000 costs
-p14191
-sa(dp14192
-g228
+p14189
+sa(dp14190
+g224
 V2015-06-30
+p14191
+sg226
+VNew Food
+p14192
+sg228
+VVictoria White
 p14193
 sg230
-VNew Food
-p14194
-sg232
-VVictoria White
-p14195
-sg234
 VFreeza Meats prosecuted for serious food fraud offences
-p14196
-sa(dp14197
-g228
+p14194
+sa(dp14195
+g224
 V2015-06-30
+p14196
+sg226
+VFood Standards Agency
+p14197
+sg228
+VUnknown
 p14198
 sg230
-VFood Standards Agency
-p14199
-sg232
-VUnknown
-p14200
-sg234
 VFSA in Northern Ireland welcomes Freeza Meats Ltd guilty plea to food fraud offences
-p14201
-sa(dp14202
-g228
+p14199
+sa(dp14200
+g224
 V2015-07-01
+p14201
+sg226
+VFoodManufacture.co.uk
+p14202
+sg228
+VMike Stones
 p14203
 sg230
-VFoodManufacture.co.uk
-p14204
-sg232
-VMike Stones
-p14205
-sg234
 VMeat firm to pay £144k for food fraud offences
-p14206
-sasg245
+p14204
+sasg241
 VMislabeling
+p14205
+sg243
+V2015
+p14206
+sg245
+VWestern Europe, Ireland
 p14207
 sg247
-VWestern Europe, Ireland
-p14208
-sg249
-g220
-sg250
+g218
+sg248
 VBeef products; Halal meat
+p14208
+sg250
+VUnknown
 p14209
 sg252
-VFreeza Meats Ltd, an Irish company which was involved in a horse meat scandal in 2013, found guilty in another twelve offences against the Food Safety Order (NI) 1991 and the General Food Regulations (NI) 2004. The company was supplying to the market adulterated beef products. In these meat products the genuine ingredients were diluted with cheaper products, i.e. beef hearts; the cheaper ingredients were not declared as an ingredient on the label. Freeza Meats also admitted packaging Halal burgers that were not Halal. To decrease the production costs, the company used meat not slaughtered in Halal ways so they were able to save on hiring a Muslim preacher that had to be present during the Halal met preparation. To this date, the company was announced to be out of the market.
+VUnknown
 p14210
 ssV604
 p14211
@@ -40718,84 +40718,84 @@ sg205
 VNorth America, United States
 p14215
 sg207
-V2007
+Vmislabeled halal beef
 p14216
 sg209
-Vmislabeled halal beef
-p14217
+g210
 sg211
-g212
-sg213
 Vindividual actors; Midamar Corporation; PM Beef
+p14217
+sg213
+VMeat Products
 p14218
 sg215
-VMeat Products
+VSeveral men affiliated with Midamar Corporation were accused in changing the establishment number for PM Beef in Windom, MN, to the number assigned by USDA to the O\u2019Neill Packing Co. in Omaha. The act of halal beef mislabeling took place because O\u2019Neill Packing Co.'s establishment number was approved for export to Malaysia and Indonesia while the PM Beef's was not. Officials believe that the change of establishment numbers was a part of a scheme to falsify export documents and earn additional profits on halal meat exports.
 p14219
 sg217
-VUnknown
-p14220
+g218
 sg219
-g220
-sg221
-V2010
-p14221
-sg223
 Vunknown
-p14222
-sg225
-(lp14223
-(dp14224
-g228
+p14220
+sg221
+(lp14221
+(dp14222
+g224
 V2015-07-08
+p14223
+sg226
+VFood Safety News
+p14224
+sg228
+VUnknown
 p14225
 sg230
-VFood Safety News
-p14226
-sg232
-VUnknown
-p14227
-sg234
 VJury Trial Underway in Iowa Over Alleged Halal Beef Export Scheme
-p14228
-sa(dp14229
-g228
+p14226
+sa(dp14227
+g224
 V2015-07-10
+p14228
+sg226
+VFood Safety News
+p14229
+sg228
+VUnknown
 p14230
 sg230
-VFood Safety News
-p14231
-sg232
-VUnknown
-p14232
-sg234
 VHalal Beef Exporter Takes the Witness Stand in His Own Defense
-p14233
-sa(dp14234
-g228
+p14231
+sa(dp14232
+g224
 V2015-07-07
+p14233
+sg226
+VFood Safety News
+p14234
+sg228
+VDan Flynn
 p14235
 sg230
-VFood Safety News
-p14236
-sg232
-VDan Flynn
-p14237
-sg234
 VConfusion Over Lawyers Marks Start of First Halal Trial in Iowa
-p14238
-sasg245
+p14236
+sasg241
 VMislabeling
+p14237
+sg243
+V2010
+p14238
+sg245
+VSoutheast Asia, Malaysia; Southeast Asia, Indonesia
 p14239
 sg247
-VSoutheast Asia, Malaysia; Southeast Asia, Indonesia
-p14240
-sg249
-g220
-sg250
+g218
+sg248
 VHalal beef
+p14240
+sg250
+VUnknown
 p14241
 sg252
-VSeveral men affiliated with Midamar Corporation were accused in changing the establishment number for PM Beef in Windom, MN, to the number assigned by USDA to the O\u2019Neill Packing Co. in Omaha. The act of halal beef mislabeling took place because O\u2019Neill Packing Co.'s establishment number was approved for export to Malaysia and Indonesia while the PM Beef's was not. Officials believe that the change of establishment numbers was a part of a scheme to falsify export documents and earn additional profits on halal meat exports.
+V2007
 p14242
 ssV607
 p14243
@@ -41165,59 +41165,59 @@ sg205
 VWestern Europe, Italy
 p14370
 sg207
-V1997
+VClenbuterol
 p14371
 sg209
-VClenbuterol
-p14372
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p14372
+sg213
+VMeat Products
 p14373
 sg215
-VMeat Products
+VIn 1997, an investigation conducted in Italy identified a poisoning episode following the consumption of veal during a meal served to 50 people housed in an institution in Assisi. Symptoms and clinical signs of distal tremors, palpitations, headache, facial erythema, tachipnoea-dyspnoea, paresthesiadysesthesia, nausea, vomit conations, myalgia cramps and lens accommodation disorder appeared 1/2 - 3 hours after ingestion. Clenbuterol was identified in the urine of all the symptomatic patients as well as in meat samples.
 p14374
 sg217
-VClenbuterol is a ß2 agonist that is used in food production animals to increase the muscle-to-fat ratio. It is banned for use in food production animals in the U.S. and the E.U. Ingestion by humans can cause heart palpitations, tremors, dizziness, nausea and increased anxiety.
-p14375
+g218
 sg219
-g220
-sg221
-V1999
-p14376
-sg223
 Vunknown
-p14377
-sg225
-(lp14378
-(dp14379
-g228
+p14375
+sg221
+(lp14376
+(dp14377
+g224
 V1999-07-06
+p14378
+sg226
+VElSevier
+p14379
+sg228
+VGianfranco Brambilla, Telemaco Cenci, Flavia Franconi, Roberta Galarini, Agostino Macr\u0131`, Francesco Rondoni, Marco Strozzi, Alberto Loizzo
 p14380
 sg230
-VElSevier
-p14381
-sg232
-VGianfranco Brambilla, Telemaco Cenci, Flavia Franconi, Roberta Galarini, Agostino Macr\u0131`, Francesco Rondoni, Marco Strozzi, Alberto Loizzo
-p14382
-sg234
 VClinical and pharmacological profile in a clenbuterol epidemic poisoning of contaminated beef meat in Italy
-p14383
-sasg245
+p14381
+sasg241
 VArtificial Enhancement
+p14382
+sg243
+V1999
+p14383
+sg245
+VWestern Europe, Italy
 p14384
 sg247
-VWestern Europe, Italy
-p14385
-sg249
 V50
+p14385
+sg248
+VVeal
 p14386
 sg250
-VVeal
+VClenbuterol is a ß2 agonist that is used in food production animals to increase the muscle-to-fat ratio. It is banned for use in food production animals in the U.S. and the E.U. Ingestion by humans can cause heart palpitations, tremors, dizziness, nausea and increased anxiety.
 p14387
 sg252
-VIn 1997, an investigation conducted in Italy identified a poisoning episode following the consumption of veal during a meal served to 50 people housed in an institution in Assisi. Symptoms and clinical signs of distal tremors, palpitations, headache, facial erythema, tachipnoea-dyspnoea, paresthesiadysesthesia, nausea, vomit conations, myalgia cramps and lens accommodation disorder appeared 1/2 - 3 hours after ingestion. Clenbuterol was identified in the urine of all the symptomatic patients as well as in meat samples.
+V1997
 p14388
 ssV156
 p14389
@@ -41733,58 +41733,58 @@ sg205
 VEast Asia, China
 p14562
 sg207
-V2012
+VCat Meat
 p14563
 sg209
-VCat Meat
-p14564
+g3739
 sg211
-g3740
-sg213
 Vunknown
+p14564
+sg213
+VMeat Products
 p14565
 sg215
-VMeat Products
+VA slaughterhouse in China sold cat meat that was advertised as rabbit meat. The meat was sold to butchers and local markets and eventually to local restaurants. Substituting homeless and domesticated cats for rabbits was a lucrative trade. The slaughterhouse was investigated by authorities after being tipped off from an anonymous source.
 p14566
 sg217
-VUnknown
-p14567
+g218
 sg219
-g220
-sg221
-V2013
-p14568
-sg223
 Vunknown
-p14569
-sg225
-(lp14570
-(dp14571
-g228
+p14567
+sg221
+(lp14568
+(dp14569
+g224
 V2013-10-31
+p14570
+sg226
+Vtelegraph.co.uk
+p14571
+sg228
+VTom Phillips
 p14572
 sg230
-Vtelegraph.co.uk
-p14573
-sg232
-VTom Phillips
-p14574
-sg234
 VChinese police find slaughterhouse selling cat meat
-p14575
-sasg245
+p14573
+sasg241
 VSubstitution with a non-food-grade substance
+p14574
+sg243
+V2013
+p14575
+sg245
+VEast Asia, China
 p14576
 sg247
-VEast Asia, China
-p14577
-sg249
-g220
-sg250
+g218
+sg248
 VRabbit Meat
+p14577
+sg250
+VUnknown
 p14578
 sg252
-VA slaughterhouse in China sold cat meat that was advertised as rabbit meat. The meat was sold to butchers and local markets and eventually to local restaurants. Substituting homeless and domesticated cats for rabbits was a lucrative trade. The slaughterhouse was investigated by authorities after being tipped off from an anonymous source.
+V2012
 p14579
 ssV48
 p14580
@@ -42796,71 +42796,71 @@ sg205
 VSoutheast Asia, Taiwan
 p14925
 sg207
-VUnknown
+VBeef; Lamb oil; pork; Pork Jowl; Water-retaining agent
 p14926
 sg209
-VBeef; Lamb oil; pork; Pork Jowl; Water-retaining agent
-p14927
+g1013
 sg211
-g1014
-sg213
 VChing Lung Meat Company; Hua Yuan International
+p14927
+sg213
+VMeat Products
 p14928
 sg215
-VMeat Products
+VTwo meat suppliers in Taiwan sold lamb products that were adulterated with pork, beef, lamb oil, or a water-retaining agent. The adulterated meat was then distributed to over 100 restaurants and market vendors. The first company, Ching Lung Meat Company, simply mixed lamb with pork. The second company, Hua Yuan International, manufactured three \u201cgrades\u201d of lamb. The first two grades mixed lamb with pork jowl and minced beef, respectively. The third grade was pork that had been adulterated with lamb oil and contained no actual lamb meat. Hua Yuan also added a water-retaining agent to frozen meat to increase product weight. As lamb is more expensive than pork, the companies adulterated the products to increase profits. It is not clear how the adulteration was initially detected, but an investigation of the two companies was launched after market vendors were investigated and lab tests revealed that the lamb products contained pork.
 p14929
 sg217
-VUnknown.
-p14930
+g218
 sg219
-g220
-sg221
-V2014
-p14931
-sg223
 Vunknown
-p14932
-sg225
-(lp14933
-(dp14934
-g228
+p14930
+sg221
+(lp14931
+(dp14932
+g224
 V2014-11-13
+p14933
+sg226
+VThe China Post
+p14934
+sg228
+VYen, Queena
 p14935
 sg230
-VThe China Post
-p14936
-sg232
-VYen, Queena
-p14937
-sg234
 VLamb products mixed with pork recalled: FDA
-p14938
-sa(dp14939
-g228
+p14936
+sa(dp14937
+g224
 V2014-11-13
+p14938
+sg226
+VTaipei Times
+p14939
+sg228
+VHsu, Stacy
 p14940
 sg230
-VTaipei Times
-p14941
-sg232
-VHsu, Stacy
-p14942
-sg234
 VFDA conducting meat probe
-p14943
-sasg245
+p14941
+sasg241
 VDilution
+p14942
+sg243
+V2014
+p14943
+sg245
+VSoutheast Asia, Taiwan
 p14944
 sg247
-VSoutheast Asia, Taiwan
-p14945
-sg249
-g220
-sg250
+g218
+sg248
 Vlamb
+p14945
+sg250
+VUnknown.
 p14946
 sg252
-VTwo meat suppliers in Taiwan sold lamb products that were adulterated with pork, beef, lamb oil, or a water-retaining agent. The adulterated meat was then distributed to over 100 restaurants and market vendors. The first company, Ching Lung Meat Company, simply mixed lamb with pork. The second company, Hua Yuan International, manufactured three \u201cgrades\u201d of lamb. The first two grades mixed lamb with pork jowl and minced beef, respectively. The third grade was pork that had been adulterated with lamb oil and contained no actual lamb meat. Hua Yuan also added a water-retaining agent to frozen meat to increase product weight. As lamb is more expensive than pork, the companies adulterated the products to increase profits. It is not clear how the adulteration was initially detected, but an investigation of the two companies was launched after market vendors were investigated and lab tests revealed that the lamb products contained pork.
+VUnknown
 p14947
 ssV485
 p14948
@@ -43898,70 +43898,70 @@ sg205
 Vunknown
 p15311
 sg207
-VUnknown
+VAnimal-by-product; Pet food
 p15312
 sg209
-VAnimal-by-product; Pet food
-p15313
+g1013
 sg211
-g1014
-sg213
 Vunknown
+p15313
+sg213
+VMeat Products
 p15314
 sg215
-VMeat Products
+VA cold storage warehouse in Northern Ireland repackaged and re-labeled animal-by-product intended for pet food as meat for human consumption. An investigation of the facility uncovered the animal-by-product as well as an industrial shrink-wrapping machine, labeling equipment, and forged veterinary records claiming to originate from various meat plants across the European Union. Meat sold for human consumption is worth significantly more than meat sold for pet food. The incident was first discovered when a shipping company reported a suspicious container arriving from Asia. A major criminal investigation of the incident was never launched, so details about specific adulterated products and distributed locations were not available.
 p15315
 sg217
-VUnknown.
-p15316
+g218
 sg219
-g220
-sg221
-V2005
-p15317
-sg223
 Vunknown
-p15318
-sg225
-(lp15319
-(dp15320
-g228
+p15316
+sg221
+(lp15317
+(dp15318
+g224
 V2013-12-12
-p15321
-sg230
+p15319
+sg226
 g25
-sg232
+sg228
 VElliott, Chris
-p15322
-sg234
+p15320
+sg230
 VElliott review into the integrity and assurance of food supply networks: interim report
-p15323
-sa(dp15324
-g228
+p15321
+sa(dp15322
+g224
 V2013-12-12
+p15323
+sg226
+VBBC News NI
+p15324
+sg228
+VMacauley, Conor
 p15325
 sg230
-VBBC News NI
-p15326
-sg232
-VMacauley, Conor
-p15327
-sg234
 VDog food meat 'ended up in human food chain' says report
-p15328
-sasg245
+p15326
+sasg241
 VSubstitution with a non-food-grade substance
+p15327
+sg243
+V2005
+p15328
+sg245
+VWestern Europe, United Kingdom
 p15329
 sg247
-VWestern Europe, United Kingdom
-p15330
-sg249
-g220
-sg250
+g218
+sg248
 VMeat
+p15330
+sg250
+VUnknown.
 p15331
 sg252
-VA cold storage warehouse in Northern Ireland repackaged and re-labeled animal-by-product intended for pet food as meat for human consumption. An investigation of the facility uncovered the animal-by-product as well as an industrial shrink-wrapping machine, labeling equipment, and forged veterinary records claiming to originate from various meat plants across the European Union. Meat sold for human consumption is worth significantly more than meat sold for pet food. The incident was first discovered when a shipping company reported a suspicious container arriving from Asia. A major criminal investigation of the incident was never launched, so details about specific adulterated products and distributed locations were not available.
+VUnknown
 p15332
 ssV477
 p15333
@@ -44055,70 +44055,70 @@ sg205
 VEast Asia, China
 p15364
 sg207
-V2010
+VNon-organic pork
 p15365
 sg209
-VNon-organic pork
-p15366
+g1013
 sg211
-g1014
-sg213
 VWalmart
+p15366
+sg213
+VMeat Products
 p15367
 sg215
-VMeat Products
+VNon-organic pork was mislabeled as organic pork and sold to customers at Wal-Mart stores in the city of Chongqing in southwestern China. The organic pork was sold at higher prices than non-organic pork. It is unclear how the mislabeling was detected, but reports indicate that authorities warned the retailer about plans to fine Wal-Mart if actions were not taken. When the mislabeling did not stop, significant fines were imposed.
 p15368
 sg217
-VUnknown.
-p15369
+g218
 sg219
-g220
-sg221
-V2011
-p15370
-sg223
 Vunknown
-p15371
-sg225
-(lp15372
-(dp15373
-g228
+p15369
+sg221
+(lp15370
+(dp15371
+g224
 V2011-10-10
+p15372
+sg226
+VBBC News
+p15373
+sg228
+VUnknown
 p15374
 sg230
-VBBC News
-p15375
-sg232
-VUnknown
-p15376
-sg234
 VWal-Mart stores closed in China after pork probe
-p15377
-sa(dp15378
-g228
+p15375
+sa(dp15376
+g224
 V2011-10-11
+p15377
+sg226
+VWall Street Journal
+p15378
+sg228
+VBurkitt, Laurie
 p15379
 sg230
-VWall Street Journal
-p15380
-sg232
-VBurkitt, Laurie
-p15381
-sg234
 g25
-sasg245
+sasg241
 VMislabeling
+p15380
+sg243
+V2011
+p15381
+sg245
+VEast Asia, China
 p15382
 sg247
-VEast Asia, China
-p15383
-sg249
-g220
-sg250
+g218
+sg248
 VNon-organic pork
+p15383
+sg250
+VUnknown.
 p15384
 sg252
-VNon-organic pork was mislabeled as organic pork and sold to customers at Wal-Mart stores in the city of Chongqing in southwestern China. The organic pork was sold at higher prices than non-organic pork. It is unclear how the mislabeling was detected, but reports indicate that authorities warned the retailer about plans to fine Wal-Mart if actions were not taken. When the mislabeling did not stop, significant fines were imposed.
+V2010
 p15385
 ssV475
 p15386
@@ -44133,71 +44133,71 @@ sg205
 VEast Asia, China
 p15390
 sg207
-V2014
+VChicken blood; dyes; Printing chemicals
 p15391
 sg209
-VChicken blood; dyes; Printing chemicals
-p15392
+g1013
 sg211
-g1014
-sg213
 Vindividual actor
+p15392
+sg213
+VMeat Products
 p15393
 sg215
-VMeat Products
+VA store in China adulterated chicken blood with dyes and printing agents and sold it to consumers as duck blood. The adulterants were added so that the product would be more appealing. Duck blood is a delicacy in China that is significantly more expensive than chicken blood. The significant price difference between chicken blood and duck blood created an incentive for adulteration. It is not clear how the adulteration was detected other than it was reported in the Chinese media.
 p15394
 sg217
-VUnknown.
-p15395
+g218
 sg219
-g220
-sg221
-V2014
-p15396
-sg223
 Vunknown
-p15397
-sg225
-(lp15398
-(dp15399
-g228
+p15395
+sg221
+(lp15396
+(dp15397
+g224
 V2014-04-21
+p15398
+sg226
+VXinhua
+p15399
+sg228
+VAnonymous
 p15400
 sg230
-VXinhua
-p15401
-sg232
-VAnonymous
-p15402
-sg234
 VFood additive scandal scares public yet again
-p15403
-sa(dp15404
-g228
+p15401
+sa(dp15402
+g224
 V2014-04-21
+p15403
+sg226
+VBloomberg View
+p15404
+sg228
+VMinter, Adam
 p15405
 sg230
-VBloomberg View
-p15406
-sg232
-VMinter, Adam
-p15407
-sg234
 VIn China, Duck Blood Tastes Like Chicken
-p15408
-sasg245
+p15406
+sasg241
 VSubstitution
+p15407
+sg243
+V2014
+p15408
+sg245
+VEast Asia, China
 p15409
 sg247
-VEast Asia, China
-p15410
-sg249
-g220
-sg250
+g218
+sg248
 VDuck blood
+p15410
+sg250
+VUnknown.
 p15411
 sg252
-VA store in China adulterated chicken blood with dyes and printing agents and sold it to consumers as duck blood. The adulterants were added so that the product would be more appealing. Duck blood is a delicacy in China that is significantly more expensive than chicken blood. The significant price difference between chicken blood and duck blood created an incentive for adulteration. It is not clear how the adulteration was detected other than it was reported in the Chinese media.
+V2014
 p15412
 ssV478
 p15413

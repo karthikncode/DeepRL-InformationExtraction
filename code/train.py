@@ -6,11 +6,9 @@ import itertools
 import sys
 import pickle
 import helper
-import parse_EMA
 
-
-int2tags = parse_EMA.int2tags
-tags2int = parse_EMA.tags2int
+int2tags = constants.int2tags
+tags2int = constants.tags2int
 tags = range(len(tags2int))
 # main loop
 def main(training_file,trained_model,previous_n,next_n, c, prune):

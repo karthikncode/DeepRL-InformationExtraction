@@ -11,7 +11,7 @@ import csv
 import helper
 import time, pickle
 
-helper.load_constants()
+# helper.load_constants()
 
 def build_event_dict(csv_file):
     file = open(csv_file,'rb')

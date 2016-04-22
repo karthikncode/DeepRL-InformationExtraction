@@ -38,7 +38,7 @@ def filterArticles(articles):
                 continue
 
             article = tokenizer.tokenize(articles[saveFile])
-            ents = [incident[e] for e in int2tags[1:]]
+            ents = [incident[e.replace('-','_')] for e in int2tags[1:]]
 
             tags, cleanArticle = getTags(article, ents)
 
@@ -153,8 +153,8 @@ if __name__ == "__main__":
     incidents = pickle.load(open('EMA_dump.p', 'rb'))
     downloaded_articles = pickle.load(open('EMA_downloaded_articles_dump.p.server', 'rb'))
 
-    train_fraction = .50
-    dev_fraction   = .20
+    train_fraction = .60
+    dev_fraction   = .10
     test_fraction  = .30
 
     refilter = False
@@ -163,6 +163,7 @@ if __name__ == "__main__":
         raw_input("Done filtering. Press anything to continue")
     else:
         relevant_articles = pickle.load(open('EMA_filtered_articles.2.p', 'rb'))
+        print "Using relevant articles from EMA_filtered_articles.2.p"
 
     num_articles = len(relevant_articles)
     for saveFile in relevant_articles:
@@ -185,10 +186,10 @@ if __name__ == "__main__":
         
 
         #Assign to train/dev/test
-        partion = random.random()
-        if partion < train_fraction * num_articles:
+        partition = random.random()
+        if partition < train_fraction:
             f = train
-        elif i < (train_fraction + dev_fraction):
+        elif partition < (train_fraction + dev_fraction):
             f = dev
         else:
             f = test

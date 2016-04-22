@@ -8,7 +8,14 @@ from train import load_data
 
 NUM_ENTITIES = 3
 
-EXTRA_QUERY='(adulterated | scandal | countries | fake)'
+#EMA queries
+EXTRA_QUERY='( state | country | india | china | province )'
+# EXTRA_QUERY='(  )'
+
+
+# EXTRA_QUERY='(adulterated | scandal | countries | fake)'
+
+# Shooter queries
 # EXTRA_QUERY='( injured | wounded | victim )' 
 #EXTRA_QUERY='( suspect | shooter | identified | arrested | charged )'
 
@@ -17,7 +24,8 @@ if __name__ == '__main__':
 
     trainFile = sys.argv[1]
     saveFile = sys.argv[2]
-    extra_query = sys.argv[3]
+    # extra_query = sys.argv[3]
+    extra_query = EXTRA_QUERY
     
     #load data and process identifiers
     articles, identifiers = load_data(trainFile)

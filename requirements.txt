@@ -3,3 +3,7 @@ simplejson
 numpy
 scipy
 scikit-learn
+feedparser
+tldextract
+lxml
+newspaper

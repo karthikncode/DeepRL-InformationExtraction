@@ -26,7 +26,7 @@ def load_constants():
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
         other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
-        other_features_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city', 'is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num']
+        other_feature_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city','is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num', 'is_adulterant']
     #other_features = []
     elif MODE == 'EMA':
         with open('../data/constants/adulterants.p','rb') as outfile:
@@ -38,7 +38,7 @@ def load_constants():
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
         other_features = [is_capital,is_full_city,is_partial_city,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
-        other_features_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city', 'is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num']
+        other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',' is_adulterant']
 
     #TODO: check is_food()
     
@@ -102,21 +102,8 @@ def captilized(word):
 
 def getOtherFeatures(word):
     features = {}
-    features["is_capital"] = is_capital(word)
-    features["is_digit"] = is_digit(word)
-    features["is_male_first_name"] = is_male_first_name(word)
-    features["is_female_first_name"] = is_female_first_name(word)
-    features["is_last_name"] = is_last_name(word)
-    features["is_full_city"] = is_full_city(word)
-    features["is_partial_city"] = is_partial_city(word)
-    features["is_adulterants"] = is_adulterant(word)
-    # features["is_food"] = is_food(word)
-   # features["contains_digit"] = contains_digit(word)
-    features["is_short_word"]= is_short_word(word)
-    features["is_long_word"] = is_long_word(word)
-    features["is_cap"] = captilized(word)
-   # features["is_number_word"] = is_number_word(word)
-   # features["is_ordinal_word"] = is_ordinal_word(word)
-   # features["is_ordinal_num"] = is_ordinal_num(word)
-   # features["POS_tag"] = part_of_speech(word)
+    for index, feature_func in other_features:
+        name = other_features_names[index]
+        features[name] = feature_func(word)
+
     return features

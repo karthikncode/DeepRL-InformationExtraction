@@ -12,15 +12,20 @@ int2tags = constants.int2tags
 tags2int = constants.tags2int
 tags = range(len(tags2int))
 # main loop
-def main(training_file,trained_model,previous_n,next_n, c, prune):
+def main(training_file,trained_model,previous_n,next_n, c, prune, test_file):
     helper.load_constants()
     train_data, identifier = load_data(training_file)
+ 
+    test_data, test_ident = load_data(test_file)
 
     ## extract features
     tic = time.clock()
+    print "get word_vocab"
     num_words, word_vocab = get_word_vocab(train_data, prune)
-    
+    print "feature extract for train"
     trainX, trainY = get_feature_matrix_n(previous_n,next_n,train_data, num_words, word_vocab, helper.other_features)
+    print 'feature extract for test'
+    testX, testY   = get_feature_matrix_n(previous_n, next_n, test_data, num_words, word_vocab, helper.other_features)    
     print time.clock()-tic
 
     ## train LR
@@ -30,11 +35,41 @@ def main(training_file,trained_model,previous_n,next_n, c, prune):
     clf.fit(trainX,trainY)
     print time.clock()-tic
 
+    print "predicting"
+    predictY = clf.predict(testX)
+    assert len(predictY) == len(testY)
+
+    print "evaluating"
+
+    evaluatePredictions(predictY, testY)
+
     feature_list = (word_vocab.keys() + helper.other_features) * (previous_n+next_n+1)  + word_vocab.keys() + ['previous_one'] * len(tags) + ['previous_two'] * len(tags)+ ['previous_three'] * len(tags)
     # getTopFeatures(clf,tags,feature_list)
     if trained_model != "":
         pickle.dump([clf, previous_n,next_n, word_vocab,helper.other_features], open( trained_model, "wb" ) )
     return [clf, previous_n,next_n, word_vocab,helper.other_features]
+
+def evaluatePredictions(predicted, gold):
+    range_toks = range(len(predicted))
+    num_tags = len(int2tags)-1
+    correct = [0] * num_tags
+    guessed = [0] * num_tags
+    gold_c  = [0] * num_tags
+    for i in range(1,len(int2tags)):
+        correct[i-1] = sum([predicted[j] == gold[j] and gold[j] == i for j in range_toks])
+        guessed[i-1] = sum([predicted[j] == i for j in range_toks])
+        gold_c[i-1] = sum([gold[j] == i for j in range_toks])
+
+    print "tag_type (correct, guessed, gold) (percision, recall, f1)"
+    for k in range(num_tags): 
+        percision = 1.*correct[k]/guessed[k] if guessed[k] > 0 else 0 
+        recall = 1.*correct[k]/gold_c[k] if guessed[k] > 0 else 0
+        f1 = (2.*percision*recall)/(percision+recall) \
+        if (percision+recall) > 0 else 0
+
+        evalText =  int2tags[k+1] + ' ( ' + str(correct[k]) + ", " + str(guessed[k]) + ", " + str(gold_c[k]) + ")"
+        evalText += '( ' + str(percision) + ", " + str(recall) + ", " + str(f1) + ")"
+        print evalText
 
 def get_word_vocab(data, prune):
     num_words = 0
@@ -74,8 +109,6 @@ def get_feature_matrix_n(previous_n,next_n,data, num_words, word_vocab, other_fe
     dataX = scipy.sparse.lil_matrix((num_words, total_features))
     curr_word = 0
     for sentence in data:
-        if sentence == 'skip_body':
-            continue
         other_words_lower = set([s.lower for s in sentence[0]])
         for i in range(len(sentence[0])):
             word = sentence[0][i]
@@ -116,14 +149,14 @@ def separate_word_tag(sentence):
     words = []
     tags = []
     i = 0
-    for part in parts:
+    for index, part in enumerate(parts):
+        part = part.strip()
+        if len(part.split("_")) < 2 or part[0] == "_":
+            continue
         i+=1
-        tag = "_".join(part.split("_")[1:])
-        try:
-            tags.append(tags2int[tag])
-            words.append(part.split("_")[0])
-        except Exception, e:
-            pass
+        tags.append(tags2int[part.split("_")[-1]])
+        words.append(part.split("_")[0])
+      
     return [words,tags]
 
 # return a list of raw sentences (unprocessed)
@@ -153,10 +186,22 @@ def save_list_first_names(infile_path,outfile_path):
 
 
 if __name__ == "__main__":
-    training_file = "../data/tagged_data/EMA2/train.2.tag" #sys.argv[1]
-    trained_model = "trained_model.EMA.2.p" #sys.argv[2]
+
+    mode = "EMA"
+    if mode == 'EMA':
+        training_file = "../data/tagged_data/EMA/train.tag"
+        test_file = "../data/tagged_data/EMA/dev.tag"
+    elif mode == "Shooter":
+        training_file = "../data/tagged_data/whole_text_full_city2/train.tag"
+        training_file = "../data/tagged_data/whole_text_full_city2/dev.tag"
+
+    evaluate = True # Set true to score classifier on dev
+    if not evaluate:
+        test_file = False
+
+    trained_model = "trained_model.EMA.p" #sys.argv[2]
     previous_n = 0 #sys.argv[3]
     next_n = 4
     c = 10
     prune = 5
-    main(training_file,trained_model,previous_n,next_n,c,prune)
+    main(training_file,trained_model,previous_n,next_n,c,prune, test_file)

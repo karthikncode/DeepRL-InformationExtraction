@@ -53,15 +53,15 @@ def filterArticles(articles):
                     filtered_gold_num[i-1]    += ents[i-1].strip().lower() not in ["unknown"]
                 #Store article in convenient format to writing to tagfile
                 relavant_article = {}
-                relavant_article['tokens'] = cleanArticle
+                relavant_article['tokens'] = cleanArticle[:1000]
                 relavant_article['tags']   = tags
                 relavant_article['title']  = citation['Title']
                 relavant_article['ents']   = [cleanDelimiters(e) for e in ents]
                 relevant_articles[saveFile] = relavant_article
     pickle.dump(relevant_articles, open('EMA_filtered_articles.2.p', 'wb'))
                     
-    oracle_scores = [(correct[i]*1./gold_num[i], int2tags[i+1]) if gold_num[i] > 100 else 0 for i in range(len(correct))]
-    filtered_oracle_scores = [(filtered_correct[i]*1./filtered_gold_num[i], int2tags[i+1]) if filtered_gold_num[i] > 100 else 0 for i in range(len(correct))]
+    oracle_scores = [(correct[i]*1./gold_num[i], int2tags[i+1]) if gold_num[i] > 0 else 0 for i in range(len(correct))]
+    filtered_oracle_scores = [(filtered_correct[i]*1./filtered_gold_num[i], int2tags[i+1]) if filtered_gold_num[i] > 0 else 0 for i in range(len(correct))]
     print "num articles is", len(relevant_articles)
     print "oracle scores", oracle_scores
     print "filtered_oracle_scores", filtered_oracle_scores
@@ -145,9 +145,9 @@ def getTags(article, ents):
 if __name__ == "__main__":
 
     random.seed(1)
-    train = open('../data/tagged_data/EMA2/train.2.tag', 'wb')
-    dev = open('../data/tagged_data/EMA2/dev.2.tag', 'wb')
-    test = open('../data/tagged_data/EMA2/test.2.tag', 'wb')
+    train = open('../data/tagged_data/EMA/train.tag', 'wb')
+    dev = open('../data/tagged_data/EMA/dev.tag', 'wb')
+    test = open('../data/tagged_data/EMA/test.tag', 'wb')
 
     
     incidents = pickle.load(open('EMA_dump.p', 'rb'))
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     dev_fraction   = .10
     test_fraction  = .30
 
-    refilter = False
+    refilter = True
     if refilter:
         relevant_articles = filterArticles(downloaded_articles)
         raw_input("Done filtering. Press anything to continue")
@@ -174,7 +174,10 @@ if __name__ == "__main__":
         tagged_body = ""
         for tok, tag in zip(tokens, tags):
             try:
-                tagged_body += tok + "_" + int2tags[tag] + " "
+                tagged_tok   = tok + "_" + int2tags[tag]
+                assert not tok == " "
+                assert len(tagged_tok.split("_")) >= 2
+                tagged_body += tagged_tok + " "
             except Exception, e:
                 pass
         try:

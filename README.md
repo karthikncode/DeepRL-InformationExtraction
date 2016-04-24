@@ -3,12 +3,7 @@
 This is the code and data for the paper [Improving Information Extraction by Acquiring External Evidence with Reinforcement Learning](http://arxiv.org/abs/1603.07954).
 
 ### Installation
-You will need to install [Torch](http://torch.ch/docs/getting-started.html) and the following python packages:
-  inflect
-  simplejson
-  numpy
-  scipy
-  scikit-learn
+You will need to install [Torch](http://torch.ch/docs/getting-started.html) and the  python packages in `requirements.txt`.  
 
 You will also need to install the [signal](https://github.com/LuaDist/lua-signal) package for Torch to deal with SIGPIPE issues in Linux.
 

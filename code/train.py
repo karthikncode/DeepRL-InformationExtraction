@@ -60,16 +60,7 @@ def evaluatePredictions(predicted, gold):
         guessed[i-1] = sum([predicted[j] == i for j in range_toks])
         gold_c[i-1] = sum([gold[j] == i for j in range_toks])
 
-    print "tag_type (correct, guessed, gold) (percision, recall, f1)"
-    for k in range(num_tags): 
-        percision = 1.*correct[k]/guessed[k] if guessed[k] > 0 else 0 
-        recall = 1.*correct[k]/gold_c[k] if guessed[k] > 0 else 0
-        f1 = (2.*percision*recall)/(percision+recall) \
-        if (percision+recall) > 0 else 0
-
-        evalText =  int2tags[k+1] + ' ( ' + str(correct[k]) + ", " + str(guessed[k]) + ", " + str(gold_c[k]) + ")"
-        evalText += '( ' + str(percision) + ", " + str(recall) + ", " + str(f1) + ")"
-        print evalText
+    helper.printScores(correct, guessed, gold_c)
 
 def get_word_vocab(data, prune):
     num_words = 0
@@ -187,7 +178,7 @@ def save_list_first_names(infile_path,outfile_path):
 
 if __name__ == "__main__":
 
-    mode = "EMA"
+    mode = constants.mode
     if mode == 'EMA':
         training_file = "../data/tagged_data/EMA/train.tag"
         test_file = "../data/tagged_data/EMA/dev.tag"

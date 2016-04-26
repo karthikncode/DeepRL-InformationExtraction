@@ -1,8 +1,9 @@
 import json
 import pickle
 import nltk.data, nltk.tag
+import constants
 
-MODE='EMA'
+MODE= constants.mode
 # MODE='Shooter'
 
 def load_constants():
@@ -37,8 +38,8 @@ def load_constants():
             number_as_words = set(json.load(outfile))
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
-        other_features = [is_capital,is_full_city,is_partial_city,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
-        other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',' is_adulterant']
+        other_features = [is_capital,is_full_city,is_partial_city,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant, is_food]
+        other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',' is_adulterant', 'is_food']
 
     #TODO: check is_food()
     
@@ -107,3 +108,20 @@ def getOtherFeatures(word):
         features[name] = feature_func(word)
 
     return features
+
+def printScores(correct, guessed, gold_c):
+    num_tags = len(constants.int2tags) - 1
+    print "tag_type (correct, guessed, gold) (percision, recall, f1)"
+    for k in range(num_tags): 
+        evalText = getPrecRecallF1String(correct[k], guessed[k], gold_c[k], constants.int2tags[k+1])
+        print evalText
+
+def getPrecRecallF1String(correct, guessed, gold, tag):
+    percision = 1.*correct/guessed if guessed > 0 else 0 
+    recall = 1.*correct/gold if guessed > 0 else 0
+    f1 = (2.*percision*recall)/(percision+recall) \
+        if (percision+recall) > 0 else 0
+
+    evalText =  tag + ' ( ' + str(correct) + ", " + str(guessed) + ", " + str(gold) + ")"
+    evalText += '( ' + str(percision) + ", " + str(recall) + ", " + str(f1) + ")"
+    return evalText

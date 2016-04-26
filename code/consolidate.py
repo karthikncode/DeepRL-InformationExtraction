@@ -128,7 +128,7 @@ for fileName in fileNames:
             # pdb.set_trace()
         print    
 
-    globalIndx += len(articles)
+        globalIndx += len(articles)
     ARTICLES2 += ARTICLES
     TITLES2 += TITLES
     IDENTIFIERS2 += IDENTIFIERS

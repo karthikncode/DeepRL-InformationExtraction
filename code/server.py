@@ -24,7 +24,7 @@ COUNT_ZERO = False
 #Global variables
 int2tags = constants.int2tags
 
-NUM_ENTITIES = len(int2tags)
+NUM_ENTITIES = len(int2tags) - 1
 NUM_QUERY_TYPES = 5
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
@@ -652,10 +652,11 @@ def loadFile(filename):
 
     identifiers_tmp = []
     for e in identifiers:
-        for i in range(NUM_ENTITIES):
+        for i in range(NUM_ENTITIES):       
             if type(e[i]) == int or e[i].isdigit():
                 e[i] = int(e[i])
                 e[i] = inflect_engine.number_to_words(e[i])
+       
         identifiers_tmp.append(e)
     identifiers = identifiers_tmp
 

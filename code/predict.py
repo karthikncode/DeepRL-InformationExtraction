@@ -137,7 +137,7 @@ def predict_ema_mode(sentence, tags, confidences):
 
     cleanedSentence = []
     cleanedTags = []
-    cleanedConfidences = confidences
+    cleanedConfidences = []
     # Combine consecutive tags (like "United_Location States_Location into 
     # United States_Location")
     i = 0
@@ -152,6 +152,8 @@ def predict_ema_mode(sentence, tags, confidences):
                 else:
                     break
         cleanedSentence.append( " ".join(sentence[i:end_range+1]))
+        avgConf = sum(confidences[i:end_range+1])/(end_range+1 - i)
+        cleanedConfidences.append(avgConf)
         cleanedTags.append(tags2int[tag]) 
 
         i = end_range + 1

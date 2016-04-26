@@ -19,11 +19,13 @@ tags2int = constants.tags2int
 tags = range(len(int2tags))
 
 helper.load_constants()
+mode = constants.mode
 
 # main loop
 def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_predictions="output.pred"):
     test_data, identifier = load_data(testing_file)
 
+    evaluate = True
 
     ## extract features
     if not isinstance(trained_model, list):
@@ -34,10 +36,12 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
 
     tic = time.clock()
     f = open(output_tags,'w')
-
+    confidences = []
     for i in range(len(test_data)+len(identifier)):
         if i%2 == 1:
             y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
+            assert(len(y) == len(tmp_conf))
+            confidences.append(tmp_conf)
             f.write(" ".join([test_data[i/2][0][j]+"_"+int2tags[int(y[j])] for j in range(len(test_data[i/2][0]))]))
             f.write("\n")
         else:
@@ -45,7 +49,10 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
             f.write("\n")
     #print time.clock()-tic
     f.close()
-    predict_mode_batch(output_tags, output_predictions, helper.cities)
+    if evaluate:
+        eval_mode_batch(output_tags, confidences, helper.cities)
+    else:
+        predict_mode_batch(output_tags, output_predictions, helper.cities)
     return
 
 # Takes in a trained model and predict all the entities
@@ -115,23 +122,25 @@ count_person = 0
 # Make predictions using majority voting of the tag
 # sentence - list of words
 # tags - list of tags corresponding to sentence
-# Returns comma separated preditions of shooterNames, killedNum, woundedNum and city with shooter names separated by '|'
 def predict_ema_mode(sentence, tags, confidences):
+    assert len(tags) == len(confidences)
 
     original_tags = tags
+    num_tags = len(int2tags) -1
 
     output_entities = {}
-    entity_confidences = [0,0,0]
-    entity_cnts = [0,0,0]
+    entity_confidences = [0] * num_tags
+    entity_cnts = [0] * num_tags
 
-    for tag in int2tags:
+    for tag in int2tags[1:]:
         output_entities[tag] = []
 
     cleanedSentence = []
     cleanedTags = []
-    # print "TAGS", tags
+    cleanedConfidences = confidences
+    # Combine consecutive tags (like "United_Location States_Location into 
+    # United States_Location")
     i = 0
-    print "len sentence", len(sentence)
     while i < len(sentence):
         tag = int2tags[tags[i]]
         end_range = i
@@ -139,7 +148,6 @@ def predict_ema_mode(sentence, tags, confidences):
             for j in range(i+1,len(sentence)):
                 new_tag = int2tags[tags[j]]
                 if new_tag == tag:
-      
                     end_range = j
                 else:
                     break
@@ -153,17 +161,16 @@ def predict_ema_mode(sentence, tags, confidences):
     assert set(tags) == set(cleanedTags)
     sentence = cleanedSentence
     tags = cleanedTags
+    confidences = cleanedConfidences
     for j in range(len(sentence)):
-        ind = "" 
-        ind = int2tags[tags[j]]
-        output_entities[ind].append((sentence[j], confidences[j]))
+        index = int2tags[tags[j]]
+        if index == "TAG":
+            continue
+        output_entities[index].append((sentence[j], confidences[j]))
+
     
     output_pred_line = ""
 
-    # mode, conf = get_mode(output_entities["shooterName"])
-    # output_pred_line += mode
-    # entity_confidences[tags2int['shooterName']-1] += conf
-    # entity_cnts[tags2int['shooterName']-1] += 1
 
     for tag in int2tags[1:]:
         # pdb.set_trace()
@@ -175,23 +182,21 @@ def predict_ema_mode(sentence, tags, confidences):
             assert not tags2int[tag] in original_tags 
             output_pred_line += "unknown"
             entity_confidences[tags2int[tag]-1] += 0
-            entity_cnts[tags2int[tag]-1] += 1
         else:
             output_pred_line += mode
             entity_confidences[tags2int[tag]-1] += conf
-            entity_cnts[tags2int[tag]-1] += 1
 
+        entity_cnts[tags2int[tag]-1] += 1
         if not tag == int2tags[-1]:
             output_pred_line += " ### "
 
 
-    print "OUTPUT_PRED_LINE", output_pred_line
 
     return output_pred_line, entity_confidences, entity_cnts
 
 
-def predict_mode(sentence, tags, confidences,  cities, crf=False, ema= False):
-    if ema:
+def predict_mode(sentence, tags, confidences,  cities, crf=False):
+    if constants.mode == "EMA":
         return predict_ema_mode(sentence, tags, confidences)
     output_entities = {}
     entity_confidences = [0,0,0,0]
@@ -293,6 +298,54 @@ def predict_mode_batch(output_tags, output_predictions, cities):
             f.write("\n")
     return
 
+def eval_mode_batch(output_tags, confidences, cities):
+    tagged_data, identifier = load_data(output_tags)
+    num_tags = len(int2tags) - 1
+    
+    correct = [0]* num_tags
+    guessed = [0] * num_tags
+    gold_correct = [0] * num_tags
+
+    assert len(tagged_data) == len(confidences)
+    for i in range(len(tagged_data)):
+        sentence = tagged_data[i][0]
+        tags     = tagged_data[i][1]
+        tag_confs = confidences[i]
+        ident = identifier[i]
+
+        gold_ents = ident.split(',')[:-1] #Throw away title
+
+
+        output_pred_line, entity_confidences, entity_cnts = predict_mode(sentence, tags, tag_confs, cities)
+        predictions = output_pred_line.split(" ### ")
+
+        assert len(gold_ents) == len(predictions)
+
+        for index in range(len(gold_ents)):            
+            match = evaluatePrediction(predictions[index], gold_ents[index])
+            if match == 'skip':
+                continue
+            else:
+                gold_correct[index] += 1
+                if match == "no_predict":
+                    continue
+                if match == 1:
+                    correct[index] += 1
+                guessed[index] += 1
+
+    helper.printScores(correct, guessed, gold_correct)
+
+# Takes a ,;| seperated list of gold ents and a  prediction
+# Returns 'skip' if gold is unknown, 'no_predict' if no prediction was made, 
+# 1 if prediction in gold, and 0 if prediction not in gold
+def evaluatePrediction(prediction, gold):
+    if prediction == 'unknown':
+        return 'no_predict'
+    if gold       == 'unknown':
+        return 'skip'
+
+    return prediction in gold
+
 # get mode of list l, returns "" if empty
 #l consists of tuples (value, confidence)
 def get_mode(l):
@@ -360,7 +413,12 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     return dataY, dataYconfidences
 
 if __name__ == "__main__":
-    trained_model = "trained_model2.p" #sys.argv[1]
-    testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" #sys.argv[2]
+    if mode == "EMA":
+        trained_model = "trained_model.EMA.p" 
+        testing_file = "../data/tagged_data/EMA/dev.tag" 
+    elif mode == "Shooter":
+        trained_model = "trained_model2.p" 
+        testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" 
+
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

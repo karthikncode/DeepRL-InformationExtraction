@@ -89,7 +89,7 @@ else:
 globalIndx = 0
 
 for fileName in fileNames:
-    for listNum in range(1,numLists):
+    for listNum in range(numLists):
         print "LIST", listNum
 
         #read the file

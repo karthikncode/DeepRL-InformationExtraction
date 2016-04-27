@@ -152,7 +152,17 @@ Performance by label (#match, #model, #ref)    (precision, recall, F1):
 ###########################################################
 Ent level
 ###########################################################
-Affected-Food-Product ( 27, 37, 39)( 0.7297, 0.6923, 0.7105)
-Produced-Location ( 21, 29, 38)( 0.7241, 0.5526, 0.6268)
-Adulterant(s) ( 19, 32, 39)( 0.5937, 0.4871, 0.5352)
+    Affected-Food-Product ( 27, 37, 39) ( 0.7297, 0.6923, 0.7105)
+    Produced-Location ( 21, 29, 38)     ( 0.7241, 0.5526, 0.6268)
+    Adulterant(s) ( 19, 32, 39)         ( 0.5937, 0.4871, 0.5352)
+
+
+python vec_consolidate.py dloads/EMA/train.extra 1 trained_model.EMA.p consolidated/vec_train.EMA.p
+
+python consolidate.py dloads/EMA/train.extra 1 trained_model.EMA.p  consolidated/train+context.EMA.p consolidated/vec_train.EMA.p
+
+
+python vec_consolidate.py dloads/EMA/dev.extra 1 trained_model.EMA.p consolidated/vec_dev.EMA.p
+
+python consolidate.py dloads/EMA/dev.extra 1 trained_model.EMA.p  consolidated/dev+context.EMA.p consolidated/vec_dev.EMA.p
 

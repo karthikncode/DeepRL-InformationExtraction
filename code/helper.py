@@ -1,6 +1,5 @@
 import json
 import pickle
-import nltk.data, nltk.tag
 import constants
 
 MODE= constants.mode
@@ -8,9 +7,8 @@ MODE= constants.mode
 
 def load_constants():
     global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals, other_features_names, \
-        tagger, adulterants, foods
+        adulterants, foods
 
-    tagger = nltk.data.load(nltk.tag._POS_TAGGER)
     cities = pickle.load(open('../data/constants/cities.p','rb'))
 
     if MODE == 'Shooter':
@@ -94,9 +92,6 @@ def is_ordinal_word(word):
 
 def is_ordinal_num(word):
     return contains_digit(word) and (word.endswith('th') or word.endswith('nd') or word.endswith('st'))
-
-def part_of_speech(word):
-    return tagger.tag([word])[0][1]
 
 def captilized(word):
     return word.istitle()

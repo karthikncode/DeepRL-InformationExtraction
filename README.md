@@ -1,4 +1,4 @@
-## Information-Extraction with Reinforcement Learning
+## Information Extraction with Reinforcement Learning
 
 This is the code and data for the paper [Improving Information Extraction by Acquiring External Evidence with Reinforcement Learning](http://arxiv.org/abs/1603.07954).
 

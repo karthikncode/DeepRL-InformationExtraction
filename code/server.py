@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
 from classifier import Classifier
 import constants
+import re
 
 DEBUG = False
 ANALYSIS = False
@@ -753,12 +754,14 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                     #original article
                     article = [w.lower() for w in ARTICLES[indx][0]] #need only the tokens, not tags
                 else:
-                    article = word_tokenize(DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower())
+                    raw_article = DOWNLOADED_ARTICLES[indx][listNum][articleNum-1].lower()
+                    cleaned_article = re.sub(r'[^\x00-\x7F]+',' ', raw_article)
+                    article = word_tokenize(cleaned_article)
                 for entityNum, entity in enumerate(entities):
                     vec = []
                     phrase = []
 
-                    if entityNum == 0: #shooter case
+                    if entityNum == 0 or constants.mode == 'EMA': #shooter case or EMA mode
                         entity = set(entity.split('|'))
                         for i, word in enumerate(article):
                             if word in entity:
@@ -813,7 +816,11 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
 
                     #now store the vector
                     CONTEXT[indx][listNum][articleNum].append(vec)
-                    assert(len(CONTEXT[indx][listNum][articleNum]) <= 4)
+                    try:
+                        assert(len(CONTEXT[indx][listNum][articleNum]) <= NUM_ENTITIES)
+                    except:
+                        pdb.set_trace()
+
 
     print "done."
     return CONTEXT

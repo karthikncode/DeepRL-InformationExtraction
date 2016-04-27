@@ -43,7 +43,7 @@ class Classifier(object):
                                 [supporting_article_index][entity_index]
                         original_entity = query[0][entity_index].strip().lower()
                         entity = supporting_article[entity_index].strip().lower()
-                        if entity == '':
+                        if entity == '' or entity == 'unknown':
                             continue
                         entity_match = [1, 0] if original_entity == entity else [0, 1]
 
@@ -61,26 +61,20 @@ class Classifier(object):
                         #Extract out label for this article (ie. is label correct)
                         gold_entity = train_identifiers[article_index]\
                                       [entity_index].strip().lower()
-                        if gold_entity == '':
+                        if gold_entity == '' or gold_entity == 'unknown' :
                             continue
 
-                        #special handling for shooterName (entity_index = 0)
-                        if entity_index == 0:
-                            entity = set(entity.split('|'))
-                            gold_entity = set(gold_entity.split('|'))
-                            if len(entity.intersection(gold_entity)) > 0:
-                                label = 1
-                            else:
-                                label = 0
-                        else:
-                            label = int(gold_entity == entity)
+                        label = int(entity in gold_entity )
 
                         ## Only if gold entity and the entity aren't empty,
                         ## we add this as a training example
                         X.append(features)
                         Y.append(label)
             assert( len(X) == len(Y))
-
+            print "set(y)", set(Y)
+            print 'Y', Y
+            print 'len(X), len(Y)', len(X), len(Y)
+            raw_input()
             classifiers[entity_index].fit(X,Y)
             print "CLASSIFIER INDEX", entity_index
             print "Ratio of Labels being ones is ", sum(Y)*1./len(Y)

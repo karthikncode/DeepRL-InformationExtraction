@@ -17,6 +17,7 @@ import argparse
 from random import shuffle
 from operator import itemgetter
 from server import loadFile, computeContext
+import pdb
 
 WORD_LIMIT = 1000
 tfidf_vectorizer = TfidfVectorizer()
@@ -78,7 +79,6 @@ def extractEntitiesWithConfidences(article):
     assert sum(split) == 0
     return result
 
-
 ########################### SCRIPT ########################################
 
 if ',' in fileName:
@@ -109,6 +109,7 @@ for fileName in fileNames:
         for indx in range(len(articles)):
             DOWNLOADED_ARTICLES[indx].append(downloaded_articles[indx])
 
+
         assert(len(articles)>0 and len(ARTICLES) == len(articles))
 
         print "Calculating ENTITIES and CONFIDENCES...\n"
@@ -127,8 +128,8 @@ for fileName in fileNames:
                 ENTITIES[indx+globalIndx][listNum][j+1], CONFIDENCES[indx+globalIndx][listNum][j+1] = entities, confidences
             # pdb.set_trace()
         print    
-
         globalIndx += len(articles)
+
     ARTICLES2 += ARTICLES
     TITLES2 += TITLES
     IDENTIFIERS2 += IDENTIFIERS
@@ -144,9 +145,9 @@ for indx, article in enumerate(ARTICLES):
         allArticles += DOWNLOADED_ARTICLES[indx][i]
 
     tfidf_matrix = tfidf_vectorizer.fit_transform(allArticles)
-
     cnt = 1
-    for listNum, sublist in enumerate(DOWNLOADED_ARTICLES[indx]):
+    for listNum in range(len(DOWNLOADED_ARTICLES[indx])):
+        sublist = DOWNLOADED_ARTICLES[indx][listNum]
         if len(sublist)>0:
             COSINE_SIM[indx][listNum] = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[cnt:cnt+len(sublist)])[0]
         else:

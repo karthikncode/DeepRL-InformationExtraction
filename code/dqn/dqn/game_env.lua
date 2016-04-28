@@ -19,6 +19,15 @@ function env:__init(args)
         connect = "tcp://127.0.0.1:" .. args.zmq_port;
     }
 
+    if args.mode == 'Shooter' then
+        self.actions = {0,1,2,3,4,5,999} -- SHooter
+        -- actions for selecting each entity or stopping
+        -- Action 5 - ignore all entities
+        -- Action 999 - take all entities
+    else
+        self.actions = {0,1,2,3,4,999}  --EMA
+    end
+
 end
 
 function env:process_msg(msg)    
@@ -65,7 +74,6 @@ end
 
 
 function env:getActions()   
-    return {0,1,2,3,4,5,999} -- actions for selecting each entity or stopping
-    -- Action 5 - ignore all entities
-    -- Action 999 - take all entities
+    return self.actions
+
 end

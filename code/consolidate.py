@@ -128,8 +128,8 @@ for fileName in fileNames:
                 ENTITIES[indx+globalIndx][listNum][j+1], CONFIDENCES[indx+globalIndx][listNum][j+1] = entities, confidences
             # pdb.set_trace()
         print    
-        globalIndx += len(articles)
-
+    
+    globalIndx += len(articles)
     ARTICLES2 += ARTICLES
     TITLES2 += TITLES
     IDENTIFIERS2 += IDENTIFIERS

@@ -26,12 +26,12 @@ COUNT_ZERO = False
 int2tags = constants.int2tags
 
 NUM_ENTITIES = len(int2tags) - 1
-NUM_QUERY_TYPES = 5
+NUM_QUERY_TYPES = NUM_ENTITIES + 1
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
 CONTEXT_TYPE = None
 STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
-STOP_ACTION = 4
+STOP_ACTION = NUM_ENTITIES
 IGNORE_ALL = STOP_ACTION + 1
 ACCEPT_ALL = 999 #arbitrary
 
@@ -902,7 +902,7 @@ def main(args):
     if args.evalOutFile != '':
         evalOutFile = open(args.evalOutFile, 'w')
 
-    # pdb.set_trace()
+    pdb.set_trace()
 
     #server setup
     port = args.port

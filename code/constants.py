@@ -14,8 +14,7 @@ if mode == "Shooter":
 elif mode == "EMA":
     # for EMA
     int2tags = \
-    ['TAG',\
-    'Affected-Food-Product',\
+    ['Affected-Food-Product',\
     'Produced-Location',\
     'Adulterant(s)']
     tags2int = \

@@ -426,31 +426,29 @@ class Environment:
             #all other tags
             for i in range(NUM_ENTITIES):
                 if goldEntities[i] != 'unknown':
-
                     
-                    
-
                     #old eval
-                    # gold = set(splitBars(goldEntities[i].lower()))
-                    # pred = set(splitBars(predEntities[i].lower()))
-                    # correct = len(gold.intersection(pred))
+                    gold = set(splitBars(goldEntities[i].lower()))
+                    pred = set(splitBars(predEntities[i].lower()))
+                    correct = len(gold.intersection(pred))
 
-                    # if shooterLenientEval:
-                    #     CORRECT[int2tags[i]] += (1 if correct> 0 else 0)
-                    #     GOLD[int2tags[i]] += (1 if len(gold) > 0 else 0)
-                    #     PRED[int2tags[i]] += (1 if len(pred) > 0 else 0)
-                    # else:
-                    #     CORRECT[int2tags[i]] += correct
-                    #     GOLD[int2tags[i]] += len(gold)
-                    #     PRED[int2tags[i]] += len(pred)
+                    if shooterLenientEval:
+                        CORRECT[int2tags[i]] += (1 if correct> 0 else 0)
+                        GOLD[int2tags[i]] += (1 if len(gold) > 0 else 0)
+                        PRED[int2tags[i]] += (1 if len(pred) > 0 else 0)
+                    else:
+                        CORRECT[int2tags[i]] += correct
+                        GOLD[int2tags[i]] += len(gold)
+                        PRED[int2tags[i]] += len(pred)
 
-                    pred = predEntities[i].lower()
-                    gold = goldEntities[i].lower()
-                    if pred in gold:
-                        CORRECT[int2tags[i]] += 1
-                    GOLD[int2tags[i]] += 1
-                    if pred != 'unknown':
-                        PRED[int2tags[i]] += 1
+                    #new eval (Adam)
+                    # pred = predEntities[i].lower()
+                    # gold = goldEntities[i].lower()
+                    # if pred in gold:
+                    #     CORRECT[int2tags[i]] += 1
+                    # GOLD[int2tags[i]] += 1
+                    # if pred != 'unknown':
+                    #     PRED[int2tags[i]] += 1
 
                     
         if evalOutFile:

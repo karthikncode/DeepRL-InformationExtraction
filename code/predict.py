@@ -14,9 +14,9 @@ import constants
 
 p = inflect.engine()
 
-int2tags = constants.int2tags
+int2tags = ['TAG'] + constants.int2tags #since the constants file does not include the 'TAG' tag
 tags2int = constants.tags2int
-tags = range(len(int2tags))
+tags = range(len(int2tags)) 
 
 helper.load_constants()
 mode = constants.mode

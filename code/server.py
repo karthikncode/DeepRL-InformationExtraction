@@ -825,6 +825,9 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
     print "done."
     return CONTEXT
 
+def splitDict(dict, start, end):
+        return [dict[i] for i in range(start, end)]
+
 def main(args):
     global ENTITIES, CONFIDENCES, COSINE_SIM, CONTEXT
     global TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM, TRAIN_CONTEXT
@@ -881,9 +884,43 @@ def main(args):
     elif args.classifierEval:
         print args.trainEntities
         print args.testEntities
-        baseline = Classifier(TRAIN_ENTITIES, TRAIN_CONFIDENCES, TRAIN_COSINE_SIM,\
-                 TEST_ENTITIES, TEST_CONFIDENCES, TEST_COSINE_SIM)
-        baseline.trainAndEval(train_identifiers, test_identifiers, args.entity, COUNT_ZERO)
+
+
+        m = "DEV"
+
+        if  m == "DEV":
+            CLS_TRAIN_ENTITIES = splitDict(TRAIN_ENTITIES, 42, len(TRAIN_ENTITIES) )
+            CLS_TRAIN_CONFIDENCES = splitDict(TRAIN_CONFIDENCES, 42, len(TRAIN_ENTITIES) )
+            CLS_TRAIN_COSINE_SIM = splitDict(TRAIN_COSINE_SIM, 42, len(TRAIN_ENTITIES) )
+            CLS_TRAIN_CONTEXT = splitDict(TRAIN_CONTEXT, 42, len(TRAIN_ENTITIES) )
+            CLS_train_identifiers = splitDict(train_identifiers,  42, len(TRAIN_ENTITIES) )
+                     
+            CLS_TEST_ENTITIES = splitDict(TRAIN_ENTITIES, 0, 42 )
+            CLS_TEST_CONFIDENCES = splitDict(TRAIN_CONFIDENCES, 0, 42 )
+            CLS_TEST_COSINE_SIM = splitDict(TRAIN_COSINE_SIM, 0, 42 )
+            CLS_TEST_CONTEXT= splitDict(TRAIN_CONTEXT, 0, 42 )
+
+            CLS_test_identifiers   = splitDict(train_identifiers, 0, 42 )
+        elif m == "TEST":
+
+            CLS_TRAIN_ENTITIES =TRAIN_ENTITIES 
+            CLS_TRAIN_CONFIDENCES =TRAIN_CONFIDENCES 
+            CLS_TRAIN_COSINE_SIM =TRAIN_COSINE_SIM 
+            CLS_TRAIN_CONTEXT =TRAIN_CONTEXT 
+                     
+            CLS_TEST_ENTITIES = TEST_ENTITIES 
+            CLS_TEST_CONFIDENCES = TEST_CONFIDENCES 
+            CLS_TEST_COSINE_SIM = TEST_COSINE_SIM 
+            CLS_TEST_CONTEXT=     TEST_CONTEXT
+
+       
+            CLS_train_identifiers = train_identifiers
+            CLS_test_identifiers   = test_identifiers
+
+        baseline = Classifier(CLS_TRAIN_ENTITIES, CLS_TRAIN_CONFIDENCES, CLS_TRAIN_COSINE_SIM, CLS_TRAIN_CONTEXT,\
+                 CLS_TEST_ENTITIES, CLS_TEST_CONFIDENCES, CLS_TEST_COSINE_SIM, CLS_TEST_CONTEXT)
+        
+        baseline.trainAndEval(CLS_train_identifiers, CLS_test_identifiers, args.entity, COUNT_ZERO)
         return
 
 

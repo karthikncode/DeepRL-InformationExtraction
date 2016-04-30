@@ -24,7 +24,7 @@ def load_constants():
             number_as_words = set(json.load(outfile))
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
-        other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
+        other_features = [is_capital,is_digit,is_male_filsrst_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
         other_feature_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city','is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num', 'is_adulterant']
     #other_features = []
     elif MODE == 'EMA':
@@ -38,6 +38,10 @@ def load_constants():
             word_ordinals = set(json.load(outfile))
         other_features = [is_capital,is_full_city,is_partial_city,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant, is_food]
         other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',' is_adulterant', 'is_food']
+
+
+    #Ideas: is_country, is_partial_country, is food, is_partial_food, is_aduletrant, is_partial_adulteran, remove_number_shit, 
+    # is_region, is_partial_region, 
 
     #TODO: check is_food()
     

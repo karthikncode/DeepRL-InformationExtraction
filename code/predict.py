@@ -24,6 +24,7 @@ mode = constants.mode
 # main loop
 def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_predictions="output.pred"):
     test_data, identifier = load_data(testing_file)
+    print 'len(identifier)', len(identifier)
 
     evaluate = True
 
@@ -341,12 +342,13 @@ def eval_mode_batch(output_tags, confidences, cities):
 # Returns 'skip' if gold is unknown, 'no_predict' if no prediction was made, 
 # 1 if prediction in gold, and 0 if prediction not in gold
 def evaluatePrediction(prediction, gold):
-    if prediction == 'unknown':
-        return 'no_predict'
     if gold       == 'unknown':
         return 'skip'
+    if prediction == 'unknown':
+        return 'no_predict'
+    gold_set = set([s.strip() for s in gold.split('|')])
 
-    return prediction in gold
+    return prediction in gold_set
 
 # get mode of list l, returns "" if empty
 #l consists of tuples (value, confidence)

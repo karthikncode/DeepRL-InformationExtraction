@@ -430,6 +430,8 @@ class Environment:
                     #old eval
                     gold = set(splitBars(goldEntities[i].lower()))
                     pred = set(splitBars(predEntities[i].lower()))
+                    if 'unknown' in pred:
+                        pred = set()                    
                     correct = len(gold.intersection(pred))
 
                     if shooterLenientEval:
@@ -440,6 +442,8 @@ class Environment:
                         CORRECT[int2tags[i]] += correct
                         GOLD[int2tags[i]] += len(gold)
                         PRED[int2tags[i]] += len(pred)
+
+                    # print i, pred, "###", gold, "$$$", correct                    
 
                     #new eval (Adam)
                     # pred = predEntities[i].lower()

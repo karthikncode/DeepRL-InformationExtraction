@@ -123,7 +123,7 @@ class Environment:
             ENTITIES[self.indx][0][0] = self.prevEntities
             CONFIDENCES[self.indx][0][0] = self.prevConfidences
 
-        #store the original entities before updateing state
+        #store the original entities before updating state
         self.originalEntities = self.prevEntities
 
 
@@ -353,8 +353,6 @@ class Environment:
             return rewards[self.entity]
 
 
-
-
     def calculateStatSign(self, oldEntities, newEntities):
         if constants.mode == 'Shooter':
             rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
@@ -443,7 +441,7 @@ class Environment:
                         GOLD[int2tags[i]] += len(gold)
                         PRED[int2tags[i]] += len(pred)
 
-                    # print i, pred, "###", gold, "$$$", correct                    
+                    print i, pred, "###", gold, "$$$", correct                    
 
                     #new eval (Adam)
                     # pred = predEntities[i].lower()
@@ -706,11 +704,11 @@ def baselineEval(articles, identifiers, args):
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
     for indx in range(len(articles)):
-        print "INDX:", indx
+        print "INDX:", indx, '/', len(articles)
         originalArticle = articles[indx][0] #since article has words and tags
         newArticles = [[] for i in range(NUM_QUERY_TYPES)]
         goldEntities = identifiers[indx]
-        env = Environment(originalArticle, newArticles, goldEntities, indx, args, True)
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args, evalMode=True)
         env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"
@@ -903,13 +901,20 @@ def main(args):
 
 
     #starting assignments
-    ENTITIES = TRAIN_ENTITIES
-    CONFIDENCES = TRAIN_CONFIDENCES
-    COSINE_SIM = TRAIN_COSINE_SIM
-    CONTEXT = TRAIN_CONTEXT
-    articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
+    if not args.baselineEval and not args.thresholdEval and not args.confEval:
+        ENTITIES = TRAIN_ENTITIES
+        CONFIDENCES = TRAIN_CONFIDENCES
+        COSINE_SIM = TRAIN_COSINE_SIM
+        CONTEXT = TRAIN_CONTEXT
+        articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
+    else:
+        ENTITIES = TEST_ENTITIES
+        CONFIDENCES = TEST_CONFIDENCES
+        COSINE_SIM = TEST_COSINE_SIM
+        CONTEXT = TEST_CONTEXT
+        articles, titles, identifiers, downloaded_articles = test_articles, test_titles, test_identifiers, test_downloaded_articles
 
-    if args.baselineEval:
+    if args.baselineEval:        
         baselineEval(articles, identifiers, args)
         return
     elif args.thresholdEval:
@@ -1089,6 +1094,7 @@ def main(args):
                 print newstate[8:]
                 print "Entities:", env.prevEntities
                 print "Action:", action, query
+
             newstate, reward, terminal = env.step(action, query)
             terminal = 'true' if terminal else 'false'
 

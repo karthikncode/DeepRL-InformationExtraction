@@ -7,7 +7,7 @@ MODE= constants.mode
 
 def load_constants():
     global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals, other_features_names, \
-        adulterants, foods
+        adulterants, foods, adulterant_parts, country_names
 
     cities = pickle.load(open('../data/constants/cities.p','rb'))
 
@@ -24,10 +24,12 @@ def load_constants():
             number_as_words = set(json.load(outfile))
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
-        other_features = [is_capital,is_digit,is_male_filsrst_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
+        other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
         other_feature_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city','is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num', 'is_adulterant']
     #other_features = []
     elif MODE == 'EMA':
+        with open('../data/constants/adulterant_part.p','rb') as outfile:
+            adulterant_parts = set(pickle.load(outfile))
         with open('../data/constants/adulterants.p','rb') as outfile:
             adulterants = set(pickle.load(outfile))
         with open('../data/constants/foods.p','rb') as outfile:
@@ -36,19 +38,37 @@ def load_constants():
             number_as_words = set(json.load(outfile))
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
-        other_features = [is_capital,is_full_city,is_partial_city,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant, is_food]
-        other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',' is_adulterant', 'is_food']
-
-
-    #Ideas: is_country, is_partial_country, is food, is_partial_food, is_aduletrant, is_partial_adulteran, remove_number_shit, 
-    # is_region, is_partial_region, 
-
-    #TODO: check is_food()
-    
+        with open('../data/constants/country_names.p', 'rb') as outfile:
+            country_names = set(pickle.load(outfile))
+        other_features = [is_capital,is_full_city,is_partial_city,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, \
+        is_adulterant, is_food, is_country, is_adulterant_part, is_direction, is_region]
+        other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',\
+        'is_adulterant', 'is_food','is_country', 'is_adulterant_part', 'is_direction', 'is_region']
+        
     #IMP: adding train names to last names here. Comment below if you don't want this
     # last_names.update(train_names)
 
 
+# returns set where all elements of arr are split by delim, and flattened into a list
+def flatten(arr, delim):
+    result = []
+    for a in arr:
+        b = a.split(delim)
+        result.extend(b)
+    return result
+
+def is_adulterant_part(word):
+    return word in adulterant_parts
+
+def is_direction(word):
+    return word.lower() in ["east", "north", "west", "south"] or \
+    word.lower() in ["eastern", "northern", "western", "southern"]
+
+def is_region(word):
+    return word.lower() in ["asia", 'europe', 'america', "africa", "australia"]
+
+def is_country(word):
+    return word.lower() in country_names
 
 
 # other features, return true or false

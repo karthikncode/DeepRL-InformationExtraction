@@ -184,15 +184,19 @@ if __name__ == "__main__":
         test_file = "../data/tagged_data/EMA/dev.tag"
     elif mode == "Shooter":
         training_file = "../data/tagged_data/whole_text_full_city2/train.tag"
-        training_file = "../data/tagged_data/whole_text_full_city2/dev.tag"
+        test_file = "../data/tagged_data/whole_text_full_city2/dev.tag"
 
     evaluate = True # Set true to score classifier on dev
     if not evaluate:
         test_file = False
 
     trained_model = "trained_model.EMA.p" #sys.argv[2]
-    previous_n = 0 #sys.argv[3]
-    next_n = 4
+    if constants.mode == "EMA":
+        previous_n = 2 #sys.argv[3]
+        next_n = 2
+    else:
+        previous_n = 0 #sys.argv[3]
+        next_n = 4
     c = 10
     prune = 5
     main(training_file,trained_model,previous_n,next_n,c,prune, test_file)

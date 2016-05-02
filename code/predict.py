@@ -341,12 +341,22 @@ def eval_mode_batch(output_tags, confidences, cities):
 # Returns 'skip' if gold is unknown, 'no_predict' if no prediction was made, 
 # 1 if prediction in gold, and 0 if prediction not in gold
 def evaluatePrediction(prediction, gold):
-    if prediction == 'unknown':
-        return 'no_predict'
     if gold       == 'unknown':
         return 'skip'
+    if prediction == 'unknown':
+        return 'no_predict'
 
-    return prediction in gold
+    mode = "strict"
+
+    if mode == "strict":
+        gold_set = set([s.strip() for s in gold.split('|')])
+        return prediction in gold_set
+    elif mode == "loose":
+        return prediction in gold
+    elif mode == 'flex':
+        gold = gold.replace("|", "")
+        gold_set = set([s.strip() for s in gold.split(' ')])
+        return prediction in gold_set
 
 # get mode of list l, returns "" if empty
 #l consists of tuples (value, confidence)

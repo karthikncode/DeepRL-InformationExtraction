@@ -94,6 +94,8 @@ for fileName in fileNames:
 
         #read the file
         articles, titles, identifiers, downloaded_articles = loadFile(fileName+'.'+str(listNum))
+        print "LEN ARTICLES", len(articles)
+        print "final LEN IDENTIFIERS", len(IDENTIFIERS)
 
         #need this information only once (original articles)
         if listNum==0:
@@ -128,7 +130,7 @@ for fileName in fileNames:
                 ENTITIES[indx+globalIndx][listNum][j+1], CONFIDENCES[indx+globalIndx][listNum][j+1] = entities, confidences
             # pdb.set_trace()
         print    
-    
+
     globalIndx += len(articles)
     ARTICLES2 += ARTICLES
     TITLES2 += TITLES
@@ -156,11 +158,15 @@ for indx, article in enumerate(ARTICLES):
         # pdb.set_trace()
         cnt += len(sublist)
 
+
+
 #calculate the contexts
 CONTEXT1 = collections.defaultdict(ddd)
 CONTEXT2 = collections.defaultdict(ddd)
 computeContext(ENTITIES, CONTEXT1, ARTICLES, DOWNLOADED_ARTICLES, vectorizer1, CONTEXT_LENGTH)
 computeContext(ENTITIES, CONTEXT2, ARTICLES, DOWNLOADED_ARTICLES, vectorizer2, CONTEXT_LENGTH)
+print "final LEN ARTICLES", len(ARTICLES)
+print "final LEN IDENTIFIERS", len(IDENTIFIERS)
 
 #now to store everything
 pickle.dump([ARTICLES, TITLES, IDENTIFIERS, DOWNLOADED_ARTICLES, ENTITIES, CONFIDENCES, COSINE_SIM, CONTEXT1, CONTEXT2], open(sys.argv[4], "wb"))

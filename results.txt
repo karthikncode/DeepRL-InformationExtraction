@@ -34,7 +34,7 @@ STAGE 1: Entities on original article
 #############################################################
 MAX ENT TAGGER
 #############################################################
-shooterName f1: 0.452380952381
+shooterName f1: 0.452380952381python
 killedNum f1: 0.697530864198
 woundedNum f1: 0.686346863469
 city f1: 0.537671232877
@@ -111,7 +111,7 @@ N/A
    \                 |    \  \ - ~ ~ - /  /    |
          _____          ..-~             ~-..-~
         |     |   \~~~\.'                    `./~~~/
-       ---------   \__/                        \__/
+       ---------   \__/                        \__/ 
       .'  O    \     /               /       \  "
      (_____,    `._.'               |         }  \/~~~/
       `----.          /       }     |        /    \__/
@@ -139,30 +139,37 @@ Max Ent #food and adult features best
     Adulterant(s) ( 75, 153, 164)         ( 0.4901, 0.4573, 0.4731)
 #############################################################
 
-#############################################################
-CRF #adult only features best
-#############################################################
-Performance by label (#match, #model, #ref)    (precision, recall, F1):
-
-    Affected_Food_Product: (675, 972, 1287)    (0.6944, 0.5245, 0.5976)
-    Produced_Location: (89, 204, 318)          (0.4363, 0.2799, 0.3410)
-    Distributed_Location: (146, 289, 426)      (0.5052, 0.3427, 0.4084)
-
 
 ###########################################################
 Ent level
 ###########################################################
-    Affected-Food-Product ( 27, 37, 39) ( 0.7297, 0.6923, 0.7105)
-    Produced-Location ( 21, 29, 38)     ( 0.7241, 0.5526, 0.6268)
-    Adulterant(s) ( 19, 32, 39)         ( 0.5937, 0.4871, 0.5352)
 
 
-python vec_consolidate.py dloads/EMA/train.extra 1 trained_model.EMA.p consolidated/vec_train.EMA.p
+Affected-Food-Product ( 18, 37, 39)( 0.486486486486, 0.461538461538, 0.473684210526)
+Produced-Location ( 20, 29, 38)( 0.689655172414, 0.526315789474, 0.597014925373)
+Adulterant(s) ( 8, 32, 39)( 0.25, 0.205128205128, 0.225352112676)
 
-python consolidate.py dloads/EMA/train.extra 1 trained_model.EMA.p  consolidated/train+context.EMA.p consolidated/vec_train.EMA.p
 
 
-python vec_consolidate.py dloads/EMA/dev.extra 1 trained_model.EMA.p consolidated/vec_dev.EMA.p
+#############################################################
+#############################################################
 
-python consolidate.py dloads/EMA/dev.extra 1 trained_model.EMA.p  consolidated/dev+context.EMA.p consolidated/vec_dev.EMA.p
 
+#########################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lookahead = 0 x 4
+
+Affected-Food-Product ( 18, 36, 39)( 0.5, 0.461538461538, 0.48)
+Produced-Location ( 21, 28, 38)( 0.75, 0.552631578947, 0.636363636364)
+Adulterant(s) ( 8, 34, 39)( 0.235294117647, 0.205128205128, 0.219178082192)
+
+lookahead = 2 x 2
+Affected-Food-Product ( 21, 34, 39)( 0.617647058824, 0.538461538462, 0.575342465753)
+Produced-Location ( 21, 29, 38)( 0.724137931034, 0.552631578947, 0.626865671642)
+Adulterant(s) ( 17, 30, 39)( 0.566666666667, 0.435897435897, 0.492753623188)
+
+
+3x3
+Affected-Food-Product ( 21, 35, 39)( 0.6, 0.538461538462, 0.567567567568)
+Produced-Location ( 22, 26, 38)( 0.846153846154, 0.578947368421, 0.6875)
+Adulterant(s) ( 14, 28, 39)( 0.5, 0.358974358974, 0.417910447761)

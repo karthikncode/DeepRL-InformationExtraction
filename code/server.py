@@ -347,7 +347,7 @@ class Environment:
 
 
 
-        if self.entity == NUM_ENTITIES:
+        if self.entity == NUM_ENTITIES:            
             return sum(rewards)
         else:
             return rewards[self.entity]
@@ -428,8 +428,8 @@ class Environment:
                     #old eval
                     gold = set(splitBars(goldEntities[i].lower()))
                     pred = set(splitBars(predEntities[i].lower()))
-                    if 'unknown' in pred:
-                        pred = set()                    
+                    # if 'unknown' in pred:
+                        # pred = set()                    
                     correct = len(gold.intersection(pred))
 
                     if shooterLenientEval:
@@ -459,6 +459,7 @@ class Environment:
             evalOutFile.write("Pred: "+str(pred)+"\n")
             evalOutFile.write("Correct: "+str(correct)+"\n")
 
+    #TODO:use recall output for now. change this output later. 
     def oracleEvaluate(self, goldEntities, entityDic, confDic):
         # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
@@ -502,10 +503,7 @@ class Environment:
                         if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
                             bestCorrect[int2tags[i]] = correct
                             bestPred[int2tags[i]] = len(pred)
-                            bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
-                            # print "Correct: ", correct
-                            # print "Gold:", gold
-                            # print "pred:", pred
+                            bestConf[int2tags[i]] = confDic[stepNum][listNum][i]                        
                         if stepNum == 0 and listNum == 0:
                             GOLD[int2tags[i]] += len(gold)
                         if correct==0:
@@ -515,12 +513,13 @@ class Environment:
                     for i in range(NUM_ENTITIES): 
                         if goldEntities[i].lower() == 'unknown': continue  
                         gold = set(splitBars(goldEntities[i].lower()))
-                        pred = set(splitBars(predEntities[i].lower()))
-                        bestPred[int2tags[i]] = 1 if 'unknown' not in pred else bestPred[int2tags[i]]
-                        correct = 1 if len(gold.intersection(pred)) > 0 else 0
+                        pred = set(splitBars(predEntities[i].lower()))                  
+                        correct = 1. if len(gold.intersection(pred)) > 0 else 0
+
                         if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
                             bestCorrect[int2tags[i]] = correct
-                            
+                            bestPred[int2tags[i]] = 1 if len(pred) > 0 else 0
+                            # bestPred[int2tags[i]] = 1 if 'unknown' not in pred else bestPred[int2tags[i]]
                             bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
                             # print "Correct: ", correct
                             # print "Gold:", gold
@@ -1109,8 +1108,7 @@ def main(args):
         if message != "evalStart" and message != "evalEnd":
             #do article eval if terminal
             if evalMode and articleNum <= len(articles) and terminal == 'true':
-                if args.oracle:
-                    print "Using oracle eval"
+                if args.oracle:                    
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)

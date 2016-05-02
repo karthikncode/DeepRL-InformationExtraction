@@ -1,6 +1,6 @@
 
 mode = "EMA"
-
+# mode = "Shooter"
 
 if mode == "Shooter":
     #for Shooter DB

@@ -24,7 +24,6 @@ mode = constants.mode
 # main loop
 def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_predictions="output.pred"):
     test_data, identifier = load_data(testing_file)
-    print 'len(identifier)', len(identifier)
 
     evaluate = True
 
@@ -334,9 +333,6 @@ def eval_mode_batch(output_tags, confidences, cities):
                     continue
                 if match == 1:
                     correct[index] += 1
-                else:
-                    if index == 2:
-                        print 'missed adulterant', gold_ents[index]
                 guessed[index] += 1
 
     helper.printScores(correct, guessed, gold_correct)

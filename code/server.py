@@ -25,13 +25,13 @@ COUNT_ZERO = False
 #Global variables
 int2tags = constants.int2tags
 
-NUM_ENTITIES = len(int2tags) - 1
-NUM_QUERY_TYPES = 5
+NUM_ENTITIES = len(int2tags)
+NUM_QUERY_TYPES = NUM_ENTITIES + 1
 WORD_LIMIT = 1000
 CONTEXT_LENGTH = 3
 CONTEXT_TYPE = None
 STATE_SIZE = 4*NUM_ENTITIES+1 + 2*CONTEXT_LENGTH*NUM_ENTITIES
-STOP_ACTION = 4
+STOP_ACTION = NUM_ENTITIES
 IGNORE_ALL = STOP_ACTION + 1
 ACCEPT_ALL = 999 #arbitrary
 
@@ -78,6 +78,9 @@ evalMode = False
 STAT_POSITIVE, STAT_NEGATIVE = 0, 0 #stat. sign.
 
 CONTEXT = None
+
+def splitBars(w):
+    return [q.strip() for q in w.split('|')]
 
 #Environment for each episode
 class Environment:
@@ -236,9 +239,13 @@ class Environment:
 
         #modify self.state appropriately
         # print(self.bestEntities, entities)
-        matches = map(self.checkEquality, self.bestEntities.values()[1:-1], entities[1:-1])
-        matches.insert(0, self.checkEqualityShooter(self.bestEntities.values()[0], entities[0]))
-        matches.append(self.checkEqualityCity(self.bestEntities.values()[-1], entities[-1]))
+        if constants.mode == 'Shooter':
+            matches = map(self.checkEquality, self.bestEntities.values()[1:-1], entities[1:-1])
+            matches.insert(0, self.checkEqualityShooter(self.bestEntities.values()[0], entities[0]))
+            matches.append(self.checkEqualityCity(self.bestEntities.values()[-1], entities[-1]))
+        else:
+            matches = map(self.checkEqualityShooter, self.bestEntities.values(), entities)
+
         # pdb.set_trace()
         self.state = [0 for i in range(STATE_SIZE)]
         for i in range(NUM_ENTITIES):
@@ -259,7 +266,7 @@ class Environment:
             self.state[4*NUM_ENTITIES] = 0
 
         #selectively mask states
-        if self.entity != 4:
+        if self.entity != NUM_ENTITIES:
             for j in range(NUM_ENTITIES):
                 if j != self.entity:
                     self.state[j] = 0
@@ -270,7 +277,7 @@ class Environment:
         if nextArticle and CONTEXT_TYPE != 0:
             j = 4*NUM_ENTITIES+1     
             for q in range(NUM_ENTITIES):
-                if self.entity == 4 or self.entity == q:
+                if self.entity == NUM_ENTITIES or self.entity == q:
                     self.state[j:j+2*CONTEXT_LENGTH] = CONTEXT[self.indx][listNum][articleIndx+1][q]
                 j += 2*CONTEXT_LENGTH
 
@@ -292,8 +299,8 @@ class Environment:
     def checkEqualityShooter(self, e1, e2):
         if e2 == '': return 0.
 
-        gold = set(e2.lower().split('|'))
-        pred = set(e1.lower().split('|'))
+        gold = set(splitBars(e2.lower()))
+        pred = set(splitBars(e1.lower()))
         correct = len(gold.intersection(pred))
         prec = float(correct)/len(pred)
         rec = float(correct)/len(gold)
@@ -315,73 +322,62 @@ class Environment:
 
 
     def calculateReward(self, oldEntities, newEntities):
-        rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
-                    int(self.checkEquality(newEntities[2], self.goldEntities[2])) - int(self.checkEquality(oldEntities[2], self.goldEntities[2]))]
+        if constants.mode == 'Shooter':
+            rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
+                        int(self.checkEquality(newEntities[2], self.goldEntities[2])) - int(self.checkEquality(oldEntities[2], self.goldEntities[2]))]
 
 
-        #add in shooter reward
-        if self.goldEntities[0]:
-            rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
-                    - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+            #add in shooter reward
+            if self.goldEntities[0]:
+                rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
+                        - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+            else:
+                rewards.insert(0, 0.)
+
+            # add in city reward
+            rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
+                    - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
         else:
-            rewards.insert(0, 0.)
-
-        # add in city reward
-        rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
-                - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
-
-        # if shooter_reward != 0:
-        #     print "Shooter reward", shooter_reward
-
-        if DEBUG:
-            #print
-            print "oldEntities", oldEntities
-            print "newEntities:", newEntities
-            print "goldEntities:", self.goldEntities
-            print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
-            print rewards
-
-        #TODO: if terminal, give some reward based on how many entities are correct?
-
-        # pdb.set_trace()
+            rewards = []
+            for i in range(len(newEntities)):
+                if self.goldEntities[i] != 'unknown':
+                    rewards.append(self.checkEqualityShooter(newEntities[i], self.goldEntities[i]) - self.checkEqualityShooter(oldEntities[i], self.goldEntities[i]))
+                else:
+                    rewards.append(0.)
 
 
-        if self.entity == 4:
+
+        if self.entity == NUM_ENTITIES:
             return sum(rewards)
         else:
             return rewards[self.entity]
 
+
+
+
     def calculateStatSign(self, oldEntities, newEntities):
-        rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
-                    int(self.checkEquality(newEntities[2], self.goldEntities[2])) - int(self.checkEquality(oldEntities[2], self.goldEntities[2]))]
+        if constants.mode == 'Shooter':
+            rewards = [int(self.checkEquality(newEntities[1], self.goldEntities[1])) - int(self.checkEquality(oldEntities[1], self.goldEntities[1])),
+                        int(self.checkEquality(newEntities[2], self.goldEntities[2])) - int(self.checkEquality(oldEntities[2], self.goldEntities[2]))]
 
 
-        #add in shooter reward
-        if self.goldEntities[0]:
-            rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
-                    - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+            #add in shooter reward
+            if self.goldEntities[0]:
+                rewards.insert(0, self.checkEqualityShooter(newEntities[0], self.goldEntities[0]) \
+                        - self.checkEqualityShooter(oldEntities[0], self.goldEntities[0]))
+            else:
+                rewards.insert(0, 0.)
+
+            # add in city reward
+            rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
+                    - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
         else:
-            rewards.insert(0, 0.)
-
-        # add in city reward
-        rewards.append(self.checkEqualityCity(newEntities[-1], self.goldEntities[-1]) \
-                - self.checkEqualityCity(oldEntities[-1], self.goldEntities[-1]))
-
-        # if shooter_reward != 0:
-        #     print "Shooter reward", shooter_reward
-
-        if DEBUG:
-            #print
-            print "oldEntities", oldEntities
-            print "newEntities:", newEntities
-            print "goldEntities:", self.goldEntities
-            print "matches:", sum(map(self.checkEquality, newEntities[1:], self.goldEntities[1:]))
-            print rewards            
-
-        #TODO: if terminal, give some reward based on how many entities are correct?
-
-        # pdb.set_trace()
-
+            rewards = []
+            for i in range(len(newEntities)):
+                if self.goldEntities[i] != 'unknown':
+                    rewards.append(self.checkEqualityShooter(newEntities[i], self.goldEntities[i]) - self.checkEqualityShooter(oldEntities[i], self.goldEntities[i]))
+                else:
+                    rewards.append(0.)
 
         return rewards
         
@@ -392,54 +388,73 @@ class Environment:
     def evaluateArticle(self, predEntities, goldEntities, shooterLenientEval, shooterLastName, evalOutFile):
         # print "Evaluating article", predEntities, goldEntities
 
-        #shooterName first: only add this if gold contains a valid shooter
-        if goldEntities[0]!='':
-            if shooterLastName:
-                gold = set(goldEntities[0].lower().split('|')[-1:])
-            else:
-                gold = set(goldEntities[0].lower().split('|'))
+        if constants.mode == 'Shooter':
+            #shooterName first: only add this if gold contains a valid shooter
+            if goldEntities[0]!='':
+                if shooterLastName:
+                    gold = set(splitBars(goldEntities[0].lower())[-1:])
+                else:
+                    gold = set(splitBars(goldEntities[0].lower()))
 
-            pred = set(predEntities[0].lower().split('|'))
-            correct = len(gold.intersection(pred))
+                pred = set(splitBars(predEntities[0].lower()))
+                correct = len(gold.intersection(pred))
 
-            # print "Gold:",goldEntities
-            # print "Pred:",predEntities
-            # print gold, pred, correct
-            # pdb.set_trace()
-
-            if shooterLenientEval:
-                CORRECT[int2tags[0]] += (1 if correct> 0 else 0)
-                GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
-                PRED[int2tags[0]] += (1 if len(pred) > 0 else 0)
-            else:
-                CORRECT[int2tags[0]] += correct
-                GOLD[int2tags[0]] += len(gold)
-                PRED[int2tags[0]] += len(pred)
-
-            # FOR DEBUGGING
-            # if correct != len(gold):
-            #     print "Gold:", gold
-            #     print "Pred:", pred
-            #     #print all articles
-            #     # for i in range(len(self.allArticles)):
-            #     #     print self.allArticles[i]
-            #     #     print "----------------------------"
-            #     pdb.set_trace()
+                if shooterLenientEval:
+                    CORRECT[int2tags[0]] += (1 if correct> 0 else 0)
+                    GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+                    PRED[int2tags[0]] += (1 if len(pred) > 0 else 0)
+                else:
+                    CORRECT[int2tags[0]] += correct
+                    GOLD[int2tags[0]] += len(gold)
+                    PRED[int2tags[0]] += len(pred)
 
 
-        #all other tags
-        for i in range(1, NUM_ENTITIES):
-            if COUNT_ZERO or goldEntities[i] != 'zero':
-                # gold = set(goldEntities[i].lower().split())
-                # pred = set(predEntities[i].lower().split())
-                # correct = len(gold.intersection(pred))
-                # GOLD[int2tags[i]] += len(gold)
-                # PRED[int2tags[i]] += len(pred)
-                GOLD[int2tags[i]] += 1
-                PRED[int2tags[i]] += 1
-                if predEntities[i].lower() == goldEntities[i].lower():
-                    CORRECT[int2tags[i]] += 1
 
+            #all other tags
+            for i in range(1, NUM_ENTITIES):
+                if COUNT_ZERO or goldEntities[i] != 'zero':
+                    # gold = set(goldEntities[i].lower().split())
+                    # pred = set(predEntities[i].lower().split())
+                    # correct = len(gold.intersection(pred))
+                    # GOLD[int2tags[i]] += len(gold)
+                    # PRED[int2tags[i]] += len(pred)
+                    GOLD[int2tags[i]] += 1
+                    PRED[int2tags[i]] += 1
+                    if predEntities[i].lower() == goldEntities[i].lower():
+                        CORRECT[int2tags[i]] += 1
+        else:
+            #all other tags
+            for i in range(NUM_ENTITIES):
+                if goldEntities[i] != 'unknown':
+                    
+                    #old eval
+                    gold = set(splitBars(goldEntities[i].lower()))
+                    pred = set(splitBars(predEntities[i].lower()))
+                    if 'unknown' in pred:
+                        pred = set()                    
+                    correct = len(gold.intersection(pred))
+
+                    if shooterLenientEval:
+                        CORRECT[int2tags[i]] += (1 if correct> 0 else 0)
+                        GOLD[int2tags[i]] += (1 if len(gold) > 0 else 0)
+                        PRED[int2tags[i]] += (1 if len(pred) > 0 else 0)
+                    else:
+                        CORRECT[int2tags[i]] += correct
+                        GOLD[int2tags[i]] += len(gold)
+                        PRED[int2tags[i]] += len(pred)
+
+                    # print i, pred, "###", gold, "$$$", correct                    
+
+                    #new eval (Adam)
+                    # pred = predEntities[i].lower()
+                    # gold = goldEntities[i].lower()
+                    # if pred in gold:
+                    #     CORRECT[int2tags[i]] += 1
+                    # GOLD[int2tags[i]] += 1
+                    # if pred != 'unknown':
+                    #     PRED[int2tags[i]] += 1
+
+                    
         if evalOutFile:
             evalOutFile.write("--------------------\n")
             evalOutFile.write("Gold: "+str(gold)+"\n")
@@ -447,7 +462,7 @@ class Environment:
             evalOutFile.write("Correct: "+str(correct)+"\n")
 
 
-
+    #TODO for EMA
     def oracleEvaluate(self, goldEntities, entityDic, confDic):
         # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
@@ -460,9 +475,9 @@ class Environment:
 
                 #shooterName first: only add this if gold contains a valid shooter
                 if goldEntities[0]!='':
-                    gold = set(goldEntities[0].lower().split('|'))
+                    gold = set(splitBars(goldEntities[0].lower()))
 
-                    pred = set(predEntities[0].lower().split('|'))
+                    pred = set(splitBars(predEntities[0].lower()))
                     correct = 1. if len(gold.intersection(pred)) > 0 else 0
 
                     if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
@@ -503,7 +518,7 @@ class Environment:
             CORRECT[int2tags[i]] += bestCorrect[int2tags[i]]
             EVALCONF[int2tags[i]].append(bestConf[int2tags[i]])
 
-
+    #TODO for EMA
     def thresholdEvaluate(self, goldEntities, thres=0.0):
         # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
@@ -553,6 +568,7 @@ class Environment:
         self.evaluateArticle(bestEntities, goldEntities, False, False, False)
 
 
+    #TODO for EMA
     def confEvaluate(self, goldEntities, thres=0.0):
         # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
@@ -592,6 +608,7 @@ class Environment:
 
         self.evaluateArticle(bestEntities, goldEntities, False, False, False)
 
+    #TODO for EMA
     #TODO: use conf or 1 for mode calculation
     def majorityVote(self, entityList):
         if not entityList: return '',0.
@@ -663,6 +680,7 @@ def loadFile(filename):
 
     return articles, titles, identifiers, downloaded_articles
 
+
 def baselineEval(articles, identifiers, args):
     global CORRECT, GOLD, PRED
     CORRECT = collections.defaultdict(lambda:0.)
@@ -671,7 +689,7 @@ def baselineEval(articles, identifiers, args):
     for indx in range(len(articles)):
         print "INDX:", indx
         originalArticle = articles[indx][0] #since article has words and tags
-        newArticles = [[] for i in range(5)]
+        newArticles = [[] for i in range(NUM_QUERY_TYPES)]
         goldEntities = identifiers[indx]
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, True)
         env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
@@ -762,7 +780,7 @@ def computeContext(ENTITIES, CONTEXT, ARTICLES, DOWNLOADED_ARTICLES, vectorizer,
                     phrase = []
 
                     if entityNum == 0 or constants.mode == 'EMA': #shooter case or EMA mode
-                        entity = set(entity.split('|'))
+                        entity = set(splitBars(entity))
                         for i, word in enumerate(article):
                             if word in entity:
                                 for j in range(1,context+1):
@@ -1183,7 +1201,7 @@ if __name__ == '__main__':
 
     argparser.add_argument("--entity",
         type = int,
-        default = 4,
+        default = NUM_ENTITIES,
         help = "Entity num. 4 means all.")
 
     #TODO: add code for options 'conf' and 'majority'

@@ -38,6 +38,7 @@ cmd:option('-threads', 1, 'number of BLAS threads')
 cmd:option('-gpu', -1, 'gpu flag')
 
 cmd:option('-zmq_port', 5050, 'ZMQ port')
+cmd:option('-mode', 'Shooter', 'Experiment domain')
 cmd:option('-exp_folder', 'logs/', 'folder for logs')
 
 cmd:text()
@@ -47,7 +48,6 @@ local opt = cmd:parse(arg)
 if not dqn then
     require "initenv"
 end
-
 
 --- General setup.
 local game_env, game_actions, agent, opt = setup(opt)

@@ -461,8 +461,6 @@ class Environment:
             evalOutFile.write("Pred: "+str(pred)+"\n")
             evalOutFile.write("Correct: "+str(correct)+"\n")
 
-
-    #TODO for EMA
     def oracleEvaluate(self, goldEntities, entityDic, confDic):
         # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
@@ -473,45 +471,66 @@ class Environment:
         for stepNum, predEntitiesDic in entityDic.items():   
             for listNum, predEntities in predEntitiesDic.items():
 
-                #shooterName first: only add this if gold contains a valid shooter
-                if goldEntities[0]!='':
-                    gold = set(splitBars(goldEntities[0].lower()))
+                if constants.mode == 'Shooter':
 
-                    pred = set(splitBars(predEntities[0].lower()))
-                    correct = 1. if len(gold.intersection(pred)) > 0 else 0
+                    #shooterName first: only add this if gold contains a valid shooter
+                    if goldEntities[0]!='':
+                        gold = set(splitBars(goldEntities[0].lower()))
 
-                    if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
-                        # print "Correct: ", correct
-                        # print "Gold:", gold
-                        # print "pred:", pred
-                        bestCorrect[int2tags[0]] = correct
-                        bestPred[int2tags[0]] = 1 if len(pred) > 0 else 0.
-                        bestConf[int2tags[0]] = confDic[stepNum][listNum][0]
+                        pred = set(splitBars(predEntities[0].lower()))
+                        correct = 1. if len(gold.intersection(pred)) > 0 else 0
 
-                    if stepNum == 0 and listNum == 0:
-                        GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+                        if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
+                            # print "Correct: ", correct
+                            # print "Gold:", gold
+                            # print "pred:", pred
+                            bestCorrect[int2tags[0]] = correct
+                            bestPred[int2tags[0]] = 1 if len(pred) > 0 else 0.
+                            bestConf[int2tags[0]] = confDic[stepNum][listNum][0]
 
-                    if correct==0:
-                        EVALCONF2[int2tags[0]].append(confDic[stepNum][listNum][0])
+                        if stepNum == 0 and listNum == 0:
+                            GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+
+                        if correct==0:
+                            EVALCONF2[int2tags[0]].append(confDic[stepNum][listNum][0])
 
 
-                #all other tags
-                for i in range(1, NUM_ENTITIES): 
-                    if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
-                    gold = set(goldEntities[i].lower().split())
-                    pred = set(predEntities[i].lower().split())
-                    correct = len(gold.intersection(pred))      
-                    if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
-                        bestCorrect[int2tags[i]] = correct
-                        bestPred[int2tags[i]] = len(pred)
-                        bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
-                        # print "Correct: ", correct
-                        # print "Gold:", gold
-                        # print "pred:", pred
-                    if stepNum == 0 and listNum == 0:
-                        GOLD[int2tags[i]] += len(gold)
-                    if correct==0:
-                        EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
+                    #all other tags
+                    for i in range(1, NUM_ENTITIES): 
+                        if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
+                        gold = set(goldEntities[i].lower().split())
+                        pred = set(predEntities[i].lower().split())
+                        correct = len(gold.intersection(pred))      
+                        if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                            bestCorrect[int2tags[i]] = correct
+                            bestPred[int2tags[i]] = len(pred)
+                            bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
+                            # print "Correct: ", correct
+                            # print "Gold:", gold
+                            # print "pred:", pred
+                        if stepNum == 0 and listNum == 0:
+                            GOLD[int2tags[i]] += len(gold)
+                        if correct==0:
+                            EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
+                else:
+                    #EMA
+                    for i in range(NUM_ENTITIES): 
+                        if goldEntities[i].lower() == 'unknown': continue  
+                        gold = set(splitBars(goldEntities[i].lower()))
+                        pred = set(splitBars(predEntities[i].lower()))
+                        bestPred[int2tags[i]] = 1 if 'unknown' not in pred else bestPred[int2tags[i]]
+                        correct = 1 if len(gold.intersection(pred)) > 0 else 0
+                        if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                            bestCorrect[int2tags[i]] = correct
+                            
+                            bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
+                            # print "Correct: ", correct
+                            # print "Gold:", gold
+                            # print "pred:", pred
+                        if stepNum == 0 and listNum == 0:
+                            GOLD[int2tags[i]] += 1 #len(gold)
+                        if correct==0:
+                            EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
 
         for i in range(NUM_ENTITIES):
             PRED[int2tags[i]] += bestPred[int2tags[i]]
@@ -1048,6 +1067,7 @@ def main(args):
             #do article eval if terminal
             if evalMode and articleNum <= len(articles) and terminal == 'true':
                 if args.oracle:
+                    print "Using oracle eval"
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)

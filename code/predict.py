@@ -334,6 +334,9 @@ def eval_mode_batch(output_tags, confidences, cities):
                     continue
                 if match == 1:
                     correct[index] += 1
+                else:
+                    if index == 2:
+                        print 'missed adulterant', gold_ents[index]
                 guessed[index] += 1
 
     helper.printScores(correct, guessed, gold_correct)
@@ -346,9 +349,18 @@ def evaluatePrediction(prediction, gold):
         return 'skip'
     if prediction == 'unknown':
         return 'no_predict'
-    gold_set = set([s.strip() for s in gold.split('|')])
 
-    return prediction in gold_set
+    mode = "strict"
+
+    if mode == "strict":
+        gold_set = set([s.strip() for s in gold.split('|')])
+        return prediction in gold_set
+    elif mode == "loose":
+        return prediction in gold
+    elif mode == 'flex':
+        gold = gold.replace("|", "")
+        gold_set = set([s.strip() for s in gold.split(' ')])
+        return prediction in gold_set
 
 # get mode of list l, returns "" if empty
 #l consists of tuples (value, confidence)

@@ -176,11 +176,13 @@ class Environment:
             listNum = self.listNum
             self.listNum += 1
             if self.listNum == NUM_QUERY_TYPES: self.listNum = 0
-        elif self.rlqueryEval:
-            #set the reconciliation action
-            action = ACCEPT_ALL
         else:
             listNum = query-1 #convert from 1-based to 0-based         
+
+        if self.rlqueryEval:
+            #set the reconciliation action
+            action = ACCEPT_ALL        
+
         if ignoreDuplicates:
             nextArticle = None
             while not nextArticle and self.stepNum[listNum] < len(self.newArticles[listNum]):

@@ -96,6 +96,7 @@ class Environment:
         self.shooterLenientEval = args.shooterLenientEval
         self.listNum = 0 #start off with first list    
         self.rlbasicEval = args.rlbasicEval    
+        self.rlqueryEval = args.rlqueryEval    
 
         self.shuffledIndxs = [range(len(q)) for q in self.newArticles]
         if not evalMode and args.shuffleArticles:
@@ -123,7 +124,7 @@ class Environment:
             ENTITIES[self.indx][0][0] = self.prevEntities
             CONFIDENCES[self.indx][0][0] = self.prevConfidences
 
-        #store the original entities before updateing state
+        #store the original entities before updating state
         self.originalEntities = self.prevEntities
 
 
@@ -177,6 +178,11 @@ class Environment:
             if self.listNum == NUM_QUERY_TYPES: self.listNum = 0
         else:
             listNum = query-1 #convert from 1-based to 0-based         
+
+        if self.rlqueryEval:
+            #set the reconciliation action
+            action = ACCEPT_ALL        
+
         if ignoreDuplicates:
             nextArticle = None
             while not nextArticle and self.stepNum[listNum] < len(self.newArticles[listNum]):
@@ -297,7 +303,7 @@ class Environment:
         return e2!='' and (COUNT_ZERO or e2 != 'zero')  and e1.lower() == e2.lower()
 
     def checkEqualityShooter(self, e1, e2):
-        if e2 == '': return 0.
+        if e2 == '' or e2=='unknown': return 0.
 
         gold = set(splitBars(e2.lower()))
         pred = set(splitBars(e1.lower()))
@@ -347,12 +353,10 @@ class Environment:
 
 
 
-        if self.entity == NUM_ENTITIES:
+        if self.entity == NUM_ENTITIES:            
             return sum(rewards)
         else:
             return rewards[self.entity]
-
-
 
 
     def calculateStatSign(self, oldEntities, newEntities):
@@ -430,8 +434,8 @@ class Environment:
                     #old eval
                     gold = set(splitBars(goldEntities[i].lower()))
                     pred = set(splitBars(predEntities[i].lower()))
-                    if 'unknown' in pred:
-                        pred = set()                    
+                    # if 'unknown' in pred:
+                        # pred = set()                    
                     correct = len(gold.intersection(pred))
 
                     if shooterLenientEval:
@@ -443,7 +447,7 @@ class Environment:
                         GOLD[int2tags[i]] += len(gold)
                         PRED[int2tags[i]] += len(pred)
 
-                    # print i, pred, "###", gold, "$$$", correct                    
+                    print i, pred, "###", gold, "$$$", correct                    
 
                     #new eval (Adam)
                     # pred = predEntities[i].lower()
@@ -461,8 +465,7 @@ class Environment:
             evalOutFile.write("Pred: "+str(pred)+"\n")
             evalOutFile.write("Correct: "+str(correct)+"\n")
 
-
-    #TODO for EMA
+    #TODO:use recall output for now. change this output later. 
     def oracleEvaluate(self, goldEntities, entityDic, confDic):
         # the best possible numbers assuming that just the right information is extracted
         # from the set of related articles
@@ -473,45 +476,64 @@ class Environment:
         for stepNum, predEntitiesDic in entityDic.items():   
             for listNum, predEntities in predEntitiesDic.items():
 
-                #shooterName first: only add this if gold contains a valid shooter
-                if goldEntities[0]!='':
-                    gold = set(splitBars(goldEntities[0].lower()))
+                if constants.mode == 'Shooter':
 
-                    pred = set(splitBars(predEntities[0].lower()))
-                    correct = 1. if len(gold.intersection(pred)) > 0 else 0
+                    #shooterName first: only add this if gold contains a valid shooter
+                    if goldEntities[0]!='':
+                        gold = set(splitBars(goldEntities[0].lower()))
 
-                    if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
-                        # print "Correct: ", correct
-                        # print "Gold:", gold
-                        # print "pred:", pred
-                        bestCorrect[int2tags[0]] = correct
-                        bestPred[int2tags[0]] = 1 if len(pred) > 0 else 0.
-                        bestConf[int2tags[0]] = confDic[stepNum][listNum][0]
+                        pred = set(splitBars(predEntities[0].lower()))
+                        correct = 1. if len(gold.intersection(pred)) > 0 else 0
 
-                    if stepNum == 0 and listNum == 0:
-                        GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+                        if correct > bestCorrect[int2tags[0]] or (correct == bestCorrect[int2tags[0]] and len(pred) < bestPred[int2tags[0]]):
+                            # print "Correct: ", correct
+                            # print "Gold:", gold
+                            # print "pred:", pred
+                            bestCorrect[int2tags[0]] = correct
+                            bestPred[int2tags[0]] = 1 if len(pred) > 0 else 0.
+                            bestConf[int2tags[0]] = confDic[stepNum][listNum][0]
 
-                    if correct==0:
-                        EVALCONF2[int2tags[0]].append(confDic[stepNum][listNum][0])
+                        if stepNum == 0 and listNum == 0:
+                            GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+
+                        if correct==0:
+                            EVALCONF2[int2tags[0]].append(confDic[stepNum][listNum][0])
 
 
-                #all other tags
-                for i in range(1, NUM_ENTITIES): 
-                    if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
-                    gold = set(goldEntities[i].lower().split())
-                    pred = set(predEntities[i].lower().split())
-                    correct = len(gold.intersection(pred))      
-                    if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
-                        bestCorrect[int2tags[i]] = correct
-                        bestPred[int2tags[i]] = len(pred)
-                        bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
-                        # print "Correct: ", correct
-                        # print "Gold:", gold
-                        # print "pred:", pred
-                    if stepNum == 0 and listNum == 0:
-                        GOLD[int2tags[i]] += len(gold)
-                    if correct==0:
-                        EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
+                    #all other tags
+                    for i in range(1, NUM_ENTITIES): 
+                        if not COUNT_ZERO and goldEntities[i].lower() == 'zero': continue  
+                        gold = set(goldEntities[i].lower().split())
+                        pred = set(predEntities[i].lower().split())
+                        correct = len(gold.intersection(pred))      
+                        if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                            bestCorrect[int2tags[i]] = correct
+                            bestPred[int2tags[i]] = len(pred)
+                            bestConf[int2tags[i]] = confDic[stepNum][listNum][i]                        
+                        if stepNum == 0 and listNum == 0:
+                            GOLD[int2tags[i]] += len(gold)
+                        if correct==0:
+                            EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
+                else:
+                    #EMA
+                    for i in range(NUM_ENTITIES): 
+                        if goldEntities[i].lower() == 'unknown': continue  
+                        gold = set(splitBars(goldEntities[i].lower()))
+                        pred = set(splitBars(predEntities[i].lower()))                  
+                        correct = 1. if len(gold.intersection(pred)) > 0 else 0
+
+                        if correct > bestCorrect[int2tags[i]] or (correct == bestCorrect[int2tags[i]] and len(pred) < bestPred[int2tags[i]]):
+                            bestCorrect[int2tags[i]] = correct
+                            bestPred[int2tags[i]] = 1 if len(pred) > 0 else 0
+                            # bestPred[int2tags[i]] = 1 if 'unknown' not in pred else bestPred[int2tags[i]]
+                            bestConf[int2tags[i]] = confDic[stepNum][listNum][i]
+                            # print "Correct: ", correct
+                            # print "Gold:", gold
+                            # print "pred:", pred
+                        if stepNum == 0 and listNum == 0:
+                            GOLD[int2tags[i]] += 1 #len(gold)
+                        if correct==0:
+                            EVALCONF2[int2tags[i]].append(confDic[stepNum][listNum][i])
 
         for i in range(NUM_ENTITIES):
             PRED[int2tags[i]] += bestPred[int2tags[i]]
@@ -687,11 +709,11 @@ def baselineEval(articles, identifiers, args):
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
     for indx in range(len(articles)):
-        print "INDX:", indx
+        print "INDX:", indx, '/', len(articles)
         originalArticle = articles[indx][0] #since article has words and tags
         newArticles = [[] for i in range(NUM_QUERY_TYPES)]
         goldEntities = identifiers[indx]
-        env = Environment(originalArticle, newArticles, goldEntities, indx, args, True)
+        env = Environment(originalArticle, newArticles, goldEntities, indx, args, evalMode=True)
         env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"
@@ -884,13 +906,20 @@ def main(args):
 
 
     #starting assignments
-    ENTITIES = TRAIN_ENTITIES
-    CONFIDENCES = TRAIN_CONFIDENCES
-    COSINE_SIM = TRAIN_COSINE_SIM
-    CONTEXT = TRAIN_CONTEXT
-    articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
+    if not args.baselineEval and not args.thresholdEval and not args.confEval:
+        ENTITIES = TRAIN_ENTITIES
+        CONFIDENCES = TRAIN_CONFIDENCES
+        COSINE_SIM = TRAIN_COSINE_SIM
+        CONTEXT = TRAIN_CONTEXT
+        articles, titles, identifiers, downloaded_articles = train_articles, train_titles, train_identifiers, train_downloaded_articles
+    else:
+        ENTITIES = TEST_ENTITIES
+        CONFIDENCES = TEST_CONFIDENCES
+        COSINE_SIM = TEST_COSINE_SIM
+        CONTEXT = TEST_CONTEXT
+        articles, titles, identifiers, downloaded_articles = test_articles, test_titles, test_identifiers, test_downloaded_articles
 
-    if args.baselineEval:
+    if args.baselineEval:        
         baselineEval(articles, identifiers, args)
         return
     elif args.thresholdEval:
@@ -1069,6 +1098,7 @@ def main(args):
                 print newstate[8:]
                 print "Entities:", env.prevEntities
                 print "Action:", action, query
+
             newstate, reward, terminal = env.step(action, query)
             terminal = 'true' if terminal else 'false'
 
@@ -1083,7 +1113,7 @@ def main(args):
         if message != "evalStart" and message != "evalEnd":
             #do article eval if terminal
             if evalMode and articleNum <= len(articles) and terminal == 'true':
-                if args.oracle:
+                if args.oracle:                    
                     env.oracleEvaluate(env.goldEntities, ENTITIES[env.indx], CONFIDENCES[env.indx])
                 else:
                     env.evaluateArticle(env.bestEntities.values(), env.goldEntities, args.shooterLenientEval, args.shooterLastName, evalOutFile)
@@ -1192,6 +1222,11 @@ if __name__ == '__main__':
         type = bool,
         default = False,
         help = "Evaluate with RL agent that takes only reconciliation decisions.")
+
+    argparser.add_argument("--rlqueryEval",
+        type = bool,
+        default = False,
+        help = "Evaluate with RL agent that takes only query decisions.")
 
     argparser.add_argument("--shuffleArticles",
         type = bool,

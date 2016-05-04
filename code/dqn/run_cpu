@@ -35,7 +35,7 @@ agent_name="agent_"$1
 ncols=1
 target_q=${6:-5000}
 mode='EMA'
-if [ mode = 'Shooter' ]
+if [ "$mode" == "Shooter" ]
 then
     state_dim=41;
     n_queries=5;

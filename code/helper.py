@@ -44,7 +44,6 @@ def load_constants():
         is_adulterant, is_food, is_country, is_adulterant_part, is_direction, is_region]
         other_feature_names = ['is_capital','is_full_city','is_partial_city','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num',\
         'is_adulterant', 'is_food','is_country', 'is_adulterant_part', 'is_direction', 'is_region']
-        
     #IMP: adding train names to last names here. Comment below if you don't want this
     # last_names.update(train_names)
 
@@ -129,10 +128,10 @@ def getOtherFeatures(word):
     return features
 
 def printScores(correct, guessed, gold_c):
-    num_tags = len(constants.int2tags) - 1
+    num_tags = len(constants.int2tags)
     print "tag_type (correct, guessed, gold) (percision, recall, f1)"
     for k in range(num_tags): 
-        evalText = getPrecRecallF1String(correct[k], guessed[k], gold_c[k], constants.int2tags[k+1])
+        evalText = getPrecRecallF1String(correct[k], guessed[k], gold_c[k], constants.int2tags[k])
         print evalText
 
 def getPrecRecallF1String(correct, guessed, gold, tag):

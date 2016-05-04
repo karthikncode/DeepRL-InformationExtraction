@@ -303,7 +303,7 @@ class Environment:
         return e2!='' and (COUNT_ZERO or e2 != 'zero')  and e1.lower() == e2.lower()
 
     def checkEqualityShooter(self, e1, e2):
-        if e2 == '': return 0.
+        if e2 == '' or e2=='unknown': return 0.
 
         gold = set(splitBars(e2.lower()))
         pred = set(splitBars(e1.lower()))

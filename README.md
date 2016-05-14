@@ -5,7 +5,7 @@ This is the code and data for the paper [Improving Information Extraction by Acq
 ### Installation
 You will need to install [Torch](http://torch.ch/docs/getting-started.html) and the  python packages in `requirements.txt`.  
 
-You will also need to install the Lua dev library `liblua` (`sudo apt-get install liblua5.2`) and the [signal](https://github.com/LuaDist/lua-signal) package for Torch to deal with SIGPIPE issues in Linux.
+You will also need to install the Lua dev library `liblua` (`sudo apt-get install liblua5.2`) and the [signal](https://github.com/LuaDist/lua-signal) package for Torch to deal with SIGPIPE issues in Linux. You may need to run `cmake .` followed by `make` to install the signal package. 
 
 ### Data Preparation
 

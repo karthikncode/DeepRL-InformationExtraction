@@ -447,7 +447,7 @@ class Environment:
                         GOLD[int2tags[i]] += len(gold)
                         PRED[int2tags[i]] += len(pred)
 
-                    print i, pred, "###", gold, "$$$", correct                    
+                    # print i, pred, "###", gold, "$$$", correct                    
 
                     #new eval (Adam)
                     # pred = predEntities[i].lower()

@@ -41,11 +41,12 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
         if i%2 == 1:
             if "crf" in trained_model:
                 y, tmp_conf = crf.predict(test_data[i/2][0], trained_model)
+                f.write(" ".join([test_data[i/2][0][j]+"_"+y[j] for j in range(len(test_data[i/2][0]))]))
             else:
                y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
+               f.write(" ".join([test_data[i/2][0][j]+"_"+int2tags[int(y[j])] for j in range(len(test_data[i/2][0]))]))
             assert(len(y) == len(tmp_conf))
             confidences.append(tmp_conf)
-            f.write(" ".join([test_data[i/2][0][j]+"_"+int2tags[int(y[j])] for j in range(len(test_data[i/2][0]))]))
             f.write("\n")
         else:
             f.write(identifier[i/2])
@@ -427,7 +428,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
 
 if __name__ == "__main__":
     if mode == "EMA":
-        trained_model = "trained_model.EMA.p" 
+        trained_model = "trained_model_crf.EMA.p" 
         testing_file = "../data/tagged_data/EMA/dev.tag" 
     elif mode == "Shooter":
         trained_model = "trained_model2.p" 

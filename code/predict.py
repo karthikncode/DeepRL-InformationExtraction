@@ -28,18 +28,21 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
     evaluate = True
 
     ## extract features
-    if not isinstance(trained_model, list):
-        clf, previous_n, next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
-    else:
-        clf, previous_n, next_n, word_vocab,other_features = trained_model
-
+    if not "crf" in trained_model: 
+        if not isinstance(trained_model, list):
+            clf, previous_n, next_n, word_vocab,other_features = pickle.load( open( trained_model, "rb" ) )
+        else:
+            clf, previous_n, next_n, word_vocab,other_features = trained_model
 
     tic = time.clock()
     f = open(output_tags,'w')
     confidences = []
     for i in range(len(test_data)+len(identifier)):
         if i%2 == 1:
-            y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
+            if "crf" in trained_model:
+                y, tmp_conf = crf.predict(test_data[i/2][0], trained_model)
+            else:
+               y, tmp_conf = predict_tags_n(viterbi, previous_n,next_n, clf, test_data[i/2][0], word_vocab,other_features)
             assert(len(y) == len(tmp_conf))
             confidences.append(tmp_conf)
             f.write(" ".join([test_data[i/2][0][j]+"_"+int2tags[int(y[j])] for j in range(len(test_data[i/2][0]))]))

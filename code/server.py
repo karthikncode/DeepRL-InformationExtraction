@@ -541,11 +541,12 @@ class Environment:
             EVALCONF[int2tags[i]].append(bestConf[int2tags[i]])
 
     #TODO for EMA
-    def thresholdEvaluate(self, goldEntities, thres=0.0):
-        # the best possible numbers assuming that just the right information is extracted
-        # from the set of related articles
+    def thresholdEvaluate(self, goldEntities, args):
+        #use a tf-idf threshold to select articles to extract from
+        # uses Majority aggregation
         global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
         global ENTITIES, CONFIDENCES
+        thres = args.threshold
         bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
         bestConf = collections.defaultdict(lambda:0.)
         bestSim = 0.
@@ -574,7 +575,7 @@ class Environment:
                     else:
                         entities, confidences = self.extractEntitiesWithConfidences(self.newArticles[listNum][i])
                     for j in range(NUM_ENTITIES):
-                        if entities[j]:
+                        if entities[j] and entities[j] != 'unknown':
                             aggEntites[j][entities[j]] += 1
 
 
@@ -587,15 +588,15 @@ class Environment:
             # pdb.set_trace()
 
 
-        self.evaluateArticle(bestEntities, goldEntities, False, False, False)
+        self.evaluateArticle(bestEntities, goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
 
     #TODO for EMA
-    def confEvaluate(self, goldEntities, thres=0.0):
-        # the best possible numbers assuming that just the right information is extracted
-        # from the set of related articles
+    def confEvaluate(self, goldEntities, args):
+        # use confidence-based aggregation over tf-idf similarity threshold used to select articles
         global PRED, GOLD, CORRECT, EVALCONF, EVALCONF2
         global ENTITIES, CONFIDENCES
+        thres = args.threshold
         bestPred, bestCorrect = collections.defaultdict(lambda:0.), collections.defaultdict(lambda:0.)
         bestConf = collections.defaultdict(lambda:0.)
         bestSim = 0.
@@ -619,16 +620,14 @@ class Environment:
                 else:
                     entities, confidences = self.extractEntitiesWithConfidences(self.newArticles[listNum][i])
                 for j in range(NUM_ENTITIES):
-                    if entities[j] != '':
-                        # if j==0 and confidences[j] > 0:
-                        #     pdb.set_trace()
+                    if entities[j] != '' and entities[j] != 'unknown':
                         if confidences[j] > bestConfidences[j]:
                             bestConfidences[j] = confidences[j]
                             bestEntities[j] = entities[j]
 
 
 
-        self.evaluateArticle(bestEntities, goldEntities, False, False, False)
+        self.evaluateArticle(bestEntities, goldEntities, args.shooterLenientEval, args.shooterLastName, args.evalOutFile)
 
     #TODO for EMA
     #TODO: use conf or 1 for mode calculation
@@ -726,7 +725,6 @@ def baselineEval(articles, identifiers, args):
 
 def thresholdEval(articles, downloaded_articles, identifiers, args):
     global CORRECT, GOLD, PRED
-    THRES = 0.8
     CORRECT = collections.defaultdict(lambda:0.)
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
@@ -736,7 +734,7 @@ def thresholdEval(articles, downloaded_articles, identifiers, args):
         newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
         goldEntities = identifiers[indx]
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
-        env.thresholdEvaluate(env.goldEntities, THRES)
+        env.thresholdEvaluate(env.goldEntities, args)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"
     for tag in int2tags:
@@ -750,14 +748,13 @@ def confEval(articles, downloaded_articles, identifiers, args):
     CORRECT = collections.defaultdict(lambda:0.)
     GOLD = collections.defaultdict(lambda:0.)
     PRED = collections.defaultdict(lambda:0.)
-    THRES = 0.0
     for indx in range(len(articles)):
         print "INDX:", indx
         originalArticle = articles[indx][0]
         newArticles = [[q.split(' ')[:WORD_LIMIT] for q in sublist] for sublist in downloaded_articles[indx]]
         goldEntities = identifiers[indx]
         env = Environment(originalArticle, newArticles, goldEntities, indx, args, False)
-        env.confEvaluate(env.goldEntities, THRES)
+        env.confEvaluate(env.goldEntities, args)
 
     print "------------\nEvaluation Stats: (Precision, Recall, F1):"
     for tag in int2tags:
@@ -1212,7 +1209,12 @@ if __name__ == '__main__':
     argparser.add_argument("--thresholdEval",
         type = bool,
         default = False,
-        help = "Evaluate baseline performance")
+        help = "Use tf-idf similarity threshold to select articles to extract from")
+
+    argparser.add_argument("--threshold",
+        type = float,
+        default = 0.8,
+        help = "threshold value for Aggregation baseline above")
 
     argparser.add_argument("--confEval",
         type = bool,
@@ -1239,7 +1241,6 @@ if __name__ == '__main__':
         default = NUM_ENTITIES,
         help = "Entity num. 4 means all.")
 
-    #TODO: add code for options 'conf' and 'majority'
     argparser.add_argument("--aggregate",
         type = str,
         default = 'always',

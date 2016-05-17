@@ -6,7 +6,8 @@ MODE= constants.mode
 # MODE='Shooter'
 
 def load_constants():
-    global male_first_names,female_first_names,last_names,cities,other_features,number_as_words,word_ordinals, other_features_names, \
+    global male_first_names,female_first_names,last_names,cities,other_features,\
+        number_as_words,word_ordinals, other_feature_names, \
         adulterants, foods, adulterant_parts, country_names
 
     cities = pickle.load(open('../data/constants/cities.p','rb'))
@@ -121,8 +122,8 @@ def captilized(word):
 
 def getOtherFeatures(word):
     features = {}
-    for index, feature_func in other_features:
-        name = other_features_names[index]
+    for index, feature_func in enumerate(other_features):
+        name = other_feature_names[index]
         features[name] = feature_func(word)
 
     return features

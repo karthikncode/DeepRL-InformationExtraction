@@ -930,23 +930,22 @@ def main(args):
         print args.testEntities
 
 
-        m = "DEV"
-
+        m = "TEST"
+        split_index = 292
         if  m == "DEV":
-            CLS_TRAIN_ENTITIES = splitDict(TRAIN_ENTITIES, 42, len(TRAIN_ENTITIES) )
-            CLS_TRAIN_CONFIDENCES = splitDict(TRAIN_CONFIDENCES, 42, len(TRAIN_ENTITIES) )
-            CLS_TRAIN_COSINE_SIM = splitDict(TRAIN_COSINE_SIM, 42, len(TRAIN_ENTITIES) )
-            CLS_TRAIN_CONTEXT = splitDict(TRAIN_CONTEXT, 42, len(TRAIN_ENTITIES) )
-            CLS_train_identifiers = splitDict(train_identifiers,  42, len(TRAIN_ENTITIES) )
+            CLS_TEST_ENTITIES = splitDict(TRAIN_ENTITIES, split_index, len(TRAIN_ENTITIES) )
+            CLS_TEST_CONFIDENCES = splitDict(TRAIN_CONFIDENCES, split_index, len(TRAIN_ENTITIES) )
+            CLS_TEST_COSINE_SIM = splitDict(TRAIN_COSINE_SIM, split_index, len(TRAIN_ENTITIES) )
+            CLS_TEST_CONTEXT = splitDict(TRAIN_CONTEXT, split_index, len(TRAIN_ENTITIES) )
+            CLS_test_identifiers = splitDict(train_identifiers,  split_index, len(TRAIN_ENTITIES) )
                      
-            CLS_TEST_ENTITIES = splitDict(TRAIN_ENTITIES, 0, 42 )
-            CLS_TEST_CONFIDENCES = splitDict(TRAIN_CONFIDENCES, 0, 42 )
-            CLS_TEST_COSINE_SIM = splitDict(TRAIN_COSINE_SIM, 0, 42 )
-            CLS_TEST_CONTEXT= splitDict(TRAIN_CONTEXT, 0, 42 )
+            CLS_TRAIN_ENTITIES = splitDict(TRAIN_ENTITIES, 0, split_index )
+            CLS_TRAIN_CONFIDENCES = splitDict(TRAIN_CONFIDENCES, 0, split_index )
+            CLS_TRAIN_COSINE_SIM = splitDict(TRAIN_COSINE_SIM, 0, split_index )
+            CLS_TRAIN_CONTEXT= splitDict(TRAIN_CONTEXT, 0, split_index )
 
-            CLS_test_identifiers   = splitDict(train_identifiers, 0, 42 )
+            CLS_train_identifiers   = splitDict(train_identifiers, 0, split_index )
         elif m == "TEST":
-
             CLS_TRAIN_ENTITIES =TRAIN_ENTITIES 
             CLS_TRAIN_CONFIDENCES =TRAIN_CONFIDENCES 
             CLS_TRAIN_COSINE_SIM =TRAIN_COSINE_SIM 

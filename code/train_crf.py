@@ -49,10 +49,10 @@ def predict():
 def predict(article, trained_model):
     tagger = crf.Tagger()
     tagger.open(trained_model)
-    print article
+
     xseq = articleFeatureExtract(article)
-    print xseq
     yseq  =  tagger.tag(xseq)
+
     confidences =  [tagger.marginal(yseq[i],i) for i in range(len(yseq))]
     confidences_beam = [ [tagger.marginal(tag, i)  for tag in train.int2tags]   for i in range(len(yseq))]
      

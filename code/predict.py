@@ -145,11 +145,11 @@ def predict_ema_mode(sentence, tags, confidences):
     # United States_Location")
     i = 0
     while i < len(sentence):
-        tag = int2tags[tags[i]]
+        tag = int2tags[tags[i]] if not type(tags[i]) == str else tags[i]
         end_range = i
         if not tag == "TAG":
             for j in range(i+1,len(sentence)):
-                new_tag = int2tags[tags[j]]
+                new_tag = int2tags[tags[j]] if not type(tags[j]) == str else tags[j]
                 if new_tag == tag:
                     end_range = j
                 else:
@@ -161,14 +161,12 @@ def predict_ema_mode(sentence, tags, confidences):
 
         i = end_range + 1
 
-  
 
-    assert set(tags) == set(cleanedTags)
     sentence = cleanedSentence
     tags = cleanedTags
     confidences = cleanedConfidences
     for j in range(len(sentence)):
-        index = int2tags[tags[j]]
+        index = int2tags[tags[j]] if not type(tags[j]) == str else tags[j]
         if index == "TAG":
             continue
         output_entities[index].append((sentence[j], confidences[j]))

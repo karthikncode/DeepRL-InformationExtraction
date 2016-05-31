@@ -4,9 +4,10 @@
 
 import sys, pickle, pdb
 import query as query
+from constants import int2tags
 from train import load_data
 
-NUM_ENTITIES = 3
+NUM_ENTITIES = len(int2tags)
 
 #EMA queries
 #EXTRA_QUERY='( state | country | india | china | province )'
@@ -26,9 +27,8 @@ if __name__ == '__main__':
 
     trainFile = sys.argv[1]
     saveFile = sys.argv[2]
-    # extra_query = sys.argv[3]
-    extra_query = EXTRA_QUERY
-    
+    extra_query = sys.argv[3]
+        
     #load data and process identifiers
     articles, identifiers = load_data(trainFile)
     identifiers_tmp = []  

@@ -7,8 +7,7 @@ MODE= constants.mode
 
 def load_constants():
     global male_first_names,female_first_names,last_names,cities,other_features,\
-        number_as_words,word_ordinals, other_feature_names, \
-        adulterants, foods, adulterant_parts, country_names
+        number_as_words,word_ordinals, other_feature_names
 
     cities = pickle.load(open('../data/constants/cities.p','rb'))
 
@@ -25,10 +24,12 @@ def load_constants():
             number_as_words = set(json.load(outfile))
         with open('../data/constants/word_ordinals.json','rb') as outfile:
             word_ordinals = set(json.load(outfile))
-        other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num, is_adulterant]
-        other_feature_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city','is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num', 'is_adulterant']
+        other_features = [is_capital,is_digit,is_male_first_name,is_female_first_name,is_last_name,is_full_city,is_partial_city,contains_digit,is_short_word,is_long_word,is_number_word,is_ordinal_word,is_ordinal_num]
+        other_feature_names = ['is_capital','is_digit','is_male_first_name','is_female_first_name','is_last_name','is_full_city','is_partial_city','contains_digit','is_short_word','is_long_word','is_number_word','is_ordinal_word','is_ordinal_num']
     #other_features = []
     elif MODE == 'EMA':
+        global adulterants, foods, adulterant_parts, country_names
+
         with open('../data/constants/adulterant_part.p','rb') as outfile:
             adulterant_parts = set(pickle.load(outfile))
         with open('../data/constants/adulterants.p','rb') as outfile:
@@ -57,9 +58,6 @@ def flatten(arr, delim):
         result.extend(b)
     return result
 
-def is_adulterant_part(word):
-    return word in adulterant_parts
-
 def is_direction(word):
     return word.lower() in ["east", "north", "west", "south"] or \
     word.lower() in ["eastern", "northern", "western", "southern"]
@@ -75,11 +73,16 @@ def is_country(word):
 def is_capital(word):
     return word[0].isupper()
 
-def is_adulterant(word):
-    return word.lower() in adulterants
 
-def is_food(word):
-    return word.lower() in foods
+if MODE == 'EMA':
+    def is_adulterant(word):
+        return word.lower() in adulterants
+
+    def is_food(word):
+        return word.lower() in foods
+
+    def is_adulterant_part(word):
+      return word in adulterant_parts
 
 def is_digit(word):
     return word.isdigit()
@@ -129,10 +132,11 @@ def getOtherFeatures(word):
     return features
 
 def printScores(correct, guessed, gold_c):
-    num_tags = len(constants.int2tags)
+    int2tags = ["TAG"] + constants.int2tags
+    num_tags = len(int2tags)
     print "tag_type (correct, guessed, gold) (percision, recall, f1)"
     for k in range(num_tags): 
-        evalText = getPrecRecallF1String(correct[k], guessed[k], gold_c[k], constants.int2tags[k])
+        evalText = getPrecRecallF1String(correct[k], guessed[k], gold_c[k], int2tags[k])
         print evalText
 
 def getPrecRecallF1String(correct, guessed, gold, tag):

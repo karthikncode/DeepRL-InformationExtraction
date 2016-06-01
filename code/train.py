@@ -9,6 +9,7 @@ import helper
 import constants
 
 int2tags = constants.int2tags
+int2tagsTag = ["TAG"] + int2tags
 tags2int = constants.tags2int
 tags = range(len(tags2int))
 # main loop
@@ -51,14 +52,14 @@ def main(training_file,trained_model,previous_n,next_n, c, prune, test_file):
 
 def evaluatePredictions(predicted, gold):
     range_toks = range(len(predicted))
-    num_tags = len(int2tags)-1
+    num_tags = len(int2tagsTag)
     correct = [0] * num_tags
     guessed = [0] * num_tags
     gold_c  = [0] * num_tags
-    for i in range(1,len(int2tags)):
-        correct[i-1] = sum([predicted[j] == gold[j] and gold[j] == i for j in range_toks])
-        guessed[i-1] = sum([predicted[j] == i for j in range_toks])
-        gold_c[i-1] = sum([gold[j] == i for j in range_toks])
+    for i in range(len(int2tagsTag)):
+        correct[i] = sum([predicted[j] == gold[j] and gold[j] == i for j in range_toks])
+        guessed[i] = sum([predicted[j] == i for j in range_toks])
+        gold_c[i] = sum([gold[j] == i for j in range_toks])
 
     helper.printScores(correct, guessed, gold_c)
 
@@ -183,14 +184,14 @@ if __name__ == "__main__":
         training_file = "../data/tagged_data/EMA/train.tag"
         test_file = "../data/tagged_data/EMA/dev.tag"
     elif mode == "Shooter":
-        training_file = "../data/tagged_data/whole_text_full_city2/train.tag"
-        test_file = "../data/tagged_data/whole_text_full_city2/dev.tag"
+        training_file = "../data/tagged_data/shooterLarge/train.tag"
+        test_file = "../data/tagged_data/shooterLarge/dev.tag"
 
     evaluate = True # Set true to score classifier on dev
     if not evaluate:
         test_file = False
 
-    trained_model = "trained_model.EMA.p" #sys.argv[2]
+    trained_model = "trained_model.large.y.p" #sys.argv[2]
     if constants.mode == "EMA":
         previous_n = 2 #sys.argv[3]
         next_n = 2

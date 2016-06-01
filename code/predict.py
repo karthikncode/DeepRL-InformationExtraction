@@ -11,6 +11,7 @@ from train import load_data
 import helper
 import re, pdb, collections
 import constants
+import re
 
 p = inflect.engine()
 
@@ -317,16 +318,26 @@ def eval_mode_batch(output_tags, confidences, cities):
         tag_confs = confidences[i]
         ident = identifier[i]
 
-        gold_ents = ident.split(',')[:-1] #Throw away title
+        gold_ents = ident.split(',')[:num_tags] #Throw away title
 
 
         output_pred_line, entity_confidences, entity_cnts = predict_mode(sentence, tags, tag_confs, cities)
         predictions = output_pred_line.split(" ### ")
 
-        assert len(gold_ents) == len(predictions)
+        if not len(gold_ents) == len(predictions):
+            print 'ident', ident
+            print 'gold_ents', gold_ents
+            raw_input()
+            continue
 
         for index in range(len(gold_ents)):            
             match = evaluatePrediction(predictions[index], gold_ents[index])
+            debugCity = False
+            if index == 3 and debugCity:
+                print 'predictions[index]', predictions[index]
+                print 'gold_ents[index]', gold_ents[index]
+                print 'match', match
+                raw_input()
             if match == 'skip':
                 continue
             else:
@@ -337,15 +348,18 @@ def eval_mode_batch(output_tags, confidences, cities):
                     correct[index] += 1
                 guessed[index] += 1
 
-    helper.printScores(correct, guessed, gold_correct)
+    helper.printScores(correct, guessed, gold_correct, False)
 
 # Takes a ,;| seperated list of gold ents and a  prediction
 # Returns 'skip' if gold is unknown, 'no_predict' if no prediction was made, 
 # 1 if prediction in gold, and 0 if prediction not in gold
-def evaluatePrediction(prediction, gold):
-    if gold       == 'unknown':
+def evaluatePrediction(pred, goldLabel):
+    prediction = pred.strip().lower()
+    gold = goldLabel.strip().lower()
+
+    if gold       == 'unknown' or gold == '':
         return 'skip'
-    if prediction == 'unknown':
+    if prediction == 'unknown' or prediction == '':
         return 'no_predict'
 
     mode = "strict"
@@ -431,8 +445,8 @@ if __name__ == "__main__":
         trained_model = "trained_model_crf.EMA.p" 
         testing_file = "../data/tagged_data/EMA/dev.tag" 
     elif mode == "Shooter":
-        trained_model = "trained_model2.p" 
-        testing_file = "../data/tagged_data/whole_text_full_city/dev.tag" 
+        trained_model = "trained_model.large.y.p" 
+        testing_file = "../data/tagged_data/shooterLarge/dev.tag" 
 
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

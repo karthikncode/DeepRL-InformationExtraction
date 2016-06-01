@@ -131,8 +131,11 @@ def getOtherFeatures(word):
 
     return features
 
-def printScores(correct, guessed, gold_c):
-    int2tags = ["TAG"] + constants.int2tags
+def printScores(correct, guessed, gold_c, useTAGtag=True):
+    if useTAGtag:
+        int2tags = ["TAG"] + constants.int2tags
+    else:
+        int2tags = constants.int2tags
     num_tags = len(int2tags)
     print "tag_type (correct, guessed, gold) (percision, recall, f1)"
     for k in range(num_tags): 

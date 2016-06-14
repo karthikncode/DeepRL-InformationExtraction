@@ -1,7 +1,5 @@
 ## Information Extraction with Reinforcement Learning
 
-This is the code and data for the paper [Improving Information Extraction by Acquiring External Evidence with Reinforcement Learning](http://arxiv.org/abs/1603.07954).
-
 ### Installation
 You will need to install [Torch](http://torch.ch/docs/getting-started.html) and the  python packages in `requirements.txt`.  
 
@@ -10,7 +8,7 @@ You will also need to install the Lua dev library `liblua` (`sudo apt-get instal
 
 ### Data Preparation
 
-Create the vectorizers:  
+Create the vectorizers (using a pre-trained model):  
 `python vec_consolidate.py dloads/train.extra 5 trained_model2.p consolidated/vec_train.5.p`   
   
 Consolidate the articles:  

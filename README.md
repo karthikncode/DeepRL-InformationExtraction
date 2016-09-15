@@ -25,5 +25,6 @@ Consolidate the articles:
     `./run_cpu 7000 logs/tmp/`  
     Make sure the port numbers for the server and agent match up.
 
-
+### Acknowledgements
+  * [Deepmind's DQN codebase](https://github.com/kuz/DeepMind-Atari-Deep-Q-Learner)
 

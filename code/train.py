@@ -12,6 +12,7 @@ int2tags = constants.int2tags
 int2tagsTag = ["TAG"] + int2tags
 tags2int = constants.tags2int
 tags = range(len(tags2int))
+
 # main loop
 def main(training_file,trained_model,previous_n,next_n, c, prune, test_file):
     helper.load_constants()

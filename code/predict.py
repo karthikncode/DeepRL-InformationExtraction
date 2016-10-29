@@ -16,11 +16,19 @@ import re
 p = inflect.engine()
 
 int2tags = ['TAG'] + constants.int2tags #since the constants file does not include the 'TAG' tag
+NUM_ENTITIES = len(constants.int2tags)
 tags2int = constants.tags2int
 tags = range(len(int2tags)) 
 
 helper.load_constants()
 mode = constants.mode
+
+CORRECT = collections.defaultdict(lambda:0.)
+GOLD = collections.defaultdict(lambda:0.)
+PRED = collections.defaultdict(lambda:0.)
+
+def splitBars(w):
+    return [q.strip() for q in w.split('|')]
 
 # main loop
 def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_predictions="output.pred"):
@@ -55,7 +63,7 @@ def main(trained_model,testing_file,viterbi,output_tags="output.tag", output_pre
     #print time.clock()-tic
     f.close()
     if evaluate:
-        eval_mode_batch(output_tags, confidences, helper.cities)
+        eval_mode_batch(output_tags, confidences, helper.cities)        
     else:
         predict_mode_batch(output_tags, output_predictions, helper.cities)
     return
@@ -303,13 +311,67 @@ def predict_mode_batch(output_tags, output_predictions, cities):
             f.write("\n")
     return
 
+def evaluateArticle(predEntities, goldEntities, shooterLenientEval=True, 
+                    shooterLastName=False, evalOutFile=None):
+    global PRED, GOLD, CORRECT
+    int2tags = constants.int2tags
+    if constants.mode == 'Shooter':
+        #shooterName first: only add this if gold contains a valid shooter
+        if goldEntities[0]!='':
+            if shooterLastName:
+                gold = set(splitBars(goldEntities[0].lower())[-1:])
+            else:
+                gold = set(splitBars(goldEntities[0].lower()))
+
+            pred = set(splitBars(predEntities[0].lower()))
+            correct = len(gold.intersection(pred))
+
+            if shooterLenientEval:
+                CORRECT[int2tags[0]] += (1 if correct> 0 else 0)
+                GOLD[int2tags[0]] += (1 if len(gold) > 0 else 0)
+                PRED[int2tags[0]] += (1 if len(pred) > 0 else 0)
+            else:
+                CORRECT[int2tags[0]] += correct
+                GOLD[int2tags[0]] += len(gold)
+                PRED[int2tags[0]] += len(pred)
+
+        # All other tags.
+        for i in range(1, NUM_ENTITIES):
+            if goldEntities[i] != 'zero':
+                GOLD[int2tags[i]] += 1
+                PRED[int2tags[i]] += 1
+                if predEntities[i].lower() == goldEntities[i].lower():
+                    CORRECT[int2tags[i]] += 1
+    else:
+        # For EMA.        
+        for i in range(NUM_ENTITIES):
+            if goldEntities[i] != 'unknown':
+                
+                #old eval
+                gold = set(splitBars(goldEntities[i].lower()))
+                pred = set(splitBars(predEntities[i].lower()))
+                # if 'unknown' in pred:
+                    # pred = set()                    
+                correct = len(gold.intersection(pred))
+
+                if shooterLenientEval:
+                    CORRECT[int2tags[i]] += (1 if correct> 0 else 0)
+                    GOLD[int2tags[i]] += (1 if len(gold) > 0 else 0)
+                    PRED[int2tags[i]] += (1 if len(pred) > 0 else 0)
+                else:
+                    CORRECT[int2tags[i]] += correct
+                    GOLD[int2tags[i]] += len(gold)
+                    PRED[int2tags[i]] += len(pred)
+                
+    if evalOutFile:
+        evalOutFile.write("--------------------\n")
+        evalOutFile.write("Gold: "+str(gold)+"\n")
+        evalOutFile.write("Pred: "+str(pred)+"\n")
+        evalOutFile.write("Correct: "+str(correct)+"\n")
+
 def eval_mode_batch(output_tags, confidences, cities):
     tagged_data, identifier = load_data(output_tags)
     num_tags = len(int2tags) - 1
-    
-    correct = [0]* num_tags
-    guessed = [0] * num_tags
-    gold_correct = [0] * num_tags
 
     assert len(tagged_data) == len(confidences)
     for i in range(len(tagged_data)):
@@ -324,31 +386,17 @@ def eval_mode_batch(output_tags, confidences, cities):
         output_pred_line, entity_confidences, entity_cnts = predict_mode(sentence, tags, tag_confs, cities)
         predictions = output_pred_line.split(" ### ")
 
-        if not len(gold_ents) == len(predictions):
-            print 'ident', ident
-            print 'gold_ents', gold_ents
-            raw_input()
-            continue
+        # Evaluate the predictions. 
+        evaluateArticle(predictions, gold_ents)
 
-        for index in range(len(gold_ents)):            
-            match = evaluatePrediction(predictions[index], gold_ents[index])
-            debugCity = False
-            if index == 3 and debugCity:
-                print 'predictions[index]', predictions[index]
-                print 'gold_ents[index]', gold_ents[index]
-                print 'match', match
-                raw_input()
-            if match == 'skip':
-                continue
-            else:
-                gold_correct[index] += 1
-                if match == "no_predict":
-                    continue
-                if match == 1:
-                    correct[index] += 1
-                guessed[index] += 1
+    print "------------\nEvaluation Stats: (Precision, Recall, F1):"
+    for tag in GOLD:
+        prec = CORRECT[tag]/PRED[tag]
+        rec = CORRECT[tag]/GOLD[tag]
+        f1 = (2*prec*rec)/(prec+rec)
+        print tag, prec, rec, f1, "########", CORRECT[tag], PRED[tag], GOLD[tag]
 
-    helper.printScores(correct, guessed, gold_correct, False)
+
 
 # Takes a ,;| seperated list of gold ents and a  prediction
 # Returns 'skip' if gold is unknown, 'no_predict' if no prediction was made, 
@@ -445,8 +493,9 @@ if __name__ == "__main__":
         trained_model = "trained_model_crf.EMA.p" 
         testing_file = "../data/tagged_data/EMA/dev.tag" 
     elif mode == "Shooter":
-        trained_model = "trained_model.large.y.p" 
-        testing_file = "../data/tagged_data/shooterLarge/dev.tag" 
+        trained_model = "trained_model2.p" 
+        # testing_file = "../data/tagged_data/shooterLarge/dev.tag" 
+        testing_file = "../data/tagged_data/whole_text_full_city/dev.tag"
 
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

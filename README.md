@@ -8,11 +8,11 @@ You will also need to install the Lua dev library `liblua` (`sudo apt-get instal
 
 ### Data Preparation
 
-Create the vectorizers (using a pre-trained model):  
-`python vec_consolidate.py dloads/train.extra 5 trained_model2.p consolidated/vec_train.5.p`   
+Create the vectorizers (using a pre-trained model), for example:  
+`python vec_consolidate.py dloads/Shooter/train.extra 5 trained_model2.p consolidated/vec_train.5.p`   
   
-Consolidate the articles:  
-`python consolidate.py dloads/train.extra 5 trained_model2.p consolidated/train+context.5.p consolidated/vec_train.5.p`  
+Consolidate the articles, for example:  
+`python consolidate.py dloads/Shooter/train.extra 5 trained_model2.p consolidated/train+context.5.p consolidated/vec_train.5.p`  
 
 
 ### Running the code

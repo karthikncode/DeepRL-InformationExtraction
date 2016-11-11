@@ -53,7 +53,7 @@ for tl in ax2.get_yticklabels():
     tl.set_color('black')
     tl.set_fontsize(17)
 # plt.show()
-plt.savefig('plots/plot.pdf', bbox_inches='tight')
+plt.savefig('plots/plot_new.pdf', bbox_inches='tight')
 
 
 

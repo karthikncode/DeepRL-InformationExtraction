@@ -17,7 +17,7 @@ Consolidate the articles, for example:
 
 ### Running the code
   * Change to the code directory: `cd code/`
-  * First run the server:  
+  * First run the server, for example:  
     `python server.py --port 7000 --trainEntities consolidated/train+context.5.p --testEntities consolidated/dev+test+context.5.p --outFile outputs/tmp2.out --modelFile trained_model2.p --entity 4 --aggregate always --shooterLenientEval True --delayedReward False --contextType 2` 
 
   * In a separate terminal/tab, change to the agent code directory: `cd code/dqn/`

@@ -10,15 +10,17 @@ You will also need to install the Lua dev library `liblua` (`sudo apt-get instal
 
 Create the vectorizers (using a pre-trained model), for example:  
 `python vec_consolidate.py dloads/Shooter/train.extra 5 trained_model2.p consolidated/vec_train.5.p`   
+`python vec_consolidate.py dloads/Shooter/dev.extra 5 trained_model2.p consolidated/vec_dev.5.p`   
   
 Consolidate the articles, for example:  
 `python consolidate.py dloads/Shooter/train.extra 5 trained_model2.p consolidated/train+context.5.p consolidated/vec_train.5.p`  
+`python consolidate.py dloads/Shooter/dev.extra 5 trained_model2.p consolidated/dev+context.5.p consolidated/vec_dev.5.p`  
 
 
 ### Running the code
   * Change to the code directory: `cd code/`
   * First run the server, for example:  
-    `python server.py --port 7000 --trainEntities consolidated/train+context.5.p --testEntities consolidated/dev+test+context.5.p --outFile outputs/tmp2.out --modelFile trained_model2.p --entity 4 --aggregate always --shooterLenientEval True --delayedReward False --contextType 2` 
+    `python server.py --port 7000 --trainEntities consolidated/train+context.5.p --testEntities consolidated/dev+context.5.p --outFile outputs/run.out --modelFile trained_model2.p --entity 4 --aggregate always --shooterLenientEval True --delayedReward False --contextType 2` 
 
   * In a separate terminal/tab, change to the agent code directory: `cd code/dqn/`
   * Then run the agent:  

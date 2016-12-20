@@ -495,7 +495,7 @@ if __name__ == "__main__":
     elif mode == "Shooter":
         trained_model = "trained_model2.p" 
         # testing_file = "../data/tagged_data/shooterLarge/dev.tag" 
-        testing_file = "../data/tagged_data/whole_text_full_city/dev.tag"
+        testing_file = "../data/tagged_data/Shootings/dev.tag"
 
     viterbi = False #sys.argv[4]
     main(trained_model,testing_file,viterbi)

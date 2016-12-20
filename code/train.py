@@ -185,8 +185,8 @@ if __name__ == "__main__":
         training_file = "../data/tagged_data/EMA/train.tag"
         test_file = "../data/tagged_data/EMA/dev.tag"
     elif mode == "Shooter":
-        training_file = "../data/tagged_data/shooterLarge/train.tag"
-        test_file = "../data/tagged_data/shooterLarge/dev.tag"
+        training_file = "../data/tagged_data/Shootings/train.tag"
+        test_file = "../data/tagged_data/Shootings/dev.tag"
 
     evaluate = True # Set true to score classifier on dev
     if not evaluate:

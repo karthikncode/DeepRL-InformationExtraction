@@ -7,3 +7,4 @@ feedparser
 tldextract
 lxml
 newspaper
+python-crfsuite

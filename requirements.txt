@@ -8,3 +8,4 @@ tldextract
 lxml
 newspaper
 python-crfsuite
+nltk

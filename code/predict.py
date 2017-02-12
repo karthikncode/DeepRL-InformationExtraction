@@ -484,7 +484,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
                 dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1
         dataYconfidences[i] = clf.predict_proba(dataX[i,:].reshape(1, -1))
         dataY[i] = np.argmax(dataYconfidences[i])
-        dataYconfidences[i] = dataYconfidences[i][0][dataY[i]]
+        dataYconfidences[i] = dataYconfidences[i][0][int(dataY[i])]
 
     return dataY, dataYconfidences
 

@@ -481,7 +481,7 @@ def predict_tags_n(viterbi, previous_n,next_n, clf, sentence, word_vocab,other_f
     for i in range(len(sentence)):
         for j in range(previous_n):
             if j < i:
-                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+dataY[i-j-1]] = 1
+                dataX[i,(previous_n+next_n+1)*num_features+len(word_vocab)+len(tags)*j+int(dataY[i-j-1])] = 1
         dataYconfidences[i] = clf.predict_proba(dataX[i,:].reshape(1, -1))
         dataY[i] = np.argmax(dataYconfidences[i])
         dataYconfidences[i] = dataYconfidences[i][0][int(dataY[i])]

@@ -38,18 +38,18 @@ class Classifier(object):
         original_confidence = confidences[article_index][query_index][0]
         confidence = confidences[article_index][query_index][supporting_article_index]
         
-        confidence_dif = [confidence[i] - original_confidence[i] for i in range(len(confidence))]
-        confidence_bool = [confidence[i] > original_confidence[i] for i in range(len(confidence))]
+        # confidence_dif = [confidence[i] - original_confidence[i] for i in range(len(confidence))]
+        # confidence_bool = [confidence[i] > original_confidence[i] for i in range(len(confidence))]
 
-        orig_confidence_thresh = [original_confidence[i] < .4 for i in range(len(confidence))]
-        confidence_thresh = [confidence[i] > .6 for i in range(len(confidence))]
+        # orig_confidence_thresh = [original_confidence[i] < .4 for i in range(len(confidence))]
+        # confidence_thresh = [confidence[i] > .6 for i in range(len(confidence))]
 
         #One hot vector to show if entity matches orginal
         original_entity = entities[article_index][query_index][0]
         new_entity = entities[article_index][query_index][supporting_article_index]
         match_features = []
         for e_index in range(len(original_entity)):
-            if original_entity[e_index] == '' or original_entity[e_index] == 'unknown':
+            if original_entity[e_index] == '': # or original_entity[e_index] == 'unknown':
                 match_features += [0, 0]
             elif original_entity[e_index].strip().lower() == new_entity[e_index].strip().lower():
                 match_features += [1, 0]
@@ -65,15 +65,15 @@ class Classifier(object):
 
         features = original_confidence+ confidence + match_features + [tfidf]
 
-        if tfidf > .3:
-            features += [1]
-        else:
-            features += [0]
+        # if tfidf > .3:
+        #     features += [1]
+        # else:
+        #     features += [0]
 
-        features += confidence_dif 
+        # features += confidence_dif 
         # features += confidence_bool
-        features   += confidence_thresh
-        features   += orig_confidence_thresh
+        # features   += confidence_thresh
+        # features   += orig_confidence_thresh
 
         for c in context[article_index][query_index][supporting_article_index]:
             features += c            

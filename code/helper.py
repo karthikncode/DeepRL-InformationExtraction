@@ -131,7 +131,7 @@ def getOtherFeatures(word):
 
     return features
 
-def printScores(correct, guessed, gold_c, useTAGtag=True):
+def printScores(correct, guessed, gold_c, useTAGtag=False):
     if useTAGtag:
         int2tags = ["TAG"] + constants.int2tags
     else:

@@ -405,7 +405,7 @@ def evaluatePrediction(pred, goldLabel):
     prediction = pred.strip().lower()
     gold = goldLabel.strip().lower()
 
-    if gold       == 'unknown' or gold == '':
+    if gold       == 'unknown' or gold == '' or gold == 'zero':
         return 'skip'
     if prediction == 'unknown' or prediction == '':
         return 'no_predict'

@@ -16,6 +16,7 @@ Consolidate the articles, for example:
 `python consolidate.py dloads/Shooter/train.extra 5 trained_model2.p consolidated/train+context.5.p consolidated/vec_train.5.p`  
 `python consolidate.py dloads/Shooter/dev.extra 5 trained_model2.p consolidated/dev+context.5.p consolidated/vec_dev.5.p`  
 
+Make sure you use the correct `vec_xyz.p` file as input to the `consolidate.py` script. You can also find pre-consolidated files in pickle format here: [link](https://drive.google.com/open?id=1HUpWJi-9f4wSltYZG9sDuCSMqiZcGbiG)
 
 ### Running the code
   * Change to the code directory: `cd code/`
